@@ -39,7 +39,7 @@ class wechatCallbackapiTest
 		  die('Could not connect: ' . mysql_error());
 		  }
 		  mysqli_select_db($this->link,"wlgl");
-		  //echo '连接成功';
+		  //echo '连接成功2';
 	}
     //响应消息
     public function responseMsg()

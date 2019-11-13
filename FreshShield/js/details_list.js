@@ -236,7 +236,7 @@
 
 			},
 			error: function() {
-				alert("网络错误，请重新进入");
+//				alert("网络错误，请重新进入");
 				$(".wait").addClass("hidden");
 			}
 		});
@@ -437,7 +437,7 @@
 				myscroll_x.refresh();
 			},
 			error: function() {
-				alert("网络错误，请重新进入");
+				//alert("网络错误，请重新进入");
 				$(".wait").addClass("hidden");
 				my_history_ajax(_start, _history_start_time, _history_end_time);
 			}
@@ -461,7 +461,7 @@
 
 			},
 			error: function() {
-				alert("网络错误，请重新进入");
+				//alert("网络错误，请重新进入");
 				$(".wait").addClass("hidden");
 			}
 		});
@@ -484,7 +484,7 @@
 			},
 			error: function() {
 				$(".wait").addClass("hidden");
-				alert("网络错误，请重新进入");
+				//alert("网络错误，请重新进入");
 			}
 		})
 	};
@@ -568,7 +568,7 @@
 				}
 			},
 			error: function() {
-				alert("网络错误，请重新打开页面");
+				//alert("网络错误，请重新打开页面");
 			}
 		})
 
@@ -629,7 +629,7 @@
 							my_add_map_new(_j, _w, (data.result.formatted_address + data.result.sematic_description));
 						},
 						error: function() {
-							alert("网络错误，请重新进入");
+							//alert("网络慢，加载中耐心等待");
 						}
 					})
 				}
@@ -715,7 +715,7 @@
 		}
 	}
 	/*
-	 * 根据用户输入时间显示数据；
+	 * 根据用户输入时间显示数据；5
 	 */
 	$(".history_search_top input[type=button]").on("click", function() {
 		_zhe_length = 0;
@@ -885,7 +885,7 @@
 				}
 			},
 			error: function() {
-				alert("网络错误，请重新进入");
+				//alert("网络错误，请重新进入");
 			}
 		})
 
