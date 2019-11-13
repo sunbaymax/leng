@@ -1,0 +1,245 @@
+
+.header{
+	background:#3299fe;
+	height:4rem;
+	width:100vw;
+	text-align: center;
+	line-height: 4rem;
+	color:#fefefe;
+	font-weight: bold;
+	font-size: 1.5rem;
+	position:fixed;
+	top:0px;
+	left:0px;
+	z-index: 9999;
+}
+.header .back_list,.back_list_user{
+	width:1.5rem;
+	height:1.5rem;
+	position:absolute;
+	top:1.25rem;
+	left:5px;
+}
+form{
+	width:100vw;
+	height:auto;
+	margin-top:2rem;
+}
+form .userN_form{
+	width:100vw;
+	height:2rem;
+	font-size: 1.2rem;
+	line-height:2rem;
+	border-bottom: 1px solid #000;
+	box-sizing: border-box;
+	font-weight:bold;
+}
+form .userN_form span{
+	color:#7b9d60;
+}
+.title_basic{
+	height:auto;
+	color:#000;
+	width:100vw;
+	background:#eef7fe;
+	font-size:1.1rem;
+	text-align: left;
+	font-weight:bold;
+}
+.title_basic span{
+	border-left:1px solid #000;
+	border-right:1px solid #000;
+	margin-left:5vw;
+}
+.content_basic{
+	width:100vw;
+	height:auto;
+	overflow: hidden;
+}
+.content_basic_macine{
+	height:auto;
+}
+.basic_label{
+	width:40vw;
+	text-align: right;
+	float:left;
+}
+.basic_label p{
+	width:37vw;
+	line-height:3rem;
+	font-size: 1.5rem;
+	padding-right:3vw;
+}
+.basic_label p:nth-of-type(3){
+	line-height:5rem;
+}
+
+.basic_input{
+	width:60vw;
+	float:left;
+	font-size: 1.5rem;
+}
+.fly_flag{
+	width:37vw;
+	height:3rem;
+	display:block;
+	line-height: 3rem;
+	font-size:1.5rem;
+	font-family: "微软雅黑";
+	padding-right:3vw;
+}
+.fly_time{
+	font-size:1rem;
+	text-align: center;
+	line-height:2rem;
+}
+.gps_flag{
+	width:60vw;
+	height:3rem;
+	display:block;
+	line-height: 3rem;
+	margin-left:2vw;
+	font-family: "微软雅黑";
+	font-size: 1.5rem;
+}
+.basic_input select{
+	border:none;
+	border:1px solid #ccc;
+	outline: none;
+	box-sizing: border-box;
+	font-size: 1rem;
+	width:20vw;
+	height:2rem;
+	text-align: center;
+	margin-top:0.5rem;
+	margin-bottom: 0.5rem;
+}
+.basic_input .text_input:nth-of-type(1),
+.basic_input .text_input:nth-of-type(2),
+.basic_input .text_input:nth-of-type(3),
+.basic_input .text_input:nth-of-type(4){
+	width:40vw;
+	height:2rem;
+	margin-top:0.5rem;
+	margin-bottom: 0.5rem;
+	outline: none;
+	border:1px solid #ccc;
+	box-sizing: border-box;
+	text-align: center;
+}
+.basic_input .text_input:nth-of-type(5){
+	width:20vw;
+	height:2rem;
+	margin-top:0.5rem;
+	margin-bottom: 0.5rem;
+	outline: none;
+	border:1px solid #ccc;
+	box-sizing: border-box;
+	text-align: center;
+}
+textarea{
+	display:block;
+	width: 50vw;
+	height:4rem;
+	margin-top:0.5rem;
+	margin-bottom: 0.5rem;
+	border:none;
+	border:1px solid #ccc;
+	font-size: 1rem;
+	outline: none;
+	box-sizing: border-box;
+}
+.basic_input .baojingShang,
+.basic_input .baojingXia,
+.basic_input .hegeShang,
+.basic_input .hegeXia,
+.basic_input .dianLiang{
+	width:20vw!important;
+	height:2rem!important;
+	margin-top:0.5rem;
+	margin-bottom: 0.5rem;
+	outline: none;
+	border:1px solid #ccc;
+	box-sizing: border-box;
+	text-align: center;
+}
+.special_p{
+	line-height:3rem!important;
+}
+.basic_fly{
+	float:left;
+	width:100vw;
+	height:4rem;
+	text-align: center;
+	line-height:4rem;
+	font-size:1.5rem;
+}
+.form_post{
+	width:90vw;
+	height:2rem;
+	margin-top:1rem;
+	margin-bottom:5rem;
+	line-height:2rem;
+	text-align: right;
+	background:#fefefe;
+	padding-right:10vw;
+}
+.form_post input{
+	width:6rem;
+	height:2rem;
+	border:1px solid #000;
+	outline: none;
+	line-height:2rem;
+	background:#ccc;
+	text-align: center;
+	font-size: 1rem;
+}
+.content_basic input{
+	border-radius: 0!important;
+}
+.warning_input .tel_number{
+	width: 40vw;
+    height: 2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    outline: none;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    text-align: center;
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

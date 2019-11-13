@@ -1,0 +1,162 @@
+ <!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title>中集冷云（北京）冷链科技有限公司</title>
+	<script type="text/javascript">
+		/*
+		 * 判断用户是否登录，如果已登录跳转到
+		 */
+		if(!window.localStorage.getItem("user")) {
+			alert("请先绑定账号至您的微信号");
+			window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx82dbac04fa8fd8ef&redirect_uri=http://www.ccsc58.cc/weixinnew/oauth2.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
+		}
+	</script>
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
+	<link rel="stylesheet" href="sw/swiper-3.3.1.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/index01.css" />
+</head>
+
+<body>
+<div class="content">
+	<div class="user_index_img">
+		<div>
+
+		</div>
+		<div>
+			<p>用户名：</p>
+			<p>手机号码：</p>
+		</div>
+		<img class="index_right" src="img/index_right.png" alt="" />
+	</div>
+	<div class="banner">
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide"><img src="http://ccsc58.com/images/app_image/lunbo1.jpg" alt="" /></div>
+				<div class="swiper-slide"><img src="http://ccsc58.com/images/app_image/lunbo2.jpg" alt="" /></div>
+				<div class="swiper-slide"><img src="http://ccsc58.com/images/app_image/lunbo3.jpg" alt="" /></div>
+				<div class="swiper-slide"><img src="http://ccsc58.com/images/app_image/lunbo4.jpg" alt="" /></div>
+			</div>
+			<div class="swiper-pagination"></div>
+		</div>
+	</div>
+	<div class="index_content">
+		<a href="machineList.php">
+			<img src="img/lenglian_index.png" />
+			<span>冷链监控</span>
+		</a>
+		<a href="html/dingdan.php">
+			<img src="img/yunshu_index.png" />
+			<span>我的订单</span>
+		</a>
+		<a href="html/Upan_list.html">
+			<img src="img/help_index.png" />
+			<span>U盘记录仪</span>
+		</a>
+		<a href="html/warning_list.html">
+			<img src="img/warning_index.png" />
+			<span>报警查询</span>
+		</a>
+	</div>
+</div>
+<div class="footer">
+	<a class="choosed" href="index.html">
+		<img src="img/index01.png" alt="" />
+		<span>首页</span>
+	</a>
+	<a href="html/dingdan.php">
+		<img src="img/dingdan.png" alt="" />
+		<span>我的订单</span>
+	</a>
+	<a href="html/shebei_list.html">
+		<img src="img/machine.png" alt="" />
+		<span>设备列表</span>
+	</a>
+	<a href="html/user.html">
+		<img src="img/user_di.png" alt="" />
+		<span>用户信息</span>
+	</a>
+</div>
+<script src="js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="sw/swiper-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var mySwiper = new Swiper('.swiper-container', {
+		autoplay: 2000, //可选选项，自动滑动
+		pagination: '.swiper-pagination',
+		loop: true,
+		autoplayDisableOnInteraction: false,
+		speed: 300,
+	});
+	if(window.localStorage.getItem("user")) {
+		var _userName = window.localStorage.getItem("user");
+		var _userPass = window.localStorage.getItem("pass");
+		$.ajax({
+			type: "post",
+			url: "http://www.ccsc58.com/json/04_00_tb_admin_return.php",
+			data: {
+				admin_permit: "zjly8888",
+				UserP: "w",
+				admin_user: _userName,
+				admin_pass: _userPass
+			},
+			success: function(data) {
+				var _json = JSON.parse(data);
+				$(".user_index_img div:nth-of-type(2) p:nth-of-type(1)").html(_userName);
+				$(".user_index_img div:nth-of-type(2) p:nth-of-type(2)").html(_json.resultCode.admin_mobile);
+				$(".user_index_img div:nth-of-type(1)").html("<img src=\"http://www.ccsc58.com/json/04_01_tb_admin_return_bmp.php?admin_user=" + _userName + "\"/>")
+				$(".user_index_img").css({
+					display: "block"
+				});
+				$(".user_index_img").on("click",function(){
+					window.location.href="html/user.html";
+				})
+			},
+			error: function() {
+				alert("网络错误，请重新进入");
+				window.location.href=window.location.href;
+			}
+		});
+		/*报警信息显示；
+		 */
+		$.ajax({
+			type: "post",
+			url: "http://www.ccsc58.com/json/02_01_tb_baojing_float.php",
+			data: {
+				admin_permit: "zjly8888",
+				admin_user: _userName,
+				admin_pass: _userPass,
+				UserP: "w"
+			},
+			success: function(data) {
+				var _json = JSON.parse(data);
+				var _x = "";
+				if(_json.message == "success"&&_json.resultCode!="nodata") {
+					_x = "<div class=\"swiper-container index_warning\"><div class=\"swiper-wrapper\">";
+					for(var i = 0; i < _json.resultCode.length; i++) {
+						_x += "<div class=\"swiper-slide\"><a href=\"html/details_list.html?num_m=" + _json.resultCode[i].shebeibianhao + "&\">"+ _json.resultCode[i].neirong + "</a></div>";
+					}
+					_x += "</div><img src=\"img/index_warning.png\"/></div>";
+					$(".content").append(_x);
+					var mao = new Swiper('.index_warning', {
+						autoplay: 2000, //可选选项，自动滑动
+						loop: true,
+						autoplayDisableOnInteraction: false,
+						speed: 300,
+						direction: 'vertical'
+					});
+					$(".index_warning").css({
+						display: "block"
+					})
+				}
+			}
+		});
+	} else {
+		$(".user_index_img").css({
+			display: "block"
+		})
+	}
+</script>
+</body>
+</html>

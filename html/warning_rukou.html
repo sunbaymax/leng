@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>请稍后。。。</title>
+		<script type="text/javascript">
+			if(!window.localStorage.getItem("user")) {
+				alert("请先绑定账号至您的微信号");
+				window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx82dbac04fa8fd8ef&redirect_uri=http://www.ccsc58.cc/weixinnew/oauth2.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect"
+			}else{
+				window.location.href="warning_list.html";
+			}
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

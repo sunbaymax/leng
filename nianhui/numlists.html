@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>中集冷云（北京）冷链科技有限公司</title>
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+		<link rel="stylesheet" type="text/css" href="../css/changeM.css" />
+		<style type="text/css">
+			.content {
+				width: 100%;
+				overflow: hidden;
+				margin: 0 auto;
+				margin-top: 4rem;
+			}
+			.fieldset{
+				width: 100%;
+				margin: 0 auto;
+			}
+			label{
+				display: inline-block;
+				margin-left: 10%;
+				width: 40%;
+				text-align: right;
+			}
+			form {
+				margin-top: 2rem;
+				margin-bottom: 2rem;
+			}
+			
+			input {
+				width: 40%;
+				height: 2rem;
+				line-height: 2rem;
+				text-align: left;
+				margin-left: 1%;
+				border: 1px solid #ccc;
+			}
+			
+			#button {
+				width: 85%;
+				height: 3rem;
+				line-height: 3rem;
+				letter-spacing: 5px;
+				margin-left: 5%;
+				margin-top: 1rem;
+				background: #3299fe;
+				text-align: center;
+				color: #fefefe;
+				font-weight: bold;
+				font-size: 1.5rem;
+			}
+			
+			ul {
+				width: 100%;
+				height: 10rem;
+				/*border-bottom: 1px solid #ccc;*/
+				font-weight: bold;
+				font-size: 1.5rem;
+				font-family: "微软雅黑";
+				/*padding-left: 20px;*/
+				margin-top: 48px;
+			}
+			
+			ul li {
+				width: 95%;
+				height: 2rem;
+				line-height: 2rem;
+				padding-left: 5%;
+			}
+			
+			ul li span {
+				font-weight: normal;
+			}
+			
+			#wrapper {
+				width: 100%;
+				position: absolute;
+				left: 0;
+				top: 13rem;
+				overflow: hidden;
+				z-index: 1;
+				bottom: 0px;
+			}
+			
+			.more {
+				height: 4rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: blue;
+			}
+			
+			.pull_icon {
+				width: 25px;
+				height: 25px;
+				background-image: url('images/pull.png');
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: 25px;
+				transition: all .5s;
+			}
+			
+			.more span {
+				padding-left: .5rem;
+			}
+			
+			.scroller {
+				background-color: #fff;
+			}
+			
+			.more .flip {
+				transform: rotate(180deg);
+			}
+			
+			.loading {
+				background-image: url('images/loading.png');
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: 25px;
+			}
+			
+			.more .loading {
+				-webkit-transform: rotate(0deg) translateZ(0);
+				-webkit-transition-duration: 0;
+				-webkit-animation-name: loading;
+				-webkit-animation-duration: 2s;
+				-webkit-animation-iteration-count: infinite;
+				-webkit-animation-timing-function: linear;
+			}
+			
+			@-webkit-keyframes loading {
+				from {
+					-webkit-transform: rotate(0deg) translateZ(0);
+				}
+				to {
+					-webkit-transform: rotate(360deg) translateZ(0);
+				}
+			}
+			
+			.btn {
+				display: block;
+				width: 85%;
+				height: 3rem;
+				line-height: 3rem;
+				letter-spacing: 5px;
+				margin-left: 5%;
+				margin-top: 1rem;
+				background: #3299fe;
+				text-align: center;
+				color: #fefefe;
+				font-weight: bold;
+				font-size: 1.5rem;
+				text-decoration: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="header">
+			按段设备号与箱码绑定查询界面
+		</div>
+		<div class="content">
+			<ul>
+				<p class="fieldset">
+					<label class="image-replace cd-username icon iconfont icon-yonghuming" for="signin-username" style="font-family: '微软雅黑';color: #6E6E6E; font-size: 14px;">请输入最新查询条数：</label>
+					<input class="full-width has-padding has-border" id="number" type="text" placeholder="必填：默认200条">
+				</p>
+			</ul>
+			<a class="btn" id="a1" href="" onclick="doTest()">查询</a>
+		</div>
+
+		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function doTest() {
+				var value = $("#number").val(); //获得选中项的值 
+				 var n=/^[1-9]\d*$|^0$/;
+
+				if(value == "" || value == null) {
+					$('#a1').attr('href', 'http://www.zjcoldcloud.com/ceshi/log/read_fromtext.php?id=shebeibangding&length=200');
+
+				} 
+				 else if(!n.test(value)) {
+						alert('非数字');
+					} 
+					else {
+
+					$('#a1').attr('href', 'http://www.zjcoldcloud.com/ceshi/log/read_fromtext.php?id=shebeibangding&length='+value+'');
+	
+					}
+				}
+		</script>
+
+	</body>
+
+</html>

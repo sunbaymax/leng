@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>中奖消息通知</title>
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+		<link rel="stylesheet" href="css/weui.min.css">
+    <link rel="stylesheet" href="css/example.css">
+		<style type="text/css">
+			form {
+				width: 100%;
+				line-height: 3rem;
+				font-size: 1.5rem;
+			}
+			
+			label {
+				display: inline-block;
+				width: 20%;
+				height: 2rem;
+				line-height: 2rem;
+				text-align: left;
+				margin-left: 10%;
+				font-weight: bold;
+			}
+			
+			input {
+				width: 80%;
+				height: 3rem;
+				border: none;
+				border-bottom: 1px solid #ccc;
+				outline: none;
+				line-height: 3rem;
+				margin-left: 10%;
+				font-size: 1.5rem;
+			}
+			
+			.top {
+				width: 100%;
+				height: 18rem;
+			}
+			
+			.button {
+				width: 80%;
+				height: 3rem;
+				line-height: 3rem;
+				text-align: center;
+				margin-left: 10%;
+				margin-top: 2rem;
+				background: #0A1A39;
+				color: #fefefe;
+				border: none;
+				font-weight: bold;
+				font-size: 2rem;
+				letter-spacing: 2px;
+			}
+			
+			p {
+				width: 80%;
+				margin-left: 10%;
+				height: 2rem;
+				line-height: 2rem;
+				color: #C1C1C1;
+				font-size: 1rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<img class="top" src="images/kaijiang.gif" alt="" />
+		<form>
+			
+			<label for="tel">电话：</label><br><input type="text" id="tel" value="" placeholder="请输入中奖员工手机号码" />
+			<!--<label for="company">公司：</label><br><input type="text" id="company" value="" placeholder="请输入真实公司名称，以便工作人员核实" />-->
+			<label for="jiang" >奖项：</label><br>
+			<select name="jiang" id="jiang" style="width: 50%;height:3rem; font-family: '楷体';font-size: 1.5rem; margin-left: 10%;margin-top: 1rem;">
+				<option value="99">请选择奖项</option> 
+				<option value="特等奖">特等奖</option>
+				<option value="一等奖">一等奖</option> 
+				<option value="二等奖">二等奖</option> 
+				<option value="三等奖">三等奖</option> 
+				<option value="1等奖">1等奖</option> 
+				<option value="2等奖">2等奖</option> 
+				<option value="3等奖">3等奖</option> 
+     </select> 
+     <s style="display:inline-block;width: 80%;height: 1px;margin-top:3px;margin-left: 10%; border-bottom: 1px solid #ccc;"></s>
+			<div class="button">推送消息</div>
+		</form>
+		<p style="text-align: center;font-size: 1.2rem;margin-top: 20px;">
+			感谢参与，年会愉快！<img src="images/smile.png" style="display:inline-block;width:2rem ;height:2rem ;line-height: 2rem;" /></br>技术支持：中集冷云（北京）冷链科技有限公司
+		</p>
+		<script src="../zhuanPans/js/jquery-1.10.2.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function getNowFormatDate() {
+			    var date = new Date();
+			    var seperator1 = "-";
+			    var seperator2 = ":";
+			    var month = date.getMonth() + 1;
+			    var strDate = date.getDate();
+			    if (month >= 1 && month <= 9) {
+			        month = "0" + month;
+			    }
+			    if (strDate >= 0 && strDate <= 9) {
+			        strDate = "0" + strDate;
+			    }
+			    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+			            + " " + date.getHours() + seperator2 + date.getMinutes()
+			            + seperator2 + date.getSeconds();
+			    return currentdate;
+			}
+//			var box = [];
+			//console.log(box);
+			$(".button").on("click", function() {
+				
+				var _tel = $("#tel").val();
+//				box.push(_tel);
+//				console.log(box);
+//				console.log(_tel);
+				var _jiang = $("#jiang").val();
+				
+				var time=getNowFormatDate();
+				//alert(time);
+				
+						$.ajax({
+								type: "Post",
+								//url: "http://www.ccsc58.com/zhongjiang_mess_qunfa.php",
+								url: "http://www.ccsc58.com/CS_mess_qunfa.php",
+								dataType:"JSON",
+								data: {
+									tel:_tel
+								},
+								success: function(data) {
+									if(data.code == "10000") {
+										console.log(data);
+										for(var i=0; i<data.data.length; i++){
+										var name=data.data[i].name;
+										var wangfa="玩法";
+										var qihao="20180120期";
+										var jiangxiang =_jiang;
+										var jianjie="开奖信息以人力资源部中心正式公告为准。更多信息，请点击查看详情";
+										var openid=data.data[i].openid;
+										var app_key="261AFF68C0E9F076420D083D66222824"; 
+										//alert(openid);
+											$.ajax({
+											type:"post",
+											url:"http://www.ccsc58.cc/leng/lengyunjiekou.php",
+											
+											data:{
+												first:name,
+												keyword1:wangfa,
+												keyword2:qihao,
+												keyword3:jiangxiang,
+												remark:jianjie,
+												openid:openid,
+												app_key:app_key
+											},
+											success:function(data){
+												//alert("推送成功!");
+												console.log('推送成功');
+												//return false;
+												
+											},
+											error:function(){
+												alert("推送失败！");
+											}
+										});
+										
+										}
+     									//window.location.href = "qiandao_ok.html";										
+									}
+									else if(data.code == "30000"){
+										alert("本人没有参与签到！");
+									}else{
+										alert("手机号预留跟后台有偏差！");
+									}
+								},
+								error: function() {
+									alert("网络错误");
+									//window.location.href = window.location.href;
+								}
+							});
+						
+				});
+
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>北京中集智冷科技有限公司</title>
+		<link rel="stylesheet" href="css/index.css" />
+		<link rel="stylesheet" href="css/changeM.css" />
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+	<style>
+		#wrapper li .li_top img {
+			display: inline-block;
+			width: 100%;
+			height: 80%;
+			margin: 0;
+			margin-top: 10%;
+		}
+	</style>
+
+	<body>
+		<div class="header" style="height:4rem;line-height: 4rem;">
+			<input type="text" placeholder="请输入搜索内容" />
+			<img class="search_shop" src="img/search_ding.png" alt="" />
+		</div>
+		<div id="wrapper">
+			<div class="scroller">
+				<ul>
+					<li>
+						<div class="li_top">
+							<img src="http://www.cccc58.com/upload/2018/11/26/20181126114046168.png" style="display: inline-block;width: 100%;height: 70%;margin: 0;margin-top: 15%;" />
+						</div>
+						<div class="li_bottom">
+							<span>温湿度智能监控终端</span><br>
+							<span>￥360</span>
+						</div>
+					</li>
+
+					<li>
+						<div class="li_top">
+							<img src="http://qiniu.ccsc58.com/FhSxNf50epJrwduWTav5WkZdxq_H" style="width: 100%;height: 100%;margin-top: 0;" />
+						</div>
+						<div class="li_bottom">
+							<span>温度记录仪</span><br>
+							<span>￥138</span>
+						</div>
+					</li>
+
+					<li>
+						<div class="li_top">
+							<img src="http://qiniu.ccsc58.com/FjKMq5PdOQUFak9aTwNX1GAStR4S" style="width: 100%;height:auto;" />
+						</div>
+						<div class="li_bottom">
+							<span>温度监控智能车载终端</span><br>
+							<span>￥790</span>
+						</div>
+					</li>
+				</ul>
+				<div class="clear"></div>
+				<div class="more"><i class="pull_icon"></i><span>上拉加载...</span></div>
+			</div>
+		</div>
+		<div class="footer">
+			<a href="http://www.ccsc58.com">
+				<img src="../img/index.png" alt="" />
+				<span>首页</span>
+			</a>
+			<a class="choosed" href="shop.html">
+				<img src="../img/dingdan01.png" alt="" />
+				<span>产品中心</span>
+			</a>
+			<a href="shop_car.html">
+				<img src="../img/machine.png" alt="" />
+				<span>购物车</span>
+			</a>
+			<a href="user.html">
+				<img src="../img/user_di.png" alt="" />
+				<span>用户信息</span>
+			</a>
+		</div>
+		<script src="js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function UrlSearch() {
+				var name, value;
+				var str = location.href; //取得整个地址栏
+				var num = str.indexOf("?")
+				str = str.substr(num + 1); //取得所有参数 stringvar.substr(start [, length ]
+
+				var arr = str.split("&"); //各个参数放到数组里
+				for(var i = 0; i < arr.length; i++) {
+					num = arr[i].indexOf("=");
+					if(num > 0) {
+						name = arr[i].substring(0, num);
+						value = arr[i].substr(num + 1);
+						this[name] = value;
+					}
+				}
+			}
+			var Request = new UrlSearch(); //实例化
+			var _openId = Request.openid;
+			window.sessionStorage.setItem("openid", _openId);
+			var myscroll = new iScroll("wrapper", {
+				onScrollMove: function() {
+					if(this.y < (this.maxScrollY)) {
+						$('.pull_icon').addClass('flip');
+						$('.pull_icon').removeClass('loading');
+						$('.more span').text('释放加载...');
+					} else {
+						$('.pull_icon').removeClass('flip loading');
+						$('.more span').text('上拉加载...')
+					}
+				},
+				onScrollEnd: function() {
+					if($('.pull_icon').hasClass('flip')) {
+						$('.pull_icon').addClass('loading');
+						$('.more span').text('加载中...');
+						pullUpAction();
+					}
+				},
+				onRefresh: function() {
+					$('.more').removeClass('flip');
+					$('.more span').text('上拉加载...');
+				}
+			});
+
+			function pullUpAction() {
+				if($('.scroller ul li').length > 50) {
+					$('.more').html("没有更多数据了...").css({
+						color: '#000'
+					});
+					return;
+				} else {
+					setTimeout(function() {
+						//						for(var i = 0; i < 5; i++) {
+						//							$('.scroller ul').append("<li><div class = \"li_top\"><img src = \"img/chanPin.png\" /></div><div class = \"li_bottom\"><span>U盘记录仪</span><br><span>￥999</span></div></li>");
+						//						}
+						$('.more').html("暂无更多数据");
+						myscroll.refresh();
+					}, 10)
+				};
+			};
+			$("ul").on("click", "li:eq(0)", function() {
+				window.location.href = "shop_details_10tp.html";
+			});
+			$("ul").on("click", "li:eq(1)", function() {
+				window.location.href = "shop_1000B_details.html";
+			});
+			$("ul").on("click", "li:eq(2)", function() {
+				//				window.location.href = "shop_1000a_details.html";
+				alert('待开发中。。。')
+			});
+		</script>
+	</body>
+
+</html>

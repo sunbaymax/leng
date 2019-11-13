@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>中集冷云（北京）冷链科技有限公司</title>
+		<link rel="stylesheet" type="text/css" href="../../css/index.css" />
+		<link rel="stylesheet" href="../../css/changeM.css" />
+		<style type="text/css">			
+			.content {
+				width: 100%;
+				height: auto;
+				margin: 4rem 0 5rem 0;
+			}
+			
+			ul li {
+				width: 90%;
+				height: 4rem;
+				margin-left: 5%;
+				border-bottom: 1px solid rgba(0, 0, 0, .3);
+				position: relative;
+			}
+			
+			ul li span {
+				display: block;
+				height: 2rem;
+				line-height: 2rem;
+				float: left;
+				margin-top: 1rem;
+				margin-left: 1rem;
+			}
+			
+			ul li input {
+				width: 1rem;
+				height: 1rem;
+				float: right;
+				margin-top: 1.5rem;
+				margin-right: 1rem;
+			}
+			
+			ul li img:nth-of-type(1) {
+				width: 2rem;
+				float: left;
+				margin-top: 1rem;
+			}
+			
+			ul li img:nth-of-type(2) {
+				width: 2rem;
+				position: absolute;
+				right: 0px;
+				top: 0px;
+			}
+			
+			.footer {
+				font-size: 1.2rem;
+			}
+			
+			.footer_left {
+				width: 60%;
+				height: 5rem;
+				line-height: 5rem;
+			}
+			
+			.footer_left span {
+				margin-left: 10%;
+			}
+			
+			.footer_left span {
+				color: #FF8603;
+				font-size: 1.5rem;
+			}
+			
+			.footer_left span input {
+				width: 1.2rem;
+				height: 1.2rem;
+			}
+			
+			.footer_right {
+				width: 40%;
+				height: 5rem;
+				line-height: 5rem;
+				background: #FF8503;
+				color: #f9f9f9;
+				font-size: 2rem;
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="header"><img class="back_list" src="../../img/back.png" alt="" />收银台</div>
+		<div class="content">
+			<ul>
+				<li>
+					<img src="../../img/weixin_pay.png" />
+					<span>微信支付</span>
+					<input type="checkbox" checked="checked" />
+					<img src="../../img/tuijian.png" alt="" />
+				</li>
+			</ul>
+		</div>
+		<div class="footer">
+			<div class="footer_left left">
+				<span class="left">合计：￥0</span>
+			</div>
+			<div class="footer_right left">付款</div>
+		</div>
+		<script src="../../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var _pay_money = window.sessionStorage.getItem("pay_money");
+			window.sessionStorage.setItem("pay_daWei","中集冷云");
+			var _pay_daWei=window.sessionStorage.getItem("pay_daWei");
+			$(".footer_left .left").html("合计：￥" + _pay_money);
+			$(".footer_right").on("click", function() {
+				var _X=encodeURI("取消了");
+				$.ajax({
+					url:"http://www.ccsc58.com/json/weixin/01_00_weixin_zhifu_post.php",
+					type:"post",
+					data:{
+						controller:"register",
+						admin_permit:"zjly8888",
+						openid:"",
+						fukuandanwei:"中集冷云",
+						money:_pay_money
+					},
+					success:function(data){
+						var _json=JSON.parse(data);
+						//console.log(_json);
+						if(_json.code==10000&&_json.message=="success"&&_json.resultCode=="success"){
+							window.location.href = "jsapi.php?total=" + _pay_money * 100;
+						}else{
+							alert("网络错误，请重试！");
+						}
+					}
+				})
+				
+			});
+			/*返回购物车*/
+			$(".back_list").on("click", function() {
+				window.location.href = "../../shop/shop_car.html"
+			});
+		</script>
+	</body>
+
+</html>

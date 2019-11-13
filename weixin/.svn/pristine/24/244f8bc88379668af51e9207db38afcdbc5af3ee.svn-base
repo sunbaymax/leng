@@ -1,0 +1,120 @@
+body{
+	background:url(../img/bj.png) repeat;
+}
+.header{
+	background:#366CB2;
+	height:3rem;
+	width:100vw;
+	text-align: center;
+	line-height: 3rem;
+	color:#fefefe;
+	font-weight: bold;
+	font-size: 1.5rem;
+	position:fixed;
+	top:0px;
+	left:0px;
+	z-index: 9999;
+}
+footer{
+	position:fixed;
+	bottom:0px;
+	left:0px;
+	height:2rem;
+	line-height:2rem;
+	font-size: 1rem;
+	text-align: center;
+	background:#ccc;
+	width:100vw;
+}
+.change_uesr_ps{
+	height:3rem;
+	margin-top:3rem;
+	line-height:3rem;
+}
+.change_uesr_ps span{
+	border-left:2px solid #FF2F2F;
+	border-right:2px solid #FF2F2F;
+	padding-left:1rem;
+	padding-right:1rem;
+	margin-left:5vw;
+	color:#FF2F2F;
+	white-space:nowrap;
+}
+.change_uesr_box{
+	width:100vw;
+	height:auto;
+	min-height:20rem;
+	border-top: 1px dashed #4688BC;
+	border-bottom: 1px dashed #4688BC;
+	padding-bottom: 1rem;
+}
+.change_uesr_p{
+	width:30vw;
+	height:auto;
+	float:left;
+}
+.change_uesr_box:after {
+	content: "";
+	display: block;
+	height: 0;
+	width:0;
+	clear: both;
+}
+.change_uesr_p p{
+	width:30vw;
+	height:3rem;
+	line-height: 3rem;
+	text-align: right;
+	font-size: 1.5rem;
+	white-space:nowrap;
+}
+.change_uesr_input{
+	width:70vw;
+	float:left;
+}
+.change_uesr_input p{
+	width:70vw;
+	height:3rem;
+	position:relative;
+}
+.change_uesr_input input{
+	width:51vw;
+	height:2rem;
+	text-align: left;
+	padding-left:2rem;
+	padding-right:2rem;
+	outline: none;
+	border:none;
+	margin-top:0.5rem;
+	margin-bottom:0.5rem;
+	box-sizing: border-box;
+	border:1px solid #ccc;
+	font-size: 1rem;
+}
+.change_uesr_input label{
+	width:2rem;
+	height:3rem;
+	font-size:1rem;
+	text-align: center;
+	line-height: 3rem;
+	position:absolute;
+	color:#ccc;
+}
+.change_uesr_button{
+	width:100vw;
+	height:5rem;
+	margin-bottom: 2rem;
+	line-height: 5rem;
+	text-align: center;
+	border-bottom: 1px dashed #4688BC;
+	white-space:nowrap;
+}
+.change_uesr_button input{
+	height:2rem;
+	line-height: 2rem;
+	border:none;
+	background:#4688BC;
+	color:#fefefe;
+	font-size: 1.5rem;
+	outline: none;	
+}

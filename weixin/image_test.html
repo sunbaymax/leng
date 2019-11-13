@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>中集冷云（北京）供应链管理有限公司</title>
+		<link rel="stylesheet" href="css/index.css" />
+		<style type="text/css">
+			.img_logo {
+				width: 100%;
+			}
+			
+			.img_logo img {
+				width: 100%;
+			}
+			
+			form {
+				margin-top: 20px;
+				margin-bottom: 3rem;
+			}
+			
+			form div {
+				width: 100%;
+				height: 5rem;
+				border-top: 1px solid #e5e5e5;
+				border-bottom: 1px solid #e5e5e5;
+				line-height: 5rem;
+				text-align: center;
+				margin-top: 5px;
+				font-size: 1.5rem;
+				color: #a8a8a8;
+				white-space: nowrap;
+			}
+			
+			form div input {
+				width: 65%;
+				height: 4rem;
+				border: none;
+				line-height: 5rem;
+				text-align: center;
+				font-size: 1.5rem;
+				text-align: right;
+				padding-right: 5vw;
+			}
+			
+			form .button {
+				width: 80%;
+				height: 4rem;
+				background: #3299fe;
+				line-height: 4rem;
+				text-align: center;
+				margin-left: 10%;
+				border-radius: 10px;
+				margin-top: 20px;
+				color: #fefefe;
+				font-size: 2rem;
+			}
+			#wenXinTiShi{
+				height:2.5rem;
+				line-height:2.5rem;
+				border:none;
+				font-size:1rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="img_logo">
+			<img src="img/shouqian.png" />
+		</div>
+		<form action="" method="post">
+			<div>
+				付款金额：<input type="text" name="" id="" value="" placeholder="必填,例：0.01" />
+			</div>
+			<div>
+				付款单位：<input type="text" name="" id="" value="" placeholder="必填" />
+			</div>
+			<div>
+				服务城市：<input type="text" name="" id="" value="" placeholder="必填" />
+			</div>
+			<div id="wenXinTiShi">
+				温馨提示：请务必填写真实有效的资料信息
+			</div>
+			<div class="button">
+				确认付款
+			</div>
+		</form>
+		<script src="js/jquery-1.11.0.js"></script>
+		<script>
+			$(".button").on("click", function() {
+				var _jinE = $("form div:nth-of-type(1) input").val();
+				var _danWei=$("form div:nth-of-type(2) input").val();
+				var _money_name=$("form div:nth-of-type(3) input").val();
+				if(_jinE != "" && _jinE > 0) {
+					if(_danWei!=""){
+						if(_money_name!=""){
+							window.sessionStorage.setItem("pay_money",_jinE);
+							window.sessionStorage.setItem("pay_daWei",_danWei);
+							window.sessionStorage.setItem("_pay_name",_money_name);
+							window.location.href = "zhifu/example/jsapi.php?total=" + _jinE * 100;
+						}else{
+							alert("服务城市不能为空！")
+						}
+					}else{
+						alert("付款单位不能为空！");
+					}
+				} else {
+					alert("请输入正确的金额，不能包含除数字以外的内容！");
+				};
+				
+			});
+		</script>
+	</body>
+
+</html>

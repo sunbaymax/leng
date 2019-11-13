@@ -1,0 +1,167 @@
+.content{
+	width:100%;
+	height:auto;
+	margin-bottom:5rem;
+	margin-top:4rem;
+}
+.dingdan_content,
+.dingdan_content_xiang{
+	width:100%;
+	height:auto;
+	border-bottom: 1px solid #ccc;
+	box-sizing: border-box;
+	position:relative;
+}
+.dingdan_content_xiang{
+	height:auto;
+}
+.dingdan_content p,.dingdan_content_xiang p{
+	width:95%;
+	border-bottom: 1px solid #ccc;
+	margin-left:5%;
+	box-sizing: border-box;
+	font-size:1.5rem;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.dingdan_content p:nth-of-type(1),
+.dingdan_content p:nth-of-type(1) span{
+	color:#057CFE;
+}
+.dingdan_content p span,.dingdan_content_xiang p span{
+	color:#A5A5A5;
+}
+.dingdan_content p:nth-of-type(1),
+.dingdan_content_xiang p:nth-of-type(1){
+	height:3rem;
+	line-height:3rem;
+}
+.dingdan_content p:nth-of-type(2),
+.dingdan_content_xiang p:nth-of-type(2){
+	line-height:3rem;
+}
+.dingdan_content .weiWanCheng{
+	color:red;
+	position:absolute;
+	right:3rem;
+	top:4rem;
+	font-size:1.5rem;
+}
+.dingdan_content form{
+	width:100%;
+	height:3rem;
+	text-align: right;
+}
+.dingdan_content form input{
+	width:8rem;
+	height:2rem;
+	border:1px solid #057CFE;
+	background:rgba(0,0,0,0);
+	margin-right:2rem;
+	color:#057CFE;
+	outline: none;
+	margin-top:0.5rem;
+}
+.dingdan_content img{
+	position:absolute;
+	width:8rem;
+	height:8rem;
+	top:1rem;
+	right:2rem;
+}
+.search_dingdan div{
+	width:90%;
+	height:auto;
+	position:absolute;
+	left:5%;
+	top:3rem;
+	background:#fefefe;
+	border:1px solid #ccc;
+	border-top:none;
+}
+.search_dingdan div p{
+	height:2rem;
+	line-height:2rem;
+	text-align: left;
+	font-size:1.5rem;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.search_dingdan div p span{
+	font-size:1.7rem;
+	color:blue;
+}
+ul{
+	width:100%;
+	height:auto;
+}
+ul li{
+	width:100%;
+	height:5rem;
+	line-height:2.5rem;
+	border-bottom: 1px solid #ccc;
+	box-sizing: border-box;
+}
+ul li div{
+	font-size:1rem;
+}
+ul li div:nth-of-type(1){
+	float:left;
+	margin-left:5%;
+}
+ul li div:nth-of-type(1) p:nth-of-type(1){
+	color:#057CFE;
+	font-size:1.5rem;
+}
+ul li div:nth-of-type(2){
+	float:right;
+	margin-right:1rem;
+}
+.header img{
+	width:1.5rem;
+	height:1.5rem;
+	position:absolute;
+	right:1rem;
+	top:1.25rem;
+}
+.search_dingdan{
+	width:100%;
+	height:0vh;
+	position:fixed;
+	top:4rem;
+	left:0px;
+	background:#fefefe;
+	text-align: center;
+	line-height: 3rem;
+	font-size:1.5rem;
+	overflow: hidden;
+}
+.search_dingdan input{
+	width:90%;
+	height:3rem;
+	box-sizing: border-box;
+	border: none;
+	border-bottom: 2px solid #ccc;
+	outline: none;
+	text-align: center;
+	border-radius: 1rem;
+	font-size:1.5rem;
+}
+.search_dingdan input:nth-of-type(2){
+	width:80%;
+	background:#057CFE;
+	color:#fefefe;
+	font-size:1.5rem;
+	margin-top:1rem;
+	font-weight: bold;
+	letter-spacing: 2rem;
+	text-align: center;
+}
+.search_dingdan img{
+	position:absolute;
+	top:0.5rem;
+	right:5%;
+	display:block;
+	width:2rem;
+	height:2rem;
+}

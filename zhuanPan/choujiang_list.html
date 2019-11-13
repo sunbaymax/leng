@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>中集冷云（北京）冷链科技有限公司</title>
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+		<link rel="stylesheet" type="text/css" href="../css/changeM.css" />
+		<style type="text/css">
+			.content {
+				margin-top: 4rem;
+				overflow: hidden;
+			}
+			
+			form {
+				margin-top: 2rem;
+				margin-bottom: 2rem;
+			}
+			
+			input {
+				width: 40%;
+				height: 2rem;
+				line-height: 2rem;
+				text-align: center;
+				margin-left: 5%;
+				border: 1px solid #ccc;
+			}
+			
+			#button {
+				width: 85%;
+				height: 3rem;
+				line-height: 3rem;
+				letter-spacing: 5px;
+				margin-left: 5%;
+				margin-top: 1rem;
+				background: #3299fe;
+				text-align: center;
+				color: #fefefe;
+				font-weight: bold;
+				font-size: 1.5rem;
+			}
+			
+			ul {
+				width: 100%;
+				height: 10rem;
+				border-bottom: 1px solid #ccc;
+				font-weight: bold;
+				font-size: 1.5rem;
+				font-family: "微软雅黑";
+			}
+			
+			ul li {
+				width: 95%;
+				height: 2rem;
+				line-height: 2rem;
+				padding-left: 5%;
+			}
+			ul li span{
+				font-weight:normal;
+			}
+			#wrapper {
+				width: 100%;
+				position: absolute;
+				left: 0;
+				top: 13rem;
+				overflow: hidden;
+				z-index: 1;
+				bottom: 0px;
+			}
+			
+			.more {
+				height: 4rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: blue;
+			}
+			
+			.pull_icon {
+				width: 25px;
+				height: 25px;
+				background-image: url('images/pull.png');
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: 25px;
+				transition: all .5s;
+			}
+			
+			.more span {
+				padding-left: .5rem;
+			}
+			
+			.scroller {
+				background-color: #fff;
+			}
+			
+			.more .flip {
+				transform: rotate(180deg);
+			}
+			
+			.loading {
+				background-image: url('images/loading.png');
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: 25px;
+			}
+			
+			.more .loading {
+				-webkit-transform: rotate(0deg) translateZ(0);
+				-webkit-transition-duration: 0;
+				-webkit-animation-name: loading;
+				-webkit-animation-duration: 2s;
+				-webkit-animation-iteration-count: infinite;
+				-webkit-animation-timing-function: linear;
+			}
+			
+			@-webkit-keyframes loading {
+				from {
+					-webkit-transform: rotate(0deg) translateZ(0);
+				}
+				to {
+					-webkit-transform: rotate(360deg) translateZ(0);
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="header">
+			抽奖人名单
+		</div>
+		<div class="content">
+			<form action="">
+				<input type="text" name="" id="history_start_time" value="" readonly="readonly" onFocus="WdatePicker({startDate:'%y-%M-{%d-1} %H:%m:%s',dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
+				<input type="text" name="" id="history_end_time" value="" readonly="readonly" onFocus="WdatePicker({startDate:'%y-%M-%d %H:%m:%s',dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
+				<div id="button">
+					查询
+				</div>
+			</form>
+			<div id="wrapper">
+				<div class="scroller">
+					<div class="iscroll_box">
+						<ul class="hidden">
+							<li>姓名：&nbsp;&nbsp;<span></span></li>
+							<li>公司：&nbsp;&nbsp;<span></span></li>
+							<li>电话：&nbsp;&nbsp;<span></span></li>
+							<li>时间：&nbsp;&nbsp;<span></span></li>
+							<li>中奖：&nbsp;&nbsp;<span></span></li>
+						</ul>
+					</div>
+					<div class="more"><i class="pull_icon"></i><span>上拉加载...</span></div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../My97DatePicker/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var _endTime = new Date();
+			var _startTime = new Date(_endTime.getTime() - 24 * 60 * 60 * 1000);
+			$("#history_start_time").val(history_time(_startTime));
+			$("#history_end_time").val(history_time(_endTime));
+
+			function history_time(_a) {
+				var _start_year = _a.getFullYear();
+				var _start_month = _a.getMonth() + 1 < 10 ? "0" + (_a.getMonth() + 1) : _a.getMonth() + 1;
+				var _start_date = _a.getDate() < 10 ? "0" + (_a.getDate()) : _a.getDate();
+				var _start_hour = _a.getHours() < 10 ? "0" + (_a.getHours()) : _a.getHours();
+				var _start_minutes = _a.getMinutes() < 10 ? "0" + (_a.getMinutes()) : _a.getMinutes();
+				var _start_seconds = _a.getSeconds() < 10 ? "0" + (_a.getSeconds()) : _a.getSeconds();
+				return _start_year + "-" + _start_month + "-" + _start_date + " " + _start_hour + ":" + _start_minutes + ":" + _start_seconds;
+			};
+			var myscroll_x = new iScroll("wrapper", {
+				onScrollMove: function() {
+					if(this.y < (this.maxScrollY)) {
+						$('.pull_icon').addClass('flip');
+						$('.pull_icon').removeClass('loading');
+						$('.more span').text('释放加载...');
+					} else {
+						$('.pull_icon').removeClass('flip loading');
+						$('.more span').text('上拉加载...')
+					}
+				},
+				onScrollEnd: function() {
+					if($('.pull_icon').hasClass('flip')) {
+						$('.pull_icon').addClass('loading');
+						$('.more span').text('加载中...');
+						pullUpActions();
+					}
+				},
+				onRefresh: function() {
+					$('.more').removeClass('flip');
+					$('.more span').text('上拉加载...');
+				}
+			});
+			function pullUpActions(){
+				_start+=20;
+				my_Play(_start);
+			}
+			var _start = 0;
+			my_Play(_start);
+			$("#button").on("click",function(){
+				var _first=$("ul").eq(0).clone();
+				$("ul").remove();
+				$(".more").before(_first);
+				$(".more").html("<i class=\"pull_icon\"></i><span>上拉加载...</span>").css({
+					color:"blue"
+				})
+				var _start=0;
+				my_Play(_start);
+			})
+			function my_Play(_s) {
+				$.ajax({
+					type: "post",
+					url: "http://www.ccsc58.com/json/weixin/02_00_choujiang01_chaxun.php",
+					data: {
+						admin_permit: "zjly8888",
+						StartTime: $("#history_start_time").val(),
+						EndTime: $("#history_end_time").val(),
+						StartNo: _s,
+						Length: 20
+					},
+					success: function(data) {
+						var _json = JSON.parse(data);
+						if(_json.code=="10000"&&_json.message=="success"&&_json.resultCode!="nodata"){
+							for(var i=0;i<_json.resultCode.length;i++){
+								var _demo=$("ul").eq(0)	.clone().removeClass("hidden").appendTo(".iscroll_box");
+								_demo.find("li:nth-of-type(1) span").html(_json.resultCode[i].name==""?"暂无":_json.resultCode[i].name);
+								_demo.find("li:nth-of-type(2) span").html(_json.resultCode[i].company==""?"暂无":_json.resultCode[i].company);
+								_demo.find("li:nth-of-type(3) span").html(_json.resultCode[i].tel==""?"暂无":_json.resultCode[i].tel);
+								_demo.find("li:nth-of-type(4) span").html(_json.resultCode[i].time==""?"暂无":_json.resultCode[i].time);
+								_demo.find("li:nth-of-type(5) span").html(_json.resultCode[i].openid==""?"暂无":_json.resultCode[i].openid);
+							}
+							myscroll_x.refresh();				
+						}else{
+							$(".more").html("没有更多数据了").css({
+								color:"#ccc"
+							})
+						}
+						myscroll_x.refresh();	
+					},
+					error:function(){
+						alert("网络错误！！");
+						myscroll_x.refresh();
+						window.location.href=window.location.href;
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

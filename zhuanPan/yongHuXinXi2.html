@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>中集冷云（北京）冷链科技有限公司</title>
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+		<style type="text/css">
+			form {
+				width: 100%;
+				line-height: 3rem;
+				font-size: 1.5rem;
+			}
+			
+			label {
+				display: inline-block;
+				width: 20%;
+				height: 2rem;
+				line-height: 2rem;
+				text-align: left;
+				margin-left: 10%;
+				font-weight: bold;
+			}
+			
+			input {
+				width: 80%;
+				height: 3rem;
+				border: none;
+				border-bottom: 1px solid #ccc;
+				outline: none;
+				line-height: 3rem;
+				margin-left: 10%;
+				font-size: 1.5rem;
+			}
+			
+			.top {
+				width: 100%;
+				height: 18rem;
+			}
+			
+			.button {
+				width: 80%;
+				height: 3rem;
+				line-height: 3rem;
+				text-align: center;
+				margin-left: 10%;
+				margin-top: 2rem;
+				background: #181ED0;
+				color: #fefefe;
+				border: none;
+				font-weight: bold;
+				font-size: 2rem;
+				letter-spacing: 2px;
+				border-radius: 5px;
+    			box-shadow: 2px 4px 2px #888888;
+			}
+			
+			p {
+				width: 80%;
+				margin-left: 10%;
+				height: 2rem;
+				line-height: 2rem;
+				color: #C1C1C1;
+				font-size: 1rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<img class="top" src="images/kaijiang.gif" alt="" />
+		<form>
+			<label for="name">姓名：</label><br><input type="text" id="name" value="" placeholder="请输入真实姓名，以便我们邮寄奖品" />
+			<p class="overflow">请输入真实姓名，以便我们邮寄奖品</p>
+			<label for="tel">电话：</label><br><input type="text" id="tel" value="" placeholder="请输入真实11位手机号码，以便我们邮寄奖品" />
+			<p class="overflow">请输入真实11位手机号码，以便我们邮寄奖品</p>
+			<label for="company">公司：</label><br><input type="text" id="company" value="" placeholder="请输入真实公司名称，以便我们邮寄奖品" />
+			<p class="overflow">请输入真实公司名称，以便我们邮寄奖品</p>
+			
+			<label for="jiang">奖项：</label><br>
+			<!--<p id="jiangx"></p>
+		-->
+			<!--<select name="grade" size="1" style="position: absolute;left:32px">	-->
+			<p>
+			<select name="grade" size="1" style="width: 12.5rem;height:2.875rem;">	
+			  <option  value="0">--选择你的奖项--</option>
+			  <option value ="1">一等奖</option>
+			  <option value ="2">二等奖</option>
+			  <option value="3">三等奖</option>
+			  <option value="4">四等奖</option>
+			</select>
+		  </p>
+			<div class="button">确认提交</div>
+		</form>
+		<p style="text-align: center;">
+			最终结果解释权归“中集冷云”所有，感谢参与！
+		</p>
+		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			$(".button").on("click", function() {
+						var _name = $("#name").val();
+						var _tel = $("#tel").val();
+						var _company = $("#company").val();
+						var _grade = $("select[name='grade']").val();
+
+						if(_name == "") {
+							$("form p:nth-of-type(1)").html("请输入您的姓名").css({
+								color: "red"
+							});
+						} else if(_tel == "") {
+							$("form p:nth-of-type(2)").html("请输入您的手机号码").css({
+								color: "red"
+							});;
+						} else if(_company == "") {
+							$("form p:nth-of-type(3)").html("请输入您的公司名称").css({
+								color: "red"
+							});;
+							
+						} 
+						else {
+							
+							$(".overflow").html("").css({
+								color: "#c1c1c1"
+							});
+//							window.sessionStorage.setItem("name", _name);
+//							window.sessionStorage.setItem("tel", _tel);
+//							window.sessionStorage.setItem("company", _company);
+//							window.sessionStorage.setItem("grade", _grade);
+					
+
+							$.ajax({
+								type: "post",
+								url: "http://www.ccsc58.com/json/weixin/02_00_choujiang01_post.php",
+								data: {
+									controller: "register",
+									admin_permit: "zjly8888",
+									openid:"不晓得",
+									tel: _tel,
+									company: _company,
+									name: _name,
+									grade:_grade
+								},
+								success: function(data) {
+									var _json = JSON.parse(data);
+									if(_json.code == "10000" && _json.message == "success" && _json.resultCode == "success") {
+                                     alert("恭喜您，请至'中集冷云'展台处领取奖品");	
+                             		}
+								}
+							});
+						}
+					});
+				
+		</script>
+	</body>
+
+</html>

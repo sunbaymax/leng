@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/user.css" />
+	</head>
+
+	<body>
+		<div class="machine_box">
+			<div id="machine_map">
+
+			</div>
+			<form class="choose_map">
+				<div class="choose_left left">
+					<p>设备号：</p>
+					<p>开始时间：</p>
+					<p>结束时间：</p>
+				</div>
+				<div class="choose_right right">
+					<input class="machine_num" type="text" readonly/><br>
+					<input id="history_start_time" type="text" readonly /><br>
+					<input id="history_end_time" type="text" readonly /><br>
+				</div>
+			</form>
+			<div class="gongLi">
+				<div><b>设备号：&nbsp;&nbsp;&nbsp;</b><span></span></div>
+				<div><b>车牌号：&nbsp;&nbsp;&nbsp;</b><span></span></div>
+				<div><b>总里程：&nbsp;&nbsp;&nbsp;</b><span></span></div>
+				<div><b>开始时间:&nbsp;&nbsp;&nbsp;</b><span></span></div>
+				<div><b>结束时间:&nbsp;&nbsp;&nbsp;</b><span></span></div>
+				<div>
+					<b>温度01:</b><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<b>最高:&nbsp;&nbsp;&nbsp;</b>
+					<span></span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<b>最低:&nbsp;&nbsp;&nbsp;</b>
+					<span></span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<b>平均:&nbsp;&nbsp;&nbsp;</b>
+					<span></span>
+				</div>
+				<div>
+					<b>温度02:</b><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<b>最高:&nbsp;&nbsp;&nbsp;</b>
+					<span></span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<b>最低:&nbsp;&nbsp;&nbsp;</b>
+					<span></span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<b>平均:&nbsp;&nbsp;&nbsp;</b>
+					<span></span>
+				</div>
+				<div>
+					<b>湿度:</b><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<b>最高:&nbsp;&nbsp;&nbsp;</b>
+					<span></span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<b>最低:&nbsp;&nbsp;&nbsp;</b>
+					<span></span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<b>平均:&nbsp;&nbsp;&nbsp;</b>
+					<span></span>
+				</div>
+			</div>
+			<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+			<script src="My97DatePicker/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
+			<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=XP1alssWsEscC3NfYAhj6YfqKvgQgUXF" charset="utf-8"></script>
+			<script src="js/machine.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>

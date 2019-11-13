@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>中集冷云</title>
+    <script>
+        var _url = window.location.href;
+        var _openId = _url.match(/\?openId=\S+/)[0].replace("?openId=", "");
+        if(window.localStorage.getItem("user")) {
+            window.location.href = "index.html";
+        }else{
+            window.location.href = "html/register.html?openId="+_openId;
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>
