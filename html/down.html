@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/changeM.css" />
+		<style>
+			form {
+				width: 100%;
+				margin-top: 5rem;
+			}
+			
+			form p {
+				width: 100%;
+				text-align: center;
+				margin-top: 2rem;
+				height: 3rem;
+			}
+			
+			form p input {
+				height: 2rem;
+				box-sizing: border-box;
+				text-align: center;
+			}
+			
+			form p:nth-of-type(5) input {
+				width: 60%;
+				height: 3rem;
+				text-align: center;
+				line-height: 3rem;
+				background: #4688BC;
+				color: #fefefe;
+				font-size: 2rem;
+			}
+			
+			.down_weixin {
+				width: 100vw;
+				height: 100vh;
+				position: fixed;
+				top: 0px;
+				left: 0px;
+				background: rgba(0, 0, 0, .5);
+				z-index: 99999;
+			}
+			
+			.down_weixin img {
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="header"><img class="back_list_user" src="../img/back.png" />数据下载</div>
+		<form action="">
+			<p>设备编号：<input type="text" readonly="readonly" /></p>
+			<p>开始时间：<input style="text-align: center;" type="text" id="history_start_time" readonly/></p>
+			<p>结束时间：<input style="text-align: center;" type="text" id="history_end_time" readonly /></p>
+			<p>选择格式：
+				<select name="">
+					<option value="1">PDF格式</option>
+					<option value="2">EXCEL格式</option>
+				</select>
+			</p>
+			<p><input type="button" value="下载" /></p>
+		</form>
+		<div class="down_weixin hidden">
+			<img src="../img/down_weixin.png" />
+		</div>
+		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var _url = window.location.href;
+			var _num_m = _url.match(/\?num_m=\S+&s/)[0].replace("?num_m=", "").replace("&s", "");
+			$(".back_list_user").on("click", function() {
+				var ab = navigator.userAgent;
+				var isWei = !!/MicroMessenger/i.test(ab);
+				if(isWei) {
+					window.location.href = "details_list.html?num_m=" + _num_m;
+				} else {
+					alert("请返回微信！")
+				}
+			});
+			var _start_time = _url.match(/\&start=\S+&e/)[0].replace("&start=", "").replace("&e", "").replace("%20", " ");
+			var _end_time = _url.match(/\&end=\S+/)[0].replace("&end=", "").replace("%20", " ");
+			$("form p:nth-of-type(1) input").val(_num_m);
+			$("#history_start_time").val(_start_time);
+			$("#history_end_time").val(_end_time);
+			$(".down_weixin img").on("click", function() {
+				$(".down_weixin").addClass("hidden");
+			})
+			$("p:nth-of-type(5) input").on("click", function() {
+				var ua = navigator.userAgent;
+				var isWeixin = !!/MicroMessenger/i.test(ua);
+				if(isWeixin) {
+					$(".down_weixin").removeClass("hidden");
+				} else {
+					var _machine_number = $("form p:nth-of-type(1) input").val();
+					var _start_time = $("#history_start_time").val();
+					var _end_time = $("#history_end_time").val();
+					var _geshi = $("p:nth-of-type(4) select").val();
+					//console.log(_geshi);
+					if(_geshi == 1) {
+						window.location.href = "http://www.ccsc58.com/tcpdf/pdf/pdf_out.php?s=" + _machine_number + "&t1=" + _start_time + "&t2=" + _end_time;
+					} else if(_geshi == 2) {
+						window.location.href = "http://www.ccsc58.com/PHPExcel/PHPExcel/xls_out.php?s=" + _machine_number + "&t1=" + _start_time + "&t2=" + _end_time;
+					}
+				}
+
+			})
+		</script>
+	</body>
+
+</html>

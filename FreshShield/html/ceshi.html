@@ -1,0 +1,221 @@
+<!--<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>js实现消息滚动效果</title>
+<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+<style>
+* {
+    margin:0;
+    padding:0;
+}
+.scroll-box {
+    width:400px;
+    height:200px;
+    border:2px solid #000;
+    margin:20px auto;
+    overflow:hidden;
+}
+.scroll-box ul {
+    list-style:none;
+    width:100%;
+    height:100%;
+}
+.scroll-box ul li {
+    width:100%;
+    height:40px;
+    box-sizing:border-box;
+    line-height:40px;
+    text-align:center;
+}
+</style>
+</head>
+<body>
+<div class="scroll-box">
+ <ul>
+  <li>1好消息！好消息！本店所有商品全部白送1</li>
+  <li>2好消息！好消息！本店所有商品全部白送2</li>
+  <li>3好消息！好消息！本店所有商品全部白送3</li>
+  <li>4好消息！好消息！本店所有商品全部白送4</li>
+  <li>5好消息！好消息！本店所有商品全部白送5</li>
+  <li>6好消息！好消息！本店所有商品全部白送6</li>
+  <li>7好消息！好消息！本店所有商品全部白送7</li>
+  <li>8好消息！好消息！本店所有商品全部白送8</li>
+ </ul>
+</div>
+
+<script>
+$(function() {
+    //获得当前<ul>
+    var $uList = $(".scroll-box ul");
+    var timer = null;
+    //触摸清空定时器
+    $uList.hover(function() {
+        clearInterval(timer);
+    },
+    function() { //离开启动定时器
+        timer = setInterval(function() {
+            scrollList($uList);
+        },
+        1000);
+    }).trigger("mouseleave"); //自动触发触摸事件
+    //滚动动画
+    function scrollList(obj) {
+        //获得当前<li>的高度
+        var scrollHeight = $(".scroll-box ul li:first").height();
+        //滚动出一个<li>的高度
+        $uList.stop().animate({
+            marginTop: -scrollHeight
+        },
+        600,
+        function() {
+            //动画结束后，将当前<ul>marginTop置为初始值0状态，再将第一个<li>拼接到末尾。
+            $uList.css({
+                marginTop: 0
+            }).find("li:first").appendTo($uList);
+        });
+    }
+});
+</script>
+
+</body>
+</html>-->
+<!--<html>
+<HEAD>
+<TITLE>文本自动向上滚动</TITLE>
+<meta charset="utf-8">
+<META content="text/html; charset=gb2312" http-equiv=Content-Type>
+<STYLE type=text/css>
+#demo a {
+    width:100%;
+    overflow:hidden;
+    font:12px/16px tahoma;
+    display:block;
+    text-decoration:none;
+    margin:2px;
+    color:#4a551c;
+    padding-left:2px;
+    text-align:left;
+}
+#demo a:hover {
+    color:#ff6600;
+}
+</STYLE>
+</HEAD>
+<body>
+<div id="demo" style="overflow:hidden;height:132px;width:400px;border:1px solid #dde5bc;margin-left:300px; margin-top:100px;">
+    <div id="demo1"> 
+        <a href="#">伫立  在窗边 凝视  人来人往 飘散的发丝带着微雨</a>
+        <a href="#">似乎 它也在期待</a>
+        <a href="#">期待他的出现</a>
+        <a href="#">天空飘着幸福的微雨</a>
+        <a href="#">空气散发幸福的气息</a>
+        <a href="#">她的脸上 堆满幸福的期待</a>
+        <a href="#">雨无声无息地下着</a>
+        <a href="#">雨丝变成了雨滴</a>
+        <a href="#">慢慢地 地面有了停留的雨水</a>
+        <a href="#">她的他 却始终没有出现</a>
+        <a href="#">她的脸湿了</a>
+        <a href="#">她对自己说 那不是泪</a>
+        <a href="#">只是被雨打湿了</a>
+        <a href="#">她记得</a>
+        <a href="#">记得他陪她一起淋雨</a>
+        <a href="#">记得他陪她看过的日出日落</a>
+        <a href="#">现在 陪着她的</a>
+        <a href="#">只有无声的雨</a>
+        <a href="#">雨滴打在她的脸上</a>
+        <a href="#">凉凉的 很冷 很冷</a>
+    </div>
+    <div id="demo2"></div>
+</div>
+<script>
+var speed=40
+var demo=document.getElementById("demo");
+var demo2=document.getElementById("demo2");
+var demo1=document.getElementById("demo1");
+demo2.innerHTML=demo1.innerHTML
+function Marquee(){
+    if(demo2.offsetTop-demo.scrollTop<=0)
+        demo.scrollTop-=demo1.offsetHeight
+    else{
+        demo.scrollTop++
+    }
+}
+var MyMar=setInterval(Marquee,speed)
+demo.onmouseover=function() {clearInterval(MyMar)}
+demo.onmouseout=function() {MyMar=setInterval(Marquee,speed)}
+</script>
+</body>
+</html>-->
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>js实现消息滚动效果</title>
+
+	<style type="text/css">
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    #content li {
+        font-size: 14px;
+        height: 20px;
+        line-height: 20px;
+    }
+    #scrollUpBox {
+        height: 200px;
+        padding: 0 15px;
+        border: 2px solid #cccccc;
+        border-radius: 5px;
+        box-shadow: 0 0 10px #0000ff;
+        overflow: hidden;
+    }
+</style>
+
+<div id="scrollUpBox">
+    <ul id="content">
+        <li>测试内容1！</li>
+        <li>测试内容2！</li>
+        <li>测试内容3！</li>
+        <li>测试内容4！</li>
+        <li>测试内容5！</li>
+        <li>测试内容6！</li>
+        <li>测试内容7！</li>
+        <li>测试内容8！</li>
+        <li>测试内容9！</li>
+        
+        <li>测试内容1！</li>
+        <li>测试内容2！</li>
+        <li>测试内容3！</li>
+        <li>测试内容4！</li>
+        <li>测试内容5！</li>
+        <li>测试内容6！</li>
+        <li>测试内容7！</li>
+        <li>测试内容8！</li>
+        <li>测试内容9！</li>
+    </ul>
+</div>
+
+<script type="text/javascript">            
+    var scrollUpBox = document.getElementById('scrollUpBox');
+    var content = document.getElementById('content');
+    function scrollUp() {
+        if (scrollUpBox.scrollTop >= (content.clientHeight - scrollUpBox.clientHeight)) {
+            scrollUpBox.scrollTop = 0;
+        } else {
+            scrollUpBox.scrollTop++;
+        }
+    }                
+    var TIME = 50;
+    var timer = setInterval(scrollUp, TIME);
+    scrollUpBox.onmouseover = function() {
+        clearInterval(timer);
+    }
+    scrollUpBox.onmouseout = function() {
+        timer = setInterval(scrollUp, TIME);
+    }
+</script>
+</body>
+</html>

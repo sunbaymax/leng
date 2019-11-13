@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>北京中集智冷微信支付收款明细</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="css/changeM.css" />
+    <style type="text/css">
+        input {
+            width: 40%;
+            height: 2rem;
+            margin-left: 6vw;
+            margin-top: 1rem;
+            text-align: center;
+            line-height: 2rem;
+            font-size: 1rem;
+        }
+        .cha {
+            width: 80%;
+            height: 3rem;
+            background: #3299fe;
+            line-height: 3rem;
+            text-align: center;
+            margin-left: 10%;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            color: #fefefe;
+            font-size: 1.5rem;
+            letter-spacing: 2rem;
+        }
+        .content {
+            margin-top: 2rem;
+            width: 100%;
+            margin-top: 13rem;
+        }
+       
+        .more {
+            width: 100%;
+            height: 4rem;
+            line-height: 4rem;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        .ding {
+            width: 100%;
+            position: fixed;
+            top: 4rem;
+            left: 0px;
+            background: #Fefefe;
+            border-bottom:1px solid #ccc;
+        }
+        .top{
+        	width:100%;
+        	height:10rem;
+        	border-bottom:1px solid #ccc;
+        	color:#000;
+        }
+        .top li{
+        	width:95%;
+        	height:2.5rem;
+        	line-height:2.5rem;
+        	font-size:1.5rem;
+        	font-weight: bold;
+        	margin-left:2.5%;
+        	font-family: "微软雅黑";
+        	white-space: nowrap;
+        }
+        .top li span{
+        	font-weight:normal;
+        	white-space: nowrap;
+        }
+        .top li:last-child span{
+        	color:blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        收款记录查询
+    </div>
+    <div class="ding">
+        <input id="start_time" type="text" readonly onFocus="WdatePicker({startDate:'%y-%M-{%d-1} %H:%m:%s',dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
+        <input id="end_time" type="text" readonly onFocus="WdatePicker({startDate:'%y-%M-%d %H:%m:%s',dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
+        <div class="cha">
+            查询
+        </div>
+    </div>
+
+    <div class="content">
+        <ul class="top hidden">
+            <li>时间：&nbsp;&nbsp;<span></span></li>
+            <li>单位：&nbsp;&nbsp;<span></span></li>
+            <li>明细：&nbsp;&nbsp;<span></span></li>
+            <li>金额：&nbsp;&nbsp;<span></span></li>
+        </ul>
+        <div class="more">
+            <a href="javascript:void(0)">查看更多交易记录</a>
+        </div>
+    </div>
+    <script src="js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+    <script src="My97DatePicker/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        var _endTime = new Date();
+        var _startTime = new Date(_endTime.getTime() - 24 * 60 * 60 * 1000);
+        $("#start_time").val(history_time(_startTime));
+        $("#end_time").val(history_time(_endTime));
+
+        function history_time(_a) {
+            var _start_year = _a.getFullYear();
+            var _start_month = _a.getMonth() + 1 < 10 ? "0" + (_a.getMonth() + 1) : _a.getMonth() + 1;
+            var _start_date = _a.getDate() < 10 ? "0" + (_a.getDate()) : _a.getDate();
+            var _start_hour = _a.getHours() < 10 ? "0" + (_a.getHours()) : _a.getHours();
+            var _start_minutes = _a.getMinutes() < 10 ? "0" + (_a.getMinutes()) : _a.getMinutes();
+            var _start_seconds = _a.getSeconds() < 10 ? "0" + (_a.getSeconds()) : _a.getSeconds();
+            return _start_year + "-" + _start_month + "-" + _start_date + " " + _start_hour + ":" + _start_minutes + ":" + _start_seconds;
+        }
+        var _length = 0;
+        $(".cha").on("click", function () {
+            var _first = $(".top").eq(0).clone();
+            $(".top").remove();
+            $(".more").before(_first);
+            _length = 0;
+            my_ajax(_length);
+        });
+        $(".more").on("click", function () {
+            _length += 20;
+            my_ajax(_length);
+        })
+         my_ajax(_length);
+
+        function my_ajax(_l) {
+            $.ajax({
+                type: "post",
+                url: "http://www.ccsc58.com/json/weixin/02_00_lykj_weixin_zhifu_chaxun.php",
+                data: {
+                    admin_permit: "zjly8888",
+                    StartTime: $("#start_time").val(),
+                    EndTime: $("#end_time").val(),
+                    StartNo: _l,
+                    Length: 20
+                },
+                success: function (data) {
+                    var _json = JSON.parse(data);
+                    if (_json.resultCode != "nodata") {
+                        for (var i = 0; i < _json.resultCode.length; i++) {
+                            var _dem = $(".top").eq(0).clone().removeClass("hidden");
+                            _dem.find("li:nth-of-type(1) span").html(_json.resultCode[i].time);
+                            _dem.find("li:nth-of-type(2) span").html(_json.resultCode[i].fukuandanwei);
+                            _dem.find("li:nth-of-type(3) span").html(_json.resultCode[i].openid);
+                            _dem.find("li:nth-of-type(4) span").html("￥" + Number(_json.resultCode[i].money).toFixed(2));
+                            $(".more").before(_dem);
+                        }
+                        $(".more").html("<a href='javascript:void(0)'>查看更多交易记录</a>");
+                    } else {
+                        $(".more").html("此时间段内未发现更多交易数据！")
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

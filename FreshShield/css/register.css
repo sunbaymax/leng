@@ -1,0 +1,112 @@
+body {
+	overflow-x: hidden;
+}
+
+.register_logo {
+	display: block;
+	width: 100%;
+	height: 35vh;
+}
+
+#cd-login {
+	width: 100%;
+	height: auto;
+	margin-top: 4rem;
+	background: #fefefe;
+	margin-bottom: 4rem;
+}
+
+.cd-form .fieldset {
+	width: 100%;
+	height: 4rem;
+	position: relative;
+}
+
+.cd-form .fieldset input[type=text],
+.cd-form .fieldset input[type=password],
+.cd-form .fieldset input[type=button] {
+	width: 90%;
+	height: 4rem;
+	outline: none;
+	box-sizing: border-box;
+	margin-left: 5%;
+	font-size: 1.4rem;
+	border: 1px solid #d2d8d8;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+	border-radius: 0.5rem;
+}
+
+.cd-form .fieldset input[type=button] {
+	background-color: #3299fe;
+	color: #fefefe;
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+
+.cd-form .fieldset input[type=text],
+.cd-form .fieldset input[type=password] {
+	padding-left: 4rem;
+}
+
+.cd-form .fieldset .image-replace {
+	position: absolute;
+	display: block;
+	width: 4rem;
+	height: 4rem;
+	font-size: 2rem;
+	line-height: 4rem;
+	text-align: center;
+	left: 5%;
+	font-size: 1.4rem;
+}
+
+.cd-form .register_prompt {
+	width: 100%;
+	height: 2rem;
+	/*margin-left:10%;*/
+	line-height: 2rem;
+	font-size: 1rem;
+}
+
+.remember_login {
+	margin-left: 5%;
+	font-size: 1rem;
+}
+
+.qdy {
+	width: 100%;
+	height: 100%;
+}
+
+.qdy img {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.hide {
+	display: none;
+}
+
+#caozuo {
+	display: flex;
+	padding: 0 5%;
+	box-sizing: border-box;
+	align-items: center;
+	font-size: 1.4rem;
+	color: #333;
+}
+
+#caozuo #check {
+	display: inline-block;
+	width: 1.4rem;
+	height: 1.4rem;
+	margin-right: 0.5rem;
+}
+.forgetpsd{
+	text-decoration: none;
+}

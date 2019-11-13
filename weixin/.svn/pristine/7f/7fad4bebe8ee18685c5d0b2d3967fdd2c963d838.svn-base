@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/changeM.css" />
+		<style>
+			form{
+				width:100%;
+				margin-top:5rem;
+			}
+			form p{
+				width:100%;
+				text-align: center;
+				margin-top:2rem;
+				height:3rem;
+			}
+			form p input{
+				height:2rem;
+				box-sizing: border-box;
+				text-align: center;
+			}
+			form p:nth-of-type(5) input{
+				width:60%;
+				height:3rem;
+				text-align: center;
+				line-height:3rem;
+				background:#4688BC;
+				color:#fefefe;
+				font-size:2rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="header">数据下载</div>
+		<form action="">
+			<p>设备编号：<input type="text" /></p>
+			<p>开始时间：<input style="text-align: center;" type="text" id="history_start_time" onFocus="WdatePicker({startDate:'%y-%M-{%d-1} %H:%m:%s',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})" readonly/></p>
+			<p>结束时间：<input style="text-align: center;" type="text" id="history_end_time" onFocus="WdatePicker({startDate:'%y-%M-{%d} %H:%m:%s',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})" readonly /></p>
+			<p>选择格式：
+				<select name="">
+					<option value="1">PDF格式</option>
+					<option value="2">EXCEL格式</option>
+				</select>
+			</p>
+			<p><input type="button" value="下载" /></p>
+		</form>
+		<footer>
+			中集冷云（北京）冷链科技有限公司
+		</footer>
+		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../My97DatePicker/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		var _url = window.location.href;
+		var _num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "");
+		$("form p:nth-of-type(1) input").val(_num_m)
+			//将时间函数转换成所需样式的并加载到页面中去；
+			var _endTime = new Date();
+			var _startTime = new Date(_endTime.getTime() - 24 * 60 * 60 * 1000);
+			$("#history_start_time").val(history_time(_startTime));
+			$("#history_end_time").val(history_time(_endTime));
+
+			function history_time(_a) {
+				var _start_year = _a.getFullYear();
+				var _start_month = _a.getMonth() + 1 < 10 ? "0" + (_a.getMonth() + 1) : _a.getMonth() + 1;
+				var _start_date = _a.getDate() < 10 ? "0" + (_a.getDate()) : _a.getDate();
+				var _start_hour = _a.getHours() < 10 ? "0" + (_a.getHours()) : _a.getHours();
+				var _start_minutes = _a.getMinutes() < 10 ? "0" + (_a.getMinutes()) : _a.getMinutes();
+				var _start_seconds = _a.getSeconds() < 10 ? "0" + (_a.getSeconds()) : _a.getSeconds();
+				return _start_year + "-" + _start_month + "-" + _start_date + " " + _start_hour + ":" + _start_minutes + ":" + _start_seconds;
+			};
+			$("p:nth-of-type(5) input").on("click",function(){
+				var _machine_number=$("form p:nth-of-type(1) input").val();
+				var _start_time=$("#history_start_time").val();
+				var _end_time=$("#history_end_time").val();
+				
+				var _uuu="https://www.ccsc58.com/tcpdf/pdf/pdf_out.php?s="+_machine_number+"&t1="+_start_time+"&t2="+_end_time;
+				var _geshi=$("p:nth-of-type(4) select").val();
+				//console.log(_geshi);
+				if(_geshi==1){
+					window.location.href="http://www.ccsc58.com/tcpdf/pdf/pdf_out.php?s="+_machine_number+"&t1="+_start_time+"&t2="+_end_time;
+				}else if(_geshi==2){
+					window.location.href="http://www.ccsc58.com/PHPExcel/PHPExcel/xls_out.php?s="+_machine_number+"&t1="+_start_time+"&t2="+_end_time;
+				}
+				//alert("请在浏览器中打开此网页，否则将不能下载数据");
+				//window.location.href=_uuu;
+			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="format-detection" content="telephone=no">
+		<title>设备详情</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/changeM.css" />
+		<link rel="stylesheet" href="css/details_list.css" />
+	</head>
+
+	<body>
+		<div class="header">
+
+		</div>
+		<form action="">
+			<input class="white_input" type="button" name="" id="" value="最新数据" />
+			<input type="button" name="" id="" value="历史数据" />
+			<input type="button" name="" id="" value="参数显示" />
+			<input type="button" name="" id="" value="报警信息" />
+		</form>
+		<div class="content_details">
+			<div id="content_details">
+			</div>
+			<div class="detailNow _display">
+				<div class="details_now hidden">
+					<div class="left details_now_left">
+						<img src="img/content.png" />
+					</div>
+					<div class="right details_now_right">
+						<p>设备编号：<span></span></p>
+						<p>温度01：<span></span>&nbsp;&nbsp;&nbsp;<span>湿度：</span><span></span></p>
+						<p>温度02：<span></span>&nbsp;&nbsp;&nbsp;<span>电量：</span><span></span></p>
+						<p>位置：<span></span></p>
+						<p>更新时间：<span></span></p>
+						<p>上传时间：<span></span></p>
+						<p>信号强度：<span></span>&nbsp;&nbsp;<span></span>速度：<span style="color:#728ba1;font-weight: normal;"></span></p>
+						<div class="details_address">
+							<img src="img/details_address1.png" alt="" />
+							<span class="hidden">0</span>
+							<span class="hidden">0</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="details_history _display hidden">
+				<div class="history_search">
+					<div class="history_search_top">
+						<span>设备编号：12347</span>
+						<input id="history_start_time" type="text" onFocus="WdatePicker({startDate:'%y-%M-{%d-1} %H:%m:%s',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})" readonly/>
+						<input id="history_end_time" type="text" onFocus="WdatePicker({startDate:'%y-%M-%d %H:%m:%s',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})" readonly />
+						<br/><input type="button" value="查询" />
+					</div>
+					<ul class="history_search_footer">
+						<li class="white_li">数据列表</li>
+						<li>温度曲线</li>
+						<li>行驶轨迹</li>
+					</ul>
+				</div>
+				<div class="history_content">
+					<div class="history_content_list history_display">
+						<ul class="history_content_ul_tittle">
+							<li>序号</li>
+							<li>时间</li>
+							<li class="history_specil_li">上报位置</li>
+							<li>温度</li>
+							<li>湿度</li>
+						</ul>
+						<ul class="history_content_ul_list hidden">
+							<li>1</li>
+							<li>2016-09-13 16:20:44</li>
+							<li class="address_test"></li>
+							<li>29.35℃</li>
+							<li>15%RH</li>
+							<span class="hidden jingDu">465546</span>
+							<span class="hidden weiDu">6546</span>
+						</ul>
+						<div class="look_more hidden">
+							<a href="javascript:void(0)">本次加载<span></span>条数据，点击查看更多数据</a>
+						</div>
+					</div>
+					<div id="history_content_zhe" class="hidden history_display">
+
+					</div>
+					<div id="history_content_map" style="height:100vw" class="hidden history_display">
+
+					</div>
+				</div>
+			</div>
+			<ul class="details_parameter _display hidden">
+
+			</ul>
+			<div class="details_warning _display hidden">
+				<div class="warning_list hidden">
+					<div class="warning_list_left">
+						<img src="img/list.png" alt="" />
+					</div>
+					<div class="warning_list_right">
+						<p>编号：<span>123</span></p>
+						<p>温度阀值：<span>15℃-15℃</span>&nbsp;&nbsp;电量阀值：<span></span></p>
+						<p>报警提示：<span>超温报警</span></p>
+						<p>温度01：<span>25℃</span>&nbsp;&nbsp;湿度：<span>25%</span></p>
+						<p>温度02：<span>25℃</span>&nbsp;&nbsp;电量：<span>25%</span></p>
+						<p>上报时间：<span>0000-00-00 00：00：00</span></p>
+					</div>
+				</div>
+				<div class="warning_more">
+					<a href="javascript:void(0)">查看更多报警信息</a>
+				</div>
+			</div>
+		</div>
+		<footer>
+			中集冷云（北京）冷链科技有限公司
+		</footer>
+		<div class="wait hidden">
+			数据加载中……
+		</div>
+		<!--时间框-->
+		<script src="js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="My97DatePicker/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="js/hightcharts.js" charset="utf-8"></script>
+		<script type="text/javascript" src="js/exporting.js" charset="utf-8"></script>
+		<script src="js/details_list.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=XP1alssWsEscC3NfYAhj6YfqKvgQgUXF"></script>
+	</body>
+
+</html>

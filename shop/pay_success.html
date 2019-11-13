@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>北京中集智冷科技有限公司</title>
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/changeM.css" />
+		<style type="text/css">
+			.content{
+				width:100%;
+				height:auto;
+				margin-top:4rem;
+				margin-bottom:5rem;
+			}
+			.pay_success_top{
+				width:100%;
+				height:8rem;			
+			}
+			.pay_success_top div{
+				width:50%;
+				height:100%;
+			}
+			.pay_success_top div img{
+				height:80%;
+				float:right;
+				margin:5% 10% 0 0;
+			}
+			.pay_success_top div:nth-of-type(2) p:nth-of-type(1){
+				font-size:2rem;
+				color:#FF8603;
+				height:50%;
+				line-height:4rem;
+			}
+			.pay_success_top div:nth-of-type(2) p:nth-of-type(2){
+				color:#B0B0B0;
+				font-size:1rem;
+			}
+			.success_pay_middle{
+				margin-top:2rem;
+			}
+			.success_pay_middle div{
+				width:20%;
+				height:2rem;
+				margin-left:20%;
+				border: 1px solid #ccc;	
+				box-sizing: border-box;		
+				text-align: center;
+				line-height: 2rem;	
+				font-size:1.2rem;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="header">
+			<img class="back_list" src="../img/back.png"/>
+			交易详情
+		</div>
+		<div class="content">
+			<div class="pay_success_top">
+				<div class="left"> <img src="../img/success_pay.png"/></div>
+				<div class="left">
+					<p>付款成功啦!</p>
+					<p>
+						本商城不会以付款异常为<br>
+						由要求您退款，谨防诈骗
+					</p>
+				</div>
+			</div>
+			<div class="success_pay_middle">
+				<div class="left">
+					查看订单
+				</div>
+				<div class="left">
+					继续购物
+				</div>
+			</div>
+		</div>
+		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		$(".success_pay_middle div:nth-of-type(1)").on("click",function(){
+				window.location.href="shop_dingdan.html";
+			})
+			$(".success_pay_middle div:nth-of-type(2)").on("click",function(){
+				window.location.href="shop.html";
+			});
+		</script>
+	</body>
+</html>

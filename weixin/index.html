@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>智冷科技-微信支付平台</title>
+		<link rel="stylesheet" href="css/index.css" />
+		<link rel="stylesheet" href="iconfont/demo.css">
+		<link rel="stylesheet" href="iconfont/iconfont.css">
+		<style type="text/css">
+			.img_logo {
+				width: 100%;
+			}
+			
+			.img_logo img {
+				width: 100%;
+			}
+			
+			form {
+				margin-top: 20px;
+				margin-bottom: 3rem;
+			}
+			
+			form div {
+				width: 100%;
+				height: 5rem;
+				border-top: 1px solid #e5e5e5;
+				border-bottom: 1px solid #e5e5e5;
+				line-height: 5rem;
+				text-align: center;
+				margin-top: 5px;
+				font-size: 1.5rem;
+				color: #a8a8a8;
+				white-space: nowrap;
+			}
+			
+			form div input {
+				width: 65%;
+				height: 4rem;
+				border: none;
+				line-height: 5rem;
+				text-align: center;
+				font-size: 1.5rem;
+				text-align: right;
+				padding-right: 5vw;
+			}
+			
+			form .button {
+				width: 80%;
+				height: 4rem;
+				background: #2BA9D1;
+				line-height: 4rem;
+				text-align: center;
+				margin-left: 10%;
+				border-radius: 10px;
+				margin-top: 10px;
+				margin-bottom: 10px;
+				color: #fefefe;
+				font-size: 2rem;
+				cursor: pointer;
+			}
+			
+			.btn_ok:hover {
+				box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+			}
+			
+			#wenXinTiShi {
+				height: 2.5rem;
+				line-height: 2.5rem;
+				border: none;
+				font-size: 1rem;
+			}
+			
+			span {
+				margin-left: 10px;
+			}
+			
+			#wenXinTiShimoban {
+				height: 2.5rem;
+				line-height: 2.5rem;
+				border: none;
+				font-size: 1rem;
+				display: none;
+			}
+			  #footer {
+                height:30px;
+                line-height:30px;
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                text-align: center;
+                background: #F2F2F2;
+                color: #757575;
+                font-family: Arial;
+                font-size: 12px;
+                letter-spacing: 1px;
+            }
+		</style>
+	</head>
+
+	<body>
+		<div class="img_logo">
+			<img src="img/zhileng.png" />
+		</div>
+		<form action="" method="post">
+			<div>
+				<span class="icon iconfont icon-yunongtongxingming"></span>&nbsp;&nbsp;&nbsp;付款人：
+				<input type="text" name="username" id="username" value="" placeholder="付款人姓名" />
+			</div>
+			<div>
+				<span class="icon iconfont icon-amount1"></span>&nbsp;付款金额：
+				<input type="text" name="money" id="money" value="" placeholder="必填,例：0.01" />
+			</div>
+			<div>
+				<span class="icon iconfont icon-shoujihao"></span>&nbsp;联系方式：
+				<input type="text" name="tel" id="tel" value="" placeholder="联系人手机号" />
+			</div>
+			<div>
+				<span class="icon iconfont icon-commpany"></span>&nbsp;付款单位：
+				<input type="text" name="company" id="company" value="" placeholder="公司名称" />
+			</div>
+			<div>
+				<span class="icon iconfont icon-beizhu"></span>&nbsp;付款备注：
+				<input type="text" name="city" id="city" value="" placeholder="如包年费或维修费" />
+			</div>
+			<div id="wenXinTiShimoban">
+				温馨提示：请务必填写真实有效的资料信息
+			</div>
+			<div id="wenXinTiShi">
+				温馨提示：请务必填写真实有效的资料信息
+			</div>
+			<div class="button btn_ok">
+				确认付款
+			</div>
+		</form>
+	
+		<div id="footer">北京中集智冷科技有限公司-微信支付平台@copy2018 </div>
+		
+		<script src="js/jquery-1.11.0.js"></script>
+		<script>
+			$(document).ready(function() {
+				//获取焦点高亮显示
+				$("input").focus(function() {
+					$(this).css("background-color", "#FFFFCC");
+				});
+				$("input").blur(function() {
+					$(this).css("background-color", "#FFFFFF");
+				});
+
+				$("#username").focus(function() {
+					var _username = $("#username").val();
+				});
+				$("#username").blur(function() {
+					var _username = $("#username").val();
+					if(_username == "" && _username.length == 0) {
+						$("#wenXinTiShi").html("请输入联系人姓名！").css({
+							"color": "red",
+							"font-weight": "bold"
+						})
+					}
+					if(_username != "" && _username.length != 0) {
+						$("#wenXinTiShimoban").css("display", "block");
+						$("#wenXinTiShi").css("display", "none");
+					}
+				});
+				$("#money").focus(function() {
+					var _username = $("#username").val();
+					var _jinE = $("#money").val();
+					if(_username == "" && _username.length == 0) {
+						$("#wenXinTiShi").html("请输入联系人姓名！").css({
+							"color": "red",
+							"font-weight": "bold"
+						});
+						$("#wenXinTiShimoban").css("display", "none");
+
+					}
+				});
+				$("#money").blur(function() {
+					var _username = $("#username").val();
+					var _jinE = $("#money").val();
+					console.log(_jinE)
+					if(_username == "" && _username.length == 0) {
+						$("#wenXinTiShi").html("请输入联系人姓名！").css({
+							"display": "block",
+							"color": "red",
+							"font-weight": "bold"
+						});
+						$("#wenXinTiShimoban").css("display", "none");
+					};
+					if(_jinE == "" && _jinE.length == 0) {
+						$("#wenXinTiShi").html("请录入金额！").css({
+							"display": "block",
+							"color": "red",
+							"font-weight": "bold"
+						})
+						$("#wenXinTiShimoban").css("display", "none");
+					} else {
+						if(!isNaN(_jinE)) {
+							$("#wenXinTiShimoban").css("display", "block");
+							$("#wenXinTiShi").css("display", "none");
+						} else {
+							console.log("不是数字");
+							$("#wenXinTiShi").html("当前金额不是数字！").css({
+								"display": "block",
+								"color": "red",
+								"font-weight": "bold"
+							});
+							$("#wenXinTiShimoban").css("display", "none");
+						}
+					}
+				});
+				$("#tel").blur(function() {
+					var _tel = $("#tel").val();
+					if(_tel == "" &&  _tel.length == 0 ) {
+						$("#wenXinTiShi").html("请输入联系人手机号！").css({
+							"display": "block",
+							"color": "red",
+							"font-weight": "bold"
+						})
+						$("#wenXinTiShimoban").css("display", "none");
+					} else {
+						
+						var phoneReg = /^1[3456789][0-9]{9}$/;
+						if(!phoneReg.test(_tel)) {
+//							console.log("手机号不正确a");
+						
+						$("#wenXinTiShi").html("请输入正确的手机号格式！").css({
+							"display": "block",
+							"color": "red",
+							"font-weight": "bold"
+						});
+                       $("#wenXinTiShimoban").css("display", "none");
+						}else{
+						$("#wenXinTiShi").css("display", "none");
+						$("#wenXinTiShimoban").css("display", "block");
+						}
+						
+
+					}
+
+				});
+				$("#company").blur(function() {
+					var _tel = $("#tel").val();
+					var _danWei = $("#company").val();
+					if(_danWei == "" && _danWei.length == 0) {
+						$("#wenXinTiShi").html("请输入联系人单位，无单位写个人！").css({
+							"display": "block",
+							"color": "red",
+							"font-weight": "bold"
+						})
+						$("#wenXinTiShimoban").css("display", "none");
+					}
+
+				});
+				$("#city").blur(function() {
+					var _city = $("#city").val();
+					if(_city == "" && _city.length == 0) {
+						$("#wenXinTiShi").html("请输入付款备注").css({
+							"display": "block",
+							"color": "red",
+							"font-weight": "bold"
+						})
+						$("#wenXinTiShimoban").css("display", "none");
+					}
+				})
+				//点击确认支付
+				$(".button").on("click", function() {
+					var _username = $("#username").val();
+					var _jinE = $("#money").val();
+					var _tel = $("#tel").val();
+					var _danWei = $("#company").val();
+					var _money_name = $("#city").val();
+							if(_username != "") {
+								if(_jinE != "" && _jinE > 0) {
+								if(_tel != "") {
+									if(_danWei != "") {
+									if(_money_name != "") {
+										window.sessionStorage.setItem("username", _username);
+										window.sessionStorage.setItem("tel", _tel);
+										window.sessionStorage.setItem("pay_money", _jinE);
+										window.sessionStorage.setItem("pay_daWei", _danWei);
+										window.sessionStorage.setItem("_pay_name", _money_name);
+										window.location.href = "zhifu/example/jsapi.php?total=" + _jinE * 100;
+									} else {
+										alert("付款备注不能为空！")
+									}
+									} else {
+										alert("付款单位不能为空，如果无请写个人！")
+									}
+								} else {
+									alert("手机号不能为空！");
+								}
+							} else {
+								alert("请输入正确的金额，不能包含除数字以外的内容！");
+							}
+						
+					} else {
+						alert("姓名不能为空！");
+					};
+
+				});
+
+			})
+		</script>
+	</body>
+
+</html>

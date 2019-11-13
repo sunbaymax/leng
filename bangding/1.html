@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"  />
+		<script type="text/javascript" src="jquery-2.1.0.js"></script>
+		<style>
+		
+		</style>
+	</head>
+	<body>
+
+		手机号：<input type="text" name="phone"  /><br  />
+		验证码：<input type="text" name="messageCode"  />
+		<div class="getMessage" style="width:200px;height:20px;border:1px solid red;">获取验证码</div>
+		<button>提交</button>
+
+		
+		<script type="text/javascript">
+			$("button").on('click',function(){
+				var url = "3.php";
+				var phone = $("input[name='phone']").val();
+				var messageCode = $("input[name='messageCode']").val();
+				var data = {phone:phone, messageCode:messageCode};
+				$.post(url,data,function(msg){
+					if(msg.status){
+						alert(msg.info);
+					}else{
+						alert(msg.info);
+					}
+				},'json');
+			});
+			$(".getMessage").on('click',function(){
+                var val = $(this).text();
+                switch(val){
+                	alert(""3235msg.info");
+                    case "获取验证码":
+                        var url = "./2.php";
+                        var tel = $("input[name='phone']").val();
+                        if(tel.length){
+                            var reg = /^1[345789]\d{9}$/;
+                            if(reg.test(tel)){
+                            	alert('短信已发至您的手机');
+                                var num = 60;
+                                var setint = setInterval(function(){
+                                    $(".getMessage").css({'font-size':'12px'});
+                                    $(".getMessage").text(num + "秒后重新获取");
+                                    num -= 1;
+                                    if(num < 0){
+                                        clearInterval(setint);
+                                        $(".getMessage").css({'font-size':'14px'});
+                                        $(".getMessage").text("获取验证码");
+                                    }
+                                },1000);
+                                $.post(url,{tel:tel},function(msg){
+									console.log(msg);
+                                });
+                            }else{
+                            	alert('手机格式不正确');
+                            }
+                        }else{
+                            alert('手机号不能为空');
+                        }
+                }
+            });
+		</script>
+	</body>
+</html>

@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<meta name = "format-detection" content = "telephone=no">		<title>中集冷云（北京）冷链科技有限公司</title>
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" type="text/css" href="../css/register.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+	</head>
+
+	<body>
+		<ul class="cd-switcher">
+			<li>
+				<a class="selected" href="javascript:void(0)">用户登录</a>
+			</li>
+			<li>
+				<a href="javascript:void(0)">注册新用户</a>
+			</li>
+		</ul>
+		<div id="cd-login">
+			<!-- 登录表单 -->
+			<form class="cd-form">
+				<p class="register_prompt"></p>
+				<p class="fieldset">
+					<label class="image-replace cd-username icon iconfont icon-yonghuming" for="signin-username"></label>
+					<input class="full-width has-padding has-border" id="signin-username" type="text" placeholder="必填：用户名">
+					<p class="register_prompt"></p>
+				</p>
+				<p class="fieldset">
+					<label class="image-replace cd-password icon iconfont icon-mima" for="signin-password"></label>
+					<input class="full-width has-padding has-border" id="signin-password" type="password" placeholder="必填：输入密码">
+					<p class="register_prompt"></p>
+				</p>
+				<p class="fieldset remember_login">
+					<input type="checkbox" id="remember-me" checked>
+					<label for="remember-me">记住登录状态<!--<a href="javascript:void(0)">忘记密码？</a>--></label>
+				</p>
+				<p class="fieldset">
+					<input class="full-width" type="button" value="绑定">
+				</p>
+			</form>
+		</div>
+		<div id="cd-signup" class="hidden">
+			<!--注册表单 -->
+			<form class="cd-form">
+				<p class="register_prompt"></p>
+				<p class="fieldset">
+					<label class="image-replace cd-username icon iconfont icon-yonghuming" for="signup-username"></label>
+					<input class="full-width has-padding has-border" id="signup-username" type="text" placeholder="必填：用户名（6-20位字母及数字组合）">
+					<p class="register_prompt register_prompt_signup-username">必填</p>
+				</p>
+				<p class="fieldset">
+					<label class="image-replace cd-username icon iconfont icon-zhenshixingming" for="signup-realname"></label>
+					<input class="full-width has-padding has-border" id="signup-realname" type="text" placeholder="必填：真实姓名">
+					<p class="register_prompt register_prompt_signup-realname">必填</p>
+				</p>
+				<p class="fieldset">
+					<label class="image-replace cd-password icon iconfont icon-mima" for="signup-password01"></label>
+					<input class="full-width has-padding has-border" id="signup-password01" type="password" placeholder="必填：密码（6-12位数字或字母）">
+					<p class="register_prompt register_prompt_signup-password01">必填</p>
+				</p>
+				<p class="fieldset">
+					<label class="image-replace cd-password icon iconfont icon-querenmima" for="signup-password02"></label>
+					<input class="full-width has-padding has-border" id="signup-password02" type="password" placeholder="必填：再次输入密码">
+					<p class="register_prompt register_prompt_signup-password02">必填</p>
+				</p>
+				<p class="fieldset">
+					<label class="image-replace cd-username icon iconfont icon-shoujihaoma" for="signup-userTel"></label>
+					<input class="full-width has-padding has-border" id="signup-userTel" type="text" placeholder="必填：手机号码">
+					<p class="register_prompt register_prompt_signup-userTel">必填</p>
+				</p>
+				<p class="fieldset">
+					<label class="image-replace cd-username icon iconfont icon-svg17" for="signup-userEmail"></label>
+					<input class="full-width has-padding has-border" id="signup-userEmail" type="text" placeholder="必填：邮箱地址">
+					<p class="register_prompt register_prompt_signup-userEmail">必填</p>
+				</p>
+				<p class="fieldset">
+					<label class="image-replace cd-username icon iconfont icon-gongsimingcheng" for="signup-userCom"></label>
+					<input class="full-width has-padding has-border" id="signup-userCom" type="text" placeholder="必填：公司名称">
+					<p class="register_prompt register_prompt_signup-userCom">必填</p>
+				</p>
+				<p class="fieldset">
+					<label class="image-replace cd-username icon iconfont icon-dizhi" for="signup-userAddress"></label>
+					<input class="full-width has-padding has-border" id="signup-userAddress" type="text" placeholder="选填：公司地址">
+					<p class="register_prompt register_prompt_signup-userAddress">选填</p>
+				</p>
+				<p class="fieldset">
+					<label class="image-replace cd-username icon iconfont icon-bangongdianhua" for="signup-userComTel"></label>
+					<input class="full-width has-padding has-border" id="signup-userComTel" type="text" placeholder="选填：公司电话">
+					<p class="register_prompt register_prompt_signup-userComTel">选填</p>
+				</p>
+				<p class="fieldset remember_login">
+					<input type="checkbox" id="accept-terms" checked="">
+					<label for="accept-terms">我已阅读并同意 <a href="javascript:void(0)">用户协议</a></label>
+				</p>
+				<p class="fieldset">
+					<input class="full-width2" type="button" value="注册新用户">
+				</p>
+			</form>
+		</div>
+		<div id="success_mao">
+			<div class="success_box">
+				<div class="register_right">
+					<img src="../img/register_wrong.png" />
+				</div>
+				<div class="success_information">请使用6-20位字母及数字组合作为用户名</div>
+				<form action="">
+					<input type="button" value="确定" />
+				</form>
+			</div>
+		</div>
+		<div id="success_register">
+			<div class="success_box">
+				<div class="register_right">
+					<img src="../img/register_right.png" />
+				</div>
+				<div class="success_information">恭喜您注册成功！是否现在登录？</div>
+				<form action="">
+					<input type="button" value="确定" /><input type="button" value="取消" />
+				</form>
+			</div>
+		</div>
+		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/register.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>

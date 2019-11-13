@@ -1,0 +1,63 @@
+{
+     "button":[
+    
+      {
+           "name":"产品中心",
+           "sub_button":[
+            {  
+              "type":"view",
+               "name":"温度记录仪",
+               "url":"http://www.cccc58.com/index.php?controller=site&action=pro_listss&fid=40&pid=24"
+               
+            },
+            
+            {
+               "type":"view",
+               "name":"冷云监控平台",
+               "url":"http://www.ccsc58.cc/wlgl/Admin/login.html"
+            }]
+       },
+      {    
+          "type":"view",
+          "name":"中集冷云",
+          "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect"
+      },
+
+      {
+      
+           "name":"冷云科技",
+           "sub_button":[
+           {
+               "type":"click",
+               "name":"售后服务",
+               "key":"shouhouzhichi"
+            },
+
+           {
+               "type":"click",
+               "name":"联系我们",
+               "key":"lianxiwomen"
+            },
+            {
+               "type":"view",
+               "name":"公司官网",
+               "url":"http://www.cscc58.com/"
+            },  
+
+            {
+               "type":"view",
+               "name":"安卓APP下载",
+               "url":"http://fusion.qq.com/cgi-bin/qzapps/unified_jump?appid=42375908&isTimeline=false&actionFlag=0&params=pname%3Dcom.ccsc.coldcloud%26versioncode%3D1%26channelid%3D%26actionflag%3D0&from=singlemessage&isappinstalled=1"
+            },
+            {
+               "type":"view",
+               "name":"苹果APP下载",
+               "url":"https://itunes.apple.com/us/app/zhong-ji-leng-yun-wen-shi/id1173609882?mt=8"
+            },
+            {
+               "type":"click",
+               "name":"使用说明书",
+               "key":"shuomingshu"
+            }]
+       }]
+ }

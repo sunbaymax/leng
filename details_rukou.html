@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>请稍候。。。</title>
+	</head>
+	<script src="js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		if(window.localStorage.getItem("user")) {
+			var _userName = window.localStorage.getItem("user");
+			var _userPass = window.localStorage.getItem("pass");
+			var _url = window.location.href;
+			var _shebeibianhao=_url.match(/\?num_m=\S+/)[0].replace("?num_m=", "");
+			$.ajax({
+				url: "http://www.ccsc58.com/json/01_00_tb_history_data.php",
+				type: "post",
+				data: {
+					UserP: "w",
+					admin_permit: "zjly8888",
+					admin_user: _userName,
+					admin_pass: _userPass,
+					SheBeiBianHao: _shebeibianhao,
+					StartTime: "2000-02-15 00:00:00",
+					EndTime: "3000-02-15 00:00:00",
+					StartNo: 0,
+					Length: 1
+				},
+				success: function(data) {
+					var _json = JSON.parse(data);
+					if(_json.code == 30000) {
+						alert("该设备不存在，请重新选择发送设备号");
+						WeixinJSBridge.call('closeWindow');
+					} else {
+						window.location.href = "html/details_list.html?num_m=" + _shebeibianhao;
+					}
+				},
+				error: function() {
+					alert("网络错误，请重新进入");
+					WeixinJSBridge.call('closeWindow');
+				}
+			});
+		} else {
+			alert("请先绑定账号至公众平台");
+			window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx82dbac04fa8fd8ef&redirect_uri=http://www.ccsc58.cc/weixinnew/oauth2.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect"
+		}
+	</script>
+
+	<body>
+	</body>
+
+</html>

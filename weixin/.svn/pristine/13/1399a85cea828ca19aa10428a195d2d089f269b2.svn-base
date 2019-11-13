@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="format-detection" content="telephone=no">
+		<title>设备列表</title>
+		<script type="text/javascript">
+			/*
+			 * 判断用户是否登录，如果已登录跳转到
+			 */
+			if(!window.localStorage.getItem("user")) {
+				alert("请先绑定账号至您的微信号");
+				window.location.href = "html/register.html"
+			}
+		</script>
+		<link rel="stylesheet" href="css/machineList.css" />
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" href="css/iconfont.css" />
+	</head>
+
+	<body>
+		<div class="list_top">
+			<div class="header">我的设备&nbsp;&nbsp;
+				<a href="javascript:void(0)">+添加设备</a>
+				<div class="esc"><img src="img/esc.png" /><span>注销</span></div>
+			</div>
+			<form>
+				<label for="search"><img src="img/search.png"/></label>
+				<input type="text" id="search" placeholder="设备编号/标识名" />
+				<input type="button" value="搜索" />
+			</form>
+		</div>
+		<div class="content">
+			<div class="list hidden">
+				<div class="list_left">
+					<div>
+						<p></p>
+						<p></p>
+						<p></p>
+						<p></p>
+						<p></p>
+					</div>
+				</div>
+				<ul class="list_center">
+					<li>
+						<a href="javascript:void(0)"></a><span>箱体状态：<span></span></span>
+					</li>
+					<li class="li_all">位置：<span></span></li>
+					<li class="li_all">更新时间：<span></span></li>
+					<li class="li_all">上报时间：<span></span></li>
+					<li class="li_all">合格温度区间：<span></span></li>
+					<li class="li_all">报警温度区间：<span></span></li>
+					<li class="li_all">信号强度：<span>优</span></li>
+				</ul>
+				<div class="list_right">
+					<a href="javascript:void(0)">编辑设备</a><br/>
+					<a href="javascript:void(0)">解除绑定</a>
+				</div>
+			</div>
+			<div class="more_machine">
+				<a href="javascript:void(0)">查看更多设备</a>
+			</div>
+		</div>
+		<form class="window_post hidden">
+			<div>
+				<label for="post_add">设备号：</label>
+				<input type="text" id="post_add" placeholder="请输入设备号" /><br/>
+				<input type="button" id="post_add_post" value="发送绑定请求" />
+				<input type="button" id="post_add_esc" value="取消" />
+			</div>
+		</form>
+		<form class="window_post hidden">
+			<div>
+				<label for="get_add">设备号：</label>
+				<input type="text" id="get_add" readonly/><br/>
+				<input type="button" id="get_add_post" value="发送解除绑定请求" />
+				<input type="button" id="get_add_esc" value="取消" />
+			</div>
+		</form>
+		<div class="footer">
+			中集冷云（北京）冷链科技有限公司
+		</div>
+		<div class="wait hidden">
+			数据加载中……
+		</div>
+		<script src="js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=XP1alssWsEscC3NfYAhj6YfqKvgQgUXF" charset="utf-8"></script>
+		<script src="js/machineList.js" charset="utf-8"></script>
+	</body>
+
+</html>
