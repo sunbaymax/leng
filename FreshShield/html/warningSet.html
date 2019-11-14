@@ -231,8 +231,9 @@
 				} else {
 					_baojingwendu_xiaxian_baojing = 0;
 				} //是否开启报警上限；
-				if(_baojingwendu_xiaxian_baojing == 1 && _baojingshangxian < _baojingxiaxian) {
+				if(_baojingwendu_shangxian_baojing==1 &&_baojingwendu_xiaxian_baojing == 1 && parseInt(_baojingshangxian) < parseInt(_baojingxiaxian)) {
 					alert("报警温度上限不能小于报警温度下限");
+					$(".templowbaojing").focus();
 					return false;
 				}
 				var _dianliang_xiaxian = $(".baojingpower").val(); //电量下限
@@ -256,6 +257,11 @@
 					_chaodishidubaojing = 0;
 				} //是否开启湿度上限报警；
 				var _humiditylowbaojing = $(".humiditylowbaojing").val(); //湿度下限
+				if(_chaogaoshidubaojing==1 &&_chaodishidubaojing == 1 && parseInt(_humidityHighbaojing) < parseInt(_humiditylowbaojing)) {
+					alert("报警湿度上限不能小于报警湿度下限");
+					$(".humiditylowbaojing").focus();
+					return false;
+				}
 
 				var utype = userinfo.userType;
 				var _openid = localStorage.getItem('openId');

@@ -52,7 +52,7 @@ function Serilizable(){
 			//var_dump($res);
 			return $token;
 		}else{
-			//echo 2;
+			//echo 23;
 			return $row['A_Token'];
 		}
 	}
