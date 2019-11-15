@@ -744,8 +744,9 @@
 		warning_more(_warning_more, 0);
 
 		function warning_more(_warning_more, _flag) {
+			//http://www.ccsc58.com/json/02_00_tb_baojing.php
 			$.ajax({
-				url: "http://www.ccsc58.com/json/02_00_tb_baojing.php",
+				url: "http://www.ccsc58.com/json/xiandun_baojing.php",
 				type: "post",
 				data: {
 					admin_permit: "zjly8888",
@@ -782,10 +783,16 @@
 							_dem.find(".list_tittle .shebeihao").html(warning_data[i].shebeibianhao);
 							_dem.find(".list_tittle .worktime").html(warning_data[i].time);
 							_dem.find(".list-content .temp1").html(warning_data[i].temperature01);
+							_dem.find(".list-content .temp2").html(warning_data[i].temperature02==0?'':'/ '+warning_data[i].temperature02);
 							_dem.find(".list-content .humidity").html(warning_data[i].humidity);
 							_dem.find(".list-content .power").html(warning_data[i].power);
 							_dem.find(".list-content .powerLimit").html(warning_data[i].dianliang_xiaxian);
-							_dem.find(".list-content .tempLimit").html(warning_data[i].baojingwendu_xiaxian + "℃~" + warning_data[i].baojingwendu_shangxian + "℃");
+							_dem.find(".list-content .tempLimit").html(warning_data[i].baojingwendu_xiaxian + "~" + warning_data[i].baojingwendu_shangxian);
+							var  shidulowstr=warning_data[i].chaodishidubaojingfazhi==99999.9?'-':warning_data[i].chaodishidubaojingfazhi;
+								var shiduhigtstr=warning_data[i].chaogaoshidubaojingfazhi==99999.9?'-':warning_data[i].chaogaoshidubaojingfazhi;
+							
+							_dem.find(".list-content .humiditylimit").html(shidulowstr+'~'+shiduhigtstr);
+							
 							_dem.find(".list-content .armType").html(warning_data[i].baojingleixing == false ? '温度报警' : "");
 
 						}

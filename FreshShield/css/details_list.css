@@ -462,7 +462,7 @@ a[target=_blank]{
 	width: 100%;
 	position: absolute;
 	left: 0;
-	top: 8rem;
+	top: 8.6rem;
 	overflow: hidden;
 	z-index: 1;
 	bottom:0rem;
@@ -565,7 +565,7 @@ a[target=_blank]{
     text-align: left;
 }
 .warning_list{
-	height:13rem;
+	height:14rem;
 }
 .warning_list  .list_tittle{
 	display: flex;
