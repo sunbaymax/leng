@@ -392,7 +392,7 @@
 				
 				$(".content .list").on("click", function() {
 					var _val = $(this).find('.shebeihao').text();
-					var _is_master = $(this).find('.shebeihao').attr("is_master");
+					var _is_master = $(this).find('.shebeihao').attr("is_master")==undefined?'1':'0';
 					console.log(_is_master);
 					if(_is_master=='0'){
 						sessionStorage.setItem('ismaster_no',_val)
@@ -409,7 +409,7 @@
 				 * */
 			$("body").on("click", ".scroll_box .list", function() {
 				var num = $(this).find(".shebeihao").text();
-				var _is_master = $(this).find('.shebeihao').attr("is_master");
+				var _is_master = $(this).find('.shebeihao').attr("is_master")==undefined?'1':'0';
 				sessionStorage.setItem('ismaster',_is_master)
 				window.location.href = "html/details_lists.html?num_m=" + num
 			})

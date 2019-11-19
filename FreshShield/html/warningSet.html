@@ -130,9 +130,7 @@
 				$(".humidityHighbaojing").append(shiduzhi);
 				$(".humiditylowbaojing").append(shiduzhi);
 			}
-			$(".back_list").on("click", function() {
-				window.history.go(-1);
-			});
+			
 			$(".invitebtn").on("click", function() {
 				window.location.href = 'banding.html?openId=' + _openid;
 			});
@@ -149,6 +147,11 @@
 			} else {
 				_num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "");
 			}
+			$(".back_list").on("click", function() {
+//				window.history.go(-1);
+                sessionStorage.setItem('paraset',1);
+                window.location.href ='details_lists.html?num_m='+_num_m+'&'
+			});
 			var _ismaster = sessionStorage.getItem('ismaster');
 			if(_ismaster == 0) {
 				$(".btnok button").css("background", "#ccc");

@@ -25,7 +25,7 @@
 	/*
 	 * 获取用户的名称和密码；
 	 */
-	
+
 	var userinfo = JSON.parse(localStorage.getItem('isonline'));
 	var _userName = userinfo.user;
 	var _userPass = userinfo.pwd;
@@ -58,11 +58,22 @@
 	var _url = window.location.href;
 	var _num_m = "";
 	if(_url.indexOf("&") != -1) {
-		_num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "").replace("&", "");
-		$("form input").removeClass("white_input");
-		$("form input:nth-of-type(4)").addClass("white_input");
-		$("._display").addClass("hidden");
-		$(".details_warning").removeClass("hidden");
+		var pa = sessionStorage.getItem('paraset');
+		if(pa == 1) {
+			_num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "").replace("&", "");
+			$("form input").removeClass("white_input");
+			$("form input:nth-of-type(3)").addClass("white_input");
+			$("._display").addClass("hidden");
+			$(".details_parameter").removeClass("hidden");
+			sessionStorage.setItem('paraset',0);
+		} else {
+			_num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "").replace("&", "");
+			$("form input").removeClass("white_input");
+			$("form input:nth-of-type(4)").addClass("white_input");
+			$("._display").addClass("hidden");
+			$(".details_warning").removeClass("hidden");
+		}
+		
 	} else {
 		_num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "");
 	}
@@ -99,6 +110,7 @@
 		 * 返回列表页的时间；
 		 */
 		$(".header .button_back_list").on("click", function() {
+			sessionStorage.setItem('paraset','0');
 			window.location.href = "../machineList.php";
 			//window.history.go(-1);
 		})
@@ -236,7 +248,7 @@
 
 			},
 			error: function() {
-//				alert("网络错误，请重新进入");
+				//				alert("网络错误，请重新进入");
 				$(".wait").addClass("hidden");
 			}
 		});
@@ -783,16 +795,16 @@
 							_dem.find(".list_tittle .shebeihao").html(warning_data[i].shebeibianhao);
 							_dem.find(".list_tittle .worktime").html(warning_data[i].time);
 							_dem.find(".list-content .temp1").html(warning_data[i].temperature01);
-							_dem.find(".list-content .temp2").html(warning_data[i].temperature02==0?'':'/ '+warning_data[i].temperature02);
+							_dem.find(".list-content .temp2").html(warning_data[i].temperature02 == 0 ? '' : '/ ' + warning_data[i].temperature02);
 							_dem.find(".list-content .humidity").html(warning_data[i].humidity);
 							_dem.find(".list-content .power").html(warning_data[i].power);
 							_dem.find(".list-content .powerLimit").html(warning_data[i].dianliang_xiaxian);
 							_dem.find(".list-content .tempLimit").html(warning_data[i].baojingwendu_xiaxian + "~" + warning_data[i].baojingwendu_shangxian);
-							var  shidulowstr=warning_data[i].chaodishidubaojingfazhi==99999.9?'-':warning_data[i].chaodishidubaojingfazhi;
-								var shiduhigtstr=warning_data[i].chaogaoshidubaojingfazhi==99999.9?'-':warning_data[i].chaogaoshidubaojingfazhi;
-							
-							_dem.find(".list-content .humiditylimit").html(shidulowstr+'~'+shiduhigtstr);
-							
+							var shidulowstr = warning_data[i].chaodishidubaojingfazhi == 99999.9 ? '-' : warning_data[i].chaodishidubaojingfazhi;
+							var shiduhigtstr = warning_data[i].chaogaoshidubaojingfazhi == 99999.9 ? '-' : warning_data[i].chaogaoshidubaojingfazhi;
+
+							_dem.find(".list-content .humiditylimit").html(shidulowstr + '~' + shiduhigtstr);
+
 							_dem.find(".list-content .armType").html(warning_data[i].baojingleixing == false ? '温度报警' : "");
 
 						}

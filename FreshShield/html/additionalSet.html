@@ -69,9 +69,7 @@
 		<script src="../js/index.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/iostime.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
-			$(".back_list").on("click", function() {
-				window.history.go(-1);
-			});
+			
 			$(".invitebtn").on("click", function() {
 				window.location.href = 'banding.html?openId=' + _openid;
 			});
@@ -101,6 +99,10 @@
 			} else {
 				_num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "");
 			}
+			$(".back_list").on("click", function() {
+				sessionStorage.setItem('paraset',1);
+                window.location.href ='details_lists.html?num_m='+_num_m+'&'
+			});
 			var mobans = 1;
 			$.ajax({
 				type: "post",
@@ -126,7 +128,6 @@
 					var times = _json.resultCode.dingshifasong;
 
 					mobans = _json.resultCode.dingshifasong.length == 0 ? "1" : _json.resultCode.dingshifasong.length;
-					console.log(mobans)
 					$.each(_json.resultCode.dingshifasong, function(index, val) {
 
 						if(index != 0) {
@@ -147,7 +148,6 @@
 					alert("网络错误！！！")
 				}
 			});
-			console.log(mobans, 00)
 
 			function tinit() {
 				for(i = 0; i < mobans; i++) {
@@ -160,7 +160,6 @@
 				    var hour = now.getHours();//得到小时
 		            var minu = now.getMinutes();//得到分钟
 				    var cdate=year+"-"+month+'-'+date;
-				    console.log(cdate)
 					calendar.init({
 						'trigger': dn,
 						/*按钮选择器，用于触发弹出插件*/

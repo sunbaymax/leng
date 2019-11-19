@@ -162,7 +162,9 @@
 
 			})
 			$(".back_list").on("click", function() {
-				window.history.go(-1);
+				//window.history.go(-1);
+				 sessionStorage.setItem('paraset',1);
+                window.location.href ='details_lists.html?num_m='+_num_m+'&'
 			});
 			$(".invitebtn").on("click", function() {
 				window.location.href = 'banding.html?openId=' + _openid;
