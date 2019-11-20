@@ -284,7 +284,7 @@
 									_dem.find(".list-content .humidity").html(res.data.data[i].last_humidity);
 									_dem.find(".list-content .speed").html(res.data.data[i].speed);
 									_dem.find(".list_tittle .beizhu").html(res.data.data[i].beizhu==''?'':"("+res.data.data[i].beizhu+")");
-									_dem.find(".list-content .power").html(res.data.data[i].power == null ? "0" : res.data.data[i].power);
+									_dem.find(".list-content .power").html(res.data.data[i].last_power == null ? "0" : res.data.data[i].last_power);
 									_dem.find(".list_tittle .shebeihao").html(res.data.data[i].shebeibianhao);
 									_dem.find(".list_tittle .shebeihao").attr('is_master',res.data.data[i].is_master);
 									_dem.find(".list_tittle .main").html(res.data.data[i].is_master==0?'分':"主");
@@ -292,18 +292,18 @@
 									_dem.find(".list-content .boxstate").html(res.data.data[i].xiangzistate == 'close' ? "关闭" : "开启");
 									_dem.find(".list-content .AcceptableArea").html(res.data.data[i].hegewenduqujian);
 									_dem.find(".list-content .alarmArea").html(res.data.data[i].baojingwenduqujian);
-									if(res.data.data[i].xinghaoqiangdu >= 0 && res.data.data[i].xinghaoqiangdu < 5) {
-										_dem.find(".list-content  .signal").html("无信号");
-									} else if(res.data.data[i].xinghaoqiangdu >= 5 && res.data.data[i].xinghaoqiangdu < 13) {
+									if(res.data.data[i].xinhaoqiangdu >= 0 && res.data.data[i].xinhaoqiangdu < 5) {
+										_dem.find(".list-content  .signal").html("无");
+									} else if(res.data.data[i].xinhaoqiangdu >= 5 && res.data.data[i].xinhaoqiangdu < 13) {
 										_dem.find(".list-content  .signal").html("弱");
-									} else if(res.data.data[i].xinghaoqiangdu >= 13 && res.data.data[i].xinghaoqiangdu < 20) {
+									} else if(res.data.data[i].xinhaoqiangdu >= 13 && res.data.data[i].xinhaoqiangdu < 20) {
 										_dem.find(".list-content  .signal").html("良");
-									} else if(res.data.data[i].xinghaoqiangdu >= 20 && res.data.data[i].xinghaoqiangdu < 26) {
+									} else if(res.data.data[i].xinhaoqiangdu >= 20 && res.data.data[i].xinhaoqiangdu < 26) {
 										_dem.find(".list-content  .signal").html("好");
-									} else if(res.data.data[i].xinghaoqiangdu >= 26) {
+									} else if(res.data.data[i].xinhaoqiangdu >= 26) {
 										_dem.find(".list-content  .signal").html("强");
 									} else {
-										_dem.find(".list-content  .signal").html("无信号");
+										_dem.find(".list-content  .signal").html("无");
 									}
 									my_machine_list(res.data.data[i].last_jingdu, res.data.data[i].last_weidu, _dem)
 									/*$(".more_machine").before(_dem);*/

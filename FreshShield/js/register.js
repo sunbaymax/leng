@@ -10,7 +10,7 @@
 		console.log('timeout');
 		$(".qdy").hide();
 		$(".content").removeClass('hide');
-	}, 2000);
+	}, 1000);
 	//判断是否获取了用户的openID;
 	var _openId = "";
 	var _url = window.location.href;
@@ -76,6 +76,21 @@
 			$("#success_mao .success_box").show(500)
 		}
 	}
+
+	$('#signin-username,#signin-password').bind('input propertychange', function() {
+		if($(this).val().length>=1) {
+			console.log("hhhhhhhh");
+			$(this).next().show()
+		} else {
+			console.log("xxxxxxxx");
+			$(this).next().hide()
+		}
+	});
+    
+    $(".deltext").on("click",function(){
+    	$(this).hide().prev().val('');
+    	
+    })
 	var togglewdj = true;
 	$("#check").click(function() {
 		if(togglewdj) {
@@ -98,10 +113,10 @@
 	$(".butok").on("click", function() {
 		var _userName = $("#signin-username").val();
 		var _password = $("#signin-password").val();
-		if(_userName=='') {
-           myPlay("用户名不能为空！");
-		} else if(_password=='') {
-           myPlay("密码不能为空！");
+		if(_userName == '') {
+			myPlay("用户名不能为空！");
+		} else if(_password == '') {
+			myPlay("密码不能为空！");
 		} else {
 			myPlay("");
 			$.ajax({
