@@ -1,10 +1,10 @@
 ﻿jQuery(document).ready(function($) {
 	if(window.localStorage.getItem("isonline")) {
 		var userinfo = JSON.parse(localStorage.getItem('isonline'));
-		if(userinfo.online==1&&userinfo.user!=''&&userinfo.pwd!=''){
+		if(userinfo.online == 1 && userinfo.user != '' && userinfo.pwd != '') {
 			window.location.href = "../machineList.php";
 		}
-		
+
 	}
 	setTimeout(function() {
 		console.log('timeout');
@@ -47,10 +47,10 @@
 		if(loginCode != undefined && pwd != undefined) {
 			$("#signin-username").val(loginCode);
 			$("#signin-password").val(pwd);
-			$("#check").attr("src", "../images/choosed.png");
+			$("#check").attr("src", "../images/login_choose.png");
 			$("#check").attr("isuse", "1");
 		} else {
-			$("#check").attr("src", "../images/nochoose.png");
+			$("#check").attr("src", "../images/login_nochoose.png");
 			$("#check").attr("isuse", "0");
 			$("#signin-username").val("");
 			$("#signin-password").val("");
@@ -79,11 +79,11 @@
 	var togglewdj = true;
 	$("#check").click(function() {
 		if(togglewdj) {
-			$(this).attr("src", "../images/choosed.png");
+			$(this).attr("src", "../images/login_choose.png");
 			$(this).attr("isuse", "1");
 			togglewdj = false;
 		} else {
-			$(this).attr("src", "../images/nochoose.png");
+			$(this).attr("src", "../images/login_nochoose.png");
 			$(this).attr("isuse", "0");
 			togglewdj = true;
 		}
@@ -95,48 +95,53 @@
 	 * 
 	 * 
 	 * */
-	$(".cd-form input[type=button]").on("click", function() {
+	$(".butok").on("click", function() {
 		var _userName = $("#signin-username").val();
 		var _password = $("#signin-password").val();
-       
-		myPlay("");
-		$.ajax({
-			url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/login",
-			type: "post",
-			data: {
-				username: _userName,
-				pwd: _password,
-				weixin_openid:_openId
-			},
-			success: function(data) {
-				var _json = JSON.parse(data);
-				
-				if(_json.code == 1) {
-					myPlay("登录失败，请检查用户名及密码");
-				} else {
-					console.log(data)
-					
-					if(_json.data.content.admin_user!=''){
-                    var xduser={};
-                    xduser={
-					  "user":_userName,
-					  "pwd":_password,
-					  "online":1,
-					  "userType":_json.data.tag,
-					  "copenid":_json.data.content.openid
-					}
-              
-                    window.localStorage.setItem("isonline", JSON.stringify(xduser))
-					window.location.href = "../machineList.php";
-					
-					}
-					
+		if(_userName=='') {
+           myPlay("用户名不能为空！");
+		} else if(_password=='') {
+           myPlay("密码不能为空！");
+		} else {
+			myPlay("");
+			$.ajax({
+				url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/login",
+				type: "post",
+				data: {
+					username: _userName,
+					pwd: _password,
+					weixin_openid: _openId
+				},
+				success: function(data) {
+					var _json = JSON.parse(data);
 
-				};
-			},
-			error: function() {
-				myPlay("请检查您是否连接网络")
-			}
-		});
+					if(_json.code == 1) {
+						myPlay("登录失败，请检查用户名及密码");
+					} else {
+						console.log(data)
+
+						if(_json.data.content.admin_user != '') {
+							var xduser = {};
+							xduser = {
+								"user": _userName,
+								"pwd": _password,
+								"online": 1,
+								"userType": _json.data.tag,
+								"copenid": _json.data.content.openid
+							}
+
+							window.localStorage.setItem("isonline", JSON.stringify(xduser))
+							window.location.href = "../machineList.php";
+
+						}
+
+					};
+				},
+				error: function() {
+					myPlay("请检查您是否连接网络")
+				}
+			});
+		}
+
 	})
 });

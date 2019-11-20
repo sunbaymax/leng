@@ -276,8 +276,6 @@
 						},
 						dataType: 'json',
 						success: function(res) {
-							console.log(res.data.data);
-							
 							if(res.code == 0 && res.message == 'success') {
 								for(var i = 0; i < res.data.data.length; i++) {
 									var _dem = $(".list").eq(0).clone().removeClass("hidden").appendTo(".scroll_box");
@@ -392,8 +390,7 @@
 				
 				$(".content .list").on("click", function() {
 					var _val = $(this).find('.shebeihao').text();
-					var _is_master = $(this).find('.shebeihao').attr("is_master")==undefined?'1':'0';
-					console.log(_is_master);
+					var _is_master = $(this).find('.shebeihao').attr("is_master")==undefined?'1':$(this).find('.shebeihao').attr("is_master");
 					if(_is_master=='0'){
 						sessionStorage.setItem('ismaster_no',_val)
 					}
@@ -409,7 +406,9 @@
 				 * */
 			$("body").on("click", ".scroll_box .list", function() {
 				var num = $(this).find(".shebeihao").text();
-				var _is_master = $(this).find('.shebeihao').attr("is_master")==undefined?'1':'0';
+				var _is_master = $(this).find('.shebeihao').attr("is_master")==undefined?'1':$(this).find('.shebeihao').attr("is_master");
+//				console.log(_is_master);
+//				return false;
 				sessionStorage.setItem('ismaster',_is_master)
 				window.location.href = "html/details_lists.html?num_m=" + num
 			})

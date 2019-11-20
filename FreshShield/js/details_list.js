@@ -327,7 +327,11 @@
 					};
 					details_now_map();
 				};
-			} else {
+			} else if(_json.code == 1){
+				alert("未发现：" + _num.replace("&", "") + "设备，请确认您的设备是否绑定在 " + _userName + " 账号下！！！！");
+				window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_templatform.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
+			}else {
+				
 				alert("请求错误");
 				window.location.href = "../machineList.php";
 			}

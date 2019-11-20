@@ -5,12 +5,18 @@ $(document).ready(function() {
 		$(".wait span").animate({
 			width: "2rem"
 		}, 1000, myDuan)
+		$('body,html').animate({
+			scrollTop: 0
+		}, 0);
 	};
 
 	function myDuan() {
 		$(".wait span").animate({
 			width: "0rem"
 		}, 10, myChang);
+		$('body,html').animate({
+			scrollTop: 0
+		}, 0);
 	};
 	window.alert = function(name) {
 		var iframe = document.createElement("IFRAME");
