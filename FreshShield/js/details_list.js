@@ -268,8 +268,9 @@
 		}
 	}
 	//获取页面当前时间；
+	//http://www.ccsc58.com/json/xiandun_history_data.php http://www.ccsc58.com/json/01_00_tb_history_data.php
 	$.ajax({
-		url: "http://www.ccsc58.com/json/01_00_tb_history_data.php",
+		url: "http://www.ccsc58.com/json/xiandun_history_data.php",
 		type: "post",
 		data: {
 			UserP: "w",
@@ -303,7 +304,7 @@
 						_demN.find(".list_tittle .shebeihao").html(_list[i].shebeibianhao);
 						_demN.find(".list_tittle .worktime").html(_list[i].time);
 						_demN.find(".list-content .temp1").html(_list[i].temperature01);
-						_demN.find(".list-content .humidity").html(_list[i].humidity);
+						_demN.find(".list-content .humidity").html(_list[i].humidity=='0.0'?"-":_list[i].humidity);
 						_demN.find(".list-content .temp2").html(_list[i].temperature02);
 						_demN.find(".list-content .power").html(_list[i].power);
 						if(_list[i].xinghaoqiangdu >= 0 && _list[i].xinghaoqiangdu < 5) {
@@ -411,11 +412,12 @@
 		my_history_ajax(_start, _history_start_time, _history_end_time, _iscroll_length);
 	}
 	my_history_ajax(_start, _history_start_time, _history_end_time, _iscroll_length);
-
+    
+    //http://www.ccsc58.com/json/01_00_tb_history_data.php 
 	function my_history_ajax(_start, _history_start_time, _history_end_time, _iscroll_length) {
 		$.ajax({
 			type: "post",
-			url: "http://www.ccsc58.com/json/01_00_tb_history_data.php",
+			url: "http://www.ccsc58.com/json/xiandun_history_data.php",
 			data: {
 				UserP: "w",
 				SheBeiBianHao: _num_m,
@@ -442,7 +444,7 @@
 						_dem.find("li:nth-of-type(1)").html(_start + i + 1);
 						_dem.find("li:nth-of-type(2)").html(_json.resultCode[i].time.replace(_json.resultCode[i].time.match(/^2[0-9]{3}/)[0] + "-", "").replace(_json.resultCode[i].time.match(/\s/)[0], "<br>"));
 						_dem.find("li:nth-of-type(4)").html(_json.resultCode[i].temperature01 + "℃/<br>" + _json.resultCode[i].temperature02 + "℃");
-						_dem.find("li:nth-of-type(5)").html(_json.resultCode[i].humidity + "%");
+						_dem.find("li:nth-of-type(5)").html(_json.resultCode[i].humidity=='0.0'?'-':_json.resultCode[i].humidity + "%");
 						$(".more").html("<i class='pull_icon'></i><span>上拉加载...</span>")
 						address_test(_json.resultCode[i].jingdu, _json.resultCode[i].weidu, _dem, _start + i, (_json.resultCode.length - 1));
 						//$(".look_more").before(_dem);
