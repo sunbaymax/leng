@@ -80,7 +80,6 @@
 					admin_user: _userName,
 					admin_pass: _userPass,
 					SheBeiBianHao: _num_m
-
 				},
 				success: function(data) {
 					var _json = JSON.parse(data);
@@ -94,13 +93,14 @@
 					<!-- 设备基本信息  -->
 					$(".form .shebeihao").val(_json.resultCode.shebeibianhao);
 					$(".form .shebeihao").attr('biao', _json.resultCode.GPS_Start);
+					$(".form .shebeihao").attr('yejian', _json.resultCode.yejianshangchuankaiguan);
 					$(".form .shebeihaoname").val(_json.resultCode.device_name);
 					$(".form .daoqiTime").val(_json.resultCode.daoqishijian);
 					$(".form .bieming").val(_beizhu);
 					$(".form .activeTime").val(_jihuoshijian);
 				},
 				error: function() {
-					alert("网络错误！！！")
+					console.log("网络错误！！！")
 				}
 			});
 			$(".btnok button").on("click", function() {
@@ -132,17 +132,19 @@
 							}
 						},
 						error: function() {
-							alert("网络错误")
+							console.log("网络错误")
 						}
 					});
 				} else {
+					var _yejianshangchuankaiguan = $(".shebeihao").attr('yejian');
 					$.ajax({
 						type: "post",
 						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/update_device",
 						data: {
 							devid: _num_m,
 							beizhu: bieming,
-							GPS_Start: _GPS_Start
+							GPS_Start: _GPS_Start,
+							yejianshangchuankaiguan:_yejianshangchuankaiguan
 						},
 						dataType: "JSON",
 						success: function(res) {
@@ -155,7 +157,7 @@
 							}
 						},
 						error: function() {
-							alert("网络错误")
+							console.log("网络错误")
 						}
 					});
 				}

@@ -160,6 +160,7 @@
 					//						$(".endtime").show();
 					//					}
 					$(".btnok button").attr('biao', _json.resultCode.GPS_Start);
+					$(".btnok button").attr('yejian', _json.resultCode.yejianshangchuankaiguan);
 
 				},
 				error: function() {
@@ -221,10 +222,11 @@
 							}
 						},
 						error: function() {
-							alert("网络错误")
+							console.log("网络错误")
 						}
 					});
 				} else {
+					var _yejianshangchuankaiguan = $(".btnok button").attr('yejian');
 					$.ajax({
 						type: "post",
 						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/update_device",
@@ -236,8 +238,8 @@
 							fasong_jiange_minute: _fasong_jiange_minute,
 							feixingmoshikaiqi: _feixingmoshikaiqi,
 							chaowenchucunshijianjiange:_cwcaiji_jiange_minute,
-							chaowenshangchuanshijianjiange:_cwfasong_jiange_minute
-
+							chaowenshangchuanshijianjiange:_cwfasong_jiange_minute,
+                            yejianshangchuankaiguan:_yejianshangchuankaiguan
 						},
 						dataType: "json",
 						success: function(res) {
@@ -249,7 +251,7 @@
 							}
 						},
 						error: function() {
-							alert("网络错误")
+							console.log("网络错误")
 						}
 					});
 				}

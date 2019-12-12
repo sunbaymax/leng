@@ -179,6 +179,7 @@
 				success: function(data) {
 					var _json = JSON.parse(data);
 					$(".btnok button").attr('biao', _json.resultCode.GPS_Start);
+					$(".btnok button").attr('yejian', _json.resultCode.yejianshangchuankaiguan);
 					<!-- 设备报警设置  -->
 					$(".tempHighbaojing").val(_json.resultCode.baojingwendu_shangxian); //报警温度上限
 					if(_json.resultCode.baojingwendu_shangxian_baojing == 0) {
@@ -306,6 +307,7 @@
 						}
 					});
 				} else {
+					var _yejianshangchuankaiguan = $(".btnok button").attr('yejian');
 					$.ajax({
 						type: "post",
 						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/update_device",
@@ -323,7 +325,8 @@
 							chaogaoshidubaojing: _chaogaoshidubaojing,
 							chaogaoshidubaojingfazhi: _humidityHighbaojing,
 							chaodishidubaojing: _chaodishidubaojing,
-							chaodishidubaojingfazhi: _humiditylowbaojing
+							chaodishidubaojingfazhi: _humiditylowbaojing,
+							yejianshangchuankaiguan:_yejianshangchuankaiguan
 						},
 						dataType: "json",
 						success: function(res) {
