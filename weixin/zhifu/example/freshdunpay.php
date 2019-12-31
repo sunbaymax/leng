@@ -62,8 +62,11 @@ $editAddress = $tools->GetEditAddressParameters();
         <div class="money"></div>
 <body>
 	
-	
+	<script src="../../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+
 	<script type="text/javascript">
+		
+		
 		callpay();
         
         
@@ -90,26 +93,26 @@ $editAddress = $tools->GetEditAddressParameters();
 					if(res.err_msg == "get_brand_wcpay_request:ok") {
 						var _goingpay = JSON.parse(sessionStorage.getItem('goingpay'));
 						var _user = _goingpay.ispayuser;
-						var _money = _goingpay.money;
+						var _money =parseFloat( _goingpay.money)/100;
 						var _shebeinum = _goingpay.shebeinum;
-						alert(_user);
-						alert(_money);
-						alert(_shebeinum);
+						var userinfo = JSON.parse(localStorage.getItem('isonline'));
+                        var _duodian = userinfo.duodian; 
+
 		              $.ajax({
 		              	type:"post",
 		              	url:"http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/top",
-		              	async:true,
 		              	data:{
-		              		phone:_user,
-		              		shebeibianhao:_shebeinum,
-		              		money:_money
-		              	},
+                        		phone:_user,
+                        		shebeibianhao:_shebeinum,
+		              		    money:_money
+                        	},
 		              	dataType:"JSON",
 		              	success:function(res){
 		              		alert("付款成功");
+		              		
 							setTimeout(function () {
 					           window.location.href="../../../FreshShield/html/bill.html";
-					        }, 2000);
+					        }, 3000);
 		              	},
 		              	error:function(err){
 		              		alert("付款成功！");
@@ -124,6 +127,7 @@ $editAddress = $tools->GetEditAddressParameters();
 				        }, 3000);
 						
 					} else {
+						
 						alert("暂时无法付款，请联系客服人员");
 						setTimeout(function () {
 				           window.location.href="../../../FreshShield/html/bill.html";

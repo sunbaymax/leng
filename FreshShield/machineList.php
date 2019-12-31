@@ -17,6 +17,12 @@
 				color: #C90000;
 				font-size: 1.3rem;
 			}
+			.list .addresscontent{
+				display: block;
+				height: auto;
+                /*padding-bottom: 0.5rem;*/
+               padding: 0;
+			}
 			.hidden{
 				display: none;
 			}
@@ -91,7 +97,7 @@
 								<div>
 									采集时间：<span class="worktime"></span>
 								</div>
-								<div>
+								<div class="addresscontent">
 									地理位置：<span class="address"></span>
 								</div>
 

@@ -165,9 +165,17 @@
 				border: 1px solid #40C0C3;
 				color: #40C0C3;
 			}
+			.paylist{
+				width: 1.8rem;
+			    height: 2.2rem;
+			    position: absolute;
+			    top: 1rem;
+			    right: 1rem;
+			}
 		</style>
 		<div class="header">
 			<img class="back_list" src="../img/back.png" ids='0' /> 代缴账单
+			<img src="../img/paylists.png" class="paylist"/>
 		</div>
 
 		<div class="content">
@@ -195,7 +203,7 @@
 								</div>
 
 								<div>
-									<p>代缴费用：<span class="cssmoney">￥<label class="money"> 1000</label> </span></p>
+									<p>代缴费用：<span class="cssmoney">￥<label class="money"></label> </span></p>
 									<p><button class="btnpay">去支付</button></p>
 								</div>
 
@@ -219,6 +227,13 @@
 			var userinfo = JSON.parse(localStorage.getItem('isonline'));
 			var _userName = userinfo.user;
 			var _userPass = userinfo.pwd;
+			var _duodian = userinfo.duodian;
+			var _url;
+			if(_duodian==1){
+				 _url="https://www.zjcoldcloud.com/xiandun/public/index.php/index/pay_bill/duodianlist"
+			}else{
+				_url="https://www.zjcoldcloud.com/xiandun/public/index.php/index/pay_bill"
+			}
 			var myscroll_x = new iScroll("wrapper", {
 				onScrollMove: function() {
 					if(this.y < (this.maxScrollY)) {
@@ -242,6 +257,14 @@
 					$('.more span').text('上拉加载...');
 				}
 			});
+			$(".paylist").on("click",function(){
+				if(_duodian==1){
+				 window.location.href="paylistduodian.html"
+			}else{
+				window.location.href="paylist.html"
+			}
+				
+			})
 
 			var _start = 0; //控制一次加载到页面条数的开头；
 			function pullUpActions() {
@@ -250,7 +273,7 @@
 				machine_ajax_list(_start);
 			}
 			$.ajax({
-				url: "https://www.zjcoldcloud.com/xiandun/public/index.php/index/pay_bill",
+				url: _url,
 				type: "post",
 				data: {
 					mainname: _userName
@@ -313,12 +336,11 @@
 			})
 			$("body").on("click", ".btnpay",function() {
 				var _shebeinum=$(this).parents('.list').find('.shebeihao').text();
-				var _money=parseInt($(this).parents('.list').find(".money").text());
+				var _money=parseFloat($(this).parents('.list').find(".money").text())*100;
 				var userinfo = JSON.parse(localStorage.getItem('isonline'));
 				var _user = userinfo.user;
 				var _pass = userinfo.pwd;
-				var _openid = userinfo.copenid;
-				
+				var _openid = userinfo.copenid;	
                 var gopay={};
                 gopay={
                 	money:_money,
@@ -326,7 +348,13 @@
                 	shebeinum:_shebeinum
                 };
                 window.sessionStorage.setItem("goingpay", JSON.stringify(gopay))
-				window.location.href='http://www.ccsc58.cc/leng/weixin/zhifu/example/freshdunpay.php?total='+_money*100;
+                if(_duodian==1){
+				 window.location.href='http://www.ccsc58.cc/leng/weixin/zhifu/example/Duodianpay.php?total='+_money;
+				}else{
+					window.location.href='http://www.ccsc58.cc/leng/weixin/zhifu/example/freshdunpay.php?total='+_money;
+				}
+               
+				
 				
 			})
 		</script>

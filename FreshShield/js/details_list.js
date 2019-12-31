@@ -29,6 +29,7 @@
 	var userinfo = JSON.parse(localStorage.getItem('isonline'));
 	var _userName = userinfo.user;
 	var _userPass = userinfo.pwd;
+	var copenid = userinfo.copenid == undefined ? '' : userinfo.copenid;
 
 	/*
 	 * 顶部导航栏点击后实现下面网页切换效果；
@@ -65,7 +66,7 @@
 			$("form input:nth-of-type(3)").addClass("white_input");
 			$("._display").addClass("hidden");
 			$(".details_parameter").removeClass("hidden");
-			sessionStorage.setItem('paraset',0);
+			sessionStorage.setItem('paraset', 0);
 		} else {
 			_num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "").replace("&", "");
 			$("form input").removeClass("white_input");
@@ -73,7 +74,7 @@
 			$("._display").addClass("hidden");
 			$(".details_warning").removeClass("hidden");
 		}
-		
+
 	} else {
 		_num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "");
 	}
@@ -110,7 +111,7 @@
 		 * 返回列表页的时间；
 		 */
 		$(".header .button_back_list").on("click", function() {
-			sessionStorage.setItem('paraset','0');
+			sessionStorage.setItem('paraset', '0');
 			window.location.href = "../machineList.php";
 			//window.history.go(-1);
 		})
@@ -270,7 +271,7 @@
 	//获取页面当前时间；
 	//http://www.ccsc58.com/json/xiandun_history_data.php http://www.ccsc58.com/json/01_00_tb_history_data.php
 	$.ajax({
-		url: "http://www.ccsc58.com/json/xiandun_history_data.php",
+		url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/get_history_data",
 		type: "post",
 		data: {
 			UserP: "w",
@@ -282,6 +283,7 @@
 			Length: 20,
 			admin_user: _userName,
 			admin_pass: _userPass,
+			openid: copenid
 		},
 		success: function(data) {
 			var _json = JSON.parse(data);
@@ -304,7 +306,7 @@
 						_demN.find(".list_tittle .shebeihao").html(_list[i].shebeibianhao);
 						_demN.find(".list_tittle .worktime").html(_list[i].time);
 						_demN.find(".list-content .temp1").html(_list[i].temperature01);
-						_demN.find(".list-content .humidity").html(_list[i].humidity=='0.0'?"-":_list[i].humidity);
+						_demN.find(".list-content .humidity").html(_list[i].humidity == '0.0' ? "-" : _list[i].humidity);
 						_demN.find(".list-content .temp2").html(_list[i].temperature02);
 						_demN.find(".list-content .power").html(_list[i].power);
 						if(_list[i].xinghaoqiangdu >= 0 && _list[i].xinghaoqiangdu < 5) {
@@ -328,11 +330,16 @@
 					};
 					details_now_map();
 				};
-			} else if(_json.code == 1){
-				alert("未发现：" + _num.replace("&", "") + "设备，请确认您的设备是否绑定在 " + _userName + " 账号下！！！！");
-				window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_templatform.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
-			}else {
-				
+			} else if(_json.code == 1) {
+				alert("未发现：" + _num_m.replace("&", "") + "设备，请确认您的设备是否绑定在 " + _userName + " 账号下！！！！");
+			    window.location.href = "../machineList.php";
+				return false;
+			} else if(_json.code == 30000) {
+				alert("未发现：" + _num_m.replace("&", "") + "设备，请确认您的设备是否绑定在 " + _userName + " 账号下！！！！");
+				window.location.href = "../machineList.php";
+				return false;
+			} else {
+
 				alert("请求错误");
 				window.location.href = "../machineList.php";
 			}
@@ -412,8 +419,8 @@
 		my_history_ajax(_start, _history_start_time, _history_end_time, _iscroll_length);
 	}
 	my_history_ajax(_start, _history_start_time, _history_end_time, _iscroll_length);
-    
-    //http://www.ccsc58.com/json/01_00_tb_history_data.php 
+
+	//http://www.ccsc58.com/json/01_00_tb_history_data.php 
 	function my_history_ajax(_start, _history_start_time, _history_end_time, _iscroll_length) {
 		$.ajax({
 			type: "post",
@@ -428,6 +435,7 @@
 				admin_permit: "zjly8888",
 				admin_user: _userName,
 				admin_pass: _userPass
+				
 			},
 			success: function(data) {
 				var _json = JSON.parse(data);
@@ -435,7 +443,7 @@
 					$(".more").html("此段时间未找到更多数据,请重新调整查看时间");
 					$(".look_more").removeClass("hidden");
 					$(".wait").addClass("hidden")
-				} else {
+				}  else {
 					_down_panDuan = 1;
 					$(".look_more a").html("点击查看更多数据");
 					$(".look_more").removeClass("hidden");
@@ -444,7 +452,7 @@
 						_dem.find("li:nth-of-type(1)").html(_start + i + 1);
 						_dem.find("li:nth-of-type(2)").html(_json.resultCode[i].time.replace(_json.resultCode[i].time.match(/^2[0-9]{3}/)[0] + "-", "").replace(_json.resultCode[i].time.match(/\s/)[0], "<br>"));
 						_dem.find("li:nth-of-type(4)").html(_json.resultCode[i].temperature01 + "℃/<br>" + _json.resultCode[i].temperature02 + "℃");
-						_dem.find("li:nth-of-type(5)").html(_json.resultCode[i].humidity=='0.0'?'-':_json.resultCode[i].humidity + "%");
+						_dem.find("li:nth-of-type(5)").html(_json.resultCode[i].humidity == '0.0' ? '-' : _json.resultCode[i].humidity + "%");
 						$(".more").html("<i class='pull_icon'></i><span>上拉加载...</span>")
 						address_test(_json.resultCode[i].jingdu, _json.resultCode[i].weidu, _dem, _start + i, (_json.resultCode.length - 1));
 						//$(".look_more").before(_dem);
@@ -806,7 +814,7 @@
 							_dem.find(".list-content .power").html(warning_data[i].power);
 							_dem.find(".list-content .powerLimit").html(warning_data[i].dianliang_xiaxian);
 							_dem.find(".list-content .tempLimit").html(warning_data[i].baojingwendu_xiaxian + "~" + warning_data[i].baojingwendu_shangxian);
-							var shidulowstr = warning_data[i].chaodishidubaojingfazhi == 99999.9 ? '-' : warning_data[i].chaodishidubaojingfazhi;
+							var shidulowstr = warning_data[i].chaodishidubaojingfazhi == -99999.9 ? '-' : warning_data[i].chaodishidubaojingfazhi;
 							var shiduhigtstr = warning_data[i].chaogaoshidubaojingfazhi == 99999.9 ? '-' : warning_data[i].chaogaoshidubaojingfazhi;
 
 							_dem.find(".list-content .humiditylimit").html(shidulowstr + '~' + shiduhigtstr);

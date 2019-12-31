@@ -177,7 +177,7 @@
 		}
 	});
 			$(".back_list").on("click", function() {
-				window.history.go(-1);
+				location.href='../machineList.php'
 			});
 
 		</script>

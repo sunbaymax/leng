@@ -142,7 +142,9 @@
 								"pwd": _password,
 								"online": 1,
 								"userType": _json.data.tag,
-								"copenid": _json.data.content.openid
+								"copenid": _json.data.content.openid,
+								"duodian":_json.data.duodian==undefined?0:_json.data.duodian,
+								"uid": _json.data.content.id,
 							}
 
 							window.localStorage.setItem("isonline", JSON.stringify(xduser))

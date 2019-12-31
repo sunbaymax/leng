@@ -31,7 +31,7 @@
 		<div class="content">
 			<div class="form">
 				<div>
-					<span>正常采集间隔：</span>
+					<span>采集间隔：</span>
 					<!--<input type="number" class="cjjg" />-->
 					<select class="cjjg">
 						
@@ -39,16 +39,15 @@
 					分钟
 				</div>
 				<div>
-					<span>正常上传间隔：</span>
+					<span>上传间隔：</span>
 					<select class="scjg">
 						
 					</select>
 					分钟
 					<!--<input type="text" type="number" class="scjg" />分钟-->
 				</div>
-				<div>
+				<!--<div>
 					<span>超温采集间隔：</span>
-					<!--<input type="number" class="cjjg" />-->
 					<select class="cwcjjg">
 						
 					</select>
@@ -60,8 +59,7 @@
 						
 					</select>
 					分钟
-					<!--<input type="text" type="number" class="scjg" />分钟-->
-				</div>
+				</div>-->
 				<!--<div>
 					<span>飞行模式开启：</span>
 					<div class='switch-wrap'>
@@ -91,8 +89,8 @@
 			       var options="<option value='"+i+"'>"+i+"</option>";
 			        $(".cjjg").append(options);
 			        $(".scjg").append(options);
-			        $(".cwcjjg").append(options);
-			        $(".cwscjg").append(options);
+//			        $(".cwcjjg").append(options);
+//			        $(".cwscjg").append(options);
 			}
 
 			
@@ -106,6 +104,7 @@
 			var userinfo = JSON.parse(localStorage.getItem('isonline'));
 			var _userName = userinfo.user;
 			var _userPass = userinfo.pwd;
+			var copenid = userinfo.copenid == undefined ? '' : userinfo.copenid;
 			var _num_m = "";
 			if(_url.indexOf("&") != -1) {
 				_num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "").replace("&", "");
@@ -133,21 +132,31 @@
 
 			$.ajax({
 				type: "post",
-				url: "http://www.ccsc58.com/json/06_00_tb_device_chanshu.php",
+				url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/get_device_param",
 				data: {
 					admin_permit: "zjly8888",
 					UserP: "w",
 					controller: "update",
 					admin_user: _userName,
 					admin_pass: _userPass,
-					SheBeiBianHao: _num_m
+					SheBeiBianHao: _num_m,
+					openid: copenid
 				},
 				success: function(data) {
 					var _json = JSON.parse(data);
+					if(_json.code == 1) {
+						alert(_json.message);
+						window.location.href = "../machineList.php";
+						return false;
+					}else if(_json.code == 30000) {
+						alert("没有查询到该设备");
+						window.location.href = "../machineList.php";
+						return false;
+					}
 					$(".cjjg").val(_json.resultCode.caiji_jiange_minute);
 					$(".scjg").val(_json.resultCode.fasong_jiange_minute);
-					$(".cwcjjg").val(_json.resultCode.chaowenchucunshijianjiange);
-					$(".cwscjg").val(_json.resultCode.chaowenshangchuanshijianjiange);
+//					$(".cwcjjg").val(_json.resultCode.chaowenchucunshijianjiange);
+//					$(".cwscjg").val(_json.resultCode.chaowenshangchuanshijianjiange);
 					<!-- 设备工作参数设置  -->
 					//					if(_json.resultCode.feixingmoshikaiqi == 0) {
 					//						$("#switch").attr("checked", false);
@@ -164,7 +173,7 @@
 
 				},
 				error: function() {
-					alert("网络错误！！！")
+					console.log("网络错误！！！")
 				}
 			});
 			//			$("#switch").on("click", function() {
@@ -181,8 +190,8 @@
 			$(".btnok button").on("click", function() {
 				var _caiji_jiange_minute = $(".cjjg").val();
 				var _fasong_jiange_minute = $(".scjg").val();
-				var _cwcaiji_jiange_minute = $(".cwcjjg").val();
-				var _cwfasong_jiange_minute = $(".cwscjg").val();
+//				var _cwcaiji_jiange_minute = $(".cwcjjg").val();
+//				var _cwfasong_jiange_minute = $(".cwscjg").val();
 				var _GPS_Start = $(this).attr('biao');
 				var _feixingmoshikaiqi; //飞行开启时间
 				//				if($("#switch").is(":checked")) {
@@ -190,7 +199,8 @@
 				//				} else {
 				//					_feixingmoshikaiqi = 0;
 				//				} //是否打印湿度；
-
+//chaowenchucunshijianjiange:_cwcaiji_jiange_minute,
+//							chaowenshangchuanshijianjiange:_cwfasong_jiange_minute
 				var utype = userinfo.userType;
 				var _openid = localStorage.getItem('openId');
 				if(utype == 'b') {
@@ -206,9 +216,8 @@
 							admin_pass: _userPass,
 							caiji_jiange_minute: _caiji_jiange_minute,
 							fasong_jiange_minute: _fasong_jiange_minute,
-							feixingmoshikaiqi: _feixingmoshikaiqi,
-							chaowenchucunshijianjiange:_cwcaiji_jiange_minute,
-							chaowenshangchuanshijianjiange:_cwfasong_jiange_minute
+							feixingmoshikaiqi: _feixingmoshikaiqi
+							
 						},
 						dataType: "json",
 						success: function(res) {
@@ -237,9 +246,9 @@
 							caiji_jiange_minute: _caiji_jiange_minute,
 							fasong_jiange_minute: _fasong_jiange_minute,
 							feixingmoshikaiqi: _feixingmoshikaiqi,
-							chaowenchucunshijianjiange:_cwcaiji_jiange_minute,
-							chaowenshangchuanshijianjiange:_cwfasong_jiange_minute,
-                            yejianshangchuankaiguan:_yejianshangchuankaiguan
+							
+                            yejianshangchuankaiguan:_yejianshangchuankaiguan,
+                            openid:copenid
 						},
 						dataType: "json",
 						success: function(res) {

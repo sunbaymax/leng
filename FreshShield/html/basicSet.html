@@ -55,6 +55,7 @@
 			var _userName = userinfo.user;
 			var _userPass = userinfo.pwd;
 			var utype = userinfo.userType;
+			var copenid = userinfo.copenid == undefined ? '' : userinfo.copenid;
 			var _openid = localStorage.getItem('openId');
 			if(utype == 'b') {
 				$('.twoc').hide();
@@ -69,25 +70,36 @@
 			} else {
 				$(".btnok button").attr('disabled', false);
 			}
-
+			//http://www.ccsc58.com/json/06_00_tb_device_chanshu.php
+			//http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/get_device_param
 			$.ajax({
 				type: "post",
-				url: 'http://www.ccsc58.com/json/06_00_tb_device_chanshu.php',
+				url: 'http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/get_device_param',
 				data: {
 					admin_permit: "zjly8888",
 					UserP: "w",
 					controller: "update",
 					admin_user: _userName,
 					admin_pass: _userPass,
-					SheBeiBianHao: _num_m
+					SheBeiBianHao: _num_m,
+					openid: copenid
 				},
 				success: function(data) {
 					var _json = JSON.parse(data);
+					if(_json.code == 1) {
+						alert(_json.message);
+						window.location.href = "../machineList.php";
+						return false;
+					}else if(_json.code == 30000) {
+						alert("没有查询到该设备");
+						window.location.href = "../machineList.php";
+						return false;
+					}
 					var _beizhu = _json.resultCode.beizhu == undefined ? '' : _json.resultCode.beizhu;
 					var _jihuoshijian = _json.resultCode.jihuoshijian == undefined ? '' : _json.resultCode.jihuoshijian;
 					<!-- 当前用户模块  -->
 					//					$(".userN_form span").html(_userName);
-					if(_json.resultCode.jihuoshijian == undefined||_json.resultCode.jihuoshijian == ''||_json.resultCode.jihuoshijian=='0000-00-00 00:00:00'){
+					if(_json.resultCode.jihuoshijian == undefined || _json.resultCode.jihuoshijian == '' || _json.resultCode.jihuoshijian == '0000-00-00 00:00:00') {
 						$(".divjihuo").hide();
 					}
 					<!-- 设备基本信息  -->
@@ -144,7 +156,8 @@
 							devid: _num_m,
 							beizhu: bieming,
 							GPS_Start: _GPS_Start,
-							yejianshangchuankaiguan:_yejianshangchuankaiguan
+							yejianshangchuankaiguan: _yejianshangchuankaiguan,
+							openid:copenid
 						},
 						dataType: "JSON",
 						success: function(res) {
@@ -165,8 +178,8 @@
 			})
 			$(".back_list").on("click", function() {
 				//window.history.go(-1);
-				 sessionStorage.setItem('paraset',1);
-                window.location.href ='details_lists.html?num_m='+_num_m+'&'
+				sessionStorage.setItem('paraset', 1);
+				window.location.href = 'details_lists.html?num_m=' + _num_m + '&'
 			});
 			$(".invitebtn").on("click", function() {
 				window.location.href = 'banding.html?openId=' + _openid;

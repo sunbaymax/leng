@@ -113,32 +113,44 @@
 				border-bottom: none;
 				line-height: 9vw;
 			}
-			.content a:nth-child(2) img:nth-of-type(1){
+			
+			.content a:nth-child(2) img:nth-of-type(1) {
 				width: 1.6rem;
 				height: 1.6rem;
 			}
-			.content a:nth-child(6) img:nth-of-type(1){
+			
+			.content a:nth-child(6) img:nth-of-type(1) {
 				width: 1.6rem;
 				height: 1.65rem;
 			}
-			.content .exit img:nth-of-type(1){
+			
+			.content .exit img:nth-of-type(1) {
 				width: 1.6rem;
 				height: 1.65rem;
 			}
-			.content .paybill img:nth-of-type(1){
+			
+			.content .paybill img:nth-of-type(1) {
 				width: 1.3rem;
 				margin-right: 0.3rem;
 				height: 1.65rem;
 			}
-			.content .account img:nth-of-type(1){
+			
+			.content .account img:nth-of-type(1) {
 				width: 1.3rem;
 				margin-right: 0.3rem;
 				height: 1.65rem;
 			}
-			.content .daqitixing img:nth-of-type(1){
-				width: 1.3rem;
+			
+			.content .daqitixing img:nth-of-type(1) {
+				width: 1.6rem;
 				margin-right: 0.3rem;
 				height: 1.65rem;
+			}
+			.content .yuyin img:nth-of-type(1) {
+				width: 1.8rem !important;
+				/*margin-right: 0.3rem;*/
+				margin-right: -0.1rem;
+				height: 1.8rem !important;
 			}
 		</style>
 	</head>
@@ -153,6 +165,7 @@
 			<a href="bill.html" class="paybill"><img src="../images/mybill.png" /><span>代缴账单</span><img src="../img/right_shop_car.png" alt="" /></a>
 			<a href="bandinglist.html" class="account"><img src="../images/mytel.png" /><span>账户设置</span><img src="../img/right_shop_car.png" alt="" /></a>
 			<a href="exprie_machine.html" class="daqitixing"><img src="../images/mytixing.png" /><span>设备到期提醒</span><img src="../img/right_shop_car.png" alt="" /></a>
+			<a href="voicebill.html" class="yuyin"><img src="../images/myyuyin.png" /><span>语音套餐</span><img src="../img/right_shop_car.png" alt="" /></a>
 			<a href="guide.html" class="daqitixing"><img src="../images/myquestions.png" /><span>常见问题</span><img src="../img/right_shop_car.png" alt="" /></a>
 			<a href="javascript:void(0)" class="exit"><img src="../images/myexit.png" /><span>退出账户</span><img src="../img/right_shop_car.png" alt="" /></a>
 		</div>
@@ -204,14 +217,21 @@
 			var b = userinfo.user;
 			var c = userinfo.pwd;
 			var _userType = userinfo.userType;
+			var _duodian = userinfo.duodian;
 			if(_userType == 'b') {
 				$(".content a:nth-of-type(2)").hide()
-				$(".content a:nth-of-type(3)").hide()
+				if(_duodian == 0) {
+					$(".content a:nth-of-type(3)").hide()
+				} else {
+					$(".content a:nth-of-type(3)").show()
+				}
 				$(".content a:nth-of-type(4)").hide()
+
 				$(".content a:nth-of-type(6)").hide()
+                $(".content a:nth-of-type(7)").hide()
 				$(".personcenter").attr('href', 'user.html');
 			} else {
-                $(".content a:nth-of-type(5)").hide()
+				$(".content a:nth-of-type(5)").hide()
 				$(".personcenter").attr('href', 'userC.html');
 			}
 			openid = window.localStorage.getItem("openId");
@@ -234,7 +254,7 @@
 					success: function(a) {
 						a = JSON.parse(a);
 						console.log(a);
-						"success" == a.resultCode ? (window.localStorage.removeItem("isonline"), window.location.href = 'register.html?openId=' + openid) : (alert("\u89e3\u9664\u7ed1\u5b9a\u5931\u8d25\uff0c\u8bf7\u91cd\u65b0\u64cd\u4f5c"), window.location.href = _url)
+						"success" == a.resultCode ? (window.localStorage.removeItem("isonline"),window.sessionStorage.clear(), window.location.href = 'register.html?openId=' + openid) : (alert("\u89e3\u9664\u7ed1\u5b9a\u5931\u8d25\uff0c\u8bf7\u91cd\u65b0\u64cd\u4f5c"), window.location.href = _url)
 					},
 					error: function() {
 						alert("\u8bf7\u68c0\u67e5\u60a8\u662f\u5426\u8fde\u63a5\u7f51\u7edc")
