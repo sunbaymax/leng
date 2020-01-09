@@ -9,6 +9,12 @@
 					"name": "微温控平台",
 					"url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_templatform.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect",
 					"sub_button": []
+				},
+				{
+					"type": "view",
+					"name": "监控宝操作视频",
+					"url": "http://mp.weixin.qq.com/s/Tf87L9zLq4U0EhuMTSqkEg",
+					"sub_button": []
 				}
 			]
 		}, {

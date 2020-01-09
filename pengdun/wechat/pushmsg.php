@@ -24,7 +24,7 @@ function Tui_song($first,$keyword1,$keyword2,$keyword3,$keyword4,$keyword5,$rema
             'touser'=>"$openId",
             'template_id'=>"uIDczxaqwPN4DXjI726nxC16RgQCO43E0KmddaqHSdU",
 //          'url'=>"http://www.ccsc58.cc/weixinnew/html/warning_list.html,
-            'url'=>"http://www.jfcss.com/FreshShield/html/details_lists.html?num_m=".$keyword6."&",
+            'url'=>"http://www.jfcss.com/FreshShield/html/warning_rukou.html?num_m=".$keyword6,
             'topcolor'=>"#7B68EE",
             'data'=>array('first'=>array('value'=>urlencode($first),'color'=>"#000",),
                 'keyword1'=>array('value'=>urlencode($keyword3),'color'=>"#ff0000",),

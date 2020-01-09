@@ -91,7 +91,7 @@ $editAddress = $tools->GetEditAddressParameters();
 					if(res.err_msg == "get_brand_wcpay_request:ok") {
 						var _goingpay = JSON.parse(sessionStorage.getItem('goingpay'));
 						var _user = _goingpay.ispayuser;
-						var _money =parseFloat( _goingpay.money/100);
+						var _money = _goingpay.money;
 						var _shebeinum = _goingpay.shebeinum;
 		              $.ajax({
 		              	type:"post",
@@ -103,10 +103,8 @@ $editAddress = $tools->GetEditAddressParameters();
                         	},
 		              	dataType:"JSON",
 		              	success:function(res){
-		              		alert("智冷科技提醒您：付款￥"+_money+"成功");
-							setTimeout(function () {
-					           window.location.href="../../../FreshShield/html/bill.html";
-					        }, 1000);
+		              		alert("智冷科技提醒您：付款￥38元"+"成功");
+							sessionStorage.removeItem('goingpay');
 		              	},
 		              	error:function(err){
 		              		alert("付款成功！");
@@ -116,15 +114,11 @@ $editAddress = $tools->GetEditAddressParameters();
 
 					} else if(res.err_msg == "get_brand_wcpay_request:cancel") {
 						alert("您已取消付款！！！");
-						setTimeout(function () {
-				           window.location.href="../../../FreshShield/html/bill.html";
-				        }, 3000);
+						
 						
 					} else {
 						alert("暂时无法付款，请联系客服人员");
-						setTimeout(function () {
-				           window.location.href="../../../FreshShield/html/bill.html";
-				        }, 1000);
+					
 					};
 				}
 			);

@@ -113,29 +113,35 @@
 				border-bottom: none;
 				line-height: 9vw;
 			}
-			.content a:nth-child(2) img:nth-of-type(1){
+			
+			.content a:nth-child(2) img:nth-of-type(1) {
 				width: 1.6rem;
 				height: 1.6rem;
 			}
-			.content a:nth-child(6) img:nth-of-type(1){
+			
+			.content a:nth-child(6) img:nth-of-type(1) {
 				width: 1.6rem;
 				height: 1.65rem;
 			}
-			.content .exit img:nth-of-type(1){
+			
+			.content .exit img:nth-of-type(1) {
 				width: 1.6rem;
 				height: 1.65rem;
 			}
-			.content .paybill img:nth-of-type(1){
+			
+			.content .paybill img:nth-of-type(1) {
 				width: 1.3rem;
 				margin-right: 0.3rem;
 				height: 1.65rem;
 			}
-			.content .account img:nth-of-type(1){
+			
+			.content .account img:nth-of-type(1) {
 				width: 1.3rem;
 				margin-right: 0.3rem;
 				height: 1.65rem;
 			}
-			.content .daqitixing img:nth-of-type(1){
+			
+			.content .daqitixing img:nth-of-type(1) {
 				width: 1.3rem;
 				margin-right: 0.3rem;
 				height: 1.65rem;
@@ -211,7 +217,7 @@
 				$(".content a:nth-of-type(6)").hide()
 				$(".personcenter").attr('href', 'user.html');
 			} else {
-                $(".content a:nth-of-type(5)").hide()
+				$(".content a:nth-of-type(5)").hide()
 				$(".personcenter").attr('href', 'userC.html');
 			}
 			openid = window.localStorage.getItem("openId");
@@ -219,27 +225,46 @@
 				$(".JieChuBang_box").removeClass("hidden");
 			});
 			$(".JieChuBang_left").on("click", function() {
-				$.ajax({
-					url: "http://www.ccsc58.com/json/11_00_tb_weixin_openID.php",
-					type: "post",
-					data: {
-						admin_permit: "zjly8888",
-						UserP: "w",
-						admin_user: b,
-						admin_pass: c,
-						controller: "update",
-						openID: "0000000000000000000000000000",
-						ip: ""
-					},
-					success: function(a) {
-						a = JSON.parse(a);
-						console.log(a);
-						"success" == a.resultCode ? (window.localStorage.removeItem("onlinepengdun"), window.location.href = 'register.html?openId=' + openid) : (alert("\u89e3\u9664\u7ed1\u5b9a\u5931\u8d25\uff0c\u8bf7\u91cd\u65b0\u64cd\u4f5c"), window.location.href = _url)
-					},
-					error: function() {
-						alert("\u8bf7\u68c0\u67e5\u60a8\u662f\u5426\u8fde\u63a5\u7f51\u7edc")
-					}
-				});
+				if(_userType == 'b') {
+					$.ajax({
+						url: "http://www.ccsc58.com/json/11_00_tb_weixin_openID.php",
+						type: "post",
+						data: {
+							admin_permit: "zjly8888",
+							UserP: "w",
+							admin_user: b,
+							admin_pass: c,
+							controller: "update",
+							openID: "0000000000000000000000000000",
+							ip: ""
+						},
+						success: function(a) {
+							a = JSON.parse(a);
+							console.log(a);
+							"success" == a.resultCode ? (window.localStorage.removeItem("onlinepengdun"), window.location.href = 'register.html?openId=' + openid) : (alert("\u89e3\u9664\u7ed1\u5b9a\u5931\u8d25\uff0c\u8bf7\u91cd\u65b0\u64cd\u4f5c"), window.location.reload())
+						},
+						error: function() {
+							alert("\u8bf7\u68c0\u67e5\u60a8\u662f\u5426\u8fde\u63a5\u7f51\u7edc")
+						}
+					});
+				} else {
+					$.ajax({
+						url: "http://www.jfcss.com/api/public/index.php?s=index/login/log_out",
+						type: "post",
+						data: {
+							username:b
+						},
+						success: function(a) {
+							a = JSON.parse(a);
+							console.log(a);
+							"success" == a.message ? (window.localStorage.removeItem("onlinepengdun"), window.location.href = 'register.html?openId=' + openid) : (window.localStorage.removeItem("onlinepengdun"), window.location.href = 'register.html?openId=' + openid)
+						},
+						error: function() {
+							alert("\u8bf7\u68c0\u67e5\u60a8\u662f\u5426\u8fde\u63a5\u7f51\u7edc")
+						}
+					});
+				}
+
 			});
 			$(".JieChuBang_right").on("click", function() {
 				$(".JieChuBang_box").addClass("hidden");

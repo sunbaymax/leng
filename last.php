@@ -39,7 +39,7 @@ class wechatCallbackapiTest
 		  die('Could not connect: ' . mysql_error());
 		  }
 		  mysqli_select_db($this->link,"wlgl");
-		  //echo '连接成功2';
+		  //echo '连接成功';
 	}
     //响应消息
     public function responseMsg()
@@ -100,7 +100,8 @@ class wechatCallbackapiTest
         switch ($object->Event)
         {
             case "subscribe":
-                $content = " 您好，欢迎关注中集智冷科技微信公众号，小智努力为您提供最具价值的行业资讯，看得过瘾不要忘了和小智线上语音互动哦，您的宝贵建议是小智成长的动力！关注中集智冷科技，聆听冷链智能温控行业自己的声音！/微笑/微笑  ";
+                $content = " 您好，欢迎关注中集智冷科技微信公众号，小智努力为您提供最具价值的行业资讯，看得过瘾不要忘了和小智线上语音互动哦，您的宝贵建议是小智成长的动力！关注中集智冷科技，聆听冷链智能温控行业自己的声音！/微笑/微笑\n\n☞【鲜盾系统操作指南】:<a href=\"https://mp.weixin.qq.com/s/8uzz14RsOJwYVZJqdRGe_w\">https://mp.weixin.qq.com/s/8uzz14RsOJwYVZJqdRGe_w</a>
+                \n\n☞【监控宝使用说明书】:<a href=\"http://www.ccsc58.cc/leng/FreshShield/file/tempbody.pdf\">下载查看</a>  ";
 	            $content .= (!empty($object->EventKey))?("\n\n<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx82dbac04fa8fd8ef&redirect_uri=http://www.ccsc58.cc/weixinnew/oauth_3.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">微信绑定</a>"):"";
 	            $url="https://api.weixin.qq.com/cgi-bin/user/info?access_token=".getAccessToken()."&openid=".$object->FromUserName."&lang=zh_CN";
 				$userInfo=json_decode(https_request($url),true);
@@ -232,13 +233,16 @@ class wechatCallbackapiTest
         if (strstr($keyword, "文本")){
             $content = "请换一种说法"."\nOpenID：".$object->FromUserName."\n冷云冷链公众平台";
         }else if($keyword=="设备"||$keyword=="查询"||$keyword=="冷链"||$keyword=="监控"||$keyword=="我的设备"||$keyword=="中集冷云"){
-         $content = "<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx82dbac04fa8fd8ef&redirect_uri=http://www.ccsc58.cc/weixinnew/oauth2.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">我的设备</a>";
+         $content = "<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_templatform.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">我的设备</a>";
             }
         else if($keyword=="网址"||$keyword=="官网"||$keyword=="中集冷云（北京）冷链科技有限公司"||$keyword=="中集冷云"||$keyword=="冷云科技"||$keyword=="门户网站"||$keyword=="网站"){        
             $content = "<a href=\"http://www.ccsc58.com\">中集冷云（北京）冷链科技有限公司</a>";
         }
         else if($keyword=="商城"||$keyword=="购买"){
 	        $content = "/微笑<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_shop.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">微商城</a> \n 欢迎您光临，这里会给你更多意想不到的惊喜 /:heart";             
+	    }
+	    else if($keyword=="多点"){
+	        $content = "<a href=\"www.ccsc58.cc/leng/FreshShield/html/dmallpay.html\">年费缴费</a>";             
 	    }
 	    else if($keyword=="年费"||$keyword=="付款"||$keyword=="收款"||$keyword=="付钱"||$keyword=="包年费"||$keyword=="支付"||$keyword=="金额"){
 	        $content = "/微笑<a href=\"http://www.ccsc58.cc/leng/weixin/index.html\">智冷微信商号平台</a> \n 智冷科技支付功能页面，帮助商户完成支付申请为基础，向用户提供安全、快捷、高效的服务 现在热线010-8361370";             
@@ -299,8 +303,8 @@ class wechatCallbackapiTest
         	}
              
         }
-        else if($keyword=="微信绑定"||$keyword=="手机号码绑定"||$keyword=="关联"){          
-             $content = "<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx82dbac04fa8fd8ef&redirect_uri=http://www.ccsc58.cc/weixinnew/oauth_3.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">微信绑定</a>";
+        else if($keyword=="微信绑定"||$keyword=="手机号码绑定"||$keyword=="绑定"){          
+             $content = "<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_wxchatbanding.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">微信绑定</a>";
         }
         else if($keyword=="RFID"||$keyword=="rfid"||$keyword=="Rfid"){
             $content = "<a href=\"http://jd.ccsc58.cc/index_RFID.php?t=RFID_20170830\">RFID</a>";
@@ -343,7 +347,7 @@ class wechatCallbackapiTest
 	            } 
         else{
         	//$content = date("Y-m-d H:i:s",time())."\nOpenID：".$object->FromUserName."\n技术支持 方倍工作室";
-           $content = "您好！您可以回复以下内容：\n\n☞【下载】:<a href=\"http://a.app.qq.com/o/simple.jsp?pkgname=com.ccsc.coldcloud\">下载APP</a>\n\n☞【官网】:<a href=\"http://www.ccsc58.com\">客服电话</a>\n\n☞【天气】:<a href=\"https://m.tianqi.com\">城市天气</a>\n\n ☞【绑定】:<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx82dbac04fa8fd8ef&redirect_uri=http://www.ccsc58.cc/weixinnew/oauth_3.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">微信绑定</a>\n\n☞【说明书】:<a href=\"https://mp.weixin.qq.com/s/5O4lbFehdZT1kuJcDvj5sw\">操作说明</a>\n\n☞【设备号】:<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">设备详情</a>\n\n☞【报警/异常】:<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">报警设备</a>\n\n☞【设备/监控】:<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">我的设备</a>\n\n ☎  客服电话:010-83612390";     
+           $content = "您好！您可以回复以下内容：\n\n☞【下载】:<a href=\"http://a.app.qq.com/o/simple.jsp?pkgname=com.ccsc.coldcloud\">下载APP</a>\n\n☞【官网】:<a href=\"http://www.ccsc58.com\">客服电话</a>\n\n☞【天气】:<a href=\"https://m.tianqi.com\">城市天气</a>\n\n ☞【绑定】:<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx82dbac04fa8fd8ef&redirect_uri=http://www.ccsc58.cc/weixinnew/oauth_3.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">微信绑定</a>\n\n☞【说明书】:<a href=\"https://mp.weixin.qq.com/s/5O4lbFehdZT1kuJcDvj5sw\">操作说明</a>\n\n☞【设备号】:<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">设备详情</a>\n\n☞【报警/异常】:<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">报警设备</a>\n\n☞【设备/监控】:<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">我的设备</a>\n\n☞【鲜盾系统操作指南】:<a href=\"https://mp.weixin.qq.com/s/8uzz14RsOJwYVZJqdRGe_w\">查看指南</a>\n\n☞【监控宝使用说明书】:<a href=\"http://www.ccsc58.cc/leng/FreshShield/file/tempbody.pdf\">下载查看</a>\n\n ☎  客服电话:010-83612390";     
 	    }
 	    
 		if(!empty($result)){

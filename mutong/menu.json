@@ -1,0 +1,44 @@
+{
+
+	"button": [
+		{
+			"type": "view",
+			"name": "牧童云平台",
+			"url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_templatform.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect",
+			"sub_button": []
+		}
+
+		, {
+			"name": "牛盾服务",
+			"sub_button": [
+				{
+					"type": "view",
+					"name": "养殖交流",
+					"url": "http://www.baidu.com",
+					"sub_button": []
+				}, {
+					"type": "view",
+					"name": "售后服务",
+					"url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_repair.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect",
+					"sub_button": []
+				}
+			]
+		}, {
+			"name": "关于我们",
+			"sub_button": [
+
+				{
+					"type": "click",
+					"name": "联系我们",
+					"key": "lianxiwomen",
+					"sub_button": []
+				}, {
+					"type": "click",
+					"name": "充值缴费",
+					"key": "gopay",
+					"sub_button": []
+				}
+			]
+		}
+	]
+}

@@ -350,9 +350,10 @@
 			_dem.css({
 				width: "100vw",
 				height: "10rem",
-				textAlign: "left",
-				fontSize: "2rem",
-				lineHeight: "5rem"
+				textAlign: "center",
+				fontSize: "1.4rem",
+				lineHeight: "5rem",
+				
 			})
 			$(".details_now").before(_dem)
 		}

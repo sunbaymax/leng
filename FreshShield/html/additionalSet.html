@@ -57,27 +57,26 @@
 						<label for='switch1'></label>
 					</div>
 				</div>
-				<div>
+				<!--<div>
 					<span>夜间数据：</span>
 					<div class='switch-wrap'>
 						<input type='checkbox' id='switch'>
 						<label for='switch'></label>
 					</div>
-				</div>
+				</div>-->
 				<div class="moban father">
 					<span>定时推送时间1：</span><input type="text" id="demo1" placeholder="请选择定时时间" readonly="readonly" class="Time1" /><img src="../images/addtime.png" class="tubiao addtime noclick" />
 				</div>
-				<div>
+				<div class="yuyinbaojing">
 					<span>语音报警：</span>
 					<div class='switch-wrap'>
 						<input type='checkbox' id='switch2'>
 						<label for='switch2'></label>
 					</div>
 				</div>
-				<div class="cmoban" style="display: none;">
+				<div class="yuyinbaojing cmoban" style="display: none;">
 					<span>开启时间：</span><input type="text" id="voicetime" placeholder="请选择语音时间" readonly="readonly" class="Time1" /><img src="../images/addtime.png" style="visibility: hidden;" class="tubiao addtime noclick" />
 				</div>
-
 			</div>
 			<div class="btnok">
 				<button>保存</button>
@@ -96,7 +95,7 @@
 			if(_ismaster == 0) {
 				$(".btnok button").css("background", "#ccc");
 				$(".btnok button").attr('disabled', true);
-				$("#switch").attr("disabled", true);
+//				$("#switch").attr("disabled", true);
 				//	$("input[type='checkbox']").attr("disabled", true);
 				$("input").attr("disabled", true);
 				$(".addtime").addClass('noclick');
@@ -176,11 +175,11 @@
 
 					$(".btnok button").attr('biao', _json.resultCode.GPS_Start);
 					<!-- 附加报警设置  -->
-					if(_json.resultCode.yejianshangchuankaiguan == 0) {
-						$("#switch").attr("checked", false);
-					} else {
-						$("#switch").attr("checked", true);
-					}
+//					if(_json.resultCode.yejianshangchuankaiguan == 0) {
+//						$("#switch").attr("checked", false);
+//					} else {
+//						$("#switch").attr("checked", true);
+//					}
 					
 					var times = _json.resultCode.dingshifasong;
 
@@ -199,13 +198,18 @@
 
 					});
 					tinit()
-					if(_json.resultCode.is_open == 0) {
+					if(_json.resultCode.is_warn_show == 0){
+						$(".yuyinbaojing").hide()
+					}else{
+						if(_json.resultCode.is_open == 0) {
 						$("#switch2").attr("checked", false);
 					} else {
 						$("#switch2").attr("checked", true);
 						$(".cmoban").show();
 						$("#voicetime").val(_json.resultCode.warn_time==''?'':_json.resultCode.warn_time);
 					}
+					}
+					
 
 				},
 				error: function() {
@@ -301,12 +305,12 @@
 
 				});
 
-				var _yejianshangchuan;
-				if($("#switch").is(":checked")) {
-					_yejianshangchuan = 1;
-				} else {
-					_yejianshangchuan = 0;
-				} //开启夜间上传；
+//				var _yejianshangchuan;
+//				if($("#switch").is(":checked")) {
+//					_yejianshangchuan = 1;
+//				} else {
+//					_yejianshangchuan = 0;
+//				} //开启夜间上传；
 				var _is_warn;
 				var _data;
 				var _warntime = $("#voicetime").val();
@@ -317,7 +321,7 @@
 						devid: _num_m,
 						GPS_Start: _GPS_Start,
 						UserP: "w",
-						yejianshangchuankaiguan: _yejianshangchuan,
+//						yejianshangchuankaiguan: _yejianshangchuan,
 						dingshifasong: arr,
 						openid: _copenid,
 						is_open:_is_warn,
@@ -329,7 +333,7 @@
 						devid: _num_m,
 						GPS_Start: _GPS_Start,
 						UserP: "w",
-						yejianshangchuankaiguan: _yejianshangchuan,
+//						yejianshangchuankaiguan: _yejianshangchuan,
 						dingshifasong: arr,
 						openid: _copenid,
 						is_open:_is_warn,
@@ -339,6 +343,7 @@
 				if(_warntime==''&&_is_warn==1){
 					alert("请选择语音时间");
 					$("#voicetime").focus()
+					return false;
 				}
 				console.log(_data);
 				$.ajax({
