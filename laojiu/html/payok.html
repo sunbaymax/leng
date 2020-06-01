@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="format-detection" content="telephone=no">
+		<title>老九冷链</title>
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+	</head>
+
+	<body>
+		<style>
+			body {
+				background-color: #F2F2F2!important;
+			}
+			
+			.content {
+				padding: 0 15px;
+				box-sizing: border-box;
+				margin-top: 5rem;
+			}
+			
+			.content ul {
+				height: auto;
+				padding: 15px;
+				background: #FFFFFF;
+				border-radius: 15px;
+				margin-top: 15px;
+			}
+			
+			.content ul li {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				height: 4.6rem;
+				line-height: 4.6rem;
+			}
+			
+			.top {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+			
+			.top img {
+				margin: 15px 0;
+				width: 100px;
+				height: 100px;
+			}
+			
+			.top span {
+				font-weight: 800;
+				font-size: 16px;
+			}
+			.msg{
+				text-align: center;
+				font-size: 12px;
+				color: #FF0000;
+				margin-top: 15px;
+			}
+		</style>
+		<div class="header">
+			<img class="back_list" src="../img/back.png" ids='0' /> 缴费详情
+		</div>
+
+		<div class="content">
+			<div class="top">
+				<img src="../images/success.png" />
+				<span>付费成功</span>
+			</div>
+			<ul>
+				<li>
+					<div>设备号：</div>
+					<div class="shebeihao"></div>
+				</li>
+				<li>
+					<div>缴费时间：</div>
+					<div class="nowtime"></div>
+				</li>
+				<li>
+					<div>缴费金额：</div>
+					<div class="money"></div>
+				</li>
+				<li>
+					<div>付款账号 ：</div>
+					<div class="account"></div>
+				</li>
+				
+			</ul>
+            <div class="msg">
+            	<span>* 缴费凭证建议截屏保留</span>
+            </div>  
+ 		</div>
+		<script type="text/javascript" src="../js/jquery-1.11.0.js"></script>
+		<script src="../js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			$(function() {
+
+		
+				var _goingpay = JSON.parse(sessionStorage.getItem('goingpay'));
+				var _user = _goingpay.ispayuser;
+				var _money = _goingpay.money;
+				var _shebeinum = _goingpay.shebeinum;
+				var times = writeCurrentDate();
+				//打印输出
+
+				$.ajax({
+					type: "post",
+					url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device_admin/company_topup",
+					async: true,
+					data: {
+						mainname: _user,
+						shebeihao: _shebeinum,
+						money: _money
+					},
+					dataType: "JSON",
+					success: function(res) {
+
+						$(".shebeihao").text(_shebeinum);
+						$(".nowtime").text(times);
+						$(".money").text(_money);
+						$(".account").text(_user);
+						sessionStorage.removeItem('goingpay');
+					},
+					error: function(err) {
+						
+						console.log(err)
+					}
+				});
+
+				$(".back_list").on("click", function() {
+					window.location.href = "bill.html";
+					sessionStorage.removeItem('goingpay')
+				})
+
+			})
+
+			function writeCurrentDate() {
+				var now = new Date();
+				var year = now.getFullYear(); //得到年份
+				var month = now.getMonth(); //得到月份
+				var date = now.getDate(); //得到日期
+				var day = now.getDay(); //得到周几
+				var hour = now.getHours(); //得到小时
+				var minu = now.getMinutes(); //得到分钟
+				var sec = now.getSeconds(); //得到秒
+				　　
+				var MS = now.getMilliseconds(); //获取毫秒
+				var week;
+				month = month + 1;
+				if(month < 10) month = "0" + month;
+				if(date < 10) date = "0" + date;
+				if(hour < 10) hour = "0" + hour;
+				if(minu < 10) minu = "0" + minu;
+				if(sec < 10) sec = "0" + sec;
+
+				var arr_week = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六");
+				week = arr_week[day];
+				var time = "";
+				time = year + "年" + month + "月" + date + "日" + " " + hour + ":" + minu + ":" + sec;
+				return time;
+				//当前日期赋值给当前日期输入框中（jQuery easyUI）
+				//				$("#currentDate").html(time);
+				//				//设置得到当前日期的函数的执行间隔时间，每1000毫秒刷新一次。
+				//				var timer = setTimeout("writeCurrentDate()", 1000);
+			}
+		</script>
+	</body>
+
+</html>

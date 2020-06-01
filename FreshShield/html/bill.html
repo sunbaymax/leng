@@ -93,7 +93,7 @@
 				margin: 1rem 0;
 				padding: 0 1rem;
 				box-sizing: border-box;
-				height: 12rem;
+				height: 10rem;
 				background: #FFFFFF;
 				border-radius: 0.5rem;
 			}
@@ -145,6 +145,8 @@
 				display: flex;
 				align-items: center;
 				height: 2rem;
+				line-height: 2rem;
+				padding: 5px 0;
 			}
 			
 			.list-content div p {
@@ -165,17 +167,18 @@
 				border: 1px solid #40C0C3;
 				color: #40C0C3;
 			}
-			.paylist{
+			
+			.paylist {
 				width: 1.8rem;
-			    height: 2.2rem;
-			    position: absolute;
-			    top: 1rem;
-			    right: 1rem;
+				height: 2.2rem;
+				position: absolute;
+				top: 1rem;
+				right: 1rem;
 			}
 		</style>
 		<div class="header">
 			<img class="back_list" src="../img/back.png" ids='0' /> 代缴账单
-			<img src="../img/paylists.png" class="paylist"/>
+			<!--			<img src="../img/paylists.png" class="paylist"/>-->
 		</div>
 
 		<div class="content">
@@ -229,10 +232,10 @@
 			var _userPass = userinfo.pwd;
 			var _duodian = userinfo.duodian;
 			var _url;
-			if(_duodian==1){
-				 _url="https://www.zjcoldcloud.com/xiandun/public/index.php/index/pay_bill/duodianlist"
-			}else{
-				_url="https://www.zjcoldcloud.com/xiandun/public/index.php/index/pay_bill"
+			if(_duodian == 1) {
+				_url = "http://www.zjcoldcloud.com/xiandun/public/index.php/index/pay_bill/duodianlist"
+			} else {
+				_url = "http://www.zjcoldcloud.com/xiandun/public/index.php/index/pay_bill"
 			}
 			var myscroll_x = new iScroll("wrapper", {
 				onScrollMove: function() {
@@ -257,13 +260,13 @@
 					$('.more span').text('上拉加载...');
 				}
 			});
-			$(".paylist").on("click",function(){
-				if(_duodian==1){
-				 window.location.href="paylistduodian.html"
-			}else{
-				window.location.href="paylist.html"
-			}
-				
+			$(".paylist").on("click", function() {
+				if(_duodian == 1) {
+					window.location.href = "paylistduodian.html"
+				} else {
+					window.location.href = "paylist.html"
+				}
+
 			})
 
 			var _start = 0; //控制一次加载到页面条数的开头；
@@ -292,30 +295,26 @@
 									<span class="shebeihao">${vaule.shebeibianhao}</span>
 								</p>
 								<p>
-									<span class="ispay">代缴费</span>
+									<span class="ispay"></span>
 								</p>
 
 							</div>
 							<div class="list-content">
+								
 								<div>
-									昵称：<span class="nickname">${vaule.beizhu}</span>
-								</div>
-								<div>
-									应缴日期：<span class="paytimer">${vaule.daoqishijian}</span>
+									到期日期：<span class="paytimer">${vaule.daoqishijian}</span>
 								</div>
 
-								<div>
-									<p>代缴费用：<span class="cssmoney">￥<label class="money"> ${vaule.money}</label> </span></p>
-									<p><button class="btnpay">去支付</button></p>
-								</div>
+								
 
 							</div>
 						</div>`
 							$(".scroll_box").append(str);
+							$(".more").html("没有更多记录");
 						});
 
 					} else {
-						$(".more").html("没有查询到缴费记录");
+						$(".more").html("没有更多记录");
 					}
 					myscroll_x.refresh();
 
@@ -328,35 +327,41 @@
 				}
 			})
 
-			function machine_ajax_list(_start) {
-				$(".more").html("未找到查询到缴费记录");
-			}
+			//			function machine_ajax_list(_start) {
+			//				$(".more").html("未找到查询到缴费记录");
+			//			}
 			$(".back_list").on("click", function() {
-				window.location.href = "user_sheZhi.html"
+				window.location.href = "pay_sheZhi.html"
+				//history.go(-1)
 			})
-			$("body").on("click", ".btnpay",function() {
-				var _shebeinum=$(this).parents('.list').find('.shebeihao').text();
-				var _money=parseFloat($(this).parents('.list').find(".money").text())*100;
-				var userinfo = JSON.parse(localStorage.getItem('isonline'));
-				var _user = userinfo.user;
-				var _pass = userinfo.pwd;
-				var _openid = userinfo.copenid;	
-                var gopay={};
-                gopay={
-                	money:_money,
-                	ispayuser:_user,
-                	shebeinum:_shebeinum
-                };
-                window.sessionStorage.setItem("goingpay", JSON.stringify(gopay))
-                if(_duodian==1){
-				 window.location.href='http://www.ccsc58.cc/leng/weixin/zhifu/example/Duodianpay.php?total='+_money;
-				}else{
-					window.location.href='http://www.ccsc58.cc/leng/weixin/zhifu/example/freshdunpay.php?total='+_money;
-				}
-               
-				
-				
+			$("body").on("click", ".list", function() {
+				var _shebeinum = $(this).find('.shebeihao').text();
+				window.location.href = 'buyflewpackage.html?num_m=' + _shebeinum;
+
 			})
+			//			$("body").on("click", ".btnpay",function() {
+			//				var _shebeinum=$(this).parents('.list').find('.shebeihao').text();
+			//				var _money=parseFloat($(this).parents('.list').find(".money").text())*100;
+			//				var userinfo = JSON.parse(localStorage.getItem('isonline'));
+			//				var _user = userinfo.user;
+			//				var _pass = userinfo.pwd;
+			//				var _openid = userinfo.copenid;	
+			//              var gopay={};
+			//              gopay={
+			//              	money:_money,
+			//              	ispayuser:_user,
+			//              	shebeinum:_shebeinum
+			//              };
+			//              window.sessionStorage.setItem("goingpay", JSON.stringify(gopay))
+			//              if(_duodian==1){
+			//				 window.location.href='http://www.ccsc58.cc/leng/weixin/zhifu/example/Duodianpay.php?total='+_money;
+			//				}else{
+			//					window.location.href='http://www.ccsc58.cc/leng/weixin/zhifu/example/freshdunpay.php?total='+_money;
+			//				}
+			//             
+			//				
+			//				
+			//			})
 		</script>
 	</body>
 

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>老九冷链</title>
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+		<link rel="stylesheet" type="text/css" href="../css/changeM.css" />
+		<style type="text/css">
+			.content {
+				width: 100%;
+				height: auto;
+				margin-top: 4rem;
+				padding: 0 1rem;
+				box-sizing: border-box;
+				font-size: 1.4rem;
+			}
+
+			.header .scan{
+			    width: 2rem;
+			    height: 1.8rem;
+			    position: absolute;
+			    top: 1.4rem;
+			    right: 1.5rem;
+							
+			}
+			.formdata {
+				margin-top: 5rem;
+				box-sizing: border-box;
+			}
+			
+			.formdata div {
+				height: 4rem;
+				line-height: 4rem;
+				margin-top: 1rem;
+				border-radius: 1rem;
+			}
+			
+			.formdata div input {
+				height: 4rem;
+				line-height: 4rem;
+				width: 100%;
+				padding: 0 2vw;
+				box-sizing: border-box;
+				border-radius: 1rem;
+			}
+			
+			.formdata .last {
+				margin-top: 20rem;
+				width: 100%;
+				text-align: center;
+			}
+			
+			.last button {
+				width: 16rem;
+				height: 4rem;
+				background: #40C0C3;
+				border-radius: 5rem;
+				border: none;
+				color: #ffffff;
+				font-size: 1.5rem;
+			}
+			.item s{
+				margin: 0px 5px;
+				/*border-bottom: 1px solid #CCCCCC;*/
+			}
+			.hide{
+				display: none;
+			}
+		</style>
+	</head>
+
+	<body>
+	   
+		<div class="header">
+			<img class="back_list" src="../img/back.png" /> 解绑设备 <img src="../images/scanner.png" class="scan hide" id="test00"/>
+		</div>
+		<div class="content">
+			<div class="formdata">
+				<div>
+					<input type='number' class="deviceval" id="post_jian" placeholder="请输入设备编号" />
+				</div>
+				<div class="item hide">解绑记录:</div>
+
+				
+				<div class="last">
+					<button class="btn-ok" id="post_jian_post">提交</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" charset="utf-8"></script>
+		<script type="text/javascript">			
+		$("#post_jian_post").on("click", function() {
+			var _num = $("#post_jian").val().replace(/\s*/g, "");
+			if(_num == "") {
+				alert("请输入设备号");
+				return false;
+			} else {
+				///上传设备号和用户名；
+			    $.ajax({
+				type: "post",
+				url: "https://www.zjcoldcloud.com/xiandun/public/index.php/index/device_admin/laojiu_jiechu_debive",
+				data: {
+					deviceNumber: _num
+				},
+				success: function(data) {
+					var _json = JSON.parse(data);
+					if(_json.code == 0) {
+						alert("解绑成功");
+						$("#post_jian").val('')
+						$(".item").show().append(`<s>${_num}</s>`);
+					} else {
+						alert("解绑失败");
+					}
+				}
+			});
+			
+
+		}
+	});
+			$(".back_list").on("click", function() {
+				location.href='../machineList.php'
+			});
+
+		</script>
+	</body>
+
+</html>

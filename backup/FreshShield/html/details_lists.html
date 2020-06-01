@@ -10,14 +10,17 @@
 		<link rel="stylesheet" type="text/css" href="../css/index.css" />
 		<link rel="stylesheet" type="text/css" href="../css/changeM.css" />
 		<link rel="stylesheet" type="text/css" href="../css/shijian.css" />
-		<link rel="stylesheet" href="../css/details_list.css" />
+		<!--<link rel="stylesheet" href="../css/details_list.css" />-->
 		<style>
 			.basic_label div {
 				margin-top: 10px;
 			}
 		</style>
 	</head>
-
+     <script>
+        var now = new Date().getTime();
+		document.write('<link href="../css/details_list.css?v=' + now + '" rel="stylesheet" type="text/css"/>');
+	</script>
 	<body>
 		<div class="header">
 
@@ -79,9 +82,9 @@
 						<div>
 							地理位置：<span class="address"></span><span class="lng  hidden"></span><span class="lat hidden"></span>
 						</div>
-						<div>
+						<!--<div>
 							箱体状态：<span class="boxstate"></span>
-						</div>
+						</div>-->
 					</div>
 				</div>
 			</div>
@@ -136,17 +139,20 @@
 							<div id="history_content_zhe">
 
 							</div>
+							
 						</div>
 					</div>
 					<div class="zhiShiXian hidden">
 						<span></span>
 						<span>实时温度01</span>
 						<span></span>
-						<span>合格上下限</span>
-						<span></span>
 						<span>报警上下限</span>
 						<span style="background: green;"></span>
 						<span>实时湿度</span>
+						<br />
+						<div style="margin-top: 30px;font-size: 12px;">
+							查看更多曲线数据，需在<label style="color:#366cb2;font-weight: bold;">数据列表</label>加载更多数据
+						</div>
 					</div>
 					<div id="history_content_map" style="height:100vw" class="hidden history_display">
 

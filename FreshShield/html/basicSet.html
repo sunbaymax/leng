@@ -27,13 +27,15 @@
 				<div class="twoc">
 					<span>设备昵称：</span><input type="text" class="bieming" placeholder="如一号大门" />
 				</div>
+				<div>
+					<span>设备排序：</span><input type="number" class="sort" placeholder="请输入排序数" />
+				</div>
 				<div class="twoc divjihuo">
 					<span>激活时间：</span><input type="text" class="activeTime" readonly="readonly" />
 				</div>
 				<div>
 					<span>到期时间：</span><input type="text" class="daoqiTime" readonly="readonly" />
 				</div>
-
 			</div>
 			<div class="btnok">
 				<button>保存</button>
@@ -108,6 +110,7 @@
 					$(".form .shebeihao").attr('yejian', _json.resultCode.yejianshangchuankaiguan);
 					$(".form .shebeihaoname").val(_json.resultCode.device_name);
 					$(".form .daoqiTime").val(_json.resultCode.daoqishijian);
+					$(".form .sort").val(_json.resultCode.sort==99999?'':_json.resultCode.sort);
 					$(".form .bieming").val(_beizhu);
 					$(".form .activeTime").val(_jihuoshijian);
 				},
@@ -118,6 +121,11 @@
 			$(".btnok button").on("click", function() {
 				var bieming = $(".bieming").val();
 				var _GPS_Start = $(".shebeihao").attr('biao');
+				var _sort = $(".form .sort").val();
+				if(_sort<1){
+					alert("请输入1~100之间的数");
+					return false;
+				}
 				var utype = userinfo.userType;
 				if(utype == 'b') {
 					$.ajax({
@@ -131,6 +139,7 @@
 							admin_user: _userName,
 							admin_pass: _userPass,
 							beizhu: bieming,
+							sort:_sort,
 							GPS_Start: _GPS_Start
 						},
 						dataType: "JSON",
@@ -157,6 +166,7 @@
 							beizhu: bieming,
 							GPS_Start: _GPS_Start,
 							yejianshangchuankaiguan: _yejianshangchuankaiguan,
+							sort:_sort,
 							openid:copenid
 						},
 						dataType: "JSON",

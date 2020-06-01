@@ -21,6 +21,18 @@
 				width: 6rem;
 				height: 6rem;
 			}
+			.cd-form #useropter{
+				margin-top: 30px;
+				padding: 0 10px;
+				box-sizing: border-box;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+			.cd-form #useropter a{
+				color: #666;
+				cursor:pointer;
+			}
 		</style>
 	</head>
 	<body style="background:#FFFFFF!important;">
@@ -53,7 +65,11 @@
 
 				<p class="fieldset" id="caozuo" style="border: none;">
 					<img src="../images/login_nochoose.png" id="check" isuse="0" /> 记住密码 &nbsp; &nbsp;
-					<a href="forgetpsd.html" class="forgetpsd">忘记密码?</a>
+					
+				</p>
+				<p class="fieldset"  id="useropter" style="border: none;">
+					<a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_wxchatbanding.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect" class="forgetpsd">我要注册</a>
+				    <a href="forgetpsd.html" class="forgetpsd">忘记密码?</a>
 				</p>
 			</div>
 			<div id="success_mao">
@@ -71,7 +87,24 @@
 
 		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/register.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/index.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script type="text/javascript">
+			function onBridgeReady() { 
+				    WeixinJSBridge.call('hideOptionMenu'); 
+				} 
+				 
+				if (typeof WeixinJSBridge == "undefined") { 
+				    if (document.addEventListener) { 
+				        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false); 
+				    } else if (document.attachEvent) { 
+				        document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+				        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady); 
+				    } 
+				} else { 
+				    onBridgeReady(); 
+				}
+		</script>-->
 	</body>
 
 </html>

@@ -202,7 +202,7 @@ $editAddress = $tools->GetEditAddressParameters();
 								var _json = JSON.parse(data);
 								if(_json.code == 10000 && _json.message == "success" && _json.resultCode == "success") {
 //									var _openId=["oSPfHv-jEPOW_KI6x67x1JOGqm54","oSPfHv-pXx-_E5jFehQHWQy1lpmI","oSPfHv17xGpC6zVfDQ-bErQf-cko","oSPfHv84aKIanXMRwVie1dGybNxQ","oSPfHv1vTpBnh_tiJ4X6-2lFnmEE"];
-									var _openId=["oSPfHv-pXx-_E5jFehQHWQy1lpmI",'oSPfHv6gYO5TVgeFIkTi1YU0tQqs'];
+									var _openId=["oSPfHv-pXx-_E5jFehQHWQy1lpmI",'oSPfHv6gYO5TVgeFIkTi1YU0tQqs','oSPfHv2Ag9ERdlw1XeNomMgKz1Bg'];
 									for(var i=0;i<_openId.length;i++){
 										$("._openID").val(_openId[i]);
 //										var success=$("input[name='success']").val();

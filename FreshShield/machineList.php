@@ -7,22 +7,15 @@
 		<meta name="format-detection" content="telephone=no">
 		<title>北京中集智冷科技有限公司</title>
 		<link rel="stylesheet" type="text/css" href="css/index.css" />
-		<link rel="stylesheet" type="text/css" href="css/Machines.css" />
+		<!--<link rel="stylesheet" type="text/css" href="css/Machines.css" />-->
 	</head>
-
+	<script>
+        var now = new Date().getTime();
+		document.write('<link href="css/Machines.css?v=' + now + '" rel="stylesheet" type="text/css"/>');
+	</script>
 	<body>
 		<style>
-			.list .beizhu{
-				margin-left: 1.5rem;
-				color: #C90000;
-				font-size: 1.3rem;
-			}
-			.list .addresscontent{
-				display: block;
-				height: auto;
-                /*padding-bottom: 0.5rem;*/
-               padding: 0;
-			}
+			
 			.hidden{
 				display: none;
 			}
@@ -41,10 +34,10 @@
 			</div>
 			<div class="window_post hidden" >
 			     <div>
-					<img id="test00" src="img/saoyisao.png" alt="">
-					<label for="post_add">设备号：</label>
-					<input type="text" id="post_add" placeholder="请输入设备号"><br>
-					<input type="button" id="post_add_post" value="绑定">
+					<!--<img id="test00" src="img/saoyisao.png" alt="">-->
+					<label for="post_add">昵称：</label>
+					<input type="text" id="post_add" placeholder="请输入"><br>
+					<input type="button" id="post_add_post" value="确定">
 					<input type="button" id="post_add_esc" value="取消">
 			     </div>
 			</div>
@@ -61,47 +54,65 @@
 
 			<div id="wrapper">
 				<div class="scroller">
+					<div class="refreshmsg" style="display: none;">
+						<!--<i class="pull_icon"></i><span>正在刷新</span>-->
+					
+						<i class="pull_icon"></i><span>正在刷新...</span>
+				
+					</div>
 					<div class="scroll_box">
-
+                       
 						<div class="list hidden">
-							<div class="list_tittle">
-								<p class="tittlewen">
-									<span>设备号：</span>
-									<span class="shebeihao"></span>
-									<span class="beizhu"></span>
-								</p>
-								<p>
-									<span class="main"></span>
-									<img src="img/right_shop_car.png" class="rightimg" />
-								</p>
-
+							<div class="item">
+								<div class="list_tittle">
+									<p class="tittlewen">
+										<span>设备号：</span>
+										<span class="shebeihao"></span>
+										<span>(<b class="main"></b>)</span>
+										<!--<span class="left15">昵称：<label class="beizhu"></label></span>-->
+									</p>
+									
+									<!--<p>
+										<img src="img/right_shop_car.png" class="rightimg" />
+									</p>-->
+	
+								</div>
+								<div class="list-content">
+									<div>
+										<p>温度1：<span class="temp1">0.0</span>℃</p>
+										<p>温度2：<span class="temp2">0.0</span></p>
+	
+									</div>
+									<div>
+										<p>湿度：<span class="humidity">-</span></p>
+										<p>电量：<span class="power">-</span>%</p>
+									</div>
+									<div>
+										<p>信号强度：<span class="signal">无</span></p>
+										<p>非报警温度区间：<span class="alarmArea"></span></p>
+										
+									</div>
+									<!--<div>
+										<p>箱体状态：<span class="boxstate">-</span></p>
+										<p>合格温度区间：<span class="AcceptableArea"></span></p>
+									</div>-->
+									<div>
+										采集时间：<span class="worktime"></span>
+									</div>
+									<div class="addresscontent">
+										<span>地理位置：</span><span class="address"></span>
+									</div>
+	
+								</div>
 							</div>
-							<div class="list-content">
-								<div>
-									<p>温度1：<span class="temp1">0.0</span>℃</p>
-									<p>温度2：<span class="temp2">0.0</span>℃</p>
-
-								</div>
-								<div>
-									<p>湿度2：<span class="humidity">-</span>%RH</p>
-									<p>电量：<span class="power">-</span>%</p>
-								</div>
-								<div>
-									<p>信号强度：<span class="signal">无</span></p>
-									<p>箱体状态：<span class="boxstate">-</span></p>
-								</div>
-								<div>
-									<p>报警温度区间：<span class="alarmArea"></span></p>
-									<p>合格温度区间：<span class="AcceptableArea"></span></p>
-								</div>
-								<div>
-									采集时间：<span class="worktime"></span>
-								</div>
-								<div class="addresscontent">
-									地理位置：<span class="address"></span>
-								</div>
-
+							
+							<div id="caozuo">
+								<span class="left15">昵称：<label class="beizhu"></label></span>
+								<button class="Untyingbtn">解绑</button>
 							</div>
+							
+							
+	
 						</div>
 
 					</div>
@@ -110,7 +121,7 @@
 					</div>
 				</div>
 			</div>
-
+       
 		</div>
 
 		<script src="../js/iscroll.js" type="text/javascript" charset="utf-8"></script>
@@ -118,6 +129,8 @@
 		<script type="text/javascript" src="../js/jquery-1.11.0.js"></script>
 		<script type="text/javascript" src="../js/index.js"></script>
 		<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" charset="utf-8"></script>
+	
+
 		<script>
 			window.alert = function(name) {
 				var iframe = document.createElement("IFRAME");
@@ -127,6 +140,17 @@
 				window.frames[0].window.alert(name);
 				iframe.parentNode.removeChild(iframe);
 			}
+			 window.confirm = function (message) {
+		        var iframe = document.createElement("IFRAME");
+		        iframe.style.display = "none";
+		        iframe.setAttribute("src", 'data:text/plain,');
+		        document.documentElement.appendChild(iframe);
+		        var alertFrame = window.frames[0];
+		        var result = alertFrame.window.confirm(message);
+		        iframe.parentNode.removeChild(iframe);
+		        return result;
+		    };
+             //console.log(new Date().getTime())
 			/*iscroll代码；
 			 */
 			wx.config({
@@ -140,6 +164,20 @@
 				'scanQRCode'
 			]
 			});
+			function onBridgeReady() {
+			WeixinJSBridge.call('hideOptionMenu');
+			}
+			
+			if (typeof WeixinJSBridge == "undefined") {
+			if (document.addEventListener) {
+			document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+			} else if (document.attachEvent) {
+			document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+			document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+			}
+			} else {
+			onBridgeReady();
+			}
 			$("#test00").on("click", function() {
 				wx.scanQRCode({
 					needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
@@ -177,6 +215,15 @@
 					} else {
 						$('.pull_icon').removeClass('flip loading');
 						$('.more span').text('上拉加载...')
+						if(myscroll_x.y > 50) {
+							$(".refreshmsg").show();
+							$('.pull_icon').addClass('loading');
+						    $('.refreshmsg span').text('正在刷新...');
+						    setTimeout(function () {
+				                window.location.reload()
+				              }, 3000);
+							
+						}
 					}
 				},
 				onScrollEnd: function() {
@@ -184,6 +231,7 @@
 						$('.pull_icon').addClass('loading');
 						$('.more span').text('加载中...');
 						pullUpActions();
+						
 					}
 				},
 				onRefresh: function() {
@@ -225,8 +273,8 @@
 								for(var i = 0; i < _json.resultCode.length; i++) {
 									var _dem = $(".list").eq(0).clone().removeClass("hidden").appendTo(".scroll_box");
 									_dem.find(".list-content .temp1").html(_json.resultCode[i].temperature01);
-									_dem.find(".list-content .temp2").html(_json.resultCode[i].temperature02);
-									_dem.find(".list-content .humidity").html(_json.resultCode[i].humidity);
+									_dem.find(".list-content .temp2").html(_json.resultCode[i].temperature02==0?'-':_json.resultCode[i].temperature02+"℃");
+									_dem.find(".list-content .humidity").html(_json.resultCode[i].humidity==0?'-':_json.resultCode[i].humidity+"%RH");
 									_dem.find(".list-content .speed").html(_json.resultCode[i].speed);
 									_dem.find(".list-content .power").html(_json.resultCode[i].power == null ? "0" : _json.resultCode[i].power);
 									_dem.find(".list_tittle .shebeihao").html(_json.resultCode[i].shebeibianhao);
@@ -286,10 +334,10 @@
 								for(var i = 0; i < res.data.data.length; i++) {
 									var _dem = $(".list").eq(0).clone().removeClass("hidden").appendTo(".scroll_box");
 									_dem.find(".list-content .temp1").html(res.data.data[i].last_temperature01);
-									_dem.find(".list-content .temp2").html(res.data.data[i].last_temperature02);
-									_dem.find(".list-content .humidity").html(res.data.data[i].last_humidity);
+									_dem.find(".list-content .temp2").html(res.data.data[i].last_temperature02==0?'-':res.data.data[i].last_temperature02+"℃");
+									_dem.find(".list-content .humidity").html(res.data.data[i].last_humidity==0?'-':res.data.data[i].last_humidity+"%RH");
 									_dem.find(".list-content .speed").html(res.data.data[i].speed);
-									_dem.find(".list_tittle .beizhu").html(res.data.data[i].beizhu==''?'':"("+res.data.data[i].beizhu+")");
+									_dem.find("#caozuo .beizhu").html(res.data.data[i].beizhu==''?'':res.data.data[i].beizhu);
 									_dem.find(".list-content .power").html(res.data.data[i].last_power == null ? "0" : res.data.data[i].last_power);
 									_dem.find(".list_tittle .shebeihao").html(res.data.data[i].shebeibianhao);
 									_dem.find(".list_tittle .shebeihao").attr('is_master',res.data.data[i].is_master);
@@ -410,11 +458,55 @@
 			/*	
 				 * 查看设备详情；
 				 * */
-			$("body").on("click", ".scroll_box .list", function() {
+			$("body").on("click", ".scroll_box .list .item", function() {
 				var num = $(this).find(".shebeihao").text();
 				var _is_master = $(this).find('.shebeihao').attr("is_master")==undefined?'1':$(this).find('.shebeihao').attr("is_master");
 //				console.log(_is_master);
 //				return false;
+				sessionStorage.setItem('ismaster',_is_master)
+				window.location.href = "html/details_lists.html?num_m=" + num
+			})
+		    //解绑
+			$("body").on("click", ".scroll_box .list .Untyingbtn", function() {
+				var num = $(this).parents('.list').find(".shebeihao").text();
+				var _is_master = $(this).parent().prev().find('.shebeihao').attr("is_master");
+			
+				var jbmsg='请确定要解绑'+num+'该设备吗?';
+				var mymessage = confirm(jbmsg);
+			    if (mymessage == true) {
+       				var _jiebangurl = '';
+					if(_is_master == 0) {
+						_jiebangurl = "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/remove_scend_device";
+					} else {
+						_jiebangurl = "http://www.zjcoldcloud.com/xiandun/public/index.php/index/Device/remove_bind";
+					}
+				
+					$.ajax({
+						type: "post",
+						url: _jiebangurl,
+						data: {
+							mainname: _userName,
+							devicenumber: num
+
+						},
+						success: function(data) {
+							var _json = JSON.parse(data);
+
+							if(_json.code == 0) {
+								alert("解除成功");
+								location.reload();
+							} else {
+								alert("解除失败")
+							}
+						}
+					});
+			    }else{
+			        console.log("取消解绑")
+			    }
+				
+				return false;
+				
+
 				sessionStorage.setItem('ismaster',_is_master)
 				window.location.href = "html/details_lists.html?num_m=" + num
 			})
@@ -436,6 +528,9 @@
                 location.href='html/addDevice.php';
 
 			});
+			
+
+			
 			
 	/*
 	 * 搜索点击事件；
@@ -469,6 +564,9 @@
 						$("#search").val("");
 						$("#search").next().hide();
 						$("#search").prev().show();
+					}else if(_json.code==30000){
+						alert(_json.message);
+						return false;
 					} else {
 						$("#search").val("");
 						$("#search").next().hide();
@@ -483,58 +581,47 @@
 			});
 		}
 	});
+	$("body").on('click','.list .left15' ,function() {
+			var _num = $(this).parents('.list').find('.shebeihao').text();
+			var _beizhu = $(this).parents('.list').find('.beizhu').text();
+				$(".window_post").removeClass('hidden');
+				
+				$(".window_post").attr('num',_num)
+				$(".window_post #post_add").val(_beizhu)
+
+	});
 		/*
 	 *发送绑定请求的代码； 
 	 */
 	$("#post_add_post").on("click", function() {
-		var _num = $("#post_add").val().replace(/\s*/g, "");
-		if(_num == "") {
-			alert("请输入设备号")
-		} else {
-				var utype = userinfo.userType;
-				if(utype == 'b') {
-				///上传设备号和用户名；
-			    $.ajax({
+		var bieming = $("#post_add").val().replace(/\s*/g, "");
+		var _num = $(this).parents('.window_post').attr('num');
+	
+			var copenid = userinfo.copenid == undefined ? '' : userinfo.copenid;
+			$.ajax({
 				type: "post",
-				url: "http://www.ccsc58.com/json/07_00_tb_device_bangding.php",
+				url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/update_device",
 				data: {
-					admin_permit: "zjly8888",
-					UserP: "w",
-					admin_user: _userName,
-					admin_pass: _userPass,
-					shebeibianhao: _num
+					devid: _num,
+					beizhu: bieming,
+					openid:copenid
 				},
-				success: function(data) {
-					var _json = JSON.parse(data);
-					if(_json.resultCode == "success") {
-						alert("设备绑定成功，重新进入页面即可看到新绑定的设备");
-						window.location.reload()
+				dataType: "JSON",
+				success: function(res) {
+					console.log(res)
+					if(res.code == 0 && res.message == "success") {
+						alert("保存成功");
+						location.reload()
 					} else {
-						alert("请求绑定设备失败，请重新进入再操作")
+						alert("信息保存失败，请重试！")
 					}
+				},
+				error: function() {
+					console.log("网络错误")
 				}
 			});
-				}else{
-					$.ajax({
-						type: "post",
-						url: "https://www.zjcoldcloud.com/xiandun/public/index.php/index/Device/bind_device",
-						data: {
-							mainname: _userName,
-							devicenumber: _num
-						},
-						success: function(data) {
-							var _json = JSON.parse(data);
-							if(_json.resultCode == "success") {
-								alert("设备绑定成功，重新进入页面即可看到新绑定的设备");
-								window.location.href = _url;
-							} else {
-								alert("请求绑定设备失败，请重新进入再操作")
-							}
-						}
-					});
-				}
 
-		}
+		
 	});
 	//隐藏上传设备号的窗口；
 	$("#post_add_esc").on("click", function() {

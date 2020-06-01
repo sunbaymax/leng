@@ -16,6 +16,14 @@
 				cursor: pointer;
 			}
 			
+			.form .cmoban .tubiao {
+				width: 2rem;
+				height: 2rem;
+				margin-left: 1rem;
+				margin-right: 0.5rem;
+				cursor: pointer;
+			}
+			
 			.form div input {
 				display: block;
 				height: 3rem;
@@ -25,8 +33,13 @@
 				border-radius: 1rem;
 				text-align: center;
 			}
-			.noclick{
+			
+			.noclick {
 				pointer-events: none;
+			}
+			
+			.hide {
+				display: none;
 			}
 		</style>
 	</head>
@@ -44,20 +57,26 @@
 						<label for='switch1'></label>
 					</div>
 				</div>
-				<div>
+				<!--<div>
 					<span>夜间数据：</span>
 					<div class='switch-wrap'>
 						<input type='checkbox' id='switch'>
 						<label for='switch'></label>
 					</div>
-				</div>
-				<div class="moban father">
-					<span>定时推送时间1：</span><input type="text" id="demo1" readonly="readonly" class="Time1" /><img src="../images/addtime.png" class="tubiao addtime noclick" />
-				</div>
-				<!--<div class="moban">
-					<span>定时推送时间2：</span><input type="text" id="demo2" class="Time2" /><img src="../images/jiantime.png" class="tubiao" />
 				</div>-->
-
+				<div class="moban father">
+					<span>定时推送时间1：</span><input type="text" id="demo1" placeholder="请选择定时时间" readonly="readonly" class="Time1" /><img src="../images/addtime.png" class="tubiao addtime noclick" />
+				</div>
+				<div class="yuyinbaojing">
+					<span>语音报警：</span>
+					<div class='switch-wrap'>
+						<input type='checkbox' id='switch2'>
+						<label for='switch2'></label>
+					</div>
+				</div>
+				<div class="yuyinbaojing cmoban" style="display: none;">
+					<span>开启时间：</span><input type="text" id="voicetime" placeholder="请选择语音时间" readonly="readonly" class="Time1" /><img src="../images/addtime.png" style="visibility: hidden;" class="tubiao addtime noclick" />
+				</div>
 			</div>
 			<div class="btnok">
 				<button>保存</button>
@@ -69,7 +88,6 @@
 		<script src="../js/index.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/iostime.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
-			
 			$(".invitebtn").on("click", function() {
 				window.location.href = 'banding.html?openId=' + _openid;
 			});
@@ -77,8 +95,8 @@
 			if(_ismaster == 0) {
 				$(".btnok button").css("background", "#ccc");
 				$(".btnok button").attr('disabled', true);
-				$("#switch").attr("disabled", true);
-			//	$("input[type='checkbox']").attr("disabled", true);
+//				$("#switch").attr("disabled", true);
+				//	$("input[type='checkbox']").attr("disabled", true);
 				$("input").attr("disabled", true);
 				$(".addtime").addClass('noclick');
 				$("#switch1").attr("disabled", false);
@@ -92,7 +110,7 @@
 			var _userName = userinfo.user;
 			var _userPass = userinfo.pwd;
 			var _copenid = userinfo.copenid;
-       
+
 			var _num_m = "";
 			if(_url.indexOf("&") != -1) {
 				_num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "").replace("&", "");
@@ -100,9 +118,35 @@
 				_num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "");
 			}
 			$(".back_list").on("click", function() {
-				sessionStorage.setItem('paraset',1);
-                window.location.href ='details_lists.html?num_m='+_num_m+'&'
+				sessionStorage.setItem('paraset', 1);
+				window.location.href = 'details_lists.html?num_m=' + _num_m + '&'
 			});
+
+			$("#switch2").change(function() {
+				if($(this).is(':checked')) {
+					$(".cmoban").hide();
+					$("#voicetime").val('');
+				} else {
+					$(".cmoban").hide();
+					$("#voicetime").val('')
+				}
+
+			});
+
+			var voicecalendar = new datePicker();
+			voicecalendar.init({
+				'trigger': '#voicetime',
+				/*按钮选择器，用于触发弹出插件*/
+				'type': 'time',
+				/*模式：date日期；datetime日期时间；time时间；ym年月；*/
+
+				/*最大日期*/
+				'onSubmit': function() { /*确认时触发事件*/
+					var theSelectData = voicecalendar.value;
+				},
+				'onClose': function() { /*取消时触发事件*/ }
+			});
+
 			var mobans = 1;
 			$.ajax({
 				type: "post",
@@ -123,18 +167,20 @@
 						alert(_json.message);
 						window.location.href = "../machineList.php";
 						return false;
-					}else if(_json.code == 30000) {
+					} else if(_json.code == 30000) {
 						alert("没有查询到该设备");
 						window.location.href = "../machineList.php";
 						return false;
 					}
+
 					$(".btnok button").attr('biao', _json.resultCode.GPS_Start);
 					<!-- 附加报警设置  -->
-					if(_json.resultCode.yejianshangchuankaiguan == 0) {
-						$("#switch").attr("checked", false);
-					} else {
-						$("#switch").attr("checked", true);
-					}
+//					if(_json.resultCode.yejianshangchuankaiguan == 0) {
+//						$("#switch").attr("checked", false);
+//					} else {
+//						$("#switch").attr("checked", true);
+//					}
+					
 					var times = _json.resultCode.dingshifasong;
 
 					mobans = _json.resultCode.dingshifasong.length == 0 ? "1" : _json.resultCode.dingshifasong.length;
@@ -152,6 +198,18 @@
 
 					});
 					tinit()
+					if(_json.resultCode.is_warn_show == 0){
+						$(".yuyinbaojing").hide()
+					}else{
+						if(_json.resultCode.is_open == 0) {
+						$("#switch2").attr("checked", false);
+					} else {
+						$("#switch2").attr("checked", true);
+//						$(".cmoban").show();
+//						$("#voicetime").val(_json.resultCode.warn_time==''?'':_json.resultCode.warn_time);
+					}
+					}
+					
 
 				},
 				error: function() {
@@ -164,12 +222,12 @@
 					let dn = "#demo" + (i + 1);
 					var calendar = new datePicker();
 					var now = new Date();
-				    var year = now.getFullYear(); //得到年份
-				    var month = now.getMonth()+1;//得到月份
-				    var date = now.getDate();//得到日期
-				    var hour = now.getHours();//得到小时
-		            var minu = now.getMinutes();//得到分钟
-				    var cdate=year+"-"+month+'-'+date;
+					var year = now.getFullYear(); //得到年份
+					var month = now.getMonth() + 1; //得到月份
+					var date = now.getDate(); //得到日期
+					var hour = now.getHours(); //得到小时
+					var minu = now.getMinutes(); //得到分钟
+					var cdate = year + "-" + month + '-' + date;
 					calendar.init({
 						'trigger': dn,
 						/*按钮选择器，用于触发弹出插件*/
@@ -186,12 +244,13 @@
 					});
 				}
 			}
+
 			$('body').on("click", ".father .addtime", function() {
 
 				mobans++;
 				let dn = 'demo' + mobans;
 				let sunman = `<div class="moban">
-					<span>定时推送时间${mobans}：</span><input readonly="readonly" type="text" id='${dn}' class="Time2" /><img src="../images/jiantime.png" class="jian tubiao" />
+					<span>定时推送时间${mobans}：</span><input readonly="readonly" placeholder="请选择定时时间" type="text" id='${dn}' class="Time2" /><img src="../images/jiantime.png" class="jian tubiao" />
 				</div>`;
 				$(this).parents('.form').find('.moban').last().after(sunman);
 				$(".moban span").each(function(index, val) {
@@ -205,8 +264,6 @@
 				$(".moban span").each(function(index, val) {
 					$(this).text('定时推送时间' + (index + 1) + "：")
 				});
-				//				$(this).parents('.form').find('.moban').last().after(sunman);
-				//				times(dn);
 			});
 
 			function times(_dn) {
@@ -228,16 +285,16 @@
 					'onClose': function() { /*取消时触发事件*/ }
 				});
 			}
-			$("#switch1").on("click", function() {
-				if($(this).is(":checked")) {
-					$(".btnok button").attr('disabled', false);
-					$(".btnok button").css("background", "#40C0C3");
-				} else {
-					$(".btnok button").attr('disabled', true);
-					$(".btnok button").css("background", "#ccc");
-				}
-
-			});
+			//			$("#switch1").on("click", function() {
+			//				if($(this).is(":checked")) {
+			//					$(".btnok button").attr('disabled', false);
+			//					$(".btnok button").css("background", "#40C0C3");
+			//				} else {
+			//					$(".btnok button").attr('disabled', true);
+			//					$(".btnok button").css("background", "#ccc");
+			//				}
+			//
+			//			});
 			$(".btnok button").on("click", function() {
 				var _GPS_Start = $(this).attr('biao');
 				let arr = [];
@@ -248,37 +305,65 @@
 
 				});
 
-				var _yejianshangchuan;
-				if($("#switch").is(":checked")) {
-					_yejianshangchuan = 1;
-				} else {
-					_yejianshangchuan = 0;
-				} //开启夜间上传；
-				$.ajax({
-					type: "post",
-					url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/update_device",
-					data: {
+//				var _yejianshangchuan;
+//				if($("#switch").is(":checked")) {
+//					_yejianshangchuan = 1;
+//				} else {
+//					_yejianshangchuan = 0;
+//				} //开启夜间上传；
+				var _is_warn;
+				var _data;
+				var _warntime = $("#voicetime").val();
+				if($("#switch2").is(":checked")) {
+					
+					_is_warn = 1;
+					_data={
 						devid: _num_m,
 						GPS_Start: _GPS_Start,
 						UserP: "w",
-						yejianshangchuankaiguan: _yejianshangchuan,
+						yejianshangchuankaiguan: "1",
 						dingshifasong: arr,
-						openid: _copenid
-					},
+						openid: _copenid,
+						is_open:_is_warn,
+						warn_time:""
+					}
+				} else {
+					_is_warn = 0;
+					_data={
+						devid: _num_m,
+						GPS_Start: _GPS_Start,
+						UserP: "w",
+						yejianshangchuankaiguan: "1",
+						dingshifasong: arr,
+						openid: _copenid,
+						is_open:_is_warn,
+						warn_time:""
+					}
+				} //开启夜间上传；
+//				if(_warntime==''&&_is_warn==1){
+//					alert("请选择语音时间");
+//					$("#voicetime").focus()
+//					return false;
+//				}
+				console.log(_data);
+				$.ajax({
+					type: "post",
+					url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/update_device",
+					data: _data,
 					dataType: "json",
 					success: function(res) {
 						if(res.code == 0 && res.message == "success") {
 							if($("#switch1").is(":checked")) {
 								var _ismaster = sessionStorage.getItem('ismaster');
-								var _jiebangurl='';
-			                    if(_ismaster == 0) {
-			                    	_jiebangurl="https://www.zjcoldcloud.com/xiandun/public/index.php/index/device/remove_scend_device";
+								var _jiebangurl = '';
+								if(_ismaster == 0) {
+									_jiebangurl = "https://www.zjcoldcloud.com/xiandun/public/index.php/index/device/remove_scend_device";
 
-			                    }else{
-			                    	_jiebangurl="http://www.zjcoldcloud.com/xiandun/public/index.php/index/Device/remove_bind";
+								} else {
+									_jiebangurl = "http://www.zjcoldcloud.com/xiandun/public/index.php/index/Device/remove_bind";
 
-			                    }
-			                    $.ajax({
+								}
+								$.ajax({
 									type: "post",
 									url: _jiebangurl,
 									data: {
@@ -288,7 +373,7 @@
 									},
 									success: function(data) {
 										var _json = JSON.parse(data);
-										
+
 										if(_json.code == 0) {
 											alert("解除设备绑定成功");
 											location.href = '../machineList.php';

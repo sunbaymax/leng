@@ -231,7 +231,7 @@ function Tui_song($first,$keyword1,$keyword2,$keyword3,$remark,$openId)
         $template=array(
             'touser'=>"$openId",
             'template_id'=>"zL41XN2WuflVXGVdKmu_ThLrbILzBRvW84L7JkjnVGM",
-            'url'=>"http://www.ccsc58.cc/weixinnew/html/warning_tui_rukou.html?num_m=".$keyword6."&",
+            'url'=>"http://www.ccsc58.cc/leng/FreshShield/html/warning_tui_rukou.html?num_m=".$keyword6."&",
             'topcolor'=>"#7B68EE",
             'data'=>array('first'=>array('value'=>urlencode($first),'color'=>"#000",),
                 'keyword1'=>array('value'=>urlencode($keyword3),'color'=>"#ff0000",),

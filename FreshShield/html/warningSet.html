@@ -105,6 +105,20 @@
 					</select>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%
 				</div>
+				<div>
+					<span>微信报警：</span>
+					<div class='switch-wrap'>
+						<input type='checkbox' id='switch5'>
+						<label for='switch5'></label>
+					</div>
+				</div>
+				<div class="telwarning">
+					<span>电话报警：</span>
+					<div class='switch-wrap'>
+						<input type='checkbox' id='switch6'>
+						<label for='switch6'></label>
+					</div>
+				</div>
 
 			</div>
 			<div class="btnok">
@@ -141,6 +155,10 @@
 			var userinfo = JSON.parse(localStorage.getItem('isonline'));
 			var _userName = userinfo.user;
 			var _userPass = userinfo.pwd;
+			var _userType = userinfo.userType;
+			if(_userType == 'b') {
+				$(".telwarning").hide()
+			}
 			var copenid = userinfo.copenid == undefined ? '' : userinfo.copenid;
 			var _num_m = "";
 			if(_url.indexOf("&") != -1) {
@@ -223,6 +241,17 @@
 					} else {
 						$("#switch4").attr("checked", true);
 					}
+					if(_json.resultCode.weixintuisong_baojing == 0) {
+						$("#switch5").attr("checked", false);
+					} else {
+						$("#switch5").attr("checked", true);
+					}
+					if(_json.resultCode.is_open == 0) {
+						$("#switch6").attr("checked", false);
+					} else {
+						$("#switch6").attr("checked", true);
+					}
+					$("#switch6").attr('is_warn_show',_json.resultCode.is_warn_show);
 					$(".humiditylowbaojing").val(_json.resultCode.chaodishidubaojingfazhi); //
 
 				},
@@ -230,7 +259,27 @@
 					console.log("网络错误！！！")
 				}
 			});
-
+			var _is_warn;
+			var warn_time=""
+			$("#switch6").on("click", function() {
+				if($(this).is(":checked")) {
+					if($(this).attr('is_warn_show')==0){
+	            		_is_warn = 0;
+	            		//alert("请在我的购买语音套餐");
+	            		var r=confirm("未购买语音套餐，是否购买？")
+						  if (r==true)
+						    {
+						     window.location.href='voicebill.html';
+						    }else{
+						    	$("#switch6").attr("checked", false);
+						    }
+	            	}else{
+			            _is_warn = 1;
+	            	}
+				} else {
+					_is_warn = 0;
+				}
+			});
 			$(".btnok button").on("click", function() {
 				var _GPS_Start = $(this).attr('biao');
 				var _baojingshangxian = $(".tempHighbaojing").val(); //温度报警上限；
@@ -272,6 +321,18 @@
 				} else {
 					_chaodishidubaojing = 0;
 				} //是否开启湿度上限报警；
+				let _weixintuisong_baojing='';
+				if($("#switch5").is(":checked")) {
+					_weixintuisong_baojing = 1;
+				} else {
+					_weixintuisong_baojing = 0;
+				} //是否开启微信报警；
+				let _is_open='';
+				if($("#switch6").is(":checked")) {
+					_is_open = 1;
+				} else {
+					_is_open = 0;
+				} //是否开启电话报警；
 				var _humiditylowbaojing = $(".humiditylowbaojing").val(); //湿度下限
 				if(_chaogaoshidubaojing==1 &&_chaodishidubaojing == 1 && parseInt(_humidityHighbaojing) < parseInt(_humiditylowbaojing)) {
 					alert("报警湿度上限不能小于报警湿度下限");
@@ -302,8 +363,7 @@
 							chaogaoshidubaojing: _chaogaoshidubaojing,
 							chaogaoshidubaojingfazhi: _humidityHighbaojing,
 							chaodishidubaojing: _chaodishidubaojing,
-							chaodishidubaojingfazhi: _humiditylowbaojing
-							
+							chaodishidubaojingfazhi: _humiditylowbaojing,
 						},
 						dataType: "json",
 						success: function(res) {
@@ -340,7 +400,10 @@
 							chaodishidubaojing: _chaodishidubaojing,
 							chaodishidubaojingfazhi: _humiditylowbaojing,
 							yejianshangchuankaiguan:_yejianshangchuankaiguan,
-							openid:copenid
+							openid:copenid,
+							weixintuisong_baojing:_weixintuisong_baojing,
+							is_open:_is_open,
+							warn_time:""
 						},
 						dataType: "json",
 						success: function(res) {

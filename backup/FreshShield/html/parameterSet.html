@@ -14,12 +14,21 @@
 				width: 10rem;
 				text-align: right;
 			}
+			
 			.form div select {
 				display: block;
 				height: 3rem;
 				width: 14rem;
 				text-align: center;
 				background: none;
+			}
+			
+			#message {
+				text-align: center;
+				color: #999999;
+				font-size: 13px;
+				height: 4rem;
+				line-height: 4rem;
 			}
 		</style>
 	</head>
@@ -31,24 +40,26 @@
 		<div class="content">
 			<div class="form">
 				<div>
-					<span>正常采集间隔：</span>
+					<span>采集间隔：</span>
 					<!--<input type="number" class="cjjg" />-->
 					<select class="cjjg">
-						
+
 					</select>
 					分钟
 				</div>
 				<div>
-					<span>正常上传间隔：</span>
+					<span>上传间隔：</span>
 					<select class="scjg">
-						
+
 					</select>
 					分钟
 					<!--<input type="text" type="number" class="scjg" />分钟-->
 				</div>
-				<div>
+				<p id="message">
+					<span></span>
+				</p>
+				<!--<div>
 					<span>超温采集间隔：</span>
-					<!--<input type="number" class="cjjg" />-->
 					<select class="cwcjjg">
 						
 					</select>
@@ -60,8 +71,7 @@
 						
 					</select>
 					分钟
-					<!--<input type="text" type="number" class="scjg" />分钟-->
-				</div>
+				</div>-->
 				<!--<div>
 					<span>飞行模式开启：</span>
 					<div class='switch-wrap'>
@@ -81,21 +91,19 @@
 			</div>
 
 		</div>
-        
+
 		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/iostime.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/index.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
-			
-			for(var i=1;i<=200;i++){
-			       var options="<option value='"+i+"'>"+i+"</option>";
-			        $(".cjjg").append(options);
-			        $(".scjg").append(options);
-			        $(".cwcjjg").append(options);
-			        $(".cwscjg").append(options);
+			for(var i = 1; i <= 200; i++) {
+				var options = "<option value='" + i + "'>" + i + "</option>";
+				$(".cjjg").append(options);
+				$(".scjg").append(options);
+				//			        $(".cwcjjg").append(options);
+				//			        $(".cwscjg").append(options);
 			}
 
-			
 			$(".invitebtn").on("click", function() {
 				window.location.href = 'banding.html?openId=' + _openid;
 			});
@@ -114,16 +122,16 @@
 				_num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "");
 			}
 			$(".back_list").on("click", function() {
-//				window.history.go(-1);
-                sessionStorage.setItem('paraset',1);
-                window.location.href ='details_lists.html?num_m='+_num_m+'&'
+				//				window.history.go(-1);
+				sessionStorage.setItem('paraset', 1);
+				window.location.href = 'details_lists.html?num_m=' + _num_m + '&'
 			});
 			var _openid = localStorage.getItem('openId');
 			var _ismaster = sessionStorage.getItem('ismaster');
 			if(_ismaster == 0) {
-//				$("input[type='checkbox']").attr("disabled", true);
+				//				$("input[type='checkbox']").attr("disabled", true);
 				$("input").attr("disabled", true);
-			    $("select").each(function() {
+				$("select").each(function() {
 					$(this).attr("disabled", "disabled");
 				});
 				$(".btnok button").css("background", "#ccc");
@@ -150,15 +158,15 @@
 						alert(_json.message);
 						window.location.href = "../machineList.php";
 						return false;
-					}else if(_json.code == 30000) {
+					} else if(_json.code == 30000) {
 						alert("没有查询到该设备");
 						window.location.href = "../machineList.php";
 						return false;
 					}
 					$(".cjjg").val(_json.resultCode.caiji_jiange_minute);
 					$(".scjg").val(_json.resultCode.fasong_jiange_minute);
-					$(".cwcjjg").val(_json.resultCode.chaowenchucunshijianjiange);
-					$(".cwscjg").val(_json.resultCode.chaowenshangchuanshijianjiange);
+					//					$(".cwcjjg").val(_json.resultCode.chaowenchucunshijianjiange);
+					//					$(".cwscjg").val(_json.resultCode.chaowenshangchuanshijianjiange);
 					<!-- 设备工作参数设置  -->
 					//					if(_json.resultCode.feixingmoshikaiqi == 0) {
 					//						$("#switch").attr("checked", false);
@@ -171,13 +179,21 @@
 					//						$(".endtime").show();
 					//					}
 					$(".btnok button").attr('biao', _json.resultCode.GPS_Start);
+					$(".btnok button").attr('taocan', _json.resultCode.flow_type);
 					$(".btnok button").attr('yejian', _json.resultCode.yejianshangchuankaiguan);
+					if(_json.resultCode.flow_type == 1) {
+						$("#message").show()
+						$("#message span").text("*该为A套餐设置为5分钟及以上");
+					}else{
+						$("#message").hide()
+					}
 
 				},
 				error: function() {
 					console.log("网络错误！！！")
 				}
 			});
+
 			//			$("#switch").on("click", function() {
 			//				if($(this).is(":checked")) {
 			//					$(".starttime").show();
@@ -192,8 +208,8 @@
 			$(".btnok button").on("click", function() {
 				var _caiji_jiange_minute = $(".cjjg").val();
 				var _fasong_jiange_minute = $(".scjg").val();
-				var _cwcaiji_jiange_minute = $(".cwcjjg").val();
-				var _cwfasong_jiange_minute = $(".cwscjg").val();
+				//				var _cwcaiji_jiange_minute = $(".cwcjjg").val();
+				//				var _cwfasong_jiange_minute = $(".cwscjg").val();
 				var _GPS_Start = $(this).attr('biao');
 				var _feixingmoshikaiqi; //飞行开启时间
 				//				if($("#switch").is(":checked")) {
@@ -201,7 +217,8 @@
 				//				} else {
 				//					_feixingmoshikaiqi = 0;
 				//				} //是否打印湿度；
-
+				//chaowenchucunshijianjiange:_cwcaiji_jiange_minute,
+				//							chaowenshangchuanshijianjiange:_cwfasong_jiange_minute
 				var utype = userinfo.userType;
 				var _openid = localStorage.getItem('openId');
 				if(utype == 'b') {
@@ -217,9 +234,8 @@
 							admin_pass: _userPass,
 							caiji_jiange_minute: _caiji_jiange_minute,
 							fasong_jiange_minute: _fasong_jiange_minute,
-							feixingmoshikaiqi: _feixingmoshikaiqi,
-							chaowenchucunshijianjiange:_cwcaiji_jiange_minute,
-							chaowenshangchuanshijianjiange:_cwfasong_jiange_minute
+							feixingmoshikaiqi: _feixingmoshikaiqi
+
 						},
 						dataType: "json",
 						success: function(res) {
@@ -238,6 +254,13 @@
 					});
 				} else {
 					var _yejianshangchuankaiguan = $(".btnok button").attr('yejian');
+					var istaocan = $(".btnok button").attr('taocan');
+					if(istaocan == 1 && _fasong_jiange_minute < 5) {
+						alert('上传不能小于5分钟，请需升级套餐');
+						$(".scjg").val("5");
+						return false;
+					}
+
 					$.ajax({
 						type: "post",
 						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/update_device",
@@ -248,16 +271,15 @@
 							caiji_jiange_minute: _caiji_jiange_minute,
 							fasong_jiange_minute: _fasong_jiange_minute,
 							feixingmoshikaiqi: _feixingmoshikaiqi,
-							chaowenchucunshijianjiange:_cwcaiji_jiange_minute,
-							chaowenshangchuanshijianjiange:_cwfasong_jiange_minute,
-                            yejianshangchuankaiguan:_yejianshangchuankaiguan,
-                            openid:copenid
+
+							yejianshangchuankaiguan: _yejianshangchuankaiguan,
+							openid: copenid
 						},
 						dataType: "json",
 						success: function(res) {
 							if(res.code == 0 && res.message == "success") {
 								alert("参数同步成功");
-                                location.reload()
+								location.reload()
 							} else {
 								alert("信息保存失败，请重试！")
 							}

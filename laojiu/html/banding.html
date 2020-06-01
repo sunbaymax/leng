@@ -1,0 +1,233 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>老九冷链</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-title" content="Amaze UI" />
+		<meta name="msapplication-TileColor" content="#0e90d2">
+		<link rel="stylesheet" href="../css/index.css">
+
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+				/*box-sizing: border-box;*/
+			}
+			
+
+			.register {
+				margin-top: 5rem;
+				font-size: 1.4rem;
+				padding: 0 2vw;
+				box-sizing: border-box;
+			}
+			
+			.res-item {
+				position: relative;
+				width: 100%;
+				border-radius: 4px;
+				background-color: #fff;
+				height: 4rem;
+				margin-top: 1rem;
+			}
+			
+			.res-icon {
+				position: absolute;
+				left: 8px;
+				top: 5px;
+				z-index: 100;
+				display: inline-block;
+				font-size: 18px;
+				color: #9c9c9c;
+			}
+			
+			.res-item .input-item {
+				display: inline-block;
+				width: 100%;
+				padding-left: 1rem;
+				box-sizing: border-box;
+				height: 4rem;
+				border: none;
+				font-size: inherit;
+				border-radius: 0.5rem;
+			}
+			
+			.res-item .input-item:focus {
+				outline-offset: 0;
+				outline: -webkit-focus-ring-color auto -2px;
+				background-color: #fefffe;
+				border: 1px solid #55CAC4;
+				outline: 0;
+				-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 5px rgba(226, 25, 69, .3);
+				box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 5px rgba(226, 25, 69, 0.3);
+			}
+			
+			.res-item .input-item:focus+.res-icon {
+				color: #e21945;
+			}
+			
+			.yanzhengma {
+				display: inline-block;
+				height: 3rem;
+				width: 10rem;
+				line-height: 3rem;
+				/* padding: 0.5rem 0.8rem; */
+				position: absolute;
+				right: 10px;
+				top: 0.5rem;
+				z-index: 100;
+				font-size: 1.3rem;
+				border: none;
+				background-color: #55CAC4;
+				color: #fff;
+				border-radius: 0.5rem;
+			}
+			.yanzhengma:disabled {
+				background-color: #ddd;
+			}
+			.res-btn {
+				margin-top: 20rem;
+				text-align: center;
+			}
+			.res-btn button {
+				width: 16rem;
+				height: 4rem;
+				background: #40C0C3;
+				border-radius: 5rem;
+				border: none;
+				color: #ffffff;
+				font-size: 1.5rem;
+			}
+			.res-btn button:focus {
+				color: #fff;
+			}
+			
+			.jiediv {
+				height: 4rem;
+				line-height: 4rem;
+				text-align: end;
+				margin-right: 1rem;
+			}
+			
+			.jiediv a {
+				text-decoration: none;
+				color: #3299fe;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="header"><img class="back_list" src="../img/back.png" />注册账号</div>
+		<div class="register">
+			<div class="res-item">
+				<input type="username" placeholder="用户名" class="input-item mobile" id="admin_user">
+				<i class="res-icon am-icon-phone"></i>
+			</div>
+			<div class="res-item">
+				<input type="nickname" placeholder="真实名字(选填)" class="input-item mobile" id="nickname">
+				<i class="res-icon am-icon-phone"></i>
+			</div>
+			<div class="res-item">
+				<input type="tel" placeholder="手机号" class="input-item mobile" id="telphone">
+				<i class="res-icon am-icon-phone"></i>
+			</div>
+	
+			<div class="res-item">
+				<input type="password" placeholder="请设置登录密码,数字或字母20位以内" class="input-item newpsd" id="pwd">
+				<i class="res-icon am-icon-phone"></i>
+			</div>
+			<div class="res-item">
+				<input type="password" placeholder="请确认登录密码" class="input-item newpsd2" id="tpwd">
+				<i class="res-icon am-icon-phone"></i>
+			</div>
+			<div class="res-btn">
+				<button type="button" id="res-btn" class="am-btn am-btn-block">提交</button>
+			</div>
+		</div>
+
+		<script src="../js/jquery-1.11.0.js"></script>
+		<script src="../js/index.js"></script>
+
+		<script>
+		    var _openId=localStorage.getItem('openId');
+			if(_openId == '' || _openId == undefined) {
+				setTimeout('WeixinJSBridge.call("closeWindow")', 1500);
+			}
+			$(".back_list").on("click", function() {
+				window.history.go(-1);
+			});
+			$('#res-btn').on('click', function() {
+		         console.log(_openId)
+				var _admin_user = $('#admin_user').val();
+				var _admin_real_name = $('#nickname').val();
+				var _mobile = $('#telphone').val();
+				var yanzheng = $('.yanzheng').val();
+				var _newpsd = $('.newpsd').val();
+				var _newpsd2 = $('.newpsd2').val();
+				if(_admin_user == '') {
+					$('#admin_user').focus();
+					document.querySelector('#admin_user').placeholder = '请填写用户名';
+					return
+				}else if(_mobile == '') {
+					$('#telphone').focus();
+					document.querySelector('#telphone').placeholder = '请填写手机号码';
+					return
+				}else if(_newpsd == '') {
+					alert("密码不能为空")
+					return
+				}else if(_newpsd2 == '') {
+					alert("确认密码不能为空")
+					return
+				}else if(_newpsd2 != _newpsd) {
+					alert("两次密码输入不一致")
+					return
+				} else {
+					$.ajax({
+						type: "post",
+						url: "https://www.zjcoldcloud.com/xiandun/public/index.php/index/register/pcAccount_add",
+						async: true,
+						data: {
+							admin_user:_admin_user,
+							admin_real_name:_admin_real_name,
+							phone: _mobile,
+							admin_pass:_newpsd,
+							admin_confirm_pass:_newpsd2,
+							openID:_openId
+						},
+						dataType: "JSON",
+						success: function(res) {
+							console.log(res);
+							if(res.code == 0) {
+								alert("绑定成功");
+								$('#res-btn').prop('disabled', true);
+								localStorage.removeItem("isonlinelaojiu");
+								location.href='register.html?openId='+_openId;
+
+							} else {
+								alert(res.message);
+							}
+						},
+						error: function(err) {
+							console.log(err)
+						}
+					});
+
+				}
+
+			})
+		</script>
+
+	</body>
+
+</html>

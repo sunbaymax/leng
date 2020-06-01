@@ -161,8 +161,8 @@
 		</div>
 		<div class="content">
 			<a class="personcenter"><img src="../images/myinfo.png" /><span>我的信息</span><img src="../img/right_shop_car.png" alt="" /></a>
-			<a href="invite.html"><img src="../images/myinvite.png" /><span>邀请家人</span><img src="../img/right_shop_car.png" alt="" /></a>
-			<a href="bill.html" class="paybill"><img src="../images/mybill.png" /><span>代缴账单</span><img src="../img/right_shop_car.png" alt="" /></a>
+			<a href="invite.html"><img src="../images/myinvite.png" /><span style="margin-left: 0.8rem;">邀请家人</span><img src="../img/right_shop_car.png" alt="" /></a>
+			<a href="pay_sheZhi.html" class="paybill"><img src="../images/mybill.png" /><span >服务费</span><img src="../img/right_shop_car.png" alt="" /></a>
 			<a href="bandinglist.html" class="account"><img src="../images/mytel.png" /><span>账户设置</span><img src="../img/right_shop_car.png" alt="" /></a>
 			<a href="exprie_machine.html" class="daqitixing"><img src="../images/mytixing.png" /><span>设备到期提醒</span><img src="../img/right_shop_car.png" alt="" /></a>
 			<a href="voicebill.html" class="yuyin"><img src="../images/myyuyin.png" /><span>语音套餐</span><img src="../img/right_shop_car.png" alt="" /></a>
@@ -239,27 +239,46 @@
 				$(".JieChuBang_box").removeClass("hidden");
 			});
 			$(".JieChuBang_left").on("click", function() {
-				$.ajax({
-					url: "http://www.ccsc58.com/json/11_00_tb_weixin_openID.php",
-					type: "post",
-					data: {
-						admin_permit: "zjly8888",
-						UserP: "w",
-						admin_user: b,
-						admin_pass: c,
-						controller: "update",
-						openID: "0000000000000000000000000000",
-						ip: ""
-					},
-					success: function(a) {
-						a = JSON.parse(a);
-						console.log(a);
-						"success" == a.resultCode ? (window.localStorage.removeItem("isonline"),window.sessionStorage.clear(), window.location.href = 'register.html?openId=' + openid) : (alert("\u89e3\u9664\u7ed1\u5b9a\u5931\u8d25\uff0c\u8bf7\u91cd\u65b0\u64cd\u4f5c"), window.location.href = _url)
-					},
-					error: function() {
-						alert("\u8bf7\u68c0\u67e5\u60a8\u662f\u5426\u8fde\u63a5\u7f51\u7edc")
-					}
-				});
+				if(_userType == 'b'){
+					$.ajax({
+						url: "http://www.ccsc58.com/json/11_00_tb_weixin_openID.php",
+						type: "post",
+						data: {
+							admin_permit: "zjly8888",
+							UserP: "w",
+							admin_user: b,
+							admin_pass: c,
+							controller: "update",
+							openID: "0000000000000000000000000000",
+							ip: ""
+						},
+						success: function(a) {
+							a = JSON.parse(a);
+							console.log(a);
+							"success" == a.resultCode ? (window.localStorage.removeItem("isonline"),window.sessionStorage.clear(), window.location.href = 'register.html?openId=' + openid) : (alert("\u89e3\u9664\u7ed1\u5b9a\u5931\u8d25\uff0c\u8bf7\u91cd\u65b0\u64cd\u4f5c"), window.location.href = _url)
+						},
+						error: function() {
+							alert("\u8bf7\u68c0\u67e5\u60a8\u662f\u5426\u8fde\u63a5\u7f51\u7edc")
+						}
+					});
+				}else{
+					$.ajax({
+						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/login/cancellation",
+						type: "post",
+						data: {
+							username:b,
+							openID:userinfo.copenid
+						},
+						success: function(a) {
+							a = JSON.parse(a);
+							"success" == a.code=='0' ? (window.localStorage.removeItem("isonline"),window.sessionStorage.clear(), window.location.href = 'register.html?openId=' + openid) : (alert("\u89e3\u9664\u7ed1\u5b9a\u5931\u8d25\uff0c\u8bf7\u91cd\u65b0\u64cd\u4f5c"), window.location.href = _url)
+						},
+						error: function() {
+							alert("\u8bf7\u68c0\u67e5\u60a8\u662f\u5426\u8fde\u63a5\u7f51\u7edc")
+						}
+					});
+				}
+
 			});
 			$(".JieChuBang_right").on("click", function() {
 				$(".JieChuBang_box").addClass("hidden");

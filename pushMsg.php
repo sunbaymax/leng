@@ -24,13 +24,13 @@ function Tui_song($first,$keyword1,$keyword2,$keyword3,$keyword4,$keyword5,$rema
             'touser'=>"$openId",
             'template_id'=>"zL41XN2WuflVXGVdKmu_ThLrbILzBRvW84L7JkjnVGM",
 //          'url'=>"http://www.ccsc58.cc/weixinnew/html/warning_list.html,
-            'url'=>"http://www.ccsc58.cc/leng/html/warning_tui_rukou.html?num_m=".$keyword6."&",
+            'url'=>"http://www.ccsc58.cc/leng/FreshShield/html/details_lists.html?num_m=".$keyword6."&",
             'topcolor'=>"#7B68EE",
             'data'=>array('first'=>array('value'=>urlencode($first),'color'=>"#000",),
                 'keyword1'=>array('value'=>urlencode($keyword3),'color'=>"#ff0000",),
                 'keyword2'=>array('value'=>urlencode($keyword4),'color'=>"#000",),
                 'keyword3'=>array('value'=>urlencode($keyword2),'color'=>"#000",),
-                'remark'=>array('value'=>urlencode($remark),'color'=>"#000"),
+                'remark'=>array('value'=>urlencode($remark),'color'=>"#0000ff"),
             )
         );
         $url="http://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".getAccessToken();
@@ -46,7 +46,7 @@ function Tui_expiration($first,$keyword1,$keyword2,$keyword3,$remark,$openId)
         $template=array(
             'touser'=>"$openId",
             'template_id'=>"MB2YmsYRvtEXIFfxO5lnZ3Cbm9AeIlA1OwJsZg3a9ig",
-            'url'=>"",
+            'url'=>"http://www.ccsc58.cc/leng/FreshShield/html/buyflewpackage.html?num_m=".$keyword1,
             'topcolor'=>"#7B68EE",
             'data'=>array('first'=>array('value'=>urlencode($first),'color'=>"#000",),
                 'keyword1'=>array('value'=>urlencode($keyword1),'color'=>"#000",),
@@ -81,6 +81,27 @@ function Tui_temphumMsg($first,$keyword1,$keyword2,$keyword3,$keyword4,$keyword5
         echo($result);
     
 }
+//维修工单用户确认
+function isrepairorder($first,$keyword1,$keyword2,$keyword3,$keyword4,$remark,$openId)
+{
+        $template=array(
+            'touser'=>"$openId",
+            'template_id'=>"oVRk4lOt8s3XO8E_OXuAgL1nnUkppXBusvVnqR-loZI",
+            'url'=>"http://www.ccsc58.cc/IceKnight/Zlservices/descrepair.html?id=".$remark."&openId=".$openId,
+            'topcolor'=>"#7B68EE",
+            'data'=>array('first'=>array('value'=>urlencode($first),'color'=>"#000",),
+                'keyword1'=>array('value'=>urlencode($keyword1),'color'=>"#000",),
+                'keyword2'=>array('value'=>urlencode($keyword2),'color'=>"#000000",),
+                'keyword3'=>array('value'=>urlencode($keyword3),'color'=>"#000000",),
+                'keyword4'=>array('value'=>urlencode($keyword4),'color'=>"#000000",),
+                'remark'=>array('value'=>urlencode(''),'color'=>"#000"),
+            )
+        );
+        $url="http://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".getAccessToken();
+        $result=https_request($url,urldecode(json_encode($template)));
+        echo($result);
+    
+}
 function https_request($url,$data = null){
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $url);
@@ -104,6 +125,8 @@ function https_request($url,$data = null){
 		Tui_song($arr[0],$arr[1],$arr[2],$arr[3],$arr[4],$arr[5],$arr[6],$arr[7],$arr[8],$arr[9]);
 	}else if(count($arr)==8){
 		Tui_temphumMsg($arr[0],$arr[1],$arr[2],$arr[3],$arr[4],$arr[5],$arr[6],$arr[7]);
+	}else if(count($arr)==7){
+		isrepairorder($arr[0],$arr[1],$arr[2],$arr[3],$arr[4],$arr[5],$arr[6]);
 	}else if(count($arr)==6){
 		Tui_expiration($arr[0],$arr[1],$arr[2],$arr[3],$arr[4],$arr[5]);
 	}else{

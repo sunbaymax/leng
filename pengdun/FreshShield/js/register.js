@@ -145,7 +145,8 @@
 								"pwd": _password,
 								"online": 1,
 								"userType": _json.data.tag,
-								"copenid": _json.data.content.openid
+								"copenid": _json.data.content.openid,
+								"uid": _json.data.content.id
 							}
 
 							window.localStorage.setItem("onlinepengdun", JSON.stringify(xduser))

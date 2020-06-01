@@ -22,7 +22,7 @@
 			.content {
 				padding: 0 10px;
 				box-sizing: border-box;
-				margin-top: 5rem;
+				/*margin-top: 5rem;*/
 			}
 			
 			.content ul {
@@ -30,7 +30,7 @@
 				padding: 5px 10px;
 				background: #FFFFFF;
 				border-radius: 15px;
-				margin-top: 15px;
+				margin-top: 10px;
 			}
 			
 			.content ul li {
@@ -70,11 +70,39 @@
 				margin-top: 30px;
 				padding: 5px;
 			}
+			
+			.yuyintitle {
+				margin-top: 4.6rem;
+				background: #FFFFFF;
+				height: 56px;
+				display: flex;
+				align-items: center;
+			}
+			
+			.yuyintitle div {
+				width: 100%;
+				text-align: center;
+				padding: 5px 0;
+				box-sizing: border-box;
+			}
+			
+			.yuyintitle div .xian {
+				border-right: 1px solid #e8e8e8;
+			}
 		</style>
 		<div class="header">
 			<img class="back_list" src="../img/back.png" ids='0' /> 购买记录
 		</div>
-
+		<div class="yuyintitle">
+			<div class="lefttotal">
+				<p class="xian">语音套餐总次数</p>
+				<p class="xian"><span class="total"></span>&nbsp;次</p>
+			</div>
+			<div class="lrighttotal">
+				<p>语音套餐剩余次数</p>
+				<p><span class="surplus"></span>&nbsp;次</p>
+			</div>
+		</div>
 		<div class="content">
 
 			<!--<ul>
@@ -108,18 +136,45 @@
 				var _userPass = userinfo.pwd;
 				var _openid = userinfo.copenid;
 				var _id = userinfo.uid;
-
-				//打印输出
 				$.ajax({
 					type: "post",
-					url: "https://www.zjcoldcloud.com/xiandun/public/index.php/index/voice_package/user_package_list",
+					url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/voice_package/package_statis",
 					async: true,
 					data: {
 						u_id: _id
 					},
 					dataType: "JSON",
 					success: function(res) {
-						if(res.code == 0&&res.data.count!=0) {
+						console.log(res);
+						if(res.code == 0) {
+							if(res.data.pk_total_num == null) {
+                                    $(".yuyintitle").hide();
+							} else {
+								$(".total").text(res.data.pk_total_num);
+								$(".surplus").text(res.data.pk_rema_num == null ? 0 : res.data.pk_rema_num);
+							}
+
+						} else {
+							$(".yuyintitle").hide()
+						}
+
+					},
+					error: function(err) {
+
+						console.log(err)
+					}
+				});
+				//打印输出
+				$.ajax({
+					type: "post",
+					url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/voice_package/user_package_list",
+					async: true,
+					data: {
+						u_id: _id
+					},
+					dataType: "JSON",
+					success: function(res) {
+						if(res.code == 0 && res.data.count != 0) {
 							var str = '';
 							$.each(res.data.content, function(index, val) {
 								str = `<ul>
@@ -130,6 +185,10 @@
 									<li>
 										<div>价格：<span class="price">${val.price}</span></div>
 										<div>次数：￥<span class="number">${val.numbers}</span></div>
+									</li>
+									<li>
+										<div>剩余次数：</div>
+										<div>${val.remanum}</div>
 									</li>
 									<li>
 										<div>购买时间：</div>

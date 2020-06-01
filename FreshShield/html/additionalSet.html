@@ -124,7 +124,7 @@
 
 			$("#switch2").change(function() {
 				if($(this).is(':checked')) {
-					$(".cmoban").show();
+					$(".cmoban").hide();
 					$("#voicetime").val('');
 				} else {
 					$(".cmoban").hide();
@@ -201,12 +201,13 @@
 					if(_json.resultCode.is_warn_show == 0){
 						$(".yuyinbaojing").hide()
 					}else{
+						$(".yuyinbaojing").hide()
 						if(_json.resultCode.is_open == 0) {
 						$("#switch2").attr("checked", false);
 					} else {
 						$("#switch2").attr("checked", true);
-						$(".cmoban").show();
-						$("#voicetime").val(_json.resultCode.warn_time==''?'':_json.resultCode.warn_time);
+//						$(".cmoban").show();
+//						$("#voicetime").val(_json.resultCode.warn_time==''?'':_json.resultCode.warn_time);
 					}
 					}
 					
@@ -305,27 +306,20 @@
 
 				});
 
-//				var _yejianshangchuan;
-//				if($("#switch").is(":checked")) {
-//					_yejianshangchuan = 1;
-//				} else {
-//					_yejianshangchuan = 0;
-//				} //开启夜间上传；
 				var _is_warn;
 				var _data;
 				var _warntime = $("#voicetime").val();
 				if($("#switch2").is(":checked")) {
-					
 					_is_warn = 1;
 					_data={
 						devid: _num_m,
 						GPS_Start: _GPS_Start,
 						UserP: "w",
-//						yejianshangchuankaiguan: _yejianshangchuan,
+						yejianshangchuankaiguan: "1",
 						dingshifasong: arr,
 						openid: _copenid,
 						is_open:_is_warn,
-						warn_time:_warntime
+						warn_time:""
 					}
 				} else {
 					_is_warn = 0;
@@ -333,18 +327,18 @@
 						devid: _num_m,
 						GPS_Start: _GPS_Start,
 						UserP: "w",
-//						yejianshangchuankaiguan: _yejianshangchuan,
+						yejianshangchuankaiguan: "1",
 						dingshifasong: arr,
 						openid: _copenid,
 						is_open:_is_warn,
 						warn_time:""
 					}
 				} //开启夜间上传；
-				if(_warntime==''&&_is_warn==1){
-					alert("请选择语音时间");
-					$("#voicetime").focus()
-					return false;
-				}
+//				if(_warntime==''&&_is_warn==1){
+//					alert("请选择语音时间");
+//					$("#voicetime").focus()
+//					return false;
+//				}
 				console.log(_data);
 				$.ajax({
 					type: "post",
@@ -357,7 +351,7 @@
 								var _ismaster = sessionStorage.getItem('ismaster');
 								var _jiebangurl = '';
 								if(_ismaster == 0) {
-									_jiebangurl = "https://www.zjcoldcloud.com/xiandun/public/index.php/index/device/remove_scend_device";
+									_jiebangurl = "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/remove_scend_device";
 
 								} else {
 									_jiebangurl = "http://www.zjcoldcloud.com/xiandun/public/index.php/index/Device/remove_bind";

@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name = "format-detection" content = "telephone=no">
+		<title>老九冷链</title>
+		<!--<link rel="stylesheet" type="text/css" href="css/data/DateTimePicker.css" />-->
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/changeM.css" />
+	</head>
+	<body>
+		<div class="header">
+			<img class="back_list" src="../img/back.png"/>设备参数
+		</div>
+		<form action="">
+			<!--设置设备基本信息（使用changeM.js操作的）-->
+			<div class="userN_form">
+				当前用户：<span></span>
+			</div>
+			<div class="title_basic">
+				<span>&nbsp;&nbsp;设置基本信息&nbsp;&nbsp;</span>
+			</div>
+			<div class="content_basic content_basic_macine">
+				<div class="basic_label">
+					<p>设备编号</p>
+					<p>设备名称</p>
+					<p>打印表头</p>
+					<p>采集间隔</p>
+					<p>发送间隔</p>
+					<span class="fly_flag"><input type="checkbox" />开启飞行模式</span>
+					<p class="fly_header hidden">开启飞行时间</p>
+				</div>
+				<div class="basic_input">
+				<input type="text" class="text_input basic_num" value=""  readonly/><br/>
+					<input type="text" class="text_input basic_name"/><br/>
+					<textarea rows="3" cols="20"></textarea>
+					<select class="caijiJianGe">
+					</select>分钟<br/>
+					<select class="fasongJianGe">
+					</select>分钟<br/>
+					<span class="gps_flag"><input type="checkbox" />开启GPS定位</span>
+					<input type="text" class="text_input fly_header hidden" onFocus="WdatePicker({startDate:'%y-%M-%d %H:%m:%s',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,minDate:'%y-%M-{%d}'})" readonly/>
+					<input type="text" class="text_input fly_header hidden"/>&nbsp;&nbsp;<span class="fly_header hidden">分钟后唤醒设备</span><br/>
+				</div>
+			</div>
+			<!--设置报警阀值-->
+			<div class="title_basic">
+				<span>&nbsp;&nbsp;设置报警阀值&nbsp;&nbsp;</span>
+			</div>
+			<div class="content_basic">
+				<div class="basic_label">
+					<p>报警温度上限</p>
+					<p>报警温度下限</p>
+					<p class="special_p">合格温度上限</p>
+					<p>合格温度下限</p>
+					<p>电量下限</p>
+					<p>绑定号码</p>
+				</div>
+				<div class="basic_input warning_input">
+					<select class="special_input text_input baojingShang">
+					</select>℃&nbsp;&nbsp;<input class="shangxian_baojing" type="checkbox"/>开启报警<br/>
+					<select class="special_input text_input baojingXia">
+					</select>℃&nbsp;&nbsp;<input class="xiaxian_baojing" type="checkbox" />开启报警<br/>
+					<select class="text_input hegeShang">
+					</select>℃<br/>
+					<select class="text_input hegeXia">
+					</select>℃<br/>
+					<select class="text_input dianLiang">
+					</select>%&nbsp;&nbsp;<input class="dianLiang_baojing" type="checkbox" />开启报警
+					<input type="text" class="tel_number" value=""/>
+				</div>
+				<div class="basic_fly">
+					<input class="tel_baojing" type="checkbox" />开启短信推送
+				</div>
+			</div>
+			<div class="form_post">
+				<input type="button" value="提交"/>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="返回列表"/>
+			</div>
+		</form>
+		<div class="footer">
+			<a href="../index.html">
+					<img src="../img/index.png" alt="" />
+					<span>首页</span>
+				</a>
+				<a href="dingdan.php">
+					<img src="../img/dingdan.png" alt="" />
+					<span>我的订单</span>
+				</a>
+				<a class="choosed" href="shebei_list.html">
+					<img src="../img/machine01.png" alt="" />
+					<span>设备列表</span>
+				</a>
+				<a href="user.html">
+					<img src="../img/user_di.png" alt="" />
+					<span>用户信息</span>
+				</a>
+		</div>
+		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../My97DatePicker/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/changeM.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>

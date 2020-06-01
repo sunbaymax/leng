@@ -3,7 +3,7 @@
 	}
 	
 	.container {
-		padding: 0 1rem;
+		padding: 0 5px;
 		box-sizing: border-box;
 	}
 	
@@ -74,7 +74,7 @@
 		overflow: hidden;
 		z-index: 1;
 		bottom: 0rem;
-		padding: 0 1rem;
+		padding: 0 5px;
 		box-sizing: border-box;
 	}
 	
@@ -82,9 +82,80 @@
 		margin-bottom: 1rem;
 		padding: 0 1rem;
 		box-sizing: border-box;
-		height: 21rem;
+		height: 18rem;
 		background: #FFFFFF;
 		border-radius: 0.5rem;
+		position: relative;
+	}
+	
+	@media only screen and (min-device-width: 320px)and (-webkit-min-device-pixel-ratio: 2) {
+		.list .dlwzwen {
+			width: 7.2rem;
+			/*color: #D2620B;*/
+		}
+		.list {
+			font-size: 1.2rem!important;
+		}
+		.list .item .list_tittle {
+			font-size: 1.2rem!important;
+		}
+		.list .list_tittle .tittlewen {
+			font-size: 1.2rem!important;
+			font-weight: bold;
+		}
+		.list #caozuo {
+			position: absolute;
+			top: 0rem;
+			right: 5px;
+			z-index: 99;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			width: 17rem;
+			height: 4rem;
+		}
+	}
+	
+	@media only screen and (min-device-width: 375px)and (-webkit-min-device-pixel-ratio: 2) {
+		.list {
+			font-size: 1.4rem!important;
+		}
+		.list .item .list_tittle {
+			font-size: 1.4rem!important;
+		}
+		.list .list_tittle .tittlewen {
+			font-size: 1.4rem!important;
+			font-weight: bold;
+		}
+		.addresscontent .dlwzwen {
+			width: 6rem;
+			/*color: #008000;*/
+		}
+		.list #caozuo {
+			position: absolute;
+			top: 0rem;
+			right: 5px;
+			z-index: 99;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			width: 22rem;
+			height: 4rem;
+		}
+		.list .left15 .beizhu{
+		 font-size:1.2rem!important ;
+		}
+	}
+	
+	.list .Untyingbtn {
+		background: none;
+		border: none;
+		color: #FF2F2F;
+		width: 7rem;
+		text-align: center;
+		font-size: 1.4rem;
+		font-weight: bold;
+		cursor: pointer;
 	}
 	
 	.list:last-of-type {
@@ -147,9 +218,15 @@
 		/*box-sizing: border-box;*/
 	}
 	
+	.list-content .addresscontent {
+		display: block;
+		/*box-sizing: border-box;*/
+	}
+	
 	.list .list-content {
 		padding: 0.5rem 0;
 		box-sizing: border-box;
+		color: #333333;
 	}
 	
 	.list-content div p {
@@ -179,6 +256,10 @@
 		align-items: center;
 	}
 	
+	.refreshmsg {
+		text-align: center;
+	}
+	
 	.window_post {
 		position: fixed;
 		top: 0;
@@ -197,7 +278,7 @@
 		background: #fefefe;
 		text-align: center;
 		margin-left: 10vw;
-		margin-top: 50px;
+		margin-top: 200px;
 		box-shadow: 5px 5px 20px #000;
 		-webkit-box-shadow: 5px 5px 20px #000;
 		box-sizing: border-box;
@@ -223,24 +304,81 @@
 		border: none;
 		border-bottom: 1px solid #ccc;
 		outline: none;
-		text-align: center;
+		text-align: left;
 		font-size: 1.5rem;
 	}
 	
 	.window_post input[type=button] {
-		border: none;
-		-webkit-box-shadow: 1px 1px 10px #000;
-		box-shadow: 1px 1px 10px #000;
-		background: #61A5E4;
 		height: 2rem;
-		line-height: 2rem;
-		font-size: 1.5rem;
-		outline: none;
+		width: 6rem;
 		border-radius: 1rem;
+		background: #FFFFFF;
+		border: 1px solid #40C0C3;
+		color: #40C0C3;
 	}
 	
 	#wrapper .list .main {
-		margin-right: 1.5rem;
+		/*margin: 0px 5px;*/
 		font-size: 1.2rem;
-		color: #37C0C4;
+		/*color: #37C0C4;*/
+	}
+	
+	#wrapper .list .left15 {
+		/*margin-left: 1.5rem;*/
+		font-weight: bold;
+		width: 16rem;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	
+	.refreshmsg {
+		height: 4rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #8a8a8a;
+	}
+	
+	.refreshmsg .pull_icon {
+		width: 25px;
+		height: 25px;
+		background-image: url('../images/pull.png');
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: 25px;
+		transition: all .5s;
+	}
+	
+	.refreshmsg span {
+		padding-left: .5rem;
+	}
+	
+	.refreshmsg .flip {
+		transform: rotate(180deg);
+	}
+	
+	.refreshmsg .loading {
+		background-image: url('../images/loading.png');
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: 25px;
+	}
+	
+	.refreshmsg .loading {
+		-webkit-transform: rotate(0deg) translateZ(0);
+		-webkit-transition-duration: 0;
+		-webkit-animation-name: loading;
+		-webkit-animation-duration: 2s;
+		-webkit-animation-iteration-count: infinite;
+		-webkit-animation-timing-function: linear;
+	}
+	
+	@-webkit-keyframes loading {
+		from {
+			-webkit-transform: rotate(0deg) translateZ(0);
+		}
+		to {
+			-webkit-transform: rotate(360deg) translateZ(0);
+		}
 	}

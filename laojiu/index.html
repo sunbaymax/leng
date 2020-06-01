@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>老九冷链</title>
+		<script type="text/javascript">
+		</script>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" href="sw/swiper-3.3.1.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/index01.css" />
+	</head>
+	<style>
+		ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+		
+		#content li {
+			font-size: 1.2rem;
+			height: 4rem;
+			line-height: 4rem;
+			display: flex;
+			/*justify-content: center;*/
+			align-items: center;
+		}
+		
+		#content li div {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		
+		#content li div img {
+			display: inline;
+			width: 20px;
+			height: 16px;
+			margin-right: 5px;
+		}
+		
+		#content li div span {
+			margin-right: 5px;
+		}
+		
+		.shebeinums {
+			width: 55vw;
+			overflow: hidden;
+			/*自动隐藏文字*/
+			text-overflow: ellipsis;
+			/*文字隐藏后添加省略号*/
+			white-space: nowrap;
+			/*强制不换行*/
+		}
+		
+		.warntime {
+			width: 40vw;
+			overflow: hidden;
+			/*自动隐藏文字*/
+			text-overflow: ellipsis;
+			/*文字隐藏后添加省略号*/
+			white-space: nowrap;
+			/*强制不换行*/
+		}
+		
+		#scrollUpBox {
+			height: 16rem;
+			/*padding: 0 15px;*/
+			/*border: 2px solid #cccccc;*/
+			border-radius: 5px;
+			/*box-shadow: 0 0 10px #0000ff;*/
+			overflow: hidden;
+		}
+	</style>
+
+	<body>
+		<div class="content1">
+			<div class="header">老九冷链</div>
+			<div class="banner">
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<div class="banner1">
+								<img src="images/banner.png" class="banner1" />
+							</div>
+						</div>
+					</div>
+					<!--<div class="swiper-pagination"></div>-->
+				</div>
+			</div>
+			<div class="index_content">
+				<div>
+					<a href="javascript:void(0)" class="lljk">
+						<img src="images/monitor.png" />
+						<span>冷链监控</span>
+					</a>
+					<a href="html/dingdan.php" class="wyys">
+						<img src="images/deliver.png" />
+						<span>我要运输</span>
+					</a>
+				</div>
+				<div>
+					<a href="html/Upan_list.html" class="Upjly">
+						<img src="images/upan.png" />
+						<span>U盘记录仪</span>
+					</a>
+					<a href="html/warning_list.html" class="lysb">
+						<img src="images/bluetooth.png" />
+						<span>蓝牙设备</span>
+					</a>
+				</div>
+
+			</div>
+			<div class="warnlist" id="demo">
+				<div class="warning1">
+					<span class="warning-titile">报警信息</span>
+					<span class="warningnums">0</span>
+				</div>
+
+				<div id="scrollUpBox">
+					<ul id="content" class="warncontent">
+						<!--<li><div class="warnline"><img src="images/baojing.png" /> <span class="shebeinums">123452</span> <span class="warntime">2019-02-21 13:22:32</span></div></li>-->
+					</ul>
+				</div>
+
+			</div>
+		</div>
+		<div class="footer">
+			<a class="choosed" href="index.html">
+				<img src="images/tab_weixin_pressed.png" alt="" />
+				<span>首页</span>
+			</a>
+			<a href="html/dingdan.php">
+				<img src="images/tab_find_frd_normal.png" alt="" />
+				<span>我的运单</span>
+			</a>
+			<a href="html/shebei_list.html">
+				<img src="images/tab_address_normal.png" alt="" />
+				<span>设备信息</span>
+			</a>
+			<a href="html/user_sheZhi.html">
+				<img src="images/tab_settings_normal.png" alt="" />
+				<span>我的</span>
+			</a>
+		</div>
+		<!--<a href="html/details_lists.html?num_m=137752">编号：137752，预警湿度下限,合格湿度下限</a>-->
+		<script src="js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="sw/swiper-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			/*
+			 * 判断用户是否登录，如果已登录跳转到
+			 */
+			if(window.localStorage.getItem("isonlinelaojiu")) {
+				var userinfo = JSON.parse(localStorage.getItem('isonlinelaojiu'));
+				if(userinfo.online != 1 && userinfo.user == '' && userinfo.pwd == '') {
+					window.location.href = "../index.html";
+				} else {
+					var _userName = userinfo.user;
+					var _userPass = userinfo.pwd;
+					/*报警信息显示；
+					 */
+					$.ajax({
+						type: "post",
+						url: "http://www.ccsc58.com/json/02_01_tb_baojing_float.php",
+						data: {
+							admin_permit: "zjly8888",
+							admin_user: _userName,
+							admin_pass: _userPass,
+							UserP: "w"
+						},
+						dataType: "json",
+						success: function(data) {
+							$(".warncontent").html('');
+							if(data.code == 10000) {
+								var nums = data.resultCode.length;
+								$(".warningnums").text(nums);
+								var warnstr = '';
+
+								$.each(data.resultCode, function(index, val) {
+									let _url = 'html/details_lists.html?num_m=' + val.shebeibianhao + "&";
+									warnstr = `<li><div class="warnline"><img src="images/baojing.png" /> <a href='${_url}' class="shebeinums">${val.neirong}</a> <span class="warntime">2019-02-21 13:22:32</span></div></li>`;
+									$(".warncontent").append(warnstr);
+								});
+
+							}
+
+						},
+						error: function(err) {
+
+						}
+					});
+
+					var scrollUpBox = document.getElementById('scrollUpBox');
+					var content = document.getElementById('content');
+
+					function scrollUp() {
+						if(scrollUpBox.scrollTop >= (content.clientHeight - scrollUpBox.clientHeight)) {
+							scrollUpBox.scrollTop = 0;
+						} else {
+							scrollUpBox.scrollTop++;
+						}
+					}
+					var TIME = 100;
+					var timer = setInterval(scrollUp, TIME);
+					scrollUpBox.onmouseover = function() {
+						clearInterval(timer);
+					}
+					scrollUpBox.onmouseout = function() {
+						timer = setInterval(scrollUp, TIME);
+					}
+
+				}
+
+			} else {
+				window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe215e9ec8c5c3306&redirect_uri=http://www.ccsc58.cc/leng/laojiu/oauth2_templatform.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
+			}
+			var mySwiper = new Swiper('.swiper-container', {
+				autoplay: 2000, //可选选项，自动滑动
+				pagination: '.swiper-pagination',
+				loop: true,
+				autoplayDisableOnInteraction: false,
+				speed: 300,
+			});
+			$(".lljk").on("click",function(){
+				var _userType = userinfo.userType;
+               if(_userType=='b'){
+            	//location.href='machineList.php'
+            	location.href='machineList.php'
+                }else{
+                	location.href='machineList.php'
+                }
+			})
+		</script>
+	</body>
+
+</html>

@@ -523,12 +523,12 @@ a[target=_blank]{
 }
 .details_now{
 	/*margin: 1rem 0;*/
-	height:17rem;
+	height:14rem;
 }
 .list_tittle{
 	display: flex;
 	align-items: center;
-	height:4rem;
+	height:3rem;
 	width: 100%;
 	background: #EDEDED;
 	padding: 0 1.5rem;
@@ -553,11 +553,14 @@ a[target=_blank]{
 	align-items: center;
 }
 .list-content div{
-	padding: 0 1.5rem;
+	padding: 1.2rem 1.5rem;
 	box-sizing: border-box;
     float: none;
+    height: 2rem;
+    line-height: 2rem;
      display: flex;
 	align-items: center;
+	    color: #333333;
 }
 .list-content div p{
 	

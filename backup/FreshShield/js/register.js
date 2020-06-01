@@ -2,7 +2,7 @@
 	if(window.localStorage.getItem("isonline")) {
 		var userinfo = JSON.parse(localStorage.getItem('isonline'));
 		if(userinfo.online == 1 && userinfo.user != '' && userinfo.pwd != '') {
-			window.location.href = "../machineList.php";
+			window.location.href = '../machineList.php?_r='+parseInt(Math.random()*10);
 		}
 
 	}
@@ -143,11 +143,12 @@
 								"online": 1,
 								"userType": _json.data.tag,
 								"copenid": _json.data.content.openid,
-								"duodian":_json.data.duodian==undefined?0:_json.data.duodian
+								"duodian":_json.data.duodian==undefined?0:_json.data.duodian,
+								"uid": _json.data.content.id,
 							}
 
 							window.localStorage.setItem("isonline", JSON.stringify(xduser))
-							window.location.href = "../machineList.php";
+							window.location.href = "../machineList.php?_r="+parseInt(Math.random()*10) ;
 
 						}
 

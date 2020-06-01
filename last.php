@@ -126,38 +126,45 @@ class wechatCallbackapiTest
                 switch ($object->EventKey)
                 {
                     case "shuomingshu":
-		                        $content = array(array("Title" =>"温湿度监控智能终端使用说明书（20TP与20DP）", 
-		                        "Description" =>"温湿度监控智能终端使用说明书（20TP与20DP）", 
-		                        "PicUrl" =>"http://www.ccsc58.cc/weixinnew/img/shumingshu_tuisong.png", 
-		                        "Url" =>"http://mp.weixin.qq.com/s/a-7N3QysT4Bmn3eNGPldOw"));
-		                        $one = array("Title" =>"温度计使用说明书（LY-RTH1000系列）", 
-		                        "Description" =>"温度计使用说明书（LY-RTH1000系列）", 
-		                        "PicUrl" =>"http://www.ccsc58.cc/leng/img/1000a_sms.png", 
-		                        "Url" =>"http://mp.weixin.qq.com/s/8bXlkPaTNIagbCN8Zqaqhg");
-		                        $a = array_unshift($content,$one);
-		                        $two = array("Title"=>"温湿度远程采集云分析平台（微信版本）", 
-		                        "Description"=>"温湿度远程采集云分析平台-微信",
-		                        "PicUrl"=>"http://www.ccsc58.cc/leng/img/wxjm.jpg",
-		                         "Url" =>"https://mp.weixin.qq.com/s/5O4lbFehdZT1kuJcDvj5sw");
-		                        $b = array_unshift($content,$two);
-//		                                
-		                        break;
-		                     case "lianxiwomen":
-		                        $content = array(array("Title" =>"联系我们", 
-		                        "Description" =>"热线电话: 010-83612390\n售后电话: 010-83613710（转）8009", 
-		                        "PicUrl" =>"http://www.ccsc58.cc/leng/images/lxwm.jpg", 
-		                        "Url" =>"http://ccsc58.com/folder/about.html"));
-		                        break;
-		                    case "tel":
-		                    	$content = "销售电话：010-8361-2390\n售后电话: 010-83613710-8009(分机号)";//点击公众下面的菜单想用户推送的内容匹配；
-		                        break;
-		                    
-		                    default:
-		                        $content = array(array("Title" =>"冷云冷链", 
-		                        "Description" =>"您正在使用冷云冷链公众平台", 
-		                        "PicUrl" =>"http://discuz.comli.com/weixin/weather/icon/cartoon.jpg", 
-		                        "Url" =>"weixin://addfriend/pondbaystudio"));
-		                        break;
+                        $content = array(array("Title" =>"LY-RTH1000B使用说明书", 
+                        "Description" =>"U盘型", 
+                        "PicUrl" =>"http://www.ccsc58.cc/leng/img/product/1000B.png", 
+                        "Url" =>"http://mp.weixin.qq.com/s/8bXlkPaTNIagbCN8Zqaqhg"));
+                        
+                        
+                        $two = array("Title"=>" ZL-TH10TP使用说明书", 
+                        "Description"=>"药盾 医药",
+                        "PicUrl"=>"http://www.ccsc58.cc/leng/img/product/10tp.jpg",
+                         "Url" =>"http://www.ccsc58.cc/leng/img/product/yiyao10tp.jpg");
+                        $c = array_unshift($content,$two);
+                        
+                        $third = array("Title"=>" ZL-TH10TP（监控宝）使用说明书", 
+                        "Description"=>"鲜盾 食品生鲜",
+                        "PicUrl"=>"http://www.ccsc58.cc/leng/img/product/jiankongbao.png",
+                         "Url" =>"http://www.ccsc58.cc/leng/FreshShield/file/zlth10tp.pdf");
+                        $b = array_unshift($content,$third);
+                        $zoo = array("Title"=>"中集智冷产品使用说明书", 
+                        "Description"=>"",
+                        "PicUrl"=>"",
+                         "Url" =>"");
+                        $b = array_unshift($content,$zoo);              
+                        break;
+                     case "lianxiwomen":
+                        $content = array(array("Title" =>"联系我们", 
+                        "Description" =>"热线电话: 010-83612390\n售后电话: 010-83613710（转）8009", 
+                        "PicUrl" =>"http://www.ccsc58.cc/leng/images/lxwm.jpg", 
+                        "Url" =>"http://ccsc58.com/folder/about.html"));
+                        break;
+                    case "tel":
+                    	$content = "销售电话：010-8361-2390\n售后电话: 010-83613710-8009(分机号)";//点击公众下面的菜单想用户推送的内容匹配；
+                        break;
+                    
+                    default:
+                        $content = array(array("Title" =>"冷云冷链", 
+                        "Description" =>"您正在使用冷云冷链公众平台", 
+                        "PicUrl" =>"http://discuz.comli.com/weixin/weather/icon/cartoon.jpg", 
+                        "Url" =>"weixin://addfriend/pondbaystudio"));
+                        break;
                 }
                 break;
             case "VIEW":
@@ -255,6 +262,9 @@ class wechatCallbackapiTest
 	         //$content = "<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">授权</a>";
 	        $content = "/微笑<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_repair.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">文字参与现场签到</a>/微笑\n备注：售后工单申请 /:heart";             
 	    }
+	    else if($keyword=="配置"||$keyword=="驱动"||strstr($keyword, "配置")){
+	    	$content = "<a href=\"http://www.ccsc58.cc/leng/softwareconfig/index.html\">温度计配置端</a>";
+	    }
         else if(strstr($keyword, "客服电话")){
 	        $content = "客服电话:010-8361-2390";
         }
@@ -285,10 +295,9 @@ class wechatCallbackapiTest
         else if($keyword=="?"||$keyword=="？"||$keyword=="时间"||$keyword=="当前时间"){
              $content = date("Y-m-d H:i:s", time()+6*60*60);
         }
-        else if($keyword=="下载"||$keyword=="app"||$keyword=="APP"||$keyword=="App"||$keyword=="安卓"||$keyword=="ios"||$keyword=="IOS"||$keyword=="应用"||$keyword=="苹果"){
-             //$content = "<a href=\"http://fusion.qq.com/cgi-bin/qzapps/unified_jump?appid=42375908&isTimeline=false&actionFlag=0&params=pname%3Dcom.ccsc.coldcloud%26versioncode%3D1%26channelid%3D%26actionflag%3D0&from=singlemessage&isappinstalled=1\">中集冷云(安卓)</a>\n\n<a href=\"https://itunes.apple.com/us/app/zhong-ji-leng-yun-wen-shi/id1173609882?mt=8\">中集冷云(苹果)</a>";
-             $content = "<a href=\"http://www.ccsc58.cc/leng/bangding/download.html\">鲜盾app下载</a>";
-        }
+//      else if($keyword=="下载"||$keyword=="app"||$keyword=="APP"||$keyword=="App"||$keyword=="安卓"||$keyword=="ios"||$keyword=="IOS"||$keyword=="应用"||$keyword=="苹果"){
+//           $content = "<a href=\"http://www.ccsc58.cc/leng/bangding/download.html\">鲜盾app下载</a>";
+//      }
         else if($keyword=="KBCX"||$keyword=="绑定查询"){
              $content = "<a href=\"http://www.ccsc58.cc/weixinnew/select_boxs.php\">箱码设备号绑定查询</a>";
         }
@@ -319,9 +328,13 @@ class wechatCallbackapiTest
             $content[] = array("Title"=>"多图文3标题", "Description"=>"", "PicUrl"=>"http://g.hiphotos.bdimg.com/wisegame/pic/item/18cb0a46f21fbe090d338acc6a600c338644adfd.jpg", "Url" =>"http://m.cnblogs.com/?u=txw1958");
         }else if (strstr($keyword, "使用说明书") || strstr($keyword, "操作手册")){
             $content = array();
+            $content[] = array("Title"=>" ZL-TH10TP（监控宝）使用说明书", "Description"=>"操作简单 精准好用","PicUrl"=>"http://qiniu.ccsc58.com/FiGxp4GVt8-736r9wWAXRuqp0zN9","Url" =>"http://www.ccsc58.cc/leng/FreshShield/file/zlth10tp.pdf");
             $content[] = array("Title"=>"温湿度监控智能终端使用说明书（20TP与20DP）", "Description"=>" 温湿度监控智能终端使用说明书（20TP与20DP）", "PicUrl"=>"http://www.ccsc58.cc/weixinnew/img/shumingshu_tuisong.png", "Url" =>"http://mp.weixin.qq.com/s/a-7N3QysT4Bmn3eNGPldOw");
             $content[] = array("Title"=>"温度计使用说明书（LY-RTH1000系列）", "Description"=>"温度计使用说明书（LY-RTH1000系列）", "PicUrl"=>"http://www.ccsc58.cc/leng/images/1000B01.png", "Url" =>"http://www.ccsc58.com/folder/Download/1000A.pdf");
             $content[] = array("Title"=>"温湿度远程采集云分析平台（微信版本）", "Description"=>"温湿度远程采集云分析平台-微信", "PicUrl"=>"http://www.ccsc58.cc/leng/img/wxjm.jpg", "Url" =>"https://mp.weixin.qq.com/s?__biz=MzIxNzU1MzIyNA==&mid=2247483725&idx=1&sn=19baee7dea592c772d7b9f513e4c5f2a&chksm=97f9416aa08ec87cc846de9af8f2be8d16b8b76abb04269a8ab66415c5c19f5e007f978d1168#wechat_redirect");
+
+            
+         
         }else if (strstr($keyword, "音乐")){
             $content = array();
             $content = array("Title"=>"最炫民族风", "Description"=>"歌手：凤凰传奇", "MusicUrl"=>"http://121.199.4.61/music/zxmzf.mp3", "HQMusicUrl"=>"http://121.199.4.61/music/zxmzf.mp3"); 
@@ -347,7 +360,7 @@ class wechatCallbackapiTest
 	            } 
         else{
         	//$content = date("Y-m-d H:i:s",time())."\nOpenID：".$object->FromUserName."\n技术支持 方倍工作室";
-           $content = "您好！您可以回复以下内容：\n\n☞【下载】:<a href=\"http://a.app.qq.com/o/simple.jsp?pkgname=com.ccsc.coldcloud\">下载APP</a>\n\n☞【官网】:<a href=\"http://www.ccsc58.com\">客服电话</a>\n\n☞【天气】:<a href=\"https://m.tianqi.com\">城市天气</a>\n\n ☞【绑定】:<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx82dbac04fa8fd8ef&redirect_uri=http://www.ccsc58.cc/weixinnew/oauth_3.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">微信绑定</a>\n\n☞【说明书】:<a href=\"https://mp.weixin.qq.com/s/5O4lbFehdZT1kuJcDvj5sw\">操作说明</a>\n\n☞【设备号】:<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">设备详情</a>\n\n☞【报警/异常】:<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">报警设备</a>\n\n☞【设备/监控】:<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">我的设备</a>\n\n☞【鲜盾系统操作指南】:<a href=\"https://mp.weixin.qq.com/s/8uzz14RsOJwYVZJqdRGe_w\">查看指南</a>\n\n☞【监控宝使用说明书】:<a href=\"http://www.ccsc58.cc/leng/FreshShield/file/tempbody.pdf\">下载查看</a>\n\n ☎  客服电话:010-83612390";     
+           $content = "您好！您可以回复以下内容：\n\n☞【配置】:<a href=\"http://www.ccsc58.cc/leng/softwareconfig/index.html\">配置软件</a>\n\n☞【官网】:<a href=\"http://www.ccsc58.com\">客服电话</a>\n\n☞【天气】:<a href=\"https://m.tianqi.com\">城市天气</a>\n\n ☞【绑定】:<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx82dbac04fa8fd8ef&redirect_uri=http://www.ccsc58.cc/weixinnew/oauth_3.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">微信绑定</a>\n\n☞【说明书】:<a href=\"https://mp.weixin.qq.com/s/5O4lbFehdZT1kuJcDvj5sw\">操作说明</a>\n\n☞【设备号】:<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">设备详情</a>\n\n☞【报警/异常】:<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">报警设备</a>\n\n☞【设备/监控】:<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">我的设备</a>\n\n☞【鲜盾系统操作指南】:<a href=\"https://mp.weixin.qq.com/s/8uzz14RsOJwYVZJqdRGe_w\">查看指南</a>\n\n☞【监控宝使用说明书】:<a href=\"http://www.ccsc58.cc/leng/FreshShield/file/zlth10tp.pdf\">下载查看</a>\n\n ☎  客服电话:010-83612390\n\n📲销售电话及微信:17319312129";     
 	    }
 	    
 		if(!empty($result)){
@@ -494,9 +507,9 @@ if (isset($object->Recognition) && !empty($object->Recognition)){
         else if($keyword=="?"||$keyword=="？"||$keyword=="时间"||$keyword=="当前时间"){
               $content = date("Y-m-d H:i:s", time()+6*60*60);
         }
-        else if($keyword=="下载"||$keyword=="app"||$keyword=="APP"||$keyword=="App"||$keyword=="安卓"||$keyword=="ios"||$keyword=="IOS"||$keyword=="应用"||$keyword=="苹果"){
-             $content = "<a href=\"http://fusion.qq.com/cgi-bin/qzapps/unified_jump?appid=42375908&isTimeline=false&actionFlag=0&params=pname%3Dcom.ccsc.coldcloud%26versioncode%3D1%26channelid%3D%26actionflag%3D0&from=singlemessage&isappinstalled=1\">中集冷云(安卓)</a>\n\n<a href=\"https://itunes.apple.com/us/app/zhong-ji-leng-yun-wen-shi/id1173609882?mt=8\">中集冷云(苹果)</a>";
-        }
+//      else if($keyword=="下载"||$keyword=="app"||$keyword=="APP"||$keyword=="App"||$keyword=="安卓"||$keyword=="ios"||$keyword=="IOS"||$keyword=="应用"||$keyword=="苹果"){
+//           $content = "<a href=\"http://fusion.qq.com/cgi-bin/qzapps/unified_jump?appid=42375908&isTimeline=false&actionFlag=0&params=pname%3Dcom.ccsc.coldcloud%26versioncode%3D1%26channelid%3D%26actionflag%3D0&from=singlemessage&isappinstalled=1\">中集冷云(安卓)</a>\n\n<a href=\"https://itunes.apple.com/us/app/zhong-ji-leng-yun-wen-shi/id1173609882?mt=8\">中集冷云(苹果)</a>";
+//      }
         else if($keyword=="微信绑定"||$keyword=="手机号码绑定"||$keyword=="关联"){          
              $content = "<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx82dbac04fa8fd8ef&redirect_uri=http://www.ccsc58.cc/weixinnew/oauth_3.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">微信绑定</a>";
         }
@@ -511,7 +524,7 @@ if (isset($object->Recognition) && !empty($object->Recognition)){
             $content[] = array("Title"=>"多图文1标题", "Description"=>"", "PicUrl"=>"http://discuz.comli.com/weixin/weather/icon/cartoon.jpg", "Url" =>"http://m.cnblogs.com/?u=txw1958");
             $content[] = array("Title"=>"多图文2标题", "Description"=>"", "PicUrl"=>"http://d.hiphotos.bdimg.com/wisegame/pic/item/f3529822720e0cf3ac9f1ada0846f21fbe09aaa3.jpg", "Url" =>"http://m.cnblogs.com/?u=txw1958");
             $content[] = array("Title"=>"多图文3标题", "Description"=>"", "PicUrl"=>"http://g.hiphotos.bdimg.com/wisegame/pic/item/18cb0a46f21fbe090d338acc6a600c338644adfd.jpg", "Url" =>"http://m.cnblogs.com/?u=txw1958");
-        }else if (strstr($keyword, "使用说明书") || strstr($keyword, "操作手册")){
+        }else if (strstr($keyword, "使用说明书") || strstr($keyword, "操作手册")||strstr($keyword, "说明书")||strstr($keyword, "下载")  ){
             $content = array();
             $content[] = array("Title"=>"温湿度监控智能终端使用说明书（20TP与20DP）", "Description"=>" 温湿度监控智能终端使用说明书（20TP与20DP）", "PicUrl"=>"http://www.ccsc58.cc/weixinnew/img/shumingshu_tuisong.png", "Url" =>"http://mp.weixin.qq.com/s/a-7N3QysT4Bmn3eNGPldOw");
             $content[] = array("Title"=>"温度计使用说明书（LY-RTH1000系列）", "Description"=>"温度计使用说明书（LY-RTH1000系列）", "PicUrl"=>"http://www.ccsc58.cc/leng/images/1000B01.png", "Url" =>"http://www.ccsc58.com/folder/Download/1000A.pdf");

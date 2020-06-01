@@ -274,16 +274,16 @@
 		url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/get_history_data",
 		type: "post",
 		data: {
-			UserP: "w",
-			admin_permit: "zjly8888",
-			SheBeiBianHao: _num_m,
-			StartTime: "2000-08-26 00:00:00",
-			EndTime: history_time(_endTime),
-			StartNo: 0,
-			Length: 20,
-			admin_user: _userName,
-			admin_pass: _userPass,
-			openid: copenid
+			UserP:"w",
+			admin_permit:"zjly8888",
+			SheBeiBianHao:_num_m,
+			StartTime:"2000-08-26 00:00:00",
+			EndTime:history_time(_endTime),
+			StartNo:0,
+			Length:20,
+			admin_user:_userName,
+			admin_pass:_userPass,
+			openid:copenid
 		},
 		success: function(data) {
 			var _json = JSON.parse(data);
@@ -339,7 +339,6 @@
 				window.location.href = "../machineList.php";
 				return false;
 			} else {
-
 				alert("请求错误");
 				window.location.href = "../machineList.php";
 			}
@@ -868,14 +867,14 @@
 	 * 折线函数；
 	 * StartTime: _history_start_time,
 				EndTime: _history_end_time,
-	 */
-
+	 */		    
 	function history_my_zhe(_history_start_time, _history_end_time, _length) {
 		var _hegeShang = [],
 			_hegeXia = [],
 			_baojingShang = [],
 			_baojingXia = [],
 			_shi_tem = [],
+			_shi_tem2 = [],
 			_shi_humdity = [],
 			_now_zhe_time = [];
 		$.ajax({
@@ -908,23 +907,51 @@
 					for(var i = _json.resultCode.length - 1; i >= 0; i--) {
 						var _zhe_time = _json.resultCode[i].time.match(/^2[0-9]{3}/)[0] + "-"
 						_shi_tem.push(Number(Number(_json.resultCode[i].temperature01).toFixed(1)));
+						_shi_tem2.push(Number(Number(_json.resultCode[i].temperature02).toFixed(1)));
 						_now_zhe_time.push(_json.resultCode[i].time.replace(_zhe_time, ""));
 						_hegeShang.push(Number(_json.hegewendushangxian));
 						_hegeXia.push(Number(_json.hegewenduxiaxian));
 						_baojingShang.push(Number(_json.baojingwendushangxian));
 						_baojingXia.push(Number(_json.baojingwenduxiaxian));
 						_shi_humdity.push(Number(Number(_json.resultCode[i].humidity).toFixed(1)));
+						
 					}
-					history_zhe(_shi_tem, _now_zhe_time, _hegeShang, _hegeXia, _baojingShang, _baojingXia, _shi_humdity);
+					var sxxian=[];
+					//最高和最低温度
+			        sxxian.push(mathMin(_shi_tem))
+			        sxxian.push(mathMax(_shi_tem))
+					history_zhe(_shi_tem, _shi_tem2, _now_zhe_time, _hegeShang, _hegeXia, _baojingShang, _baojingXia, _shi_humdity,sxxian);
 				}
 			},
 			error: function() {
 				//alert("网络错误，请重新进入");
 			}
 		})
-
-		function history_zhe(_shi_tem, _now_zhe_time, _hegeShang, _hegeXia, _baojingShang, _baojingXia, _shi_humdity) {
+	    function mathMin(arrs){
+			var min = arrs[0];
+			for(var i = 1, ilen = arrs.length; i < ilen; i+=1) {
+			    if(arrs[i] < min) {
+			      min = arrs[i];
+			    }
+			  }
+			  return min;
+		}
+			
+		function mathMax(arrs) {
+			  var max = arrs[0];
+			  for(var i = 1,ilen = arrs.length; i < ilen; i++) {
+			    if(arrs[i] > max) {
+			      max = arrs[i];
+			    }
+			  }
+			  return max;
+			}
+		function history_zhe(_shi_tem,_shi_tem2, _now_zhe_time, _hegeShang, _hegeXia, _baojingShang, _baojingXia, _shi_humdity,sxxian) {
+			console.log(_shi_tem2);
+			console.log(sxxian);
 			var _width_xian;
+			var sheType;
+		
 			if(_shi_tem.length <= 10) {
 				_width_xian = 100;
 			} else {
@@ -934,7 +961,9 @@
 				width: _width_xian + "vw"
 			})
 			$(".zhiShiXian").removeClass("hidden");
+		
 			$('#history_content_zhe').highcharts({
+				
 				title: {
 					text: "",
 					x: 0 //center
@@ -946,7 +975,7 @@
 				xAxis: {
 					categories: _now_zhe_time,
 					title: {
-						text: "时间（月/日/时/分/秒）"
+						text: "温度1此时间段最高温度"+sxxian[1]+"℃"+",最低温度:"+sxxian[0]+"℃"
 					},
 					plotLines: [{
 						color: '#ccc', //线的颜色
@@ -962,29 +991,20 @@
 				},
 				yAxis: {
 					title: {
-						text: '温度01(°C)/湿度(%rh)'
+						text: '温度(°C)/湿度(%rh)'
 					},
 					plotLines: [{
-						color: 'red', //线的颜色
-						dashStyle: 'longdashdot', //标示线的样式，默认是solid（实线），这里定义为长虚线
-						value: _hegeShang[0], //定义在哪个值上显示标示线，这里是在x轴上刻度为3的值处垂直化一条线
-						width: 2 //标示线的宽度，1px
-					}, {
-						color: 'red', //线的颜色
-						dashStyle: 'longdashdot', //标示线的样式，默认是solid（实线），这里定义为长虚线
-						value: _hegeXia[0], //定义在哪个值上显示标示线，这里是在x轴上刻度为3的值处垂直化一条线
-						width: 2 //标示线的宽度，1px
-					}, {
 						color: '#F6A900', //线的颜色
-						dashStyle: 'shortdot', //标示线的样式，默认是solid（实线），这里定义为长虚线
+						dashStyle: 'solid', //标示线的样式，默认是solid（实线），这里定义为长虚线
 						value: _baojingShang[0], //定义在哪个值上显示标示线，这里是在x轴上刻度为3的值处垂直化一条线
 						width: 2 //标示线的宽度，1px
-					}, , {
+					}, {
 						color: '#F6A900', //线的颜色
-						dashStyle: 'shortdot', //标示线的样式，默认是solid（实线），这里定义为长虚线
+						dashStyle: 'solid', //标示线的样式，默认是solid（实线），这里定义为长虚线 shortdot
 						value: _baojingXia[0], //定义在哪个值上显示标示线，这里是在x轴上刻度为3的值处垂直化一条线
 						width: 2 //标示线的宽度，1px
-					}]
+					}
+					]
 				},
 				tooltip: {
 					valueSuffix: ''
@@ -997,17 +1017,8 @@
 					borderWidth: 0,
 					itemWidth: 80
 				},
-				series: [{
-					name: '合格上限',
-					data: _hegeShang,
-					color: "rgba(0,0,0,0)",
-					dashStyle: 'longdash'
-				}, {
-					name: '合格下限',
-					data: _hegeXia,
-					color: "rgba(0,0,0,0)",
-					dashStyle: 'longdash'
-				}, {
+				series: [
+			    {
 					name: '报警上限',
 					data: _baojingShang,
 					color: "rgba(0,0,0,0)",
@@ -1018,14 +1029,23 @@
 					color: "rgba(0,0,0,0)",
 					dashStyle: 'shortdot'
 				}, {
-					name: '实时温度01',
+					name: '实时温度1',
 					data: _shi_tem,
 					color: "blue",
 					lineWidth: 1,
 					tooltip: {
 						valueSuffix: '°C'
 					},
-				}, {
+				},{
+					name: '实时温度2',
+					data: _shi_tem2,
+					color: "blue",
+					lineWidth: 1,
+					tooltip: {
+						valueSuffix: '°C'
+					},
+				}, 
+				{
 					name: '实时湿度',
 					data: _shi_humdity,
 					color: "green",
@@ -1033,7 +1053,8 @@
 					tooltip: {
 						valueSuffix: '%rh'
 					},
-				}]
+				}
+				]
 			});
 		}
 	}
