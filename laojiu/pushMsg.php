@@ -31,7 +31,7 @@ function Tui_song($first,$keyword1,$keyword2,$keyword3,$keyword4,$keyword5,$rema
                 'remark'=>array('value'=>urlencode($remark),'color'=>"#000"),
             )
         );
-        $url="http://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".getAccessToken();
+        $url="https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".getAccessToken();
         $result=https_request($url,urldecode(json_encode($template)));
         echo($result);
     }
@@ -54,7 +54,7 @@ function Tui_expiration($first,$keyword1,$keyword2,$keyword3,$remark,$openId)
                 'remark'=>array('value'=>urlencode($remark),'color'=>"#000"),
             )
         );
-        $url="http://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".getAccessToken();
+        $url="https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".getAccessToken();
         $result=https_request($url,urldecode(json_encode($template)));
         echo($result);
 }

@@ -1,7 +1,6 @@
 /*返回购物车*/
 $(".back_list").on("click", function() {
-	//window.location.href = "shop_car.html"
-	history.go(-1);
+	window.location.href = "shop_car.html"
 });
 var _zongJia = window.location.href.match(/\?zongjia=\S+/)[0].replace("?zongjia=", "").replace(window.location.href.match(/\&shuLiang=\S+/)[0], "");
 var _shuLiang = window.location.href.match(/\&shuLiang=\S+/)[0].replace("&shuLiang=", "");
@@ -33,7 +32,7 @@ $(".jiFen input").on("click", function() {
 	/*结算按钮的跳转*/
 $(".footer_right").on("click", function() {
 	console.log($(this).prev().find("span").html().replace("合计：￥", ""));
-	//window.sessionStorage.setItem("pay_money", $(this).prev().find("span").html().replace("合计：￥", ""))
-	//window.location.href = "../payweixin/example/money.html";
+	window.sessionStorage.setItem("pay_money", $(this).prev().find("span").html().replace("合计：￥", ""))
+	window.location.href = "../payweixin/example/money.html";
 });
 //console.log("http://www.ccsc58.cc/weixinnew/new/example/jsapi.php?total=1&mao="++total=1&mao=%E4%BD%A0%E5%A5%BD+&code=021ea85F1unTo200xH5F1g6Z4F1ea854&state=STATE".match(/\&mao=\S+\+total=/)[0].replace("&mao=","").replace("+total=",""))

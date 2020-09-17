@@ -39,7 +39,7 @@
 				width: 65%;
 				height: 4rem;
 				border: none;
-				line-height: 5rem;
+				line-height: 4rem;
 				text-align: center;
 				font-size: 1.5rem;
 				text-align: right;
@@ -267,7 +267,8 @@
 				//点击确认支付
 				$(".button").on("click", function() {
 					var _username = $("#username").val();
-					var _jinE = $("#money").val();
+					var _jinE1 = parseFloat($("#money").val());
+			     	var _jinE = parseFloat(_jinE1*100).toFixed(0);
 					var _tel = $("#tel").val();
 					var _danWei = $("#company").val();
 					var _money_name = $("#city").val();
@@ -278,10 +279,10 @@
 									if(_money_name != "") {
 										window.sessionStorage.setItem("username", _username);
 										window.sessionStorage.setItem("tel", _tel);
-										window.sessionStorage.setItem("pay_money", _jinE);
+										window.sessionStorage.setItem("pay_money", _jinE1);
 										window.sessionStorage.setItem("pay_daWei", _danWei);
 										window.sessionStorage.setItem("_pay_name", _money_name);
-										window.location.href = "zhifu/example/jsapi.php?total=" + _jinE * 100;
+										window.location.href = "zhifu/example/jsapi.php?total=" + _jinE;
 									} else {
 										alert("付款备注不能为空！")
 									}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>北京中集智冷科技有限公司</title>
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+		<link rel="stylesheet" type="text/css" href="../css/changeM.css" />
+		<style type="text/css">
+			.content {
+				width: 100%;
+				height: auto;
+				margin-top: 4rem;
+				padding: 0 1rem;
+				box-sizing: border-box;
+				font-size: 1.4rem;
+			}
+			
+			.formdata {
+				margin-top: 5rem;
+				box-sizing: border-box;
+			}
+			
+			.formdata div {
+				height: 4rem;
+				line-height: 4rem;
+				margin-top: 1rem;
+				border-radius: 1rem;
+			}
+			
+			.formdata div input {
+				height: 4rem;
+				line-height: 4rem;
+				width: 100%;
+				padding: 0 2vw;
+				box-sizing: border-box;
+				border-radius: 1rem;
+			}
+			
+			.formdata .last {
+				margin-top: 20rem;
+				width: 100%;
+				text-align: center;
+			}
+			
+			.last button {
+				width: 16rem;
+				height: 4rem;
+				background: #40C0C3;
+				border-radius: 5rem;
+				border: none;
+				color: #ffffff;
+				font-size: 1.5rem;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="header">
+			<img class="back_list" src="../img/back.png" /> 添加成员
+		</div>
+		<div class="content">
+			<div class="formdata">
+				<div>
+					<input type='number' class="telphone" placeholder="请输入手机号码" />
+				</div>
+				<div>
+					<input type='text' class="nickname" placeholder="请输入昵称" />
+				</div>
+				<div class="last">
+					<button class="btn-ok">分享</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(".back_list").on("click", function() {
+				window.history.go(-1);
+			});
+			/*
+			 * 获取用户的名称和密码；
+			 */
+			var userinfo = JSON.parse(localStorage.getItem('isonline'));
+			var _user = userinfo.user;
+			var _pass = userinfo.pwd;
+			$(".btn-ok").on("click", function() {
+				var _telphone = $(".telphone").val();
+				var _nickname = $(".nickname").val();
+
+				$.ajax({
+					type: "post",
+					url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/share",
+					async: true,
+					data: {
+						mainname: _user,
+						aftername: _telphone,
+						nickname: _nickname
+					},
+					dataType: "json",
+					success: function(res) {
+						console.log(res);
+						if(res.code == 0) {
+							alert('分享成功');
+							window.location.href = 'invite.html';
+						} else {
+							alert(res.message)
+						}
+					},
+					error: function(err) {
+						console.log(err);
+					}
+				});
+			})
+		</script>
+	</body>
+
+</html>

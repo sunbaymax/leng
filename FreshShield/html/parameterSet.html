@@ -125,6 +125,8 @@
 			var _userPass = userinfo.pwd;
 			var copenid = userinfo.copenid == undefined ? '' : userinfo.copenid;
 			var _num_m = "";
+			var utype = userinfo.userType;
+			
 			if(_url.indexOf("&") != -1) {
 				_num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "").replace("&", "");
 			} else {
@@ -195,8 +197,13 @@
 					$(".btnok button").attr('taocan', _json.resultCode.flow_type);
 					$(".btnok button").attr('yejian', _json.resultCode.yejianshangchuankaiguan);
 					if(_json.resultCode.flow_type == 1) {
-						$("#message").show()
+						
+						if(utype == 'b') {
+								$("#message").hide()
+						} else{
+							$("#message").show()
 						$("#message span").text("*该为A套餐上传间隔为5分钟及以上,请点击");
+						}
 					} else {
 						$("#message").hide()
 					}

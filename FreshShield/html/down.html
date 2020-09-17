@@ -66,8 +66,8 @@
 		<div class="header"><img class="back_list_user" src="../img/back.png" />数据下载</div>
 		<form action="">
 			<p>设备编号：<input type="text" readonly="readonly" /></p>
-			<p>开始时间：<input style="text-align: center;" type="text" id="history_start_time" readonly/></p>
-			<p>结束时间：<input style="text-align: center;" type="text" id="history_end_time" readonly /></p>
+			<p>开始时间：<input style="text-align: center;" type="text" id="history_start_time" onFocus="WdatePicker({startDate:'%y-%M-{%d-1} %H:%m:%s',dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly/></p>
+			<p>结束时间：<input style="text-align: center;" type="text" id="history_end_time" onFocus="WdatePicker({startDate:'%y-%M-%d %H:%m:%s',dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly /></p>
 			<p>选择格式：
 				<select name="">
 					<option value="1">PDF格式</option>
@@ -80,6 +80,7 @@
 			<img src="../img/down_weixin.png" />
 		</div>
 		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../My97DatePicker/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			var _url = window.location.href;
 			var _num_m = _url.match(/\?num_m=\S+&s/)[0].replace("?num_m=", "").replace("&s", "");
@@ -93,6 +94,16 @@
 //				}
               history.go(-1);
 			});
+
+        function history_time(_a) {
+            var _start_year = _a.getFullYear();
+            var _start_month = _a.getMonth() + 1 < 10 ? "0" + (_a.getMonth() + 1) : _a.getMonth() + 1;
+            var _start_date = _a.getDate() < 10 ? "0" + (_a.getDate()) : _a.getDate();
+            var _start_hour = _a.getHours() < 10 ? "0" + (_a.getHours()) : _a.getHours();
+            var _start_minutes = _a.getMinutes() < 10 ? "0" + (_a.getMinutes()) : _a.getMinutes();
+            var _start_seconds = _a.getSeconds() < 10 ? "0" + (_a.getSeconds()) : _a.getSeconds();
+            return _start_year + "-" + _start_month + "-" + _start_date + " " + _start_hour + ":" + _start_minutes + ":" + _start_seconds;
+        }
 			var _start_time = _url.match(/\&start=\S+&e/)[0].replace("&start=", "").replace("&e", "").replace("%20", " ");
 			var _end_time = _url.match(/\&end=\S+/)[0].replace("&end=", "").replace("%20", " ");
 			$("form p:nth-of-type(1) input").val(_num_m);

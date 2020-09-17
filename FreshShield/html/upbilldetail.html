@@ -145,7 +145,7 @@
 					<p><span>说明：设备上传间隔1分钟及以上</span></p>
 				</div>
 				<div class="msg">
-					该设备，套餐A剩余<span class="oldmoney">*</span>元，升级套餐B应付<span class="paymoney">*</span>元。
+					该设备，套餐A剩余<span class="oldmoney">*</span>元，1年升级套餐B应付<span class="paymoney">*</span>元。
 				</div>
 				<div class="zhifu">
 					<button>支付</button>
@@ -264,14 +264,14 @@
 				var _money=parseFloat($(".paymoney").text());
 				if(_money<=0){
 					$(this).attr('disabled',"true");
-					
 				}
 				else{
 					var sjuser={
 					u_id:_uid,
 					f_id:2,
 					money:_money,
-					shebeihao:_num_m
+					shebeihao:_num_m,
+					years:1
 				};
 				window.sessionStorage.setItem("sjgoingpay", JSON.stringify(sjuser));
 				window.location.href = 'http://www.ccsc58.cc/leng/weixin/zhifu/example/freshdun_flowpay.php?total=' + parseFloat(_money*100);

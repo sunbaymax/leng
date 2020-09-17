@@ -1,0 +1,98 @@
+.hong_bj{
+	width:100vw;
+	height:100vh;
+	position:fixed;
+	top:0;
+	left:0;
+	z-index: -99999;
+}
+body{
+	background: url(../img/bangding.png) no-repeat; 
+	background-repeat:no-repeat; background-size:100% 120%;-moz-background-size:100% 120%;}  
+	
+.hong_box{
+	position:relative;
+	z-index: 10;
+	width:100%;
+	margin-top:11vh;
+	margin-bottom: 2rem;
+}
+.hong_box p{
+	width:100%;
+	height:4rem;
+	text-align: center;
+	line-height: 4rem;
+	font-size: 3.3rem;
+	color:#ffffff;
+	font-family: "宋体";
+	font-weight: bold;
+	margin-bottom: 100px;
+	
+}
+
+.hong_box input {
+    width: 80%;
+    height: 4rem;
+    margin-left: 10%;
+    margin-top: 1rem;
+    border-bottom-style: 1px solid #e7e7e7;
+    color: #ababab;
+    font-size: 1.5rem;
+    float: left;
+    box-sizing: border-box;
+    padding-left: 2VW;
+}
+.hong_box img{
+	position:absolute;
+	height:3rem;
+	width:3rem;
+	top:5.5rem;
+	right:12%;
+}
+.hong_box input:nth-of-type(2){
+	width:50%;	
+}
+.yanZhengMa{
+	width:25%;
+	height:4rem;
+	font-size:1.3rem;
+	color:#ffffff;
+	text-align: center;
+	line-height:4rem;
+	float:left;
+	margin-left:5%;
+	margin-top:1rem;
+	background:#3299FE;
+	border-radius: 5px;
+	
+}
+.hong_box .button{
+	width:80%;
+	height:3rem;
+	margin-left:10%;
+	margin-top:2rem;
+	text-align: center;
+	line-height: 3rem;
+	color:#ffffff;
+	background: #3299FE;
+	font-size:1.5rem;	
+	float: left;
+	letter-spacing: 5px;
+	font-weight:bold;
+	border-radius: 5px;
+}
+/*.hong_box .button:hover  {
+	width:80%;
+	height:4rem;
+	margin-left:10%;
+	margin-top:2rem;
+	text-align: center;
+	line-height: 4rem;
+	color:#ffffff;
+	background: #ABABAB;
+	font-size:2rem;	
+	float: left;
+	letter-spacing: 5px;
+	font-weight:bold;
+	border-radius: 5px;
+}*/

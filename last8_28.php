@@ -233,16 +233,16 @@ function Tui_song($first,$keyword1,$keyword2,$keyword3,$remark,$openId)
             'template_id'=>"zL41XN2WuflVXGVdKmu_ThLrbILzBRvW84L7JkjnVGM",
             'url'=>"http://www.ccsc58.cc/leng/FreshShield/html/warning_tui_rukou.html?num_m=".$keyword6."&",
             'topcolor'=>"#7B68EE",
-            'data'=>array('first'=>array('value'=>urlencode($first),'color'=>"#000",),
+            'data'=>array('first'=>array('value'=>urlencode($first),'color'=>"#0000FF",),
                 'keyword1'=>array('value'=>urlencode($keyword3),'color'=>"#ff0000",),
                 'keyword2'=>array('value'=>urlencode($keyword4),'color'=>"#000",),
                 'keyword3'=>array('value'=>urlencode($keyword2),'color'=>"#000",),
                 'remark'=>array('value'=>urlencode($remark),'color'=>"#000"),
             )
         );
-        $url="http://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".getAccessToken();
+        $url="https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".getAccessToken();
         $result=https_request($url,urldecode(json_encode($template)));
-        //var_dump($result);
+        //echo($result);
     
 }
 //微信推送报警函数
@@ -271,9 +271,9 @@ function jiankong($first,$keyword1,$keyword2,$keyword3,$remark,$openId,$app_key)
                 'remark'=>array('value'=>urlencode($remark),'color'=>"#008000"),
             )
         );
-        $url="http://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".getAccessToken();
+        $url="https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".getAccessToken();
         $result=https_request($url,urldecode(json_encode($template)));
-        var_dump($result);
+        echo($result);
     }
 }
 function xiafa_yzm($first,$keyword1,$keyword2,$remark,$openId,$app_key)
@@ -290,9 +290,9 @@ function xiafa_yzm($first,$keyword1,$keyword2,$remark,$openId,$app_key)
                 'remark'=>array('value'=>urlencode('请于30分钟内正确输入 ，若非本人操作，请忽略！'),'color'=>"#008000"),
             )
         );
-        $url="http://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".getAccessToken();
+        $url="https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".getAccessToken();
         $result=https_request($url,urldecode(json_encode($template)));
-        var_dump($result);
+        echo($result);
     }
 }
 function Pay_money($first,$keyword1,$keyword2,$keyword3,$keyword4,$remark,$openId,$app_key)
@@ -311,7 +311,7 @@ function Pay_money($first,$keyword1,$keyword2,$keyword3,$keyword4,$remark,$openI
                 'remark'=>array('value'=>urlencode($remark),'color'=>"#000",),
             )
         );
-        $url="http://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".getAccessToken();
+        $url="https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".getAccessToken();
         $result=https_request($url,urldecode(json_encode($template)));
     }
 }
@@ -330,9 +330,9 @@ function download($first,$keyword1,$keyword2,$keyword3,$remark,$openId,$app_key,
                 'remark'=>array('value'=>urlencode($remark),'color'=>"#000",),
             )
         );
-        $url="http://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".getAccessToken();
+        $url="https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".getAccessToken();
         $result=https_request($url,urldecode(json_encode($template)));
-        var_dump($result);
+        echo($result);
    }
 }
 function repay($first,$keyword1,$keyword2,$keyword3,$keyword4,$remark,$openId,$app_key,$app_key1,$app_key2,$app_key3)
@@ -351,9 +351,9 @@ function repay($first,$keyword1,$keyword2,$keyword3,$keyword4,$remark,$openId,$a
                 'remark'=>array('value'=>urlencode($remark),'color'=>"#000",),
             )
         );
-        $url="http://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".getAccessToken();
+        $url="https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".getAccessToken();
         $result=https_request($url,urldecode(json_encode($template)));
-        var_dump($result);
+        echo($result);
    }
 }
 function Replysale($first,$keyword1,$keyword2,$keyword3,$keyword4,$remark,$openId,$id)
@@ -371,9 +371,9 @@ function Replysale($first,$keyword1,$keyword2,$keyword3,$keyword4,$remark,$openI
                 'remark'=>array('value'=>urlencode($remark),'color'=>"#000",),
             )
         );
-        $url="http://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".getAccessToken();
+        $url="https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".getAccessToken();
         $result=https_request($url,urldecode(json_encode($template)));
-        var_dump($result);
+        echo($result);
 }
 function shop_payok($first,$keyword1,$keyword2,$keyword3,$keyword4,$remark,$openId)
 {
@@ -390,9 +390,9 @@ function shop_payok($first,$keyword1,$keyword2,$keyword3,$keyword4,$remark,$open
                 'remark'=>array('value'=>urlencode($remark),'color'=>"#000",),
             )
         );
-        $url="http://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".getAccessToken();
+        $url="https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".getAccessToken();
         $result=https_request($url,urldecode(json_encode($template)));
-        var_dump($result);
+        echo($result);
 }
 function fault_alarm($first,$keyword1,$keyword2,$keyword3,$keyword4,$keyword5,$remark,$openId,$openId2,$openId3,$openId4,$openId5)
 {
@@ -410,9 +410,9 @@ function fault_alarm($first,$keyword1,$keyword2,$keyword3,$keyword4,$keyword5,$r
                 'remark'=>array('value'=>urlencode($remark),'color'=>"#000",),
             )
         );
-        $url="http://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".getAccessToken();
+        $url="https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".getAccessToken();
         $result=https_request($url,urldecode(json_encode($template)));
-        var_dump($result);
+        echo($result);
 }
 //function SendWeiXin33($zhanghao,$shebeibianhao,$baojingshijian,$baojingjibie,$baojingmokuai,$baojingleixing,$openID,$gongsimingcheng,$shebeibianhao_number){
 //	 $url = 'http://www.ccsc58.cc/weixinnew/last.php';   //服务接口地址

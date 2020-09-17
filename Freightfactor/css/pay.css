@@ -1,0 +1,171 @@
+
+.content{
+	width:100%;
+	height:auto;
+	margin-top:4rem;
+	margin-bottom: 5rem;
+}
+.footer{
+	font-size:1.2rem;	
+}
+.footer_left{
+	width:60%;
+	height:5rem;
+	line-height:5rem;
+}
+.footer_left span{
+	margin-left:10%;
+}
+.footer_left span{
+	color:#FF8603;
+	font-size: 1.5rem;
+}
+.footer_left span input{
+	width:1.2rem;
+	height:1.2rem;
+}
+.footer_right{
+	width:40%;
+	height:5rem;
+	line-height: 5rem;
+	background:#FF8503;
+	color:#f9f9f9;
+	font-size: 2rem;
+	text-align: center;
+}
+.shouHuoDi{
+	width:100%;
+	height:6rem;
+	position:relative;
+}
+.shouHuoDi p:nth-of-type(1){
+	width:95%;
+	height:3rem;
+	line-height:3rem;
+	font-size:1.5rem;
+	padding-left:5%;
+}
+.shouHuoDi p:nth-of-type(1) span{
+	margin-left:10px;
+}
+.shouHuoDi p:nth-of-type(2){
+	width:95%;
+	padding-left:5%;
+	height:2rem;
+	line-height:2rem;
+	font-size:1rem;
+	color:#808080;
+}
+.shouHuoDi img{
+	position: absolute;
+	height:2rem;
+	top:1.5rem;
+	right:1.5rem;
+}
+.fenge{
+	width:100%;
+}
+ul li{
+	width:100%;
+	height:5rem;
+	border-bottom: 1px solid rgba(0,0,0,.3);
+	position:relative;
+}
+.li_left,.li_right{
+	width:20%;
+	height:100%;
+}
+.li_left input{
+	display:none;
+}
+.li_left img{
+	width:40%;
+	height:4rem;
+	margin-right:30%;
+	margin-top:0.5rem;
+}
+.li_right img{
+	display:none;
+}
+.li_right .right{
+	font-size:1.5rem;
+	color:#FF8603;
+	margin-right:1rem;
+}
+.li_middle{
+	width:60%;
+	height:100%;
+}
+.li_middle span:nth-of-type(3){
+	display:none;
+}
+.li_middle p:nth-of-type(1){
+	width:100%;
+	height:2rem;
+	line-height: 2rem;
+	font-size:1.3rem;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.li_middle p:nth-of-type(2){
+	width:100%;
+	height:2rem;
+	line-height:2rem;
+	font-size:1rem;
+	color:#808080;
+}
+.li_middle p:nth-of-type(3){
+	position:absolute;
+	right:1rem;
+	bottom:1rem;
+}
+.kuaiDi,
+.liuYan,
+.youHuiQuan,
+.jiFen{
+	width:90%;
+	height:5rem;
+	line-height:5rem;
+	border-bottom: 1px solid rgba(0,0,0,.3);
+	font-size:1.5rem;
+	padding:0 5% 0 5%;
+}
+.kuaiDi span{
+	float:right;
+}
+.liuYan input{
+	height:2rem;
+	border:none;
+	outline: none;
+	font-size:1.3rem;
+}
+.youHuiQuan span{
+	height:1.5rem;
+	display:inline-block;
+	padding:0 5px 0 5px;
+	line-height:1.5rem;
+	font-size:1rem;
+	background:#FF8603;
+	color:#fefefe;
+	border-radius: 0.2rem;
+	margin-left:5px;
+}
+.jiFen span{
+	margin-left:5px;
+	color:#FF8603;
+}
+.jiFen input{
+	width:1.2rem;
+	height:1.2rem;
+	float:right;
+	margin-top:1.9rem;
+}
+.noaddress{
+	height: 5rem;
+    line-height: 5rem;
+    display: block;
+    color: #222;
+    text-decoration: none;
+    font-size: 1.5rem;
+}

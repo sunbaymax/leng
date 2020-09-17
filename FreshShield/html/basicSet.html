@@ -8,7 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="../css/index.css" />
 		<link rel="stylesheet" type="text/css" href="../css/set.css" />
 		<style type="text/css">
-
+           
 		</style>
 	</head>
 
@@ -34,8 +34,9 @@
 					<span>激活时间：</span><input type="text" class="activeTime" readonly="readonly" />
 				</div>
 				<div>
-					<span>到期时间：</span><input type="text" class="daoqiTime" readonly="readonly" />
+					<span>到期时间：</span><input type="text" class="daoqiTime" readonly="readonly" /><button class="ispay isgopay">续费</button>
 				</div>
+				
 			</div>
 			<div class="btnok">
 				<button>保存</button>
@@ -61,6 +62,7 @@
 			var _openid = localStorage.getItem('openId');
 			if(utype == 'b') {
 				$('.twoc').hide();
+				$('.ispay').hide();
 			} else {
 				$('.twoc').show();
 			}
@@ -118,6 +120,10 @@
 					console.log("网络错误！！！")
 				}
 			});
+			$(".ispay").on("click",function(){
+				let num=$(".shebeihao").val();
+				location.href='buyflewpackage.html?num_m='+num;
+			})
 			$(".btnok button").on("click", function() {
 				var bieming = $(".bieming").val();
 				var _GPS_Start = $(".shebeihao").attr('biao');

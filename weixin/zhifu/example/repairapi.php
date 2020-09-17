@@ -58,7 +58,7 @@ $editAddress = $tools->GetEditAddressParameters();
 </head>
 
 <body>
-	<form class="abc" action="../../../weixinnew/last.php" method="post"  style="display: none;"  id="aaa">
+	<form class="abc" method="post"  style="display: none;"  id="aaa">
 		收款成功：<input class="abcd" type="text" name="success"  value="收款成功"/><br /> 
 		订单号：<input type="text" class="danhao" name="danhao" value="暂无" /><br />
 		金额：<input class="money" type="text" name="nickname" /><br /> 
@@ -146,45 +146,20 @@ $editAddress = $tools->GetEditAddressParameters();
 		}
 
 		function jsApiCall() {
-			console.log(123);
 			WeixinJSBridge.invoke(
 				'getBrandWCPayRequest',
 				<?php echo $jsApiParameters; ?>,
 				function(res) {
 					WeixinJSBridge.log(res.err_msg);
 					if(res.err_msg == "get_brand_wcpay_request:ok") {
-						var date = new Date();
-						Date.prototype.Format = function(fmt) { //author: meizz
-							var o = {
-								"M+": this.getMonth() + 1, //月份
-								"d+": this.getDate(), //日
-								"h+": this.getHours(), //小时
-								"m+": this.getMinutes(), //分
-								"s+": this.getSeconds(), //秒
-								"q+": Math.floor((this.getMonth() + 3) / 3), //季度
-								"S": this.getMilliseconds() //毫秒
-							};
-							if(/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-							for(var k in o)
-								if(new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-							return fmt;
-						}
-						var time2 = new Date().Format("yyyy-MM-dd hh:mm:ss");
-						var time3 = new Date().Format("yyyyMMddhhmmss");
-						$(".danhao").val(time3);
 						var _username = window.sessionStorage.getItem("username");
 						var _tel = window.sessionStorage.getItem("tel");
 						var _money =_total/100;
-						var _daWei = window.sessionStorage.getItem("pay_daWei");
+						var _daWei = window.sessionStorage.getItem("pay_daWei");				
 						var _payCity=window.sessionStorage.getItem("_pay_name");
 						var _danhao=window.sessionStorage.getItem("_danhao");
 						var _openid=window.sessionStorage.getItem("openid");
-						//alert(_daWei);decodeURI(window.location.href.match(/\&mao=\S+\+total=/)[0].replace("&mao=","").replace("+total=",""))
-						var _x = new Date();
-						$(".money").val("￥" + Number(_money).toFixed(2));
-						$(".pay_danwei").val(_daWei);
-						$(".time").val("付款备注："+_payCity);	
-									
+							
 						$.ajax({
 							url: "http://www.ccsc58.com/json/weixin/02_00_lykj_weixin_zhifu_post.php",
 							type:"post",
@@ -200,18 +175,22 @@ $editAddress = $tools->GetEditAddressParameters();
 							},
 							success: function(data) {
 								var _json = JSON.parse(data);
+						
 								if(_json.code == 10000 && _json.message == "success" && _json.resultCode == "success") {
 //									var _openId=["oSPfHv-jEPOW_KI6x67x1JOGqm54","oSPfHv-pXx-_E5jFehQHWQy1lpmI","oSPfHv17xGpC6zVfDQ-bErQf-cko","oSPfHv84aKIanXMRwVie1dGybNxQ","oSPfHv1vTpBnh_tiJ4X6-2lFnmEE"];
-									var _openId=["oSPfHv-pXx-_E5jFehQHWQy1lpmI",'oSPfHv6gYO5TVgeFIkTi1YU0tQqs','oSPfHv2Ag9ERdlw1XeNomMgKz1Bg'];
-									for(var i=0;i<_openId.length;i++){
-										$("._openID").val(_openId[i]);
-//										var success=$("input[name='success']").val();
-//										var danhao=$("input[name='danhao']").val();
-//										var nickname=$("input[name='nickname']").val();
-//										var username=$("input[name='username']").val();
-										var cb=$("input[name='cb']").val();
-										var m123=$("input[name='123']").val();
-										var app_key=$("input[name='app_key']").val();
+									var _openId=['oSPfHv2Ag9ERdlw1XeNomMgKz1Bg','oSPfHv-pXx-_E5jFehQHWQy1lpmI','oSPfHv6gYO5TVgeFIkTi1YU0tQqs'];
+									var date = new Date();
+									    var month = date.getMonth() + 1;
+									    var strDate = date.getDate();
+									    if (month >= 1 && month <= 9) {
+									        month = "0" + month;
+									    }
+									    if (strDate >= 0 && strDate <= 9) {
+									        strDate = "0" + strDate;
+									    }
+									    var cb = date.getFullYear() + "-" + month + "-" + strDate
+									            + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+									for(let i=0;i<_openId.length;i++){									                                 																								
 										$.ajax({
 											type:"post",
 											url:"http://www.ccsc58.cc/leng/lengyunjiekou.php",
@@ -222,15 +201,15 @@ $editAddress = $tools->GetEditAddressParameters();
 												username:_username,
 												company:_daWei,
 												cb:cb,
-												m123:m123,
-												app_key:app_key
+												m123:_openId[i],
+												app_key:'261AFF68C0E9F076420D083D66222824'
 											},
 											success:function(data){
 												console.log('推送成功');
 											},
 											error:function(){
-												alert("如未付款成功请联系'智冷科技客服人员'");
-												return false;
+												alert("如未付款成功请联系,智冷科技客服人员");
+												
 											}
 										});
 										}
@@ -261,12 +240,12 @@ $editAddress = $tools->GetEditAddressParameters();
 										window.location.href="http://www.ccsc58.cc/IceKnight/Zlservices/myrepair.html?openid="+_openid;
 										} else {
 											alert("网络错误，请立即联系'智冷科技'客服人员确认是否已收到付款！");
-											return false;
+											
 										}
 							},
 							error:function(){
 								alert("网络错误,请立即联系'智冷科技'客服人员确认是否已收到付款！");
-								return false;
+								
 							}
 						});
 					} else if(res.err_msg == "get_brand_wcpay_request:cancel") {
@@ -278,6 +257,7 @@ $editAddress = $tools->GetEditAddressParameters();
 				}
 			);
 		}
+		
 	</script>
 </body>
 

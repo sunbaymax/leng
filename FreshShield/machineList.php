@@ -79,17 +79,17 @@
 								</div>
 								<div class="list-content">
 									<div>
-										<p>温度1：<span class="temp1">0.0</span>℃</p>
-										<p>温度2：<span class="temp2">0.0</span></p>
-	
-									</div>
-									<div>
-										<p>湿度：<span class="humidity">-</span></p>
-										<p>电量：<span class="power">-</span>%</p>
+										<p><span class="wen">温度1：</span><span class="temp1">0.0</span>℃</p>
+										<p>温度2：<span class="temp2"></span></p>
+	                                    <p>湿度：<span class="humidity"></span></p>
 									</div>
 									<div>
 										<p>信号强度：<span class="signal">无</span></p>
-										<p>非报警温度区间：<span class="alarmArea"></span></p>
+										<p>电量：<span class="power">-</span>%</p>
+									</div>
+									<div>
+										
+										<p>合格温度区间：<span class="alarmArea"></span></p>
 										
 									</div>
 									<!--<div>
@@ -271,10 +271,20 @@
 							var _json = JSON.parse(data);
 							if(_json.resultCode != "nodata" && _json.code == 10000) {
 								for(var i = 0; i < _json.resultCode.length; i++) {
+									console.log(_json.resultCode[i].beizhu)
 									var _dem = $(".list").eq(0).clone().removeClass("hidden").appendTo(".scroll_box");
+									if(_json.resultCode[i].model_type=='TT'){
+										_dem.find(".list-content .temp2").html(_json.resultCode[i].temperature02==0?'-':_json.resultCode[i].temperature02+"℃");
+										_dem.find(".list-content .humidity").parents('p').addClass('hidden');
+									}else{
+										_dem.find(".list-content .temp1").parents('p').find('.wen').text('温度：');
+										_dem.find(".list-content .temp2").parents('p').addClass('hidden');
+										_dem.find(".list-content .humidity").html(_json.resultCode[i].humidity==0?'-':_json.resultCode[i].humidity+"%RH");
+									}
 									_dem.find(".list-content .temp1").html(_json.resultCode[i].temperature01);
-									_dem.find(".list-content .temp2").html(_json.resultCode[i].temperature02==0?'-':_json.resultCode[i].temperature02+"℃");
-									_dem.find(".list-content .humidity").html(_json.resultCode[i].humidity==0?'-':_json.resultCode[i].humidity+"%RH");
+									_dem.find(".beizhu").html(_json.resultCode[i].beizhu);
+//									_dem.find(".list-content .temp2").html(_json.resultCode[i].temperature02==0?'-':_json.resultCode[i].temperature02+"℃");
+//									_dem.find(".list-content .humidity").html(_json.resultCode[i].humidity==0?'-':_json.resultCode[i].humidity+"%RH");
 									_dem.find(".list-content .speed").html(_json.resultCode[i].speed);
 									_dem.find(".list-content .power").html(_json.resultCode[i].power == null ? "0" : _json.resultCode[i].power);
 									_dem.find(".list_tittle .shebeihao").html(_json.resultCode[i].shebeibianhao);
@@ -331,11 +341,23 @@
 						dataType: 'json',
 						success: function(res) {
 							if(res.code == 0 && res.message == 'success') {
+							   if(res.data.count<=5){
+									console.log("111")
+									$(".wait").addClass("hidden");
+							         $(".more").addClass("hidden");
+									$(".more").html("未找到更多设备");
+								}
 								for(var i = 0; i < res.data.data.length; i++) {
 									var _dem = $(".list").eq(0).clone().removeClass("hidden").appendTo(".scroll_box");
 									_dem.find(".list-content .temp1").html(res.data.data[i].last_temperature01);
-									_dem.find(".list-content .temp2").html(res.data.data[i].last_temperature02==0?'-':res.data.data[i].last_temperature02+"℃");
-									_dem.find(".list-content .humidity").html(res.data.data[i].last_humidity==0?'-':res.data.data[i].last_humidity+"%RH");
+									if(res.data.data[i].model_type=='TT'){
+										_dem.find(".list-content .temp2").html(res.data.data[i].last_temperature02==0?'-':res.data.data[i].last_temperature02+"℃");
+										_dem.find(".list-content .humidity").parents('p').addClass('hidden');
+									}else{
+										_dem.find(".list-content .temp1").parents('p').find('.wen').text('温度：');
+										_dem.find(".list-content .temp2").parents('p').addClass('hidden');
+										_dem.find(".list-content .humidity").html(res.data.data[i].last_humidity==0?'-':res.data.data[i].last_humidity+"%RH");
+									}
 									_dem.find(".list-content .speed").html(res.data.data[i].speed);
 									_dem.find("#caozuo .beizhu").html(res.data.data[i].beizhu==''?'':res.data.data[i].beizhu);
 									_dem.find(".list-content .power").html(res.data.data[i].last_power == null ? "0" : res.data.data[i].last_power);
@@ -346,6 +368,7 @@
 									_dem.find(".list-content .boxstate").html(res.data.data[i].xiangzistate == 'close' ? "关闭" : "开启");
 									_dem.find(".list-content .AcceptableArea").html(res.data.data[i].hegewenduqujian);
 									_dem.find(".list-content .alarmArea").html(res.data.data[i].baojingwenduqujian);
+									_dem.find(".list-content .address").html(res.data.data[i].address);
 									if(res.data.data[i].xinhaoqiangdu >= 0 && res.data.data[i].xinhaoqiangdu < 5) {
 										_dem.find(".list-content  .signal").html("无");
 									} else if(res.data.data[i].xinhaoqiangdu >= 5 && res.data.data[i].xinhaoqiangdu < 13) {
@@ -359,7 +382,7 @@
 									} else {
 										_dem.find(".list-content  .signal").html("无");
 									}
-									my_machine_list(res.data.data[i].last_jingdu, res.data.data[i].last_weidu, _dem)
+									//my_machine_list(res.data.data[i].last_jingdu, res.data.data[i].last_weidu, _dem)
 									/*$(".more_machine").before(_dem);*/
 								}
 

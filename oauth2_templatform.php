@@ -4,10 +4,11 @@ if (isset($_GET['code'])){
 		    $result=https_request($url);
 			$arr = json_decode($result,true);
 			$openId=$arr['openid'];
-			//echo "<script type=\"text/javascript\">location.href=\"register.html?openId=".$openId."\"</script>";
 			header('location:FreshShield/html/register.html?openId='.$openId);
 		 //   header('location:http://www.ccsc58.cc/IceKnight/Zlservices/repair.html?openId='.$openId);
 }else{
+	$openId=$arr['openid'];
+	header('location:FreshShield/html/register.html?openId='.$openId);
     echo "NO CODE";
 };
 function https_request($url,$data = null){

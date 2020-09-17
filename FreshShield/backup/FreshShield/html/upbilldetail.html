@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="format-detection" content="telephone=no">
+		<title>北京中集智冷科技有限公司</title>
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+	</head>
+
+	<body>
+		<style>
+			body {
+				background-color: #F2F2F2!important;
+			}
+			
+			.content {
+				padding: 0 1rem;
+				box-sizing: border-box;
+				font-size: 1.4rem;
+				width: 100vw;
+				height: auto;
+				margin-top: 5.6rem;
+			}
+			
+			.formdata div {
+				height: 8rem;
+				line-height: 8rem;
+				margin-top: 1rem;
+				border-radius: 1rem;
+				background: #FFFFFF;
+				padding: 0 2vw;
+				box-sizing: border-box;
+				
+		    }
+			
+			.formdata div p {
+				height: 4rem;
+				line-height: 4rem;
+				display: flex;
+				justify-content: space-between;
+			}
+			
+			.formdata .msg {
+				display: block;
+				text-align: center;
+				height: 4rem;
+				line-height: 4rem;
+				margin-top: 1rem;
+				border-radius: 1rem;
+				background: none;
+				padding: 0 2vw;
+				font-size: 13px;
+			}
+			
+			.formdata .zhifu {
+				margin-top: 4rem;
+				height: 4rem;
+				line-height: 4rem;
+				display: flex;
+				justify-content: flex-end;
+				background: none;
+			}
+			
+			.formdata .zhifu button {
+				height: 2rem;
+				width: 6rem;
+				border-radius: 1rem;
+				background: #FFFFFF;
+				border: 1px solid #40C0C3;
+				color: #40C0C3;
+				width: 16rem;
+			    height: 4rem;
+			    background: #40C0C3;
+			    border-radius: 5rem;
+			    border: none;
+			    color: #ffffff;
+			    font-size: 1.5rem;
+			}
+			
+			.tip {
+				text-align: center;
+				position: absolute;
+				height: 100%;
+				width: 100%;
+				background-color: rgba(90, 90, 90, 0.5);
+				z-index: 99999;
+			}
+			
+			.tip p {
+				text-align: left;
+			}
+			
+			.collectSucc {
+				position: fixed;
+				height: auto;
+				width: 70%;
+				background-color: #ffffff;
+				margin-left: 15%;
+				margin-top: 50%;
+			}
+			
+			.collectSucc_top {
+				color: #666666;
+				font-size: 12px;
+			}
+			
+			.collectSucc_top img {
+				width: 60px;
+				margin-top: 20px;
+			}
+			
+			.collectSucc_buttom {
+				margin-top: 20px;
+				height: 40px;
+				line-height: 40px;
+				background-color: #2d99f5;
+				color: #FFFFFF;
+				font-size: 13px;
+			}
+			
+			.notclick {
+				pointer-events: none;
+			}
+		</style>
+		<div class="header">
+			<img class="back_list" src="../img/back.png" ids='0' /> 变更流量套餐
+
+		</div>
+
+		<div class="content">
+			<div class="formdata">
+				<div class="frist">
+					<p><span>套餐名：A</span>
+						<span>金额：<label class="ameal"></label>元</span></p>
+					<p><span>说明：设备上传间隔5分钟及以上</span></p>
+				</div>
+				<div class="second">
+					<p>
+						<span >套餐名：B</span>
+						<span>金额：<label class="Bmoney"></label>元</span>
+					</p>
+
+					<p><span>说明：设备上传间隔1分钟及以上</span></p>
+				</div>
+				<div class="msg">
+					该设备，套餐A剩余<span class="oldmoney">*</span>元，升级套餐B应付<span class="paymoney">*</span>元。
+				</div>
+				<div class="zhifu">
+					<button>支付</button>
+				</div>
+			</div>
+
+		</div>
+		<script src="../js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="../js/jquery-1.11.0.js"></script>
+		<script src="../js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			/*iscroll代码；
+			 */
+			var userinfo = JSON.parse(localStorage.getItem('isonline'));
+			var _userName = userinfo.user;
+			var _userPass = userinfo.pwd;
+			var _openid = window.localStorage.getItem("openId");
+			var _uid = userinfo.uid == undefined ? 'no' : userinfo.uid;
+
+			function UrlSearch() {
+				var name, value;
+				var str = location.href; //取得整个地址栏
+				var num = str.indexOf("?")
+				str = str.substr(num + 1); //取得所有参数 stringvar.substr(start [, length ]
+
+				var arr = str.split("&"); //各个参数放到数组里
+				for(var i = 0; i < arr.length; i++) {
+					num = arr[i].indexOf("=");
+					if(num > 0) {
+						name = arr[i].substring(0, num);
+						value = arr[i].substr(num + 1);
+						this[name] = value;
+					}
+				}
+			}
+			var Request = new UrlSearch(); //实例化
+			var _num_m = Request.num_m;
+			var _fid = Request.fid;
+			if(_fid == 1) {
+				$(".frist").css("background", "#CCCCCC");
+				$(".frist").addClass('notclick');
+			} else {
+				$(".frist").css("background", "#CCCCCC");
+				$(".frist").addClass('notclick');
+				$(".second").css("background", "#CCCCCC");
+				$(".second").addClass('notclick');
+				$("button").hide();
+				
+				$(".msg").text("该套餐已是最高级");
+			}
+			$.ajax({
+				type: "post",
+				url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/flow_package",
+				async: true,
+				data: "",
+				dataType: "json",
+				success: function(res) {
+					console.log(res.data);
+					if(res.code==0){
+						if(res.data[0].name=='A'){
+							 $('.ameal').text(res.data[0].price)
+							 $('.Bmoney').text(res.data[1].price)
+						}else{
+							$('.ameal').text(res.data[1].price)
+							$('.Bmoney').text(res.data[0].price)
+						}
+						
+					}else{
+						 $('.ameal').text("待确定")
+						 $('.Bmoney').text("待确定")
+					}
+					
+					
+                     
+					
+				
+				},
+				error: function(err) {
+					console.log(err)
+				}
+			});
+			var _data = {
+				f_id: '2',
+				shebeihao: _num_m
+			}
+			
+
+			$.ajax({
+				type: "post",
+				url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/flow_package/device_flow_money",
+				async: true,
+				data: _data,
+				dataType: "json",
+				success: function(res) {
+					console.log(res);
+					if(res.code == 0) {
+						$(".oldmoney").text(res.data);
+						var _paymoney = parseFloat($(".Bmoney").text()) - parseFloat(res.data);
+						var _paymoney =_paymoney.toFixed(2);
+						if(_paymoney<=0){
+					    $("button").hide();
+					
+				}
+						$(".paymoney").text(_paymoney);
+					}
+				},
+				error: function(err) {
+					console.log(err)
+				}
+			});
+
+			$(".back_list").on("click", function() {
+				window.history.go(-1);
+			})
+			$("button").on("click", function() {
+				var _money=parseFloat($(".paymoney").text());
+				if(_money<=0){
+					$(this).attr('disabled',"true");
+					
+				}
+				else{
+					var sjuser={
+					u_id:_uid,
+					f_id:2,
+					money:_money,
+					shebeihao:_num_m
+				};
+				window.sessionStorage.setItem("sjgoingpay", JSON.stringify(sjuser));
+				window.location.href = 'http://www.ccsc58.cc/leng/weixin/zhifu/example/freshdun_flowpay.php?total=' + parseFloat(_money*100);
+				
+				}
+				
+			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,272 @@
+/*禁止换行
+ */
+ul li{
+	width:100%;
+	height:3rem;
+	overflow: hidden;
+}
+/*设备列表*/
+.ajax_more{
+	width: 100vw;
+    height: 3rem;
+    font-size: 1.5rem;
+    line-height: 3rem;
+    text-align: center;
+}
+.content{
+	margin-bottom: 2rem;
+}
+.content ul{
+	width:95%;
+	height:9rem;
+	line-height: 3rem;
+	padding-left:5%;
+	font-weight: 400;
+	border-bottom: 1px solid #ccc;
+	font-size:1.5rem;
+}
+.content .list_xiang{
+	width:100%;
+	height:9rem;
+	padding-left:0;
+	line-height: 3rem;
+	font-weight: normal;
+	border-bottom: 1px solid #ccc;
+	font-size:1.5rem;
+	position:relative;
+}
+.content .list_xiang li{
+	width:80%;
+	margin-left:20%;
+}
+.content .list_xiang .img_box_U{
+	width:20%;
+	height:100%;
+	position:absolute;
+	top:0px;
+	left:0px;
+}
+.img_box_U img{
+	width:10vw;
+	height:5rem;
+	margin:2rem 0 0 5vw;
+}
+.header span{
+	display:block;
+	height:1.5rem;
+	position:absolute;
+	top:1.25rem;
+	left:5px;
+	line-height: 1.5rem;
+	font-size:1.5rem;
+}
+.header span img{
+	width:1.5rem;
+	height:1.5rem;
+	float:left;
+}
+.content_top{
+	width:100%;
+	height:3rem;
+	text-align: center;
+	background:#ccc;
+	position:fixed;
+	top:4rem;
+}
+.content_top span{
+	display:inline-block;
+	width:50%;
+	height:100%;
+	color:#4d4d4d;
+	line-height: 3rem;
+	float: left;
+	font-size:1.5rem;
+	font-weight: 400;
+}
+.content_top .xinXi_choosed{
+	color:#fa8713;
+	border-bottom: 2px solid #fa8713;
+}
+.content_sheBei{
+	width:100%;
+	margin-top:2px;
+}
+.content_sheBei p{
+	width:97%;
+	height:3rem;
+	padding-left:3%;
+	background:#F2F2F2;
+	line-height:3rem;
+	font-size:1.7rem;
+	font-weight:400;
+	border-bottom:1px solid #ccc;
+}
+.sheBei_xinxi{
+	height:9rem;
+}
+.sheBei_xinxi ul{
+	width:45%;
+	height:9rem;
+	float:left;
+}
+.sheBei_jiYao{
+	width:100%;
+	height:18rem;
+	overflow: hidden;
+	border-bottom: 1px solid #ccc;
+}
+.sheBei_jiYao ul{
+	height:6rem;
+	width:45%;
+	float:left;
+	border:none;
+	font-size: 1.5rem;
+}
+.content_sheBei .sheBei_jiYao p{
+	width:95%;
+	height:3rem;
+	line-height:3rem;
+	border:none;
+	background:none;
+	font-size: 1.5rem;
+	padding-left:5%;
+}
+.margin_top{
+	margin-top:6rem;
+}
+.warning_Tong{
+	width:95%;
+	height:15rem;
+	border-bottom: 1px solid #ccc;
+	padding-left: 5%;
+}
+.warning_Tong ul{
+	border:none;
+	height:100%;
+	line-height:3rem;
+	padding:0px;
+	width:33%;
+	float:left;
+}
+.warning_Tong ul li{
+	white-space: nowrap;
+	overflow: hidden;
+}
+.content_sheBei p .shouHuo_button{
+	display: block;
+	width:5rem;
+	height:2.8rem;
+	line-height:2.8rem;
+	color:#fefefe;
+	background: #3299fe;
+	border-radius: 5px;
+	float:right;
+	margin-top:0.1rem;
+	margin-right:2rem;
+	text-align: center;
+	font-size:1.2rem;
+	border: none;
+}
+.shouHuo{
+	width:95%;
+	height:12rem;
+	padding-left:5%;
+}
+.shouHuo input{
+	border:none;
+	width:100%;
+	font-size:1.5rem;
+	font-weight:400;
+}
+.shouHuo ul{
+	height:100%;
+	width:33%;
+	border:none;
+	float:left;
+	padding-left:0;
+}
+.shouHuo ul li{
+	white-space: nowrap;
+	overflow: hidden;border-bottom: 1px solid #ccc;
+}
+.shouHuo ul:nth-of-type(2){
+	width:67%;
+}
+.content_wenDu p{
+	width:97%;
+	padding-left:3%;
+	background:#F2F2F2;
+	height:3rem;
+	line-height:3rem;
+	font-size:1.7rem;
+	font-weight:400;
+	border-bottom:1px solid #ccc;
+}
+.content_wenDu ul{
+	height:6rem;
+}
+/*iscroll代码
+ */
+#wrapper {
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 4rem;
+	overflow: hidden;
+	z-index: 1;
+	bottom:0px;
+}
+.more {
+	height: 4rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #8a8a8a;
+}
+
+.pull_icon {
+	width: 25px;
+	height: 25px;
+	background-image: url('../images/pull.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 25px;
+	transition: all .5s;
+}
+
+.more span {
+	padding-left: .5rem;
+}
+
+.scroller {
+	background-color: #fff;
+}
+
+.more .flip {
+	transform: rotate(180deg);
+}
+
+.loading {
+	background-image: url('../images/loading.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 25px;
+}
+
+.more .loading {
+	-webkit-transform: rotate(0deg) translateZ(0);
+	-webkit-transition-duration: 0;
+	-webkit-animation-name: loading;
+	-webkit-animation-duration: 2s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes loading {
+	from {
+		-webkit-transform: rotate(0deg) translateZ(0);
+	}
+	to {
+		-webkit-transform: rotate(360deg) translateZ(0);
+	}
+}

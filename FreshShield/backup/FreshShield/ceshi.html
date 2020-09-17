@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		 <meta charset="utf-8">
+		<script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+		<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/exporting.js"></script>
+		<script>
+			var resultObj = "{name:'当月总量数',data:[101.6,100.0,102.7,102.1,105.1]}@{name:'累计总量数',data:[102.4,100.9,101.5,101.6,102.3]}";
+        var resultText = resultObj.toString();
+        var resultStr = resultText.split("@");
+        var min = null,max = null,mark = true,data = null;
+        for(var i=0;i<resultStr.length;i++){
+            var jSVO =  eval("("+resultStr[i] +")");
+            resultStr[i] = jSVO;
+            data = resultStr[i].data;
+            for(var j = 0, len = data.length;j < len;j ++){
+                if(data[j] == null){
+                    continue;
+                }
+                
+                if(mark){
+                    mark = false;
+                    min = data[j],max = data[j];
+                }
+                if(min > data[j]){
+                    min = data[j];
+                }
+                if(max < data[j]){
+                    max = data[j];
+                }
+            }
+        }
+
+        console.log(min + "======" + max);
+        //X轴
+        var xAxisObj = "2013年09月@12月@2014年03月@06月@09月"
+        var xAxisText = xAxisObj.toString();
+        var xAxisStr = xAxisText.split("@");
+        $(function () {
+            
+            //画图
+            $('#container').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: ""
+                },
+                colors:['#8300b6','#73abe4'],    
+                subtitle: {
+                    text: ""
+                },
+                xAxis: {
+                    tickmarkPlacement:'on',
+                    labels:{
+                        rotation:-15, //X轴坐标旋转
+                        style:{
+                            fontSize:'18px' //X轴坐标字体大小
+                        }
+                    },
+                    categories: xAxisStr
+                },
+                yAxis: {
+                    min: min,
+                    max: max,
+                    title: {
+                        text: ""
+                    },
+                    labels : { 
+                        enabled: true,
+                        style:{
+                          fontSize:'14px'
+                        }
+                    }
+                },
+                credits:{
+                    enabled: false//右下角的文本  
+                },
+                exporting:{ 
+                    enabled:false //用来设置是否显示‘打印’,'导出'等功能按钮，不设置时默认为显示 
+                   },
+                tooltip: {
+                    enabled: true, //是否显示提示信息
+                    headerFormat: '<span style="font-size:16px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true,
+                    style:{
+                        fontSize:'14px'
+                    }
+                },
+                plotOptions: {
+                    column: {
+                        dataLabels: {
+                            enabled: true,//图形上是否显示数据
+                            format:'{y:.1f}',
+                            pointWidth: 10,
+                            pointPadding : 0.1,
+                            style:{
+                                fontSize:'10px'//图形上数据的字体大小
+                            }
+                       },
+                         enableMouseTracking: true//鼠标移动时有信息提示
+                    }
+                }, 
+                series: resultStr
+            });
+    });
+		</script>
+	</head>
+
+	<body>
+		<div id="container" style="min-width:700px;height:400px"></div>
+	</body>
+
+</html>

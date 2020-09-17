@@ -29,14 +29,14 @@
 		</div>
 		<div class="content">
 			<div class="form">
-				<div>
+				<div class="wen1">
 					<span>是否开启温度上限报警：</span>
 					<div class='switch-wrap'>
 						<input type='checkbox' id='switch'>
 						<label for='switch'></label>
 					</div>
 				</div>
-				<div>
+				<div class="wen1">
 					<span>报警上限温度：</span>
 					<!--<input type="number" placeholder="请输入" class="tempHighbaojing" />-->
 					<select class="tempHighbaojing">
@@ -44,52 +44,82 @@
 					</select>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;℃
 				</div>
-				<div>
+				<div class="wen1">
 					<span>是否开启温度下限报警：</span>
 					<div class='switch-wrap'>
 						<input type='checkbox' id='switch1'>
 						<label for='switch1'></label>
 					</div>
 				</div>
-				<div>
+				<div class="wen1">
 					<span>报警下限温度：</span>
-					<!--<input type="number" placeholder="请输入" class="templowbaojing" />-->
 					<select class="templowbaojing">
 
 					</select>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;℃
 				</div>
+				<div class="TT">
+					<span>是否开启温度2上限报警：</span>
+					<div class='switch-wrap'>
+						<input type='checkbox' id='switch7'>
+						<label for='switch7'></label>
+					</div>
+				</div>
+				<div class="TT">
+					<span>报警上限温度2：</span>
+					<!--<input type="number" placeholder="请输入" class="tempHighbaojing" />-->
+					<select class="tempHighbaojing2">
 
-				<div>
+					</select>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;℃
+				</div>
+				<div class="TT">
+					<span>是否开启温度2下限报警：</span>
+					<div class='switch-wrap'>
+						<input type='checkbox' id='switch8'>
+						<label for='switch8'></label>
+					</div>
+				</div>
+				<div class="TT">
+					<span>报警下限温度2：</span>
+					<select class="templowbaojing2">
+
+					</select>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;℃
+				</div>
+					
+			
+
+				<div class="TH">
 					<span>是否开启湿度上限报警：</span>
 					<div class='switch-wrap'>
 						<input type='checkbox' id='switch3'>
 						<label for='switch3'></label>
 					</div>
 				</div>
-				<div>
+				<div class="TH">
 					<span>报警上限湿度：</span>
-					<!--<input type="number" placeholder="请输入" class="humidityHighbaojing" />-->
 					<select class="humidityHighbaojing">
 
 					</select>
 					&nbsp;&nbsp;%RH
 				</div>
-				<div>
+				<div class="TH">
 					<span>是否开启湿度下限报警：</span>
 					<div class='switch-wrap'>
 						<input type='checkbox' id='switch4'>
 						<label for='switch4'></label>
 					</div>
 				</div>
-				<div>
+				<div class="TH">
 					<span>报警下限湿度：</span>
-					<!--<input type="number" placeholder="请输入" class="humiditylowbaojing" />-->
 					<select class="humiditylowbaojing">
 
 					</select>
 					&nbsp;&nbsp;%RH
 				</div>
+				
+				
 				<div>
 					<span>电量下限报警：</span>
 					<div class='switch-wrap'>
@@ -134,6 +164,8 @@
 				var options = "<option value='" + i + "'>" + i + "</option>";
 				$(".tempHighbaojing").append(options);
 				$(".templowbaojing").append(options);
+				$(".tempHighbaojing2").append(options);
+				$(".templowbaojing2").append(options);
 			}
 			for(var i = 0; i <= 30; i++) {
 				var diliangzhi = "<option value='" + i + "'>" + i + "</option>";
@@ -208,6 +240,45 @@
 						window.location.href = "../machineList.php";
 						return false;
 					}
+					if(_json.resultCode.model_type=="TT"){
+						$(".form .TH").hide()
+						$(".form .wen1:nth-child(1) span").text("是否开启温度1上限报警：");
+						$(".form .wen1:nth-child(2) span").text("报警上限温度1：");
+						$(".form .wen1:nth-child(3) span").text("是否开启温度1下限报警：");
+						$(".form .wen1:nth-child(4) span").text("报警下限温度1：");
+                        $(".tempHighbaojing2").val(_json.resultCode.baojingwendu_two_shangxian); //报警温度上限
+						if(_json.resultCode.baojingwendu_two_shangxian_baojing == 0) {
+							$("#switch7").attr("checked", false);
+						} else {
+							$("#switch7").attr("checked", true);
+						}
+						$(".templowbaojing2").val(_json.resultCode.baojingwendu_two_xiaxian); //报警温度下限
+						if(_json.resultCode.baojingwendu_two_xiaxian_baojing == 0) {
+							$("#switch8").attr("checked", false);
+						} else {
+							$("#switch8").attr("checked", true);
+						}
+						$(".btnok button").attr('xinghao',"TT");
+					}else if(_json.resultCode.model_type=="TH"){
+						$(".form .TT").hide();
+						//是否开启湿度上限报警
+						if(_json.resultCode.chaogaoshidubaojing == 0) {
+							$("#switch3").attr("checked", false);
+						} else {
+							$("#switch3").attr("checked", true);
+						}
+						$(".humidityHighbaojing").val(_json.resultCode.chaogaoshidubaojingfazhi); 
+						//是否开启湿度下限报警
+						if(_json.resultCode.chaodishidubaojing == 0) {
+							$("#switch4").attr("checked", false);
+						} else {
+							$("#switch4").attr("checked", true);
+						}
+						$(".humiditylowbaojing").val(_json.resultCode.chaodishidubaojingfazhi);
+						$(".btnok button").attr('xinghao',"TH");
+					}else{
+						console.log(3)
+					}
 					$(".btnok button").attr('biao', _json.resultCode.GPS_Start);
 					$(".btnok button").attr('yejian', _json.resultCode.yejianshangchuankaiguan);
 					<!-- 设备报警设置  -->
@@ -229,18 +300,7 @@
 					} else {
 						$("#switch2").attr("checked", true);
 					}
-					//是否开启湿度上限报警
-					if(_json.resultCode.chaogaoshidubaojing == 0) {
-						$("#switch3").attr("checked", false);
-					} else {
-						$("#switch3").attr("checked", true);
-					}
-					$(".humidityHighbaojing").val(_json.resultCode.chaogaoshidubaojingfazhi); //
-					if(_json.resultCode.chaodishidubaojing == 0) {
-						$("#switch4").attr("checked", false);
-					} else {
-						$("#switch4").attr("checked", true);
-					}
+			
 					if(_json.resultCode.weixintuisong_baojing == 0) {
 						$("#switch5").attr("checked", false);
 					} else {
@@ -252,7 +312,7 @@
 						$("#switch6").attr("checked", true);
 					}
 					$("#switch6").attr('is_warn_show',_json.resultCode.is_warn_show);
-					$(".humiditylowbaojing").val(_json.resultCode.chaodishidubaojingfazhi); //
+					
 
 				},
 				error: function() {
@@ -301,6 +361,26 @@
 					$(".templowbaojing").focus();
 					return false;
 				}
+				
+				var _baojingwendu_two_shangxian = $(".tempHighbaojing2").val(); //温度2报警上限；
+				var _baojingwendu_two_shangxian_baojing;
+				if($("#switch7").is(":checked")) {
+					_baojingwendu_two_shangxian_baojing = 1;
+				} else {
+					_baojingwendu_two_shangxian_baojing = 0;
+				} //是否开启报警上限；
+				var _baojingwendu_two_xiaxian = $(".templowbaojing2").val(); //报警2下限
+				var _baojingwendu_two_xiaxian_baojing;
+				if($("#switch8").is(":checked")) {
+					_baojingwendu_two_xiaxian_baojing = 1;
+				} else {
+					_baojingwendu_two_xiaxian_baojing = 0;
+				} //是否开启报警上限；
+				if(_baojingwendu_two_xiaxian_baojing==1 &&_baojingwendu_two_shangxian_baojing == 1 && parseInt(_baojingwendu_two_shangxian) < parseInt(_baojingwendu_two_xiaxian)) {
+					alert("报警温度2上限不能小于报警温度2下限");
+					$(".templowbaojing2").focus();
+					return false;
+				}
 				var _dianliang_xiaxian = $(".baojingpower").val(); //电量下限
 				var _dianliang_xiaxian_baojing;
 				if($("#switch2").is(":checked")) {
@@ -343,10 +423,9 @@
 				var utype = userinfo.userType;
 				var _openid = localStorage.getItem('openId');
 				if(utype == 'b') {
-					$.ajax({
-						type: "post",
-						url: "http://www.ccsc58.com/json/05_00_tb_device.php",
-						data: {
+					var _data={};
+					if(_xinghao=="TH"){
+						_data={
 							controller: "update",
 							admin_permit: "zjly8888",
 							UserP: "w",
@@ -364,7 +443,37 @@
 							chaogaoshidubaojingfazhi: _humidityHighbaojing,
 							chaodishidubaojing: _chaodishidubaojing,
 							chaodishidubaojingfazhi: _humiditylowbaojing,
-						},
+						}
+					}else{
+						_data={
+							controller: "update",
+							admin_permit: "zjly8888",
+							UserP: "w",
+							shebeibianhao: _num_m,
+							admin_user: _userName,
+							admin_pass: _userPass,
+							baojingwendu_shangxian_baojing: _baojingwendu_shangxian_baojing,
+							baojingwendu_shangxian: _baojingshangxian,
+							baojingwendu_xiaxian: _baojingxiaxian,
+							baojingwendu_xiaxian_baojing: _baojingwendu_xiaxian_baojing,
+							dianliang_xiaxian: _dianliang_xiaxian,
+							dianliang_xiaxian_baojing: _dianliang_xiaxian_baojing,
+							duanxingtuisong_baojing: _dianliang_xiaxian_baojing,
+							chaogaoshidubaojing: _chaogaoshidubaojing,
+							chaogaoshidubaojingfazhi: _humidityHighbaojing,
+							chaodishidubaojing: _chaodishidubaojing,
+							chaodishidubaojingfazhi: _humiditylowbaojing,
+							baojingwendu_two_shangxian:_baojingwendu_two_shangxian,
+							baojingwendu_two_shangxian_baojing:_baojingwendu_two_shangxian_baojing,
+							baojingwendu_two_xiaxian:_baojingwendu_two_xiaxian,
+							baojingwendu_two_xiaxian_baojing:_baojingwendu_two_xiaxian_baojing,
+						}
+		
+					}
+					$.ajax({
+						type: "post",
+						url: "http://www.ccsc58.com/json/05_00_tb_device.php",
+						data: _data,
 						dataType: "json",
 						success: function(res) {
 							console.log(res)
@@ -381,10 +490,10 @@
 					});
 				} else {
 					var _yejianshangchuankaiguan = $(".btnok button").attr('yejian');
-					$.ajax({
-						type: "post",
-						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/update_device",
-						data: {
+					var _xinghao = $(".btnok button").attr('xinghao');
+					let _data={};
+					if(_xinghao=="TH"){
+						_data={
 							devid: _num_m,
 							GPS_Start: _GPS_Start,
 							UserP: "w",
@@ -404,7 +513,35 @@
 							weixintuisong_baojing:_weixintuisong_baojing,
 							is_open:_is_open,
 							warn_time:""
-						},
+						}
+					}else{
+						_data={
+							devid: _num_m,
+							GPS_Start: _GPS_Start,
+							UserP: "w",
+							baojingwendu_shangxian_baojing: _baojingwendu_shangxian_baojing,
+							baojingwendu_shangxian: _baojingshangxian,
+							baojingwendu_xiaxian: _baojingxiaxian,
+							baojingwendu_xiaxian_baojing: _baojingwendu_xiaxian_baojing,
+							dianliang_xiaxian: _dianliang_xiaxian,
+							dianliang_xiaxian_baojing: _dianliang_xiaxian_baojing,
+							duanxingtuisong_baojing: _dianliang_xiaxian_baojing,
+							baojingwendu_two_shangxian:_baojingwendu_two_shangxian,
+							baojingwendu_two_shangxian_baojing:_baojingwendu_two_shangxian_baojing,
+							baojingwendu_two_xiaxian:_baojingwendu_two_xiaxian,
+							baojingwendu_two_xiaxian_baojing:_baojingwendu_two_xiaxian_baojing,
+							yejianshangchuankaiguan:_yejianshangchuankaiguan,
+							openid:copenid,
+							weixintuisong_baojing:_weixintuisong_baojing,
+							is_open:_is_open,
+							warn_time:""
+						}
+					}
+
+					$.ajax({
+						type: "post",
+						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/update_device",
+						data: _data,
 						dataType: "json",
 						success: function(res) {
 							if(res.code == 0 && res.message == "success") {

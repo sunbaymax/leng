@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>北京中集智冷科技有限公司</title>
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/details_list.css" />
+		<link rel="stylesheet" href="../css/changeM.css" />
+	</head>
+
+	<body>
+		<div class="header">
+			<img class="back_list" src="../img/back.png" /> 设备报警列表
+		</div>
+		<div class="content_details" style="margin-top:4rem;">
+			<div class="details_warning _display">
+				<div class="warning_list hidden">
+					<div class="warning_list_left">
+						<img src="../img/warnin_img.png" alt="" />
+					</div>
+					<div class="warning_list_right">
+						<p>编号：<span>12345</span> <b class="hidden">车牌号：</b><span style="color:#728ba1" class="hidden">皖AP2891</span></p>
+						<p>温度阀值：<span>15℃-15℃</span>&nbsp;&nbsp;电量阀值：<span></span></p>
+						<p>报警提示：<span>超温报警</span></p>
+						<p>温度01：<span>25℃</span>&nbsp;&nbsp;湿度：<span>25%</span></p>
+						<p>温度02：<span>25℃</span>&nbsp;&nbsp;电量：<span>25%</span></p>
+						<p>报警时间：<span>0000-00-00 00：00：00</span></p>
+					</div>
+				</div>
+				<div class="warning_more hidden">
+					<a href="javascript:void(0)">查看更多报警信息</a>
+				</div>
+			</div>
+		</div>
+		<div class="footer" style="display: none;">
+			<a href="../index.html">
+				<img src="../img/index.png" alt="" />
+				<span>首页</span>
+			</a>
+			<a href="dingdan.php">
+				<img src="../images/tab_find_frd_normal.png" alt="" />
+				<span>我的运单</span>
+			</a>
+			<a class="choosed" href="shebei_list.html">
+				<img src="../images/tab_address_pressed.png" alt="" />
+				<span>设备信息</span>
+			</a>
+			<a href="user_sheZhi.html">
+				<img src="../images/tab_settings_normal.png" alt="" />
+				<span>我的</span>
+			</a>
+		</div>
+		<div class="wait">
+			数据加载中<span style="">……</span>
+		</div>
+		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(".back_list").on("click", function() {
+				window.location.href = "../index.html";
+			});
+			var userinfo = JSON.parse(localStorage.getItem('isonline'));
+			var _userName = userinfo.user;
+			var _userPass = userinfo.pwd;
+			//			var _userName = window.localStorage.getItem("user");
+			//			var _userPass = window.localStorage.getItem("pass");
+			$.ajax({
+				type: "post",
+				url: "http://www.ccsc58.com/json/02_01_tb_baojing_float.php",
+				data: {
+					admin_permit: "zjly8888",
+					admin_user: _userName,
+					admin_pass: _userPass,
+					UserP: "w"
+				},
+				success: function(data) {
+					var _json = JSON.parse(data);
+					my_warning(_json);
+				},
+				error: function() {
+					$(".wait").addClass("hidden");
+					alert("网络错误，请重新进入");
+					WeixinJSBridge.call('closeWindow');
+				}
+			});
+
+			function my_warning(_json) {
+				if(_json.message == "success" && _json.resultCode != "nodata") {
+					for(var i = 0; i < _json.resultCode.length; i++) {
+						var _dem = $(".warning_list").eq(0).clone().removeClass("hidden");
+						_dem.find(".warning_list_right p:nth-of-type(1) span:nth-of-type(1)").html(_json.resultCode[i].shebeibianhao);
+						_dem.find(".warning_list_right p:nth-of-type(1) span:nth-of-type(2)").html(_json.resultCode[i].chepaihao == "请填写车牌" ? "暂无" : _json.resultCode[i].chepaihao);
+						if(_json.resultCode[i].chepaihao != "请填写车牌" & _json.resultCode[i].chepaihao != "") {
+							_dem.find(".warning_list_right p:nth-of-type(1) b").removeClass("hidden");
+							_dem.find(".warning_list_right p:nth-of-type(1) span:nth-of-type(2)").html(_json.resultCode[i].chepaihao).removeClass("hidden");
+						}
+						_dem.find(".warning_list_right p:nth-of-type(2) span:nth-of-type(1)").html(_json.resultCode[i].baojingwendu_xiaxian + "℃-" + _json.resultCode[i].baojingwendu_shangxian + "℃");
+						_dem.find(".warning_list_right p:nth-of-type(2) span:nth-of-type(2)").html(_json.resultCode[i].dianliang_xiaxian + "%");
+						_dem.find(".warning_list_right p:nth-of-type(3) span").html(_json.resultCode[i].baojingleixing);
+						_dem.find(".warning_list_right p:nth-of-type(4) span:nth-of-type(1)").html(_json.resultCode[i].temperature01 + "℃");
+						_dem.find(".warning_list_right p:nth-of-type(4) span:nth-of-type(2)").html(_json.resultCode[i].humidity + "%");
+						_dem.find(".warning_list_right p:nth-of-type(5) span:nth-of-type(1)").html(_json.resultCode[i].temperature02 + "℃");
+						_dem.find(".warning_list_right p:nth-of-type(5) span:nth-of-type(2)").html(_json.resultCode[i].power + "%");
+						_dem.find(".warning_list_right p:nth-of-type(6) span").html(_json.resultCode[i].time);
+						$(".warning_more").before(_dem);
+					}
+					$(".wait").addClass("hidden");
+				} else {
+					$(".content_details").html("未发现报警设备");
+					$(".content_details").css({
+						lineHeight: "4rem",
+						textAlign: "center",
+						fontSize: "1.5rem"
+					});
+					$(".wait").addClass("hidden");
+				}
+
+			}
+		</script>
+	</body>
+
+</html>

@@ -67,14 +67,15 @@
 					<div class="list-content">
 
 						<div>
-							<p>温度1：<span class="temp1">0.0</span>℃</p>
+							<p><span class="wen">温度1：</span><span class="temp1">0.0</span>℃</p>
 							<p>温度2：<span class="temp2">0.0</span>℃</p>
-						</div>
-						<div>
-
 							<p>湿度：<span class="humidity">-</span>%RH</p>
-							<p>速度：<span class="speed">-</span>km/h</p>
 						</div>
+						<!--<div>
+
+							
+							<p>速度：<span class="speed">-</span>km/h</p>
+						</div>-->
 						<div>
 							<p>信号强度：<span class="signal">无</span></p>
 							<p>电量：<span class="power">-</span>%</p>
@@ -144,11 +145,11 @@
 					</div>
 					<div class="zhiShiXian hidden">
 						<span></span>
-						<span>实时温度</span>
+						<span class="ty1">实时温度</span>
 						<span></span>
 						<span>报警上下限</span>
 						<span style="background: green;"></span>
-						<span>实时湿度</span>
+						<span class="ty2">实时湿度</span>
 						<br />
 						<div style="margin-top: 30px;font-size: 12px;">
 							查看更多曲线数据，需在<label style="color:#366cb2;font-weight: bold;">数据列表</label>加载更多数据
@@ -225,11 +226,15 @@
 
 								</div>
 								<div class="list-content">
-									<div>
-										<p>温度：<span class="temp1">0.0</span> <span class="temp2">0.0</span>℃</p>
+									<div class="warning_temp1">
+										<p><span class="wen1">温度：</span><span class="temp1">0.0</span>℃</p>
 										<p>温度阀值：<span class="tempLimit">-</span>℃</p>
 									</div>
-									<div>
+									<div class="warning_TT">
+										<p>温度2：<span class="temp2">0.0</span>℃</p>
+										<p>温度阀值：<span class="temp2Limit">-</span>℃</p>
+									</div>
+									<div class="warning_TH">
 										<p>湿度：<span class="humidity">0.0</span>%RH</p>
 										<p>湿度阀值：<span class="humiditylimit">-</span>%RH</p>
 									</div>

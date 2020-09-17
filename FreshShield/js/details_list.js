@@ -200,11 +200,18 @@
 				map.centerAndZoom(point, 15);
 				var geoc = new BMap.Geocoder(); //添加地图到页面并确定中心点；
 				var marker = new BMap.Marker(point);
+				let strs='';
+				if(_wenDu02=='-'){
+					strs= "<br/>温度/湿度：" + _wenDu01 + "℃/" + _shiDu + "%RH<br/>时间：" + _time;
+				}else{
+					strs= "<br/>温度01/温度02：" + _wenDu01 + "℃/" + _wenDu02 + "℃/" + "%RH<br/>时间：" + _time;
+				}
+				
 				map.addOverlay(marker); //添加小红点；
 				geoc.getLocation(point, function(rs) {
 					var addComp = rs.addressComponents;
 					var address = (addComp.province == addComp.city) ? (addComp.city + addComp.district + addComp.street + addComp.streetNumber) : (addComp.province + addComp.city + addComp.district + addComp.street + addComp.streetNumber);
-					var _label = new BMap.Label(address + "<br/>温度01/温度02/湿度：" + _wenDu01 + "℃/" + _wenDu02 + "℃/" + _shiDu + "%RH<br/>时间：" + _time, {
+					var _label = new BMap.Label(address+strs, {
 						offset: new BMap.Size(20, -25)
 					})
 					_label.setStyle({
@@ -301,12 +308,22 @@
 					$(".details_now").before(_dem)
 				} else {
 					var _list = _json.resultCode;
+					console.log(_json.model_type)
+					
 					for(var i = 0; i < _list.length; i++) {
 						var _demN = $(".details_now").eq(0).clone().removeClass("hidden").appendTo($(".detailNow"));
 						_demN.find(".list_tittle .shebeihao").html(_list[i].shebeibianhao);
 						_demN.find(".list_tittle .worktime").html(_list[i].time);
 						_demN.find(".list-content .temp1").html(_list[i].temperature01);
-						_demN.find(".list-content .humidity").html(_list[i].humidity == '0.0' ? "-" : _list[i].humidity);
+						if(_json.model_type=='TT'){
+							_demN.find(".list-content .temp2").html(_list[i].temperature02==0?'-':_list[i].temperature02+"℃");
+							_demN.find(".list-content .humidity").parents('p').addClass('hidden');
+						}else{
+							_demN.find(".list-content .humidity").html(_list[i].humidity == '0.0' ? "-" : _list[i].humidity);
+							_demN.find(".list-content .temp2").parents('p').addClass('hidden');
+							_demN.find(".list-content .temp1").parents('p').find('.wen').text('温度：');
+						}
+						
 						_demN.find(".list-content .temp2").html(_list[i].temperature02);
 						_demN.find(".list-content .power").html(_list[i].power);
 						if(_list[i].xinghaoqiangdu >= 0 && _list[i].xinghaoqiangdu < 5) {
@@ -439,6 +456,12 @@
 			},
 			success: function(data) {
 				var _json = JSON.parse(data);
+				if(_json.model_type=="TH"){
+					$(".history_content_ul_tittle li:nth-of-type(5)").text("湿度");	
+				}else{
+					$(".history_content_ul_tittle li:nth-of-type(4)").text("温度1");
+					$(".history_content_ul_tittle li:nth-of-type(5)").text("温度2");	
+				}
 				if(_json.message == "noDate") {
 					$(".more").html("此段时间未找到更多数据,请重新调整查看时间");
 					$(".look_more").removeClass("hidden");
@@ -447,12 +470,19 @@
 					_down_panDuan = 1;
 					$(".look_more a").html("点击查看更多数据");
 					$(".look_more").removeClass("hidden");
+					
 					for(var i = 0; i < _json.resultCode.length; i++) {
 						_dem = $(".history_content_ul_list").eq(0).clone().removeClass("hidden").appendTo(".scroll_box");
 						_dem.find("li:nth-of-type(1)").html(_start + i + 1);
+						if(_json.model_type=="TH"){
+					       _dem.find("li:nth-of-type(5)").html(_json.resultCode[i].humidity == '0.0' ? '-' : _json.resultCode[i].humidity + "%");
+				        }else{
+				        	_dem.find("li:nth-of-type(5)").html(_json.resultCode[i].temperature02 == '0.0' ? '-' : _json.resultCode[i].temperature02 + "℃");
+				           
+				        }
 						_dem.find("li:nth-of-type(2)").html(_json.resultCode[i].time.replace(_json.resultCode[i].time.match(/^2[0-9]{3}/)[0] + "-", "").replace(_json.resultCode[i].time.match(/\s/)[0], "<br>"));
-						_dem.find("li:nth-of-type(4)").html(_json.resultCode[i].temperature01 + "℃/<br>" + _json.resultCode[i].temperature02 + "℃");
-						_dem.find("li:nth-of-type(5)").html(_json.resultCode[i].humidity == '0.0' ? '-' : _json.resultCode[i].humidity + "%");
+						_dem.find("li:nth-of-type(4)").html(_json.resultCode[i].temperature01+ "℃");
+						
 						$(".more").html("<i class='pull_icon'></i><span>上拉加载...</span>")
 						address_test(_json.resultCode[i].jingdu, _json.resultCode[i].weidu, _dem, _start + i, (_json.resultCode.length - 1));
 						//$(".look_more").before(_dem);
@@ -576,12 +606,16 @@
 						_timeCha = [];
 					for(var j = 0, i = _json.resultCode.length - 1; j < _json.resultCode.length, i >= 0; j++, i--) {
 						_jing[j] = _json.resultCode[i].jingdu;
+						if(_json.model_type=="TT"){
+							_temp[j] = _json.resultCode[i].temperature01 + "℃/" + _json.resultCode[i].temperature02 + "℃/";
+						}else{
+							_temp[j] = _json.resultCode[i].temperature01 + "℃/" + _json.resultCode[i].humidity + "%";
+						}
 						_wei[j] = _json.resultCode[i].weidu;
-						_temp[j] = _json.resultCode[i].temperature01 + "℃/" + _json.resultCode[i].temperature02 + "℃/" + _json.resultCode[i].humidity + "%";
 						_time[j] = _json.resultCode[i].time;
 						_timeCha[j] = _json.resultCode[i].timecha;
 					};
-					mao_map(_jing, _wei, _temp, _time, _timeCha);
+					mao_map(_jing, _wei, _temp, _time, _timeCha,_json.model_type);
 				} else {
 					$('#history_content_map').html("此段时间未找到数据,请重新调整查看时间");
 					$('#history_content_map').css({
@@ -598,7 +632,7 @@
 			}
 		})
 
-		function mao_map(_jing, _wei, _temp, _time, _timeCha) {
+		function mao_map(_jing, _wei, _temp, _time, _timeCha,type) {
 
 			$("#history_content_map").html("");
 			$("#history_content_map").css({
@@ -610,7 +644,7 @@
 			var b = 1,
 				_flag_map = "";
 			var adds_line = [];
-			my_map_new(_jing[a], _wei[a], _temp[a], _time[a], a, b, _timeCha[a]);
+			my_map_new(_jing[a], _wei[a], _temp[a], _time[a], a, b, _timeCha[a],type);
 			map.enableScrollWheelZoom(true);
 
 			function my_flag() {
@@ -618,11 +652,11 @@
 				a += 1;
 				b += 1
 				if(a < _jing.length) {
-					my_map_new(_jing[a], _wei[a], _temp[a], _time[a], a, b, _timeCha[a]);
+					my_map_new(_jing[a], _wei[a], _temp[a], _time[a], a, b, _timeCha[a],type);
 				}
 			}
 
-			function my_map_new(_jing_d, _wei_d, _tem, _tim, a, b, _timeC) {
+			function my_map_new(_jing_d, _wei_d, _tem, _tim, a, b, _timeC,type) {
 				if(_jing_d != 0 && _wei_d != 0) {
 
 					$.ajax({
@@ -633,7 +667,7 @@
 							coords: _jing_d + "," + _wei_d
 						},
 						success: function(data) {
-							my_address_new(data.result[0].x, data.result[0].y)
+							my_address_new(data.result[0].x, data.result[0].y,type)
 						},
 						error: function() {
 							console.log(11)
@@ -652,7 +686,7 @@
 							location: _w + "," + _j,
 						},
 						success: function(data) {
-							my_add_map_new(_j, _w, (data.result.formatted_address + data.result.sematic_description));
+							my_add_map_new(_j, _w, (data.result.formatted_address + data.result.sematic_description),type);
 						},
 						error: function() {
 							//alert("网络慢，加载中耐心等待");
@@ -660,7 +694,7 @@
 					})
 				}
 
-				function my_add_map_new(_j, _w, _address) {
+				function my_add_map_new(_j, _w, _address,type) {
 					var point = new BMap.Point(_j, _w);
 					map.centerAndZoom(point, 10);
 					var myIcon = new BMap.Icon("../img/marker_blue_sprite.png", new BMap.Size(39, 25), {
@@ -685,8 +719,14 @@
 							icon: myIcon
 						});
 					}
-
-					var content = "时间:<span style=\"color:blue;font-size:12px;\">" + _tim + "</span><br/>位置:<span style=\"color:blue;font-size:12px;\">" + _address + "</span><br/>温度01/温度02/湿度：<span style=\"color:blue;font-size:12px;\">" + _tem + "</span><br>停留时间：<span style=\"color:blue;font-size:12px;\">" + parseInt(_timeC) + "分钟</span>";
+                     console.log(type,666)
+                     var content;
+                     if(type=="TT"){
+                     	content = "时间:<span style=\"color:blue;font-size:12px;\">" + _tim + "</span><br/>位置:<span style=\"color:blue;font-size:12px;\">" + _address + "</span><br/>温度01/温度02：<span style=\"color:blue;font-size:12px;\">" + _tem + "</span><br>停留时间：<span style=\"color:blue;font-size:12px;\">" + parseInt(_timeC) + "分钟</span>";
+                     }else{
+                     	content = "时间:<span style=\"color:blue;font-size:12px;\">" + _tim + "</span><br/>位置:<span style=\"color:blue;font-size:12px;\">" + _address + "</span><br/>温度/湿度：<span style=\"color:blue;font-size:12px;\">" + _tem + "</span><br>停留时间：<span style=\"color:blue;font-size:12px;\">" + parseInt(_timeC) + "分钟</span>";
+                     }
+					 
 					map.addOverlay(marker);
 					addClickHandler(content, marker);
 					var _label01 = new BMap.Label(b, {
@@ -786,6 +826,7 @@
 				success: function(data) {
 					var _json = JSON.parse(data);
 					var warning_data = _json.resultCode;
+					console.log(_json.model_type)
 					if(_json.message == "nodata") {
 						if(_flag == 0) {
 							$(".details_warning").css({
@@ -808,16 +849,25 @@
 							var _dem = $(".warning_list").eq(0).clone().removeClass("hidden").appendTo(".scroll_box_warning");
 							_dem.find(".list_tittle .shebeihao").html(warning_data[i].shebeibianhao);
 							_dem.find(".list_tittle .worktime").html(warning_data[i].time);
-							_dem.find(".list-content .temp1").html(warning_data[i].temperature01);
-							_dem.find(".list-content .temp2").html(warning_data[i].temperature02 == 0 ? '' : '/ ' + warning_data[i].temperature02);
-							_dem.find(".list-content .humidity").html(warning_data[i].humidity);
+							if(_json.model_type=="TH"){
+								_dem.find(".list-content .warning_TT").addClass('hidden');
+								_dem.find(".list-content .humidity").html(warning_data[i].humidity);
+								let shidulowstr = warning_data[i].chaodishidubaojingfazhi == -99999.9 ? '-' : warning_data[i].chaodishidubaojingfazhi;
+							    let shiduhigtstr = warning_data[i].chaogaoshidubaojingfazhi == 99999.9 ? '-' : warning_data[i].chaogaoshidubaojingfazhi;
+								_dem.find(".list-content .humiditylimit").html(shidulowstr + '~' + shiduhigtstr);
+							}else{
+								_dem.find(".list-content .warning_TH").addClass('hidden');
+								_dem.find(".list-content .warning_temp1").find('.wen1').text('温度1：');
+								let temp2lowstr = warning_data[i].baojingwendu_two_xiaxian == -99999.9 ? '-' : warning_data[i].baojingwendu_two_xiaxian;
+							    let temp2higtstr = warning_data[i].baojingwendu_two_shangxian == 99999.9 ? '-' : warning_data[i].baojingwendu_two_shangxian;
+								_dem.find(".list-content .temp2").html(warning_data[i].temperature02 == 0 ? '':warning_data[i].temperature02);
+								_dem.find(".list-content .temp2Limit").html(temp2lowstr + '~' + temp2higtstr);
+							}
+							_dem.find(".list-content  .temp1").html(warning_data[i].temperature01);
 							_dem.find(".list-content .power").html(warning_data[i].power);
 							_dem.find(".list-content .powerLimit").html(warning_data[i].dianliang_xiaxian);
 							_dem.find(".list-content .tempLimit").html(warning_data[i].baojingwendu_xiaxian + "~" + warning_data[i].baojingwendu_shangxian);
-							var shidulowstr = warning_data[i].chaodishidubaojingfazhi == -99999.9 ? '-' : warning_data[i].chaodishidubaojingfazhi;
-							var shiduhigtstr = warning_data[i].chaogaoshidubaojingfazhi == 99999.9 ? '-' : warning_data[i].chaogaoshidubaojingfazhi;
-
-							_dem.find(".list-content .humiditylimit").html(shidulowstr + '~' + shiduhigtstr);
+							
 
 							_dem.find(".list-content .armType").html(warning_data[i].baojingleixing == false ? '温度报警' : "");
 
@@ -876,7 +926,9 @@
 			_shi_tem = [],
 			_shi_tem2 = [],
 			_shi_humdity = [],
-			_now_zhe_time = [];
+			_now_zhe_time = [],
+			_secend_val=[];
+			let type='';
 		$.ajax({
 			url: "http://www.ccsc58.com/json/09_00_tb_draw_line.php",
 			type: "post",
@@ -893,6 +945,7 @@
 			},
 			success: function(data) {
 				var _json = JSON.parse(data);
+				
 				if(_json.message == "noData") {
 					$('#history_content_zhe').html("此段时间未找到数据,请重新调整查看时间");
 					$('#history_content_zhe').css({
@@ -907,20 +960,28 @@
 					for(var i = _json.resultCode.length - 1; i >= 0; i--) {
 						var _zhe_time = _json.resultCode[i].time.match(/^2[0-9]{3}/)[0] + "-"
 						_shi_tem.push(Number(Number(_json.resultCode[i].temperature01).toFixed(1)));
-						_shi_tem2.push(Number(Number(_json.resultCode[i].temperature02).toFixed(1)));
+						if(_json.model_type=="TH"){
+							_secend_val.push(Number(Number(_json.resultCode[i].humidity).toFixed(1)));
+						}else{
+							_secend_val.push(Number(Number(_json.resultCode[i].temperature02).toFixed(1)));
+						}
 						_now_zhe_time.push(_json.resultCode[i].time.replace(_zhe_time, ""));
 						_hegeShang.push(Number(_json.hegewendushangxian));
 						_hegeXia.push(Number(_json.hegewenduxiaxian));
 						_baojingShang.push(Number(_json.baojingwendushangxian));
 						_baojingXia.push(Number(_json.baojingwenduxiaxian));
-						_shi_humdity.push(Number(Number(_json.resultCode[i].humidity).toFixed(1)));
-						
 					}
 					var sxxian=[];
 					//最高和最低温度
-			        sxxian.push(mathMin(_shi_tem))
-			        sxxian.push(mathMax(_shi_tem))
-					history_zhe(_shi_tem, _shi_tem2, _now_zhe_time, _hegeShang, _hegeXia, _baojingShang, _baojingXia, _shi_humdity,sxxian);
+			        sxxian.push(mathMin(_shi_tem));
+			        sxxian.push(mathMax(_shi_tem));
+			        if(_json.model_type=="TH"){
+			        	type="TH"
+					   history_zhe(_shi_tem,_secend_val,_now_zhe_time, _hegeShang, _hegeXia, _baojingShang, _baojingXia, sxxian,type);
+					}else{
+						type="TT"
+					   history_zhe(_shi_tem,_secend_val,_now_zhe_time, _hegeShang, _hegeXia, _baojingShang, _baojingXia,sxxian,type);
+					}
 				}
 			},
 			error: function() {
@@ -946,12 +1007,22 @@
 			  }
 			  return max;
 			}
-		function history_zhe(_shi_tem,_shi_tem2, _now_zhe_time, _hegeShang, _hegeXia, _baojingShang, _baojingXia, _shi_humdity,sxxian) {
-			console.log(_shi_tem2);
-			console.log(sxxian);
-			var _width_xian;
-			var sheType;
-		
+		function history_zhe(_shi_tem,_secend_val, _now_zhe_time, _hegeShang, _hegeXia, _baojingShang, _baojingXia,sxxian,type) {
+			var _width_xian,danwei;
+			var sheType=type;
+			let _title='';
+			let _objtype={};
+		    if(sheType=="TT"){
+		    	_title='温度1(°C)/温度2(°C)';
+		    	_objtype.val1='温度1';
+		    	_objtype.val2='温度2';
+		    	danwei='℃';
+		    }else{
+		    	_title='温度(°C)/湿度(%rh)';
+		    	_objtype.val1='温度';
+		    	_objtype.val2='湿度';
+		    	danwei='';
+		    }
 			if(_shi_tem.length <= 10) {
 				_width_xian = 100;
 			} else {
@@ -961,7 +1032,8 @@
 				width: _width_xian + "vw"
 			})
 			$(".zhiShiXian").removeClass("hidden");
-		
+		    $(".zhiShiXian .ty1").text('实时'+_objtype.val1);
+		    $(".zhiShiXian .ty2").text('实时'+_objtype.val2);
 			$('#history_content_zhe').highcharts({
 				
 				title: {
@@ -975,7 +1047,7 @@
 				xAxis: {
 					categories: _now_zhe_time,
 					title: {
-						text: "温度1此时间段最高温度"+sxxian[1]+"℃"+",最低温度:"+sxxian[0]+"℃"
+						text: _objtype.val1+"此时间段最高温度"+sxxian[1]+"℃"+",最低温度:"+sxxian[0]+"℃"
 					},
 					plotLines: [{
 						color: '#ccc', //线的颜色
@@ -991,7 +1063,7 @@
 				},
 				yAxis: {
 					title: {
-						text: '温度(°C)/湿度(%rh)'
+						text: _title
 					},
 					plotLines: [{
 						color: '#F6A900', //线的颜色
@@ -1029,7 +1101,7 @@
 					color: "rgba(0,0,0,0)",
 					dashStyle: 'shortdot'
 				}, {
-					name: '实时温度1',
+					name: _objtype.val1,
 					data: _shi_tem,
 					color: "blue",
 					lineWidth: 1,
@@ -1037,23 +1109,15 @@
 						valueSuffix: '°C'
 					},
 				},{
-					name: '实时温度2',
-					data: _shi_tem2,
-					color: "blue",
+					name: _objtype.val2,
+					data: _secend_val,
+					color: "green",
 					lineWidth: 1,
 					tooltip: {
 						valueSuffix: '°C'
 					},
 				}, 
-				{
-					name: '实时湿度',
-					data: _shi_humdity,
-					color: "green",
-					lineWidth: 1,
-					tooltip: {
-						valueSuffix: '%rh'
-					},
-				}
+				
 				]
 			});
 		}

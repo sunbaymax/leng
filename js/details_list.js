@@ -689,7 +689,7 @@
 					admin_user: _userName,
 					admin_pass: _userPass,
 					StartNo: _warning_more,
-					Length: 3
+					Length: 5
 				},
 				success: function(data) {
 					var _json = JSON.parse(data);
@@ -732,7 +732,8 @@
 			})
 		}
 		$(".warning_more").on("click", function() {
-			_warning_more += 3;
+			_warning_more += 5
+			;
 			//$(".wait").removeClass("hidden");
 			warning_more(_warning_more, 1);
 		});
@@ -772,6 +773,7 @@
 	 */
 
 	function history_my_zhe(_history_start_time, _history_end_time, _length) {
+		console.log(_length);
 		var _hegeShang = [],
 			_hegeXia = [],
 			_baojingShang = [],
