@@ -1,0 +1,156 @@
+.content {
+	width: 100%;
+	height: auto;
+	margin-top: 5rem;
+	padding: 0 2vw;
+	box-sizing: border-box;
+	font-size: 1.4rem;
+}
+
+.form div {
+	padding: 0 1rem;
+	box-sizing: border-box;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 5.4rem;
+	background: #ffffff;
+	border-bottom: 1px solid #F2F5F8;
+	margin: 0.4rem 0;
+	border-radius: 1rem;
+}
+
+.form div span {
+	display: block;
+	width: 40%;
+}
+
+.form div input {
+	display: block;
+	height: 3rem;
+	width: 16rem;
+	text-align: right;
+}
+
+.content .btnok {
+	height: 4rem;
+	margin-top: 4rem;
+	text-align: center;
+}
+
+.content .btnok button {
+	width: 16rem;
+	height: 4rem;
+	background: #40C0C3;
+	border-radius: 5rem;
+	border: none;
+	color: #ffffff;
+	font-size: 1.5rem;
+	cursor: pointer;
+}
+
+.invitebtn img {
+	width: 1rem;
+	height: 1rem;
+}
+
+.list {
+	height: auto;
+	width: 100%;
+}
+
+.list div {
+	padding: 0 2vw;
+	box-sizing: border-box;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 4rem;
+	background: #ffffff;
+	margin-top: 1rem;
+}
+
+.isgopay {
+	width: 60px;
+	height: 30px;
+	background: #40C0C3;
+	color: #FFFFFF;
+	border: none;
+	border-radius: 15px;
+}
+
+.list img {
+	width: 1rem;
+	height: 1rem;
+}
+
+.invitebtn .addimg {
+	width: 1.6rem;
+	height: 1.6rem;
+}
+
+.list .name {
+	margin-right: 1.5rem;
+}
+
+.list button {
+	height: 2rem;
+	width: 5rem;
+	border-radius: 1rem;
+	background: #FFFFFF;
+	border: 1px solid #40C0C3;
+	color: #37C0C4;
+	cursor: pointer;
+}
+
+.switch-wrap input[type=checkbox] {
+	height: 0px;
+	width: 0px;
+	visibility: hidden;
+	margin: 0;
+	padding: 0;
+}
+
+.switch-wrap label {
+	display: inline-block;
+	width: 44px;
+	height: 24px;
+	border: 1px solid #DFDFDF;
+	outline: none;
+	border-radius: 12px;
+	box-sizing: border-box;
+	background: #FFFFFF;
+	cursor: pointer;
+	transition: border-color .3s, background-color .3s;
+	vertical-align: middle;
+	position: relative;
+}
+
+.switch-wrap label::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	transition: transform 0.3s;
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+	background-color: #fff;
+}
+
+.switch-wrap input:checked+label {
+	background: #33DB70;
+}
+
+.switch-wrap input:checked+label:before {
+	transform: translateX(20px);
+}
+
+.form div div {
+	padding: 0;
+}
+
+.hide {
+	display: none;
+}

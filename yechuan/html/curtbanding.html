@@ -1,0 +1,441 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>页川云平台</title>
+
+		<!-- Set render engine for 360 browser -->
+		<meta name="renderer" content="webkit">
+
+		<!-- No Baidu Siteapp-->
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+		<!-- <link rel="icon" type="image/png" href="assets/i/favicon.png"> -->
+
+		<!-- Add to homescreen for Chrome on Android -->
+		<meta name="mobile-web-app-capable" content="yes">
+		<!-- <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png"> -->
+
+		<!-- Add to homescreen for Safari on iOS -->
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-title" content="Amaze UI" />
+		<!--  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png"> -->
+
+		<!-- Tile icon for Win8 (144x144 + tile color) -->
+		<!-- <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png"> -->
+		<meta name="msapplication-TileColor" content="#0e90d2">
+
+		<!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+		<!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+		<link rel="stylesheet" href="../css/index.css">
+
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+				/*box-sizing: border-box;*/
+			}
+			
+			header {
+				position: fixed;
+				top: 0;
+				left: 0;
+				z-index: 999;
+				width: 100%;
+				height: 49px;
+				background-color: #333;
+				color: #fff;
+			}
+			
+			header .back {
+				position: absolute;
+				top: 0;
+				left: 0;
+				display: inline-block;
+				padding-left: 5px;
+				font-size: 30px;
+			}
+			
+			header p {
+				margin: 0;
+				line-height: 49px;
+				font-size: 16px;
+				text-align: center;
+			}
+			
+			.register {
+				margin-top: 5rem;
+				font-size: 1.4rem;
+				padding: 0 2vw;
+				box-sizing: border-box;
+			}
+			
+			.res-item {
+				position: relative;
+				width: 100%;
+				border-radius: 4px;
+				background-color: #fff;
+				height: 4rem;
+				margin-top: 1rem;
+			}
+			
+			.res-icon {
+				position: absolute;
+				left: 8px;
+				top: 5px;
+				z-index: 100;
+				display: inline-block;
+				font-size: 18px;
+				color: #9c9c9c;
+			}
+			
+			.res-item .input-item {
+				display: inline-block;
+				width: 100%;
+				padding-left: 1rem;
+				box-sizing: border-box;
+				height: 4rem;
+				border: none;
+				font-size: inherit;
+				border-radius: 0.5rem;
+			}
+			
+			.res-item .input-item:focus {
+				outline-offset: 0;
+				outline: -webkit-focus-ring-color auto -2px;
+				background-color: #fefffe;
+				border: 1px solid #55CAC4;
+				outline: 0;
+				-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 5px rgba(226, 25, 69, .3);
+				box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 5px rgba(226, 25, 69, 0.3);
+			}
+			
+			.res-item .input-item:focus+.res-icon {
+				color: #e21945;
+			}
+			
+			.yanzhengma {
+				display: inline-block;
+				height: 3rem;
+				width: 8rem;
+				line-height: 3rem;
+				/* padding: 0.5rem 0.8rem; */
+				position: absolute;
+				right: 10px;
+				top: 0.5rem;
+				z-index: 100;
+				font-size: 1.3rem;
+				border: none;
+				background-color: #55CAC4;
+				color: #fff;
+				border-radius: 0.5rem;
+			}
+			
+			.yanzhengma:disabled {
+				background-color: #ddd;
+			}
+			
+			.res-btn {
+				margin-top: 20rem;
+				text-align: center;
+			}
+			
+			.res-btn button {
+				/*margin-top: 2rem;
+				background-color: #3299fe;
+				color: #fefefe;
+				font-size: 1.5rem;
+				font-weight: bold;
+				width: 100%;
+				height: 4rem;
+				outline: none;
+				box-sizing: border-box;
+				margin-left: 5%;
+				font-size: 1.4rem;
+				border: 1px solid #d2d8d8;
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				-ms-appearance: none;
+				-o-appearance: none;
+				appearance: none;
+				border-radius: 0.5rem;*/
+				width: 16rem;
+				height: 4rem;
+				background: #40C0C3;
+				border-radius: 5rem;
+				border: none;
+				color: #ffffff;
+				font-size: 1.5rem;
+			    cursor: pointer;
+			}
+			
+			.res-btn button:focus {
+				color: #fff;
+			}
+			
+			.jiediv {
+				height: 4rem;
+				line-height: 4rem;
+				text-align: end;
+				margin-right: 1rem;
+			}
+			
+			.jiediv a {
+				text-decoration: none;
+				color: #3299fe;
+			}
+			.content{
+				padding: 0 1rem;
+				box-sizing: border-box;
+				margin-top: 10rem;
+			}
+			.content div{
+				text-align: center;
+				margin-top: 4rem;
+			}
+			.content div:last-of-type{
+				text-align: center;
+				margin-top: 8rem;
+			}
+			.content .content-img{
+				margin-top: 5rem;
+				height: 4rem;
+				width: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.content .content-img img{
+				width: 4rem;
+				height: 4rem;
+			}
+			.replacebtn{
+				width: 16rem;
+				height: 4rem;
+				background: #40C0C3;
+				border-radius: 5rem;
+				border: none;
+				color: #ffffff;
+				font-size: 1.5rem;
+			}
+			
+			.hide{
+				display: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--[if lte IE 9]>
+    <p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a
+      href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+      以获得更好的体验！</p>
+    <![endif]-->
+		<div class="header"><img class="back_list" src="../img/back.png" />我的绑定</div>
+
+		<div class="content ">
+			<div class="content-img">
+				<img src="../images/bandingok.png" />
+			</div>
+			<div>
+				<h3>你的手机号：<label class="tel"></label></h3>
+			</div>
+			<div>
+				<p>
+					<button class="replacebtn">更换手机号</button>
+				</p>
+			</div>
+		</div>
+
+		<!--[if (gte IE 9)|!(IE)]><!-->
+		<script src="../js/jquery-1.11.0.js"></script>
+		<script src="../js/index.js"></script>
+
+		<script>
+			function UrlSearch() {
+				var name, value;
+				var str = location.href; //取得整个地址栏
+				var num = str.indexOf("?")
+				str = str.substr(num + 1); //取得所有参数 stringvar.substr(start [, length ]
+
+				var arr = str.split("&"); //各个参数放到数组里
+				for(var i = 0; i < arr.length; i++) {
+					num = arr[i].indexOf("=");
+					if(num > 0) {
+						name = arr[i].substring(0, num);
+						value = arr[i].substr(num + 1);
+						this[name] = value;
+					}
+				}
+			}
+			var userinfo = JSON.parse(localStorage.getItem('isonline'));
+			var _user = userinfo.user;
+			var _pass = userinfo.pwd;
+			$('.tel').text(_user);
+			var Request = new UrlSearch(); //实例化
+			var _openId = Request.openId;
+			if(_openId == '' || _openId == undefined) {
+				//setTimeout('WeixinJSBridge.call("closeWindow")', 1500);
+			} else {
+				_openId = Request.openId;
+			}
+			$(".back_list").on("click", function() {
+				location.href='bandinglist.html'
+			});
+			var times = 60;
+
+			function roof() {
+
+				if(times == 0) {
+					$('.yanzhengma').text('发送验证码(' + times + 's)');
+					$('.yanzhengma').prop('disabled', false);
+					$('.yanzhengma').text('发送验证码');
+					times = 60;
+					return
+				}
+				if(times == 59) {
+					var mobile = $('.mobile').val();
+					$.ajax({
+						type: "post",
+						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/yechuan/register/sendCode",
+						async: true,
+						data: {
+							phone: mobile
+						},
+						dataType: "json",
+						success: function(res) {
+							console.log(res);
+							if(res.code == 200) {
+								console.log("发送成功")
+							}
+						},
+						error: function(err) {
+							console.log(err);
+						}
+					});
+				}
+				$('.yanzhengma').text('发送验证码(' + times + 's)');
+				times--;
+				setTimeout(roof, 1000);
+
+			}
+			$(".replacebtn").on("click",function(){
+				location.href='yanzheng.html?openId='+_openId
+			})
+
+			$('.yanzhengma').on('click', function() {
+				var mobile = $('.mobile').val();
+				if(!mobile) {
+					$('.mobile').focus();
+					document.querySelector('.mobile').placeholder = '请填写手机号码';
+					return
+				} else if(!isPoneAvailable($("#telphone"))) {
+
+					alert("手机格式错误");
+					document.querySelector('.mobile').placeholder = '手机号格式错误';
+					return
+				} else {
+					$(this).prop('disabled', true);
+					roof();
+				}
+
+			});
+
+			function isPoneAvailable($poneInput) {
+				var myreg = /^[1][3,4,5,7,8,9][0-9]{9}$/;
+				if(!myreg.test($poneInput.val())) {
+					return false;
+				} else {
+					return true;
+				}
+			}
+			var bang = 1;
+			console.log(bang);
+			$(".cancel").on("click", function() {
+				location.href = 'RelieveBd.html?openId=' + _openId;
+				//				if($(this).text() == "解绑") {
+				//					$('.header').text('微信解绑');
+				//					$(this).text('绑定')
+				//					bang = 0;
+				//				} else {
+				//					$(this).text('解绑')
+				//					$('.header').text('微信绑定');
+				//					bang = 1;
+				//				}
+
+			})
+			$('#res-btn').on('click', function() {
+				var mobile = $('.mobile').val();
+				var yanzheng = $('.yanzheng').val();
+				var _newpsd = $('.newpsd').val();
+				var _newpsd2 = $('.newpsd2').val();
+
+				if(mobile == '') {
+					$('.mobile').focus();
+					document.querySelector('.mobile').placeholder = '请填写手机号码';
+					return
+				} else if(!isPoneAvailable($("#telphone"))) {
+					$('.mobile').focus();
+					document.querySelector('.mobile').placeholder = '手机号格式错误';
+					return
+				} else if(yanzheng == '') {
+					$('.yanzheng').focus();
+					document.querySelector('.yanzheng').placeholder = '请填写验证码';
+					return
+				}else if(_newpsd == '') {
+					alert("密码不能为空")
+					return
+				}else if(_newpsd2 == '') {
+					alert("确认密码不能为空")
+					return
+				}else if(_newpsd2 != _newpsd) {
+					alert("两次密码输入不一致")
+					return
+				} else {
+
+					$.ajax({
+						type: "post",
+						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/register/weixin_add",
+						async: true,
+						data: {
+							weixin_openid: _openId,
+							phone: mobile,
+							code: yanzheng,
+							pwd:_newpsd2,
+						},
+						dataType: "JSON",
+						success: function(res) {
+							console.log(res);
+
+							if(res.code == 0 && res.message == 'success') {
+								alert("绑定成功");
+								$('#res-btn').prop('disabled', true);
+								//location.href = 'bandinglist.html';
+
+							} else {
+								alert(res.message);
+							}
+						},
+						error: function(err) {
+							console.log(err)
+						}
+					});
+
+				}
+
+			})
+		</script>
+
+	</body>
+
+</html>

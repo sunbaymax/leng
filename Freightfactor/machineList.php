@@ -19,6 +19,7 @@
 			.hidden{
 				display: none;
 			}
+			
 		</style>
 		<div style="display:none">
 			<?php
@@ -29,8 +30,8 @@
 		</div>
 		<div class="container">
 			<div class="header">
-				<p><span>云平台</span></p>
-				<p style="display: flex;align-items: center;"><img src="images/addDevice.png" class="addDevice" /> <img src="images/userCenter.png" class="userCenter" /></p>
+				<p><span>鲜盾</span></p>
+				<p style="display: flex;align-items: center;"><img src="images/yunshuicon.png" class="yunshu" /> <img src="images/addDevice.png" class="addDevice" /> <img src="images/userCenter.png" class="userCenter" /></p>
 			</div>
 			<div class="window_post hidden" >
 			     <div>
@@ -44,10 +45,9 @@
 	
 			<div class="searchdiv">
 				<div class="father-search-content">
-					<img src="images/soushuo_1@2x.png" class="search-img" />
-					<input type="text" placeholder="请输入查询的设备号" id="search" class="search-input" />
-					
-					<img src="images/soushuo2.png" class="search-img" style="display: none;"/>
+					<!--<img src="images/soushuo_1@2x.png" class="search-img" />-->
+					<input type="text" placeholder="按昵称或设备号搜索" id="search" class="search-input" />
+					<img src="images/soushuo2.png" class="search-img" />
 				</div>
 				
 			</div>
@@ -59,6 +59,9 @@
 					
 						<i class="pull_icon"></i><span>正在刷新...</span>
 				
+					</div>
+					<div class="shebeitotal">
+						您当前绑定的设备总数为<span class="text-blue alltotal"></span>台 <label class="is_c">,待缴设备数:<a class="text-red daoqitotal" href="html/bill.html"><span class="val"></span> <i class="tip"></i></a>台</label>
 					</div>
 					<div class="scroll_box">
                        
@@ -110,6 +113,15 @@
 								<span class="left15">昵称：<label class="beizhu"></label></span>
 								<button class="Untyingbtn">解绑</button>
 							</div>
+							<div class="daoqi">
+								<h4>设备已到期</h4>
+								<div class="daoqicontent">
+									您的设备服务已到期，请于<span class="daoqiTime">2020-12-12  09:35:35</span>前进行缴费，逾期该设备SIM卡将被注销。
+								</div>
+								<div>
+									<button>前往缴费</button>
+								</div>
+							</div>
 							
 							
 	
@@ -154,18 +166,18 @@
 			/*iscroll代码；
 			 */
 			wx.config({
-			debug: false,
-			appId: '<?php echo $signPackage["appId"];?>',
-			timestamp: '<?php echo $signPackage["timestamp"];?>',
-			nonceStr: '<?php echo $signPackage["nonceStr"];?>',
-			signature: '<?php echo $signPackage["signature"];?>',
-			jsApiList: [
-				'chooseImage',
-				'scanQRCode'
-			]
+				debug: false,
+				appId: '<?php echo $signPackage["appId"];?>',
+				timestamp: '<?php echo $signPackage["timestamp"];?>',
+				nonceStr: '<?php echo $signPackage["nonceStr"];?>',
+				signature: '<?php echo $signPackage["signature"];?>',
+				jsApiList: [
+					'chooseImage',
+					'scanQRCode'
+				]
 			});
 			function onBridgeReady() {
-			WeixinJSBridge.call('hideOptionMenu');
+			  WeixinJSBridge.call('hideOptionMenu');
 			}
 			
 			if (typeof WeixinJSBridge == "undefined") {
@@ -201,8 +213,10 @@
 			var utype = userinfo.userType;
 			if(utype == 'b') {
 				$(".addDevice").hide()
+				$('.yunshu').show()
 			}else{
 				$(".addDevice").show()
+				$('.yunshu').hide()
 			}
 			
 			var _openid = localStorage.getItem('openId');
@@ -221,7 +235,7 @@
 						    $('.refreshmsg span').text('正在刷新...');
 						    setTimeout(function () {
 				                window.location.reload()
-				              }, 3000);
+				              }, 1500);
 							
 						}
 					}
@@ -235,6 +249,7 @@
 					}
 				},
 				onRefresh: function() {
+					console.log("上拉加载")
 					$('.more').removeClass('flip');
 					$('.more span').text('上拉加载...');
 				}
@@ -254,97 +269,36 @@
 			machine_ajax_list(0)
 
 			function machine_ajax_list(_start) {
-				var _userType = userinfo.userType;
+				let _search_num = $("#search").val();
+				let userinfo = JSON.parse(localStorage.getItem('wyblisonline'));
+				let _userType = userinfo.userType;
+				console.log(_userType)
 				if(_userType == 'b') {
-					$.ajax({
-						url: "http://www.ccsc58.com/json/00_00_tb_shebeidongtai.php",
-						type: "post",
-						data: {
-							admin_permit: "zjly8888",
-							UserP: "x",
-							admin_user: _userName,
-							admin_pass: _userPass,
-							StartNo: _start,
-							Length: 5
-						},
-						success: function(data) {
-							var _json = JSON.parse(data);
-							if(_json.resultCode != "nodata" && _json.code == 10000) {
-								for(var i = 0; i < _json.resultCode.length; i++) {
-									var _dem = $(".list").eq(0).clone().removeClass("hidden").appendTo(".scroll_box");
-									if(_json.resultCode[i].model_type=='TT'){
-										_dem.find(".list-content .temp2").html(_json.resultCode[i].temperature02==0?'-':_json.resultCode[i].temperature02+"℃");
-										_dem.find(".list-content .humidity").parents('p').addClass('hidden');
-									}else{
-										_dem.find(".list-content .temp1").parents('p').find('.wen').text('温度：');
-										_dem.find(".list-content .temp2").parents('p').addClass('hidden');
-										_dem.find(".list-content .humidity").html(_json.resultCode[i].humidity==0?'-':_json.resultCode[i].humidity+"%RH");
-									}
-									_dem.find(".list-content .temp1").html(_json.resultCode[i].temperature01);
-//									_dem.find(".list-content .temp2").html(_json.resultCode[i].temperature02==0?'-':_json.resultCode[i].temperature02+"℃");
-//									_dem.find(".list-content .humidity").html(_json.resultCode[i].humidity==0?'-':_json.resultCode[i].humidity+"%RH");
-									_dem.find(".list-content .speed").html(_json.resultCode[i].speed);
-									_dem.find(".list-content .power").html(_json.resultCode[i].power == null ? "0" : _json.resultCode[i].power);
-									_dem.find(".list_tittle .shebeihao").html(_json.resultCode[i].shebeibianhao);
-//									_dem.find(".list_tittle .beizhu").html(_json.resultCode[i].beizhu);
-									_dem.find(".list-content .worktime").html(_json.resultCode[i].time);
-									_dem.find(".list-content .boxstate").html(_json.resultCode[i].xiangzistate == 'close' ? "关闭" : "开启");
-									_dem.find(".list-content .AcceptableArea").html(_json.resultCode[i].hegewenduxiaxian + "~" + _json.resultCode[i].hegewendushangxian + "℃");
-									_dem.find(".list-content .alarmArea").html(_json.resultCode[i].baojingwenduxiaxian + "~" + _json.resultCode[i].baojingwendushangxian + "℃");
-									if(_json.resultCode[i].xinghaoqiangdu >= 0 && _json.resultCode[i].xinghaoqiangdu < 5) {
-										_dem.find(".list-content  .signal").html("无信号");
-									} else if(_json.resultCode[i].xinghaoqiangdu >= 5 && _json.resultCode[i].xinghaoqiangdu < 13) {
-										_dem.find(".list-content  .signal").html("弱");
-									} else if(_json.resultCode[i].xinghaoqiangdu >= 13 && _json.resultCode[i].xinghaoqiangdu < 20) {
-										_dem.find(".list-content  .signal").html("良");
-									} else if(_json.resultCode[i].xinghaoqiangdu >= 20 && _json.resultCode[i].xinghaoqiangdu < 26) {
-										_dem.find(".list-content  .signal").html("好");
-									} else if(_json.resultCode[i].xinghaoqiangdu >= 26) {
-										_dem.find(".list-content  .signal").html("强");
-									} else {
-										_dem.find(".list-content  .signal").html("无信号");
-									}
-									my_machine_list(_json.resultCode[i].jingdu, _json.resultCode[i].weidu, _dem)
-									/*$(".more_machine").before(_dem);*/
-								}
-							} else {
-								$(".more").html("未找到更多设备");
-							}
-							//$(".wait").addClass("hidden");
-							//$(".more").addClass("hidden");
-							myscroll_x.refresh();
-							myMachine();
-						},
-						error: function() {
-//							alert("网络错误，请重新进入页面");
-							_start -= 5;
-							if(_start <= 0) {
-								window.location.href = _url;
-							};
-							$(".wait").addClass("hidden");
-							myscroll_x.refresh();
-						}
-					})
-				} else {
-//					var userinfo = JSON.parse(localStorage.getItem('wyblisonline'));
-					var copenid=userinfo.copenid;
+					$('.is_c').hide()
 					$.ajax({
 						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/device_list",
+//						url: "http://www.ccsc58.com/json/00_00_tb_shebeidongtai.php",
 						type: "post",
 						data: {
-							openid: copenid,
-							offset: _start
-
+							userName: _userName,
+							offset: _start,
+							vague:_search_num
 						},
-						dataType: 'json',
+                        dataType: 'json',
 						success: function(res) {
+							$('.alltotal').text(res.data.count)
+							$('.daoqitotal .val').text(res.data.daoqi_count)
 							if(res.code == 0 && res.message == 'success') {
 							   if(res.data.count<=5){
 									console.log("111")
 									$(".wait").addClass("hidden");
 							         $(".more").addClass("hidden");
 									$(".more").html("未找到更多设备");
+								}else{
+									myscroll_x.refresh();
+
 								}
+								
 								for(var i = 0; i < res.data.data.length; i++) {
 									var _dem = $(".list").eq(0).clone().removeClass("hidden").appendTo(".scroll_box");
 									_dem.find(".list-content .temp1").html(res.data.data[i].last_temperature01);
@@ -380,6 +334,99 @@
 									} else {
 										_dem.find(".list-content  .signal").html("无");
 									}
+									if(res.data.data[i].is_guoqi==false){
+										_dem.find(".daoqi").addClass('hidden');
+									}else{
+										_dem.find(".daoqi").addClass('hidden');
+									}
+									//my_machine_list(res.data.data[i].last_jingdu, res.data.data[i].last_weidu, _dem)
+									/*$(".more_machine").before(_dem);*/
+								}
+
+							} else {
+								$(".more").html("未找到更多设备");
+							}
+							myscroll_x.refresh();
+							},
+						error: function() {
+//							alert("网络错误，请重新进入页面");
+							_start -= 5;
+							if(_start <= 0) {
+								window.location.href = _url;
+							};
+							$(".wait").addClass("hidden");
+							myscroll_x.refresh();
+						}
+					})
+				} else {
+				//
+//                  let _search_num = $("#search").val();
+					let copenid=userinfo.copenid;
+					console.log(copenid,33)
+					$.ajax({
+						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/device_list",
+						type: "post",
+						data: {
+							openid: copenid,
+							offset: _start,
+							vague:_search_num
+                            
+						},
+						dataType: 'json',
+						success: function(res) {
+							$('.alltotal').text(res.data.count)
+							$('.daoqitotal .val').text(res.data.daoqi_count)
+							if(res.code == 0 && res.message == 'success') {
+							   if(res.data.count<=5){
+									console.log("111")
+									$(".wait").addClass("hidden");
+							         $(".more").addClass("hidden");
+									$(".more").html("未找到更多设备");
+								}else{
+									myscroll_x.refresh();
+
+								}
+								
+								for(var i = 0; i < res.data.data.length; i++) {
+									var _dem = $(".list").eq(0).clone().removeClass("hidden").appendTo(".scroll_box");
+									_dem.find(".list-content .temp1").html(res.data.data[i].last_temperature01);
+									if(res.data.data[i].model_type=='TT'){
+										_dem.find(".list-content .temp2").html(res.data.data[i].last_temperature02==0?'-':res.data.data[i].last_temperature02+"℃");
+										_dem.find(".list-content .humidity").parents('p').addClass('hidden');
+									}else{
+										_dem.find(".list-content .temp1").parents('p').find('.wen').text('温度：');
+										_dem.find(".list-content .temp2").parents('p').addClass('hidden');
+										_dem.find(".list-content .humidity").html(res.data.data[i].last_humidity==0?'-':res.data.data[i].last_humidity+"%RH");
+									}
+									_dem.find(".list-content .speed").html(res.data.data[i].speed);
+									_dem.find("#caozuo .beizhu").html(res.data.data[i].beizhu==''?'':res.data.data[i].beizhu);
+									_dem.find(".list-content .power").html(res.data.data[i].last_power == null ? "0" : res.data.data[i].last_power);
+									_dem.find(".list_tittle .shebeihao").html(res.data.data[i].shebeibianhao);
+									_dem.find(".list_tittle .shebeihao").attr('is_master',res.data.data[i].is_master);
+									_dem.find(".list_tittle .main").html(res.data.data[i].is_master==0?'分':"主");
+									_dem.find(".list-content .worktime").html(res.data.data[i].last_time);
+									_dem.find(".list-content .boxstate").html(res.data.data[i].xiangzistate == 'close' ? "关闭" : "开启");
+									_dem.find(".list-content .AcceptableArea").html(res.data.data[i].hegewenduqujian);
+									_dem.find(".list-content .alarmArea").html(res.data.data[i].baojingwenduqujian);
+									_dem.find(".list-content .address").html(res.data.data[i].address);
+									if(res.data.data[i].xinhaoqiangdu >= 0 && res.data.data[i].xinhaoqiangdu < 5) {
+										_dem.find(".list-content  .signal").html("无");
+									} else if(res.data.data[i].xinhaoqiangdu >= 5 && res.data.data[i].xinhaoqiangdu < 13) {
+										_dem.find(".list-content  .signal").html("弱");
+									} else if(res.data.data[i].xinhaoqiangdu >= 13 && res.data.data[i].xinhaoqiangdu < 20) {
+										_dem.find(".list-content  .signal").html("良");
+									} else if(res.data.data[i].xinhaoqiangdu >= 20 && res.data.data[i].xinhaoqiangdu < 26) {
+										_dem.find(".list-content  .signal").html("好");
+									} else if(res.data.data[i].xinhaoqiangdu >= 26) {
+										_dem.find(".list-content  .signal").html("强");
+									} else {
+										_dem.find(".list-content  .signal").html("无");
+									}
+									if(res.data.data[i].is_guoqi==false){
+										_dem.find(".daoqi").addClass('hidden');
+									}else{
+										_dem.find(".daoqi").removeClass('hidden');
+									}
 									//my_machine_list(res.data.data[i].last_jingdu, res.data.data[i].last_weidu, _dem)
 									/*$(".more_machine").before(_dem);*/
 								}
@@ -400,6 +447,95 @@
 				}
 
 			}
+						
+//$(".search-input").on("propertychange input",function(){
+//   var searchBox_val = $(".search-input").val();
+////   alert(searchBox_val);
+//   if(searchBox_val == ""){
+//      window.location.reload();//刷新页面
+//   }else{
+//      $(this).prev().hide();
+//		$(this).next().show();
+//   }
+//});
+//		$(".search-input").bind('input propertychange', function() {
+//				var inputValue = $(this).val();
+//				if(inputValue.length > 0) {
+//					$(this).prev().hide();
+//					$(this).next().show();
+//				} else {
+//					$(this).next().hide();
+//					$(this).prev().show();
+//					
+//				}
+//
+//			});	
+			
+	/*
+	 * 搜索点击事件；
+	 */
+	$(".search-img").on("click", function() {
+		
+		var _search_num = $("#search").val();
+		if(_search_num == "") {
+			location.reload()
+		} else {
+			$(".scroll_box .list").not(".hidden").remove();
+			machine_ajax_list(0)
+			
+							  
+								
+					
+
+			
+			
+			
+			
+//			$.ajax({
+//				url: "http://www.ccsc58.com/json/01_00_tb_history_data.php",
+//				type: "post",
+//				data: {
+//					UserP: "w",
+//					admin_permit: "zjly8888",
+//					admin_user: _userName,
+//					admin_pass: _userPass,
+//					SheBeiBianHao: _search_num.replace(/\s*/g, ""),
+//					StartTime: "2000-08-26 00:00:00",
+//					EndTime: "3000-01-01 00:00:00",
+//					StartNo: 0,
+//					Length: 1
+//				},
+//				success: function(data) {
+//					var _json = JSON.parse(data);
+//					if(_json.code == 1) {
+//						$(".wait").addClass("hidden");
+//						alert("未找到您搜索的设备！");
+//						$("#search").val("");
+//						$("#search").next().hide();
+//						$("#search").prev().show();
+//					}else if(_json.code==30000){
+//						alert(_json.message);
+//						return false;
+//					} else {
+//						$("#search").val("");
+//						$("#search").next().hide();
+//						$("#search").prev().show();
+//						window.location.href = "html/details_lists.html?num_m=" +_search_num.replace(/\s*/g, "");
+//					}
+//				},
+//				error: function() {
+//					$(".wait").addClass("hidden");
+//					alert("未找到您搜索的设备！");
+//				}
+//			});
+		}
+	});
+	        //到期点击跳转
+	        $(document).on('click','.daoqi',function(){
+	        	
+	        	let shebeihao= $(this).parents('.list').find('.shebeihao').text();
+	        	window.location.href='html/buyflewpackage.html?num_m='+shebeihao
+	        })
 
 			function my_machine_list(_jingDu, _weiDu, _dem) {
 				//console.log(_jingDu+","+_weiDu)
@@ -532,76 +668,17 @@
 				window.location.href = "html/details_lists.html?num_m=" + num
 			})
 			
-			$(".search-input").bind('input propertychange', function() {
-				var inputValue = $(this).val();
-				if(inputValue.length > 0) {
-					$(this).prev().hide();
-					$(this).next().show();
-				} else {
-					$(this).next().hide()
-					$(this).prev().show();
-				}
-
-			});
+             //运输
+             $('.yunshu').on('click',function(){
+             	window.location.href='html/transport/Initiate.php'
+             })
 			//点击添加
 			$(".addDevice").on('click', function() {
 //				$(".window_post").removeClass('hidden');
                 location.href='html/addDevice.php';
 
 			});
-			
 
-			
-			
-	/*
-	 * 搜索点击事件；
-	 */
-	$(".search-img").on("click", function() {
-		
-		var _search_num = $("#search").val();
-		if(_search_num == "") {
-			$(".wait").addClass("hidden");
-			alert("请输入搜索内容！")
-		} else {
-			$.ajax({
-				url: "http://www.ccsc58.com/json/01_00_tb_history_data.php",
-				type: "post",
-				data: {
-					UserP: "w",
-					admin_permit: "zjly8888",
-					admin_user: _userName,
-					admin_pass: _userPass,
-					SheBeiBianHao: _search_num.replace(/\s*/g, ""),
-					StartTime: "2000-08-26 00:00:00",
-					EndTime: "3000-01-01 00:00:00",
-					StartNo: 0,
-					Length: 1
-				},
-				success: function(data) {
-					var _json = JSON.parse(data);
-					if(_json.code == 1) {
-						$(".wait").addClass("hidden");
-						alert("未找到您搜索的设备！");
-						$("#search").val("");
-						$("#search").next().hide();
-						$("#search").prev().show();
-					}else if(_json.code==30000){
-						alert(_json.message);
-						return false;
-					} else {
-						$("#search").val("");
-						$("#search").next().hide();
-						$("#search").prev().show();
-						window.location.href = "html/details_lists.html?num_m=" +_search_num.replace(/\s*/g, "");
-					}
-				},
-				error: function() {
-					$(".wait").addClass("hidden");
-					alert("未找到您搜索的设备！");
-				}
-			});
-		}
-	});
 	$("body").on('click','.list .left15' ,function() {
 			var _num = $(this).parents('.list').find('.shebeihao').text();
 			var _beizhu = $(this).parents('.list').find('.beizhu').text();

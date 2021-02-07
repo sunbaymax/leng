@@ -7,6 +7,12 @@
 		<title>北京中集智冷科技有限公司</title>
 		<link rel="stylesheet" type="text/css" href="../css/index.css" />
 		<link rel="stylesheet" type="text/css" href="../css/set.css" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=8">
+		<meta http-equiv="Expires" content="0">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-control" content="no-cache">
+		<meta http-equiv="Cache" content="no-cache">
 		<style type="text/css">
 			.form div span {
 				display: block;
@@ -20,7 +26,46 @@
 				text-align: center;
 				background: none;
 			}
-		</style>
+			
+			.form .group {
+				display: flex;
+				flex-direction: column;
+				height: auto;
+			}
+			
+			.form .group p {
+				width: 100%;
+			}
+			
+			.form .group .descwen {
+				padding: 10px 0 5px;
+			}
+			
+			.form .group input {
+				display: block;
+				height: 3rem;
+				width: 80%;
+				text-align: left;
+				border: 1px solid #ccc;
+				margin: 5px 0;
+				margin-left: 10%;
+			}
+			
+			.form .group .addtelbtn {
+				display: inline-block;
+				padding: 10px 0;
+				width: 5rem;
+				/*height: 4rem;*/
+			}
+			.form .group .addtelbtn button{
+				display: inline-block;
+				width: 3rem;
+				height: 3rem;
+				border: none;
+				outline: none;
+				border-radius: 50%;
+			}
+			</style>
 	</head>
 
 	<body>
@@ -87,8 +132,6 @@
 					</select>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;℃
 				</div>
-					
-			
 
 				<div class="TH">
 					<span>是否开启湿度上限报警：</span>
@@ -118,8 +161,7 @@
 					</select>
 					&nbsp;&nbsp;%RH
 				</div>
-				
-				
+
 				<div>
 					<span>电量下限报警：</span>
 					<div class='switch-wrap'>
@@ -149,6 +191,23 @@
 						<label for='switch6'></label>
 					</div>
 				</div>
+				<div class="msmwarning">
+					<span>短信报警：</span>
+					<div class='switch-wrap'>
+						<input type='checkbox' id='switch9'>
+						<label for='switch9'></label>
+					</div>
+				</div>
+				<div class="group hidden">
+					<p class="descwen">手机号报警：</p>
+					<p class="tel1">
+						<input type="number" class="telephonenum" placeholder="报警推送手机号" />
+					</p>
+					<p class="addtelbtn">
+						<button>+</button>
+					</p>
+					<!--<p><input type="number" class="telephonenum"  placeholder="报警推送手机号"/> </p>-->
+				</div>
 
 			</div>
 			<div class="btnok">
@@ -176,7 +235,7 @@
 				$(".humidityHighbaojing").append(shiduzhi);
 				$(".humiditylowbaojing").append(shiduzhi);
 			}
-			
+
 			$(".invitebtn").on("click", function() {
 				window.location.href = 'banding.html?openId=' + _openid;
 			});
@@ -190,6 +249,9 @@
 			var _userType = userinfo.userType;
 			if(_userType == 'b') {
 				$(".telwarning").hide()
+				$('.msmwarning').show()
+			}else{
+				$('.msmwarning').hide()
 			}
 			var copenid = userinfo.copenid == undefined ? '' : userinfo.copenid;
 			var _num_m = "";
@@ -199,9 +261,9 @@
 				_num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "");
 			}
 			$(".back_list").on("click", function() {
-//				window.history.go(-1);
-                sessionStorage.setItem('paraset',1);
-                window.location.href ='details_lists.html?num_m='+_num_m+'&'
+				//				window.history.go(-1);
+				sessionStorage.setItem('paraset', 1);
+				window.location.href = 'details_lists.html?num_m=' + _num_m + '&'
 			});
 			var _ismaster = sessionStorage.getItem('ismaster');
 			if(_ismaster == 0) {
@@ -216,10 +278,10 @@
 				$(".btnok button").attr('disabled', false);
 			}
 			//http://www.ccsc58.com/json/06_00_tb_device_chanshu.php
-            //http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/get_device_param
+			//http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/xiandun_get_device_param
 			$.ajax({
 				type: "post",
-				url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/get_device_param",
+				url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/xiandun_get_device_param",
 				data: {
 					admin_permit: "zjly8888",
 					UserP: "w",
@@ -227,7 +289,8 @@
 					admin_user: _userName,
 					admin_pass: _userPass,
 					SheBeiBianHao: _num_m,
-					openid: copenid
+					openid: copenid,
+					userType:_userType
 				},
 				success: function(data) {
 					var _json = JSON.parse(data);
@@ -235,31 +298,32 @@
 						alert(_json.message);
 						window.location.href = "../machineList.php";
 						return false;
-					}else if(_json.code == 30000) {
+					} else if(_json.code == 30000) {
 						alert("没有查询到该设备");
 						window.location.href = "../machineList.php";
 						return false;
 					}
-					if(_json.resultCode.model_type=="TT"){
+					if(_json.resultCode.model_type == "TT") {
 						$(".form .TH").hide()
 						$(".form .wen1:nth-child(1) span").text("是否开启温度1上限报警：");
 						$(".form .wen1:nth-child(2) span").text("报警上限温度1：");
 						$(".form .wen1:nth-child(3) span").text("是否开启温度1下限报警：");
 						$(".form .wen1:nth-child(4) span").text("报警下限温度1：");
-                        $(".tempHighbaojing2").val(_json.resultCode.baojingwendu_two_shangxian); //报警温度上限
+						$(".tempHighbaojing2").val(_json.resultCode.baojingwendu_two_shangxian); //报警温度上限
 						if(_json.resultCode.baojingwendu_two_shangxian_baojing == 0) {
 							$("#switch7").attr("checked", false);
 						} else {
 							$("#switch7").attr("checked", true);
 						}
+				
 						$(".templowbaojing2").val(_json.resultCode.baojingwendu_two_xiaxian); //报警温度下限
 						if(_json.resultCode.baojingwendu_two_xiaxian_baojing == 0) {
 							$("#switch8").attr("checked", false);
 						} else {
 							$("#switch8").attr("checked", true);
 						}
-						$(".btnok button").attr('xinghao',"TT");
-					}else if(_json.resultCode.model_type=="TH"){
+						$(".btnok button").attr('xinghao', "TT");
+					} else if(_json.resultCode.model_type == "TH") {
 						$(".form .TT").hide();
 						//是否开启湿度上限报警
 						if(_json.resultCode.chaogaoshidubaojing == 0) {
@@ -267,7 +331,7 @@
 						} else {
 							$("#switch3").attr("checked", true);
 						}
-						$(".humidityHighbaojing").val(_json.resultCode.chaogaoshidubaojingfazhi); 
+						$(".humidityHighbaojing").val(_json.resultCode.chaogaoshidubaojingfazhi);
 						//是否开启湿度下限报警
 						if(_json.resultCode.chaodishidubaojing == 0) {
 							$("#switch4").attr("checked", false);
@@ -275,10 +339,17 @@
 							$("#switch4").attr("checked", true);
 						}
 						$(".humiditylowbaojing").val(_json.resultCode.chaodishidubaojingfazhi);
-						$(".btnok button").attr('xinghao',"TH");
-					}else{
+						$(".btnok button").attr('xinghao', "TH");
+					} else {
 						console.log(3)
 					}
+					if(_json.resultCode.duanxingtuisong_baojing == 0) {
+							console.log(_json.resultCode.duanxingtuisong_baojing,11)
+							$("#switch9").attr("checked", false);
+						} else {
+							console.log(_json.resultCode.duanxingtuisong_baojing,33)
+							$("#switch9").attr("checked", true);
+						}
 					$(".btnok button").attr('biao', _json.resultCode.GPS_Start);
 					$(".btnok button").attr('yejian', _json.resultCode.yejianshangchuankaiguan);
 					<!-- 设备报警设置  -->
@@ -300,7 +371,7 @@
 					} else {
 						$("#switch2").attr("checked", true);
 					}
-			
+
 					if(_json.resultCode.weixintuisong_baojing == 0) {
 						$("#switch5").attr("checked", false);
 					} else {
@@ -311,8 +382,7 @@
 					} else {
 						$("#switch6").attr("checked", true);
 					}
-					$("#switch6").attr('is_warn_show',_json.resultCode.is_warn_show);
-					
+					$("#switch6").attr('is_warn_show', _json.resultCode.is_warn_show);
 
 				},
 				error: function() {
@@ -320,26 +390,39 @@
 				}
 			});
 			var _is_warn;
-			var warn_time=""
+			var warn_time = ""
 			$("#switch6").on("click", function() {
 				if($(this).is(":checked")) {
-					if($(this).attr('is_warn_show')==0){
-	            		_is_warn = 0;
-	            		//alert("请在我的购买语音套餐");
-	            		var r=confirm("未购买语音套餐，是否购买？")
-						  if (r==true)
-						    {
-						     window.location.href='voicebill.html';
-						    }else{
-						    	$("#switch6").attr("checked", false);
-						    }
-	            	}else{
-			            _is_warn = 1;
-	            	}
+					if($(this).attr('is_warn_show') == 0) {
+						_is_warn = 0;
+						//alert("请在我的购买语音套餐");
+						var r = confirm("未购买语音套餐，是否购买？")
+						if(r == true) {
+							window.location.href = 'voicebill.html';
+						} else {
+							$("#switch6").attr("checked", false);
+						}
+					} else {
+						_is_warn = 1;
+					}
 				} else {
 					_is_warn = 0;
 				}
 			});
+			$('.addtelbtn button').on('click',function(){
+				$('.group .descwen').after(`<p>
+						<input type="number" class="telephonenum" placeholder="报警推送手机号">
+					</p>`)
+			})
+			$("#switch9").on("click", function() {
+				if($(this).is(":checked")) {
+					$('.group').show()
+					alert('请在温控平台PC端操作绑定手机号')
+				}else{
+					$('.group').hide()
+				}
+					
+		    });		
 			$(".btnok button").on("click", function() {
 				var _GPS_Start = $(this).attr('biao');
 				var _baojingshangxian = $(".tempHighbaojing").val(); //温度报警上限；
@@ -356,12 +439,12 @@
 				} else {
 					_baojingwendu_xiaxian_baojing = 0;
 				} //是否开启报警上限；
-				if(_baojingwendu_shangxian_baojing==1 &&_baojingwendu_xiaxian_baojing == 1 && parseInt(_baojingshangxian) < parseInt(_baojingxiaxian)) {
+				if(_baojingwendu_shangxian_baojing == 1 && _baojingwendu_xiaxian_baojing == 1 && parseInt(_baojingshangxian) < parseInt(_baojingxiaxian)) {
 					alert("报警温度上限不能小于报警温度下限");
 					$(".templowbaojing").focus();
 					return false;
 				}
-				
+
 				var _baojingwendu_two_shangxian = $(".tempHighbaojing2").val(); //温度2报警上限；
 				var _baojingwendu_two_shangxian_baojing;
 				if($("#switch7").is(":checked")) {
@@ -376,7 +459,7 @@
 				} else {
 					_baojingwendu_two_xiaxian_baojing = 0;
 				} //是否开启报警上限；
-				if(_baojingwendu_two_xiaxian_baojing==1 &&_baojingwendu_two_shangxian_baojing == 1 && parseInt(_baojingwendu_two_shangxian) < parseInt(_baojingwendu_two_xiaxian)) {
+				if(_baojingwendu_two_xiaxian_baojing == 1 && _baojingwendu_two_shangxian_baojing == 1 && parseInt(_baojingwendu_two_shangxian) < parseInt(_baojingwendu_two_xiaxian)) {
 					alert("报警温度2上限不能小于报警温度2下限");
 					$(".templowbaojing2").focus();
 					return false;
@@ -401,31 +484,37 @@
 				} else {
 					_chaodishidubaojing = 0;
 				} //是否开启湿度上限报警；
-				let _weixintuisong_baojing='';
+				let _weixintuisong_baojing = '';
 				if($("#switch5").is(":checked")) {
 					_weixintuisong_baojing = 1;
 				} else {
 					_weixintuisong_baojing = 0;
 				} //是否开启微信报警；
-				let _is_open='';
+				let _is_open = '';
 				if($("#switch6").is(":checked")) {
 					_is_open = 1;
 				} else {
 					_is_open = 0;
 				} //是否开启电话报警；
 				var _humiditylowbaojing = $(".humiditylowbaojing").val(); //湿度下限
-				if(_chaogaoshidubaojing==1 &&_chaodishidubaojing == 1 && parseInt(_humidityHighbaojing) < parseInt(_humiditylowbaojing)) {
+				if(_chaogaoshidubaojing == 1 && _chaodishidubaojing == 1 && parseInt(_humidityHighbaojing) < parseInt(_humiditylowbaojing)) {
 					alert("报警湿度上限不能小于报警湿度下限");
 					$(".humiditylowbaojing").focus();
 					return false;
 				}
+				let isduanxin=''
+				if($("#switch9").is(":checked")) {
+					isduanxin = 1;
+				} else {
+					isduanxin = 0;
+				} //是否开启短信报警；
 
 				var utype = userinfo.userType;
 				var _openid = localStorage.getItem('openId');
 				if(utype == 'b') {
-					var _data={};
-					if(_xinghao=="TH"){
-						_data={
+					var _data = {};
+					if(_xinghao == "TH") {
+						_data = {
 							controller: "update",
 							admin_permit: "zjly8888",
 							UserP: "w",
@@ -438,14 +527,14 @@
 							baojingwendu_xiaxian_baojing: _baojingwendu_xiaxian_baojing,
 							dianliang_xiaxian: _dianliang_xiaxian,
 							dianliang_xiaxian_baojing: _dianliang_xiaxian_baojing,
-							duanxingtuisong_baojing: _dianliang_xiaxian_baojing,
+							duanxingtuisong_baojing: isduanxin,
 							chaogaoshidubaojing: _chaogaoshidubaojing,
 							chaogaoshidubaojingfazhi: _humidityHighbaojing,
 							chaodishidubaojing: _chaodishidubaojing,
-							chaodishidubaojingfazhi: _humiditylowbaojing,
+							chaodishidubaojingfazhi: _humiditylowbaojing
 						}
-					}else{
-						_data={
+					} else {
+						_data = {
 							controller: "update",
 							admin_permit: "zjly8888",
 							UserP: "w",
@@ -458,17 +547,17 @@
 							baojingwendu_xiaxian_baojing: _baojingwendu_xiaxian_baojing,
 							dianliang_xiaxian: _dianliang_xiaxian,
 							dianliang_xiaxian_baojing: _dianliang_xiaxian_baojing,
-							duanxingtuisong_baojing: _dianliang_xiaxian_baojing,
+							duanxingtuisong_baojing: isduanxin,
 							chaogaoshidubaojing: _chaogaoshidubaojing,
 							chaogaoshidubaojingfazhi: _humidityHighbaojing,
 							chaodishidubaojing: _chaodishidubaojing,
 							chaodishidubaojingfazhi: _humiditylowbaojing,
-							baojingwendu_two_shangxian:_baojingwendu_two_shangxian,
-							baojingwendu_two_shangxian_baojing:_baojingwendu_two_shangxian_baojing,
-							baojingwendu_two_xiaxian:_baojingwendu_two_xiaxian,
-							baojingwendu_two_xiaxian_baojing:_baojingwendu_two_xiaxian_baojing,
+							baojingwendu_two_shangxian: _baojingwendu_two_shangxian,
+							baojingwendu_two_shangxian_baojing: _baojingwendu_two_shangxian_baojing,
+							baojingwendu_two_xiaxian: _baojingwendu_two_xiaxian,
+							baojingwendu_two_xiaxian_baojing: _baojingwendu_two_xiaxian_baojing
 						}
-		
+
 					}
 					$.ajax({
 						type: "post",
@@ -491,9 +580,9 @@
 				} else {
 					var _yejianshangchuankaiguan = $(".btnok button").attr('yejian');
 					var _xinghao = $(".btnok button").attr('xinghao');
-					let _data={};
-					if(_xinghao=="TH"){
-						_data={
+					let _data = {};
+					if(_xinghao == "TH") {
+						_data = {
 							devid: _num_m,
 							GPS_Start: _GPS_Start,
 							UserP: "w",
@@ -508,14 +597,15 @@
 							chaogaoshidubaojingfazhi: _humidityHighbaojing,
 							chaodishidubaojing: _chaodishidubaojing,
 							chaodishidubaojingfazhi: _humiditylowbaojing,
-							yejianshangchuankaiguan:_yejianshangchuankaiguan,
-							openid:copenid,
-							weixintuisong_baojing:_weixintuisong_baojing,
-							is_open:_is_open,
-							warn_time:""
+							yejianshangchuankaiguan: _yejianshangchuankaiguan,
+							openid: copenid,
+							userType:_userType,
+							weixintuisong_baojing: _weixintuisong_baojing,
+							is_open: _is_open,
+							warn_time: ""
 						}
-					}else{
-						_data={
+					} else {
+						_data = {
 							devid: _num_m,
 							GPS_Start: _GPS_Start,
 							UserP: "w",
@@ -526,21 +616,22 @@
 							dianliang_xiaxian: _dianliang_xiaxian,
 							dianliang_xiaxian_baojing: _dianliang_xiaxian_baojing,
 							duanxingtuisong_baojing: _dianliang_xiaxian_baojing,
-							baojingwendu_two_shangxian:_baojingwendu_two_shangxian,
-							baojingwendu_two_shangxian_baojing:_baojingwendu_two_shangxian_baojing,
-							baojingwendu_two_xiaxian:_baojingwendu_two_xiaxian,
-							baojingwendu_two_xiaxian_baojing:_baojingwendu_two_xiaxian_baojing,
-							yejianshangchuankaiguan:_yejianshangchuankaiguan,
-							openid:copenid,
-							weixintuisong_baojing:_weixintuisong_baojing,
-							is_open:_is_open,
-							warn_time:""
+							baojingwendu_two_shangxian: _baojingwendu_two_shangxian,
+							baojingwendu_two_shangxian_baojing: _baojingwendu_two_shangxian_baojing,
+							baojingwendu_two_xiaxian: _baojingwendu_two_xiaxian,
+							baojingwendu_two_xiaxian_baojing: _baojingwendu_two_xiaxian_baojing,
+							yejianshangchuankaiguan: _yejianshangchuankaiguan,
+							openid: copenid,
+							userType:_userType,
+							weixintuisong_baojing: _weixintuisong_baojing,
+							is_open: _is_open,
+							warn_time: ""
 						}
 					}
 
 					$.ajax({
 						type: "post",
-						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/update_device",
+						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/xiandun_update_device",
 						data: _data,
 						dataType: "json",
 						success: function(res) {

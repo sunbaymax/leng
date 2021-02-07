@@ -1,0 +1,308 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="format-detection" content="telephone=no">
+		<title>邦赢交投</title>
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+	</head>
+
+	<body>
+		<style>
+			body {
+				touch-action: none;
+			}
+			
+			#wrapper {
+				position: absolute;
+				top: 8rem;
+				bottom: 0px;
+				left: 0;
+				width: 100%
+			}
+			/*#pullDown,
+			#pullUp {
+				padding: 0 10px;
+				height: 30px;
+				line-height: 30px;
+				color: #888;
+				text-align: center;
+				display: flex;
+			}*/
+			
+			.pull_icon {
+				width: 25px;
+				height: 25px;
+				background-image: url(../images/pull.png);
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: 25px;
+				transition: all .5s;
+			}
+			/*.loading {
+				background-image: url('../images/loading.png');
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: 25px;
+			}*/
+			/*#pullUp .loading {
+				-webkit-transform: rotate(0deg) translateZ(0);
+				-webkit-transition-duration: 0;
+				-webkit-animation-name: loading;
+				-webkit-animation-duration: 2s;
+				-webkit-animation-iteration-count: infinite;
+				-webkit-animation-timing-function: linear;
+			}
+			
+			@-webkit-keyframes loading {
+				from {
+					-webkit-transform: rotate(0deg) translateZ(0);
+				}
+				to {
+					-webkit-transform: rotate(360deg) translateZ(0);
+				}
+			}
+			*/
+			
+			#scroller li {
+				width: 100%;
+				height: 5rem;
+				border-bottom: 1px solid rgba(0, 0, 0, .3);
+				white-space: normal;
+				display: flex;
+				align-items: center;
+				/*justify-content: space-between;*/
+				padding: 0 2vw;
+				box-sizing: border-box;
+			}
+			
+			li p {
+				width: 25vw;
+				/*height: 12rem;
+				line-height: 12rem;*/
+				/*float: left;*/
+				font-size: 1.3rem;
+				white-space: nowrap;
+			}
+			
+			li p:nth-of-type(1) {
+				width: 30vw;
+				padding-left: 2vw;
+				margin-right: 1.5rem;
+			}
+			
+			li p:nth-of-type(2) {
+				width: 40vw;
+			}
+			
+			li img {
+				display: block;
+				width: 2.3rem;
+				height: 2.5rem;
+			}
+			
+			#pullUp {
+				height: 4rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: #8a8a8a;
+			}
+			
+			.content_top {
+				width: 100%;
+				height: 4rem;
+				line-height: 4rem;
+				position: fixed;
+				top: 4.6rem;
+				left: 0px;
+				background: #40C0C3;
+				color: #FFFFFF;
+				display: flex;
+				z-index: 99;
+			}
+		</style>
+		<div class="header">
+			<img class="back_list" src="../img/back.png" ids='0' /> 到期提醒
+		</div>
+		<div class="content_top" style="padding-left: 2vw;">
+			<p>到期设备数量：<span class="shebeinum">0</span>台</p>
+
+		</div>
+		<div id="wrapper">
+			<div id="scroller">
+				<div id="pullDown">
+					<span class="pullDownLabel">下拉刷新</span>
+				</div>
+				<ul id="thelist">
+					<!--<li>原始数据</li>-->
+				</ul>
+				<div id="pullUp" class="more">
+					<i class="pull_icon"></i><span class="pullUpLabel">上拉加载更多</span>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../js/iscroll.js"></script>
+		<script type="text/javascript" src="../js/jquery-1.11.0.js"></script>
+		<!--<script type="text/javascript" src="script/main.js"></script>-->
+		<script>
+			var myScroll, pullDownEl, pullDownOffset, pullUpEl, pullUpOffset, generatedCount = 0;
+
+			function loaded() {
+				//动画部分
+				pullDownEl = document.getElementById('pullDown');
+				pullDownOffset = pullDownEl.offsetHeight;
+				pullUpEl = document.getElementById('pullUp');
+				pullUpOffset = pullUpEl.offsetHeight;
+				myScroll = new iScroll('wrapper', {
+					useTransition: true,
+					topOffset: pullDownOffset,
+					onRefresh: function() {
+						if(pullDownEl.className.match('loading')) {
+							pullDownEl.className = '';
+							pullDownEl.querySelector('.pullDownLabel').innerHTML = '下拉刷新';
+						} else if(pullUpEl.className.match('loading')) {
+							pullUpEl.className = '';
+							pullUpEl.querySelector('.pullUpLabel').innerHTML = '上拉加载更多';
+						}
+					},
+					onScrollMove: function() {
+
+						if(this.y > 5 && !pullDownEl.className.match('flip')) {
+							pullDownEl.className = 'flip';
+							pullDownEl.querySelector('.pullDownLabel').innerHTML = '加载中...';
+							$('.pull_icon').addClass('flip');
+							$('.pull_icon').removeClass('loading');
+							this.minScrollY = 0;
+						} else if(this.y < 5 && pullDownEl.className.match('flip')) {
+							pullDownEl.className = '';
+							pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Pull down to refresh...';
+							this.minScrollY = -pullDownOffset;
+						} else if(this.y < (this.maxScrollY - 5) && !pullUpEl.className.match('flip')) {
+							pullUpEl.className = 'flip';
+							pullUpEl.querySelector('.pullUpLabel').innerHTML = '加载中...';
+							$('.pull_icon').addClass('flip');
+							$('.pull_icon').removeClass('loading');
+							this.maxScrollY = this.maxScrollY;
+						} else if(this.y > (this.maxScrollY + 5) && pullUpEl.className.match('flip')) {
+							pullUpEl.className = '';
+							pullUpEl.querySelector('.pullUpLabel').innerHTML = 'Pull up to load more...';
+							this.maxScrollY = pullUpOffset;
+						}
+					},
+					onScrollEnd: function() {
+						if(pullDownEl.className.match('flip')) {
+							pullDownEl.className = 'loading';
+							pullDownEl.querySelector('.pullDownLabel').innerHTML = '加载中...';
+							pullDownAction(); // Execute custom function (ajax call?)
+						} else if(pullUpEl.className.match('flip')) {
+							pullUpEl.className = 'loading';
+							pullUpEl.querySelector('.pullUpLabel').innerHTML = '加载中...';
+							pullUpAction(); // Execute custom function (ajax call?)
+						}
+					}
+				});
+
+				loadAction();
+			}
+			document.addEventListener('touchmove', function(e) {
+				e.preventDefault();
+			}, false); //阻止冒泡
+			document.addEventListener('DOMContentLoaded', function() {
+				setTimeout(loaded, 0);
+			}, false);
+			var _start = 0;
+			var _iscroll_length = 5
+
+			//初始状态，加载数据
+			function loadAction() {
+				machine_ajax_list(_start, _iscroll_length);
+				//				var el, li;
+				//				el = document.getElementById('thelist');
+				//				for(i = 0; i < 10; i++) {
+				//					li = document.createElement('li');
+				//					li.innerText = '初始数据--' + (++generatedCount);
+				//					el.appendChild(li, el.childNodes[0]);
+				//				}
+				myScroll.refresh();
+			}
+			var shebeinum = 0;
+
+			function machine_ajax_list(_start, _length) {
+				/*
+				 * 获取用户的名称和密码；
+				 */
+				var userinfo = JSON.parse(localStorage.getItem('isonline'));
+				var _userName = userinfo.user;
+				var _userPass = userinfo.pwd;
+				$.ajax({
+					url: "http://www.ccsc58.com/json/00_02_tb_shebeidongtai.php",
+					type: "post",
+					data: {
+						admin_permit: "zjly8888",
+						UserP: "x",
+						admin_user: _userName,
+						admin_pass: _userPass,
+						StartNo: _start,
+						Length: 5
+					},
+					success: function(data) {
+						var _json = JSON.parse(data);
+						console.log(data);
+						var str = '';
+						if(_json.message == "success" && _json.code == 10000) {
+
+							$.each(_json.resultCode, function(index, value) {
+								shebeinum++;
+								str = `<li>
+								<img src="../images/device.png" class="biaoqian" />
+								<p>设备编号：<span>${value.shebeibianhao}</span></p>
+								<p>到期时间：<span>${value.daoqishijian}</span></p>
+							</li>`;
+								$("#thelist").append(str);
+							});
+							$('.shebeinum').text(shebeinum);
+						} else {
+							$("#pullUp .pull_icon ").hide();
+							$(".pullUpLabel").html("未找到更多设备");
+						}
+						//												$('.pull_icon').removeClass('flip loading');
+						//												$('.more span').text('上拉加载...')
+						//						myscroll_x.refresh();
+
+					},
+					error: function() {
+						alert("网络错误，请重新进入页面");
+						window.location.href = _url;
+						$(".wait").addClass("hidden");
+					}
+				})
+
+			};
+			//下拉刷新当前数据
+			function pullDownAction() {
+				setTimeout(function() {
+					//这里执行刷新操作
+
+					myScroll.refresh();
+				}, 100);
+			}
+
+			//上拉加载更多数据
+			function pullUpAction() {
+				setTimeout(function() {
+					_start = _start + _iscroll_length;
+					//					_iscroll_length = _iscroll_length + 2;
+					machine_ajax_list(_start, _iscroll_length)
+					myScroll.refresh();
+				}, 100);
+			}
+			$(".back_list").on("click", function() {
+				window.location.href = "user_sheZhi.html"
+			})
+		</script>
+	</body>
+
+</html>

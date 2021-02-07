@@ -44,58 +44,57 @@ return file_get_contents("https://api.weixin.qq.com/cgi-bin/menu/delete?access_t
 $data = '{
 	"button": [
 		{
-			"type": "view",
 			"name": "云平台",
-			"url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_templatform.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect",
-			"sub_button": []
+			"sub_button": [
+				{
+					"type": "view",
+					"name": "温控平台",
+					"url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_templatform.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect",
+					"sub_button": []
+				}, {
+					"type": "miniprogram",
+					"name": "智慧养殖",
+					"url": "http://mp.weixin.qq.com",
+					"appid": "wx3aefe01c475fe181",
+					"pagepath": "pages-breed/Login/main"
+				}
+			]
 		}, {
+			"type": "view",
+			"name": "智冷商城",
+			"url": "https://shop92005288.youzan.com/v2/showcase/homepage?alias=8BZnwKvlhe&dc_ps=2665872149977290753.300001",
+			"sub_button": []
+		},{
 			"name": "智冷服务",
 			"sub_button": [
-			  {
+				{
 					"type": "view",
 					"name": "产品资料",
 					"url": "http://www.ccsc58.cc/weixinnew/menuSwiper/product.html",
 					"sub_button": []
-				}, {
-					"type": "view",
-					"name": "售后工单",
-					"url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_repair.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect",
-					"sub_button": []
-				}, {
-					"type": "view",
-					"name": "历史文章",
-					"url": "http://mp.weixin.qq.com/mp/homepage?__biz=MzIxNzU1MzIyNA==&hid=1&sn=dcf2df0452631e6d69908350d4f53ae6#wechat_redirect",
-					"sub_button": []
-				}, {
-					"type": "view",
-					"name": "机器人小冷",
-					"url": "http://www.ccsc58.cc/IceKnight/Zlservices/main.html",
-					"sub_button": []
-				}
-			]
-		}, {
-			"name": "关于我们",
-			"sub_button": [
+				},
 				{
 					"type": "view",
-					"name": "公司首页",
-					"url": "http://www.ccsc58.com/",
-					"sub_button": []
-				}, {
-					"type": "click",
-					"name": "联系我们",
-					"key": "lianxiwomen",
-					"sub_button": []
-				}, {
-					"type": "view",
-					"name": "充值缴费",
-					"url": "http://www.ccsc58.cc/leng/weixin/index.html",
+					"name": "发票申请",
+					"url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/mobileinvoice/oauth2.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect",
 					"sub_button": []
 				},
-				 {
+				{
 					"type": "view",
-					"name": "服务费充值",
-					"url": "http://www.ccsc58.cc/leng/FreshShield/html/yearfeepay.html",
+					"name": "设备报修",
+					"url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_repair.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect",
+					"sub_button": []
+				},
+				{
+					"type": "view",
+					"name": "充值缴费",
+					"url": "http://www.ccsc58.cc/leng/mypay/index.html",
+					"sub_button": []
+				},
+				{
+					"type": "click",
+					"name": "联系我们",
+					"key": "http://www.ccsc58.cc/weixinnew/menuSwiper/contact.html",
 					"sub_button": []
 				}
 			]

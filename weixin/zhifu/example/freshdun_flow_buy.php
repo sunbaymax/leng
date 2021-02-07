@@ -102,7 +102,7 @@ $editAddress = $tools->GetEditAddressParameters();
 		              		alert("付款成功");
 		              		window.sessionStorage.removeItem('sjgoingpay');
 							setTimeout(function () {
-					           window.location.href="../../../FreshShield/html/basicSet.html?num_m="+_num;
+					           window.location.href="../../../FreshShield/html/bill.html";
 					        }, 1500);
 		              	},
 		              	error:function(err){
@@ -115,13 +115,13 @@ $editAddress = $tools->GetEditAddressParameters();
 						alert("您已取消付款！！！");
 						window.sessionStorage.removeItem('sjgoingpay');
 						setTimeout(function () {
-					           window.location.href="../../../FreshShield/html/basicSet.html?num_m="+_num;
+					           window.location.href="../../../FreshShield/html/bill.html";
 					        }, 1500);
 					} else {
 						window.sessionStorage.removeItem('sjgoingpay');
 						alert("暂时无法付款，请联系客服人员");
 						setTimeout(function () {
-					           window.location.href="../../../FreshShield/html/basicSet.html";
+					           window.location.href="../../../FreshShield/html/bill.html";
 					        }, 1500);
 						
 					};

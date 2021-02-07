@@ -1,0 +1,317 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="format-detection" content="telephone=no">
+		<title>邦赢交投</title>
+		<link rel="stylesheet" type="text/css" href="../css/checkstyle.css" />
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+		<link rel="stylesheet" type="text/css" href="../css/changeM.css" />
+		<link rel="stylesheet" type="text/css" href="../css/shijian.css" />
+		<!--<link rel="stylesheet" href="../css/details_list.css" />-->
+		<style>
+			.basic_label div {
+				margin-top: 10px;
+			}
+		</style>
+	</head>
+     <script>
+        var now = new Date().getTime();
+		document.write('<link href="../css/details_list.css?v=' + now + '" rel="stylesheet" type="text/css"/>');
+	</script>
+	<body>
+		<div class="header">
+
+		</div>
+		<form class="form" action="">
+			<input class="white_input" type="button" value="最新数据" />
+			<input type="button" value="历史数据" />
+			<input type="button" value="设备参数" />
+			<input type="button" value="报警信息" />
+		</form>
+		<div class="content_details">
+			<div id="content_details">
+			</div>
+			<div class="detailNow _display">
+				<!--<div class="details_now hidden">
+					<div class="left details_now_left">
+						<img src="../img/content.png" />
+					</div>
+					<div class="right details_now_right">
+						<p>设备编号：<span></span></p>
+						<p>温度01：<span></span>&nbsp;&nbsp;&nbsp;<span>湿度：</span><span></span></p>
+						<p>温度02：<span></span>&nbsp;&nbsp;&nbsp;<span>电量：</span><span></span></p>
+						<p>位置：<span></span></p>
+						<p>采集时间：<span></span></p>
+						<p class="hidden">上传时间：<span></span></p>
+						<p>信号强度：<span></span>&nbsp;&nbsp;<span></span>速度：<span style="color:#728ba1;font-weight: normal;"></span></p>
+						<div class="details_address">
+							<img src="../img/details_address1.png" alt="" />
+							<span class="hidden">0</span>
+							<span class="hidden">0</span>
+						</div>
+					</div>
+				</div>-->
+				<div class="details_now hidden">
+					<div class="list_tittle">
+						<p>
+							<span class="shebeihao">-</span>
+						</p>
+						<p>
+							<span class="worktime">-</span>
+						</p>
+
+					</div>
+					<div class="list-content">
+
+						<div>
+							<p><span class="wen">温度1：</span><span class="temp1">0.0</span>℃</p>
+							<p>温度2：<span class="temp2">0.0</span>℃</p>
+							<p>湿度：<span class="humidity">-</span>%RH</p>
+						</div>
+						<!--<div>
+
+							
+							<p>速度：<span class="speed">-</span>km/h</p>
+						</div>-->
+						<div>
+							<p>信号强度：<span class="signal">无</span></p>
+							<p>电量：<span class="power">-</span>%</p>
+						</div>
+						<div>
+							地理位置：<span class="address"></span><span class="lng  hidden"></span><span class="lat hidden"></span>
+						</div>
+						<!--<div>
+							箱体状态：<span class="boxstate"></span>
+						</div>-->
+					</div>
+				</div>
+			</div>
+			<div class="details_history _display hidden">
+				<div class="history_search">
+					<div class="history_search_top">
+						<input id="history_start_time" type="text" readonly="readonly" />
+						<input id="history_end_time" type="text" readonly="readonly" />
+						<br/><input type="button" value="查询" />
+					</div>
+					<ul class="history_search_footer">
+						<li class="white_li">数据列表</li>
+						<li>温度曲线</li>
+						<li>行驶轨迹</li>
+						<li>数据下载</li>
+					</ul>
+				</div>
+				<div class="history_content">
+					<div class="history_content_list history_display">
+
+						<div id="wrapper">
+							<div class="scroller">
+								<div class="scroll_box">
+									<ul class="history_content_ul_tittle">
+										<li>序号</li>
+										<li>时间</li>
+										<li class="history_specil_li">位置</li>
+										<li>温度</li>
+										<li>湿度</li>
+									</ul>
+									<ul class="history_content_ul_list hidden">
+										<li>1</li>
+										<li>2016-09-13 16:20:44</li>
+										<li class="address_test"></li>
+										<li>29.35℃</li>
+										<li>15%RH</li>
+										<span class="hidden jingDu">465546</span>
+										<span class="hidden weiDu">6546</span>
+									</ul>
+								</div>
+								<div class="more">
+									<i class="pull_icon"></i><span>上拉加载...</span>
+								</div>
+							</div>
+						</div>
+						<!--<div class="look_more hidden">
+							<a href="javascript:void(0)">本次加载<span></span>条数据，点击查看更多数据</a>
+						</div>-->
+					</div>
+					<div id="zhe_box" class="history_display" style="width:100vw;height:30rem;overflow: hidden;">
+						<div id="test_xian" style="width:100vw;overflow:scroll;height:32rem;">
+							<div id="history_content_zhe">
+
+							</div>
+							
+						</div>
+					</div>
+					<div class="zhiShiXian hidden">
+						<span></span>
+						<span class="ty1">实时温度</span>
+						<span></span>
+						<span>报警上下限</span>
+						<span style="background: green;"></span>
+						<span class="ty2">实时湿度</span>
+						<br />
+						<div style="margin-top: 30px;font-size: 12px;">
+							查看更多曲线数据，需在<label style="color:#366cb2;font-weight: bold;">数据列表</label>加载更多数据
+						</div>
+					</div>
+					<div id="history_content_map" style="height:100vw" class="hidden history_display">
+
+					</div>
+				</div>
+			</div>
+			<ul class="details_parameter _display hidden">
+				<!--设置设备基本信息-->
+				<!--设置设备基本信息-->
+
+				<div class="content_basic">
+					<div class="basic_label" style="width: 100%;">
+						<a class="work_line" href="javascript:void(0)">
+							<span>参数信息设置</span>
+							<img src="../img/right_shop_car.png" />
+						</a>
+						<a class="work_line" href="javascript:void(0)">
+							<span>设备报警设置</span>
+							<img src="../img/right_shop_car.png" />
+						</a>
+						<a class="work_line" id="fujiaset" href="javascript:void(0)">
+							<span>消息提醒设置</span>
+							<img src="../img/right_shop_car.png" />
+						</a>
+						<a class="work_line" href="javascript:void(0)">
+							<span>基础信息设置</span>
+							<img src="../img/right_shop_car.png" />
+						</a>
+						
+						<a class="work_line" href="javascript:void(0)" style="display: none;">
+							<span>设备打印设置</span>
+							<img src="../img/right_shop_car.png" />
+						</a>
+						
+						<!--<a class="work_line" href="javascript:void(0)">
+							<span>系统报警设置</span>
+							<img src="../img/right_shop_car.png" />
+						</a>-->
+						
+
+					</div>
+
+				</div>
+				<!--<div class="form_post">
+					<input type="button" value="提交" />
+				</div>-->
+			</ul>
+			<div class="details_warning _display hidden">
+				<div id="wrapper_warning">
+					<div class="scroller_warning">
+						<div class="scroll_box_warning">
+							<div class="warning_list hidden">
+								<!--<div class="warning_list_left">
+									<img src="../img/warnin_img.png" alt="" />
+								</div>
+								<div class="warning_list_right">
+									<p>编号：<span>123</span></p>
+									<p>温度阀值：<span>15℃-15℃</span>&nbsp;&nbsp;电量阀值：<span></span></p>
+									<p>报警提示：<span>超温报警</span></p>
+									<p>温度01：<span>25℃</span>&nbsp;&nbsp;湿度：<span>25%</span></p>
+									<p>温度02：<span>25℃</span>&nbsp;&nbsp;电量：<span>25%</span></p>
+									<p>上报时间：<span>0000-00-00 00：00：00</span></p>
+								</div>
+							</div>-->
+								<div class="list_tittle">
+									<p>
+										<img src="../images/baojin.png" />
+										<span class="shebeihao">-</span>
+									</p>
+									<p>
+										<span class="worktime">-</span>
+									</p>
+
+								</div>
+								<div class="list-content">
+									<div class="warning_temp1">
+										<p><span class="wen1">温度：</span><span class="temp1">0.0</span>℃</p>
+										<p>温度阀值：<span class="tempLimit">-</span>℃</p>
+									</div>
+									<div class="warning_TT">
+										<p>温度2：<span class="temp2">0.0</span>℃</p>
+										<p>温度阀值：<span class="temp2Limit">-</span>℃</p>
+									</div>
+									<div class="warning_TH">
+										<p>湿度：<span class="humidity">0.0</span>%RH</p>
+										<p>湿度阀值：<span class="humiditylimit">-</span>%RH</p>
+									</div>
+									<div>
+										<p>电量：<span class="power">-</span>%</p>
+										<p>电量阈值：<span class="powerLimit">-</span>%</p>
+									</div>
+									<!--<div>
+										<p>报警类型：<span class="armType">-</span></p>
+									</div>-->
+								</div>
+							</div>
+						</div>
+						<div class="more_warning">
+							<i class="pull_icon_warning"></i><span>上拉加载...</span>
+						</div>
+					</div>
+				</div>
+				<!--<div class="warning_more">
+					<a href="javascript:void(0)">查看更多报警信息</a>
+				</div>-->
+			</div>
+		</div>
+		<div class="footer" style="display: none">
+			<a href="../index.html">
+				<img src="../images/tab_weixin_normal.png" alt="" />
+				<span>首页</span>
+			</a>
+			<a href="dingdan.php">
+				<img src="../images/tab_find_frd_normal.png" alt="" />
+				<span>我的订单</span>
+			</a>
+			<a href="shebei_list.html" class="choosed">
+				<img src="../images/tab_address_pressed.png" alt="" />
+				<span>设备列表</span>
+			</a>
+			<a href="user.html">
+				<img src="../images/tab_settings_normal.png" alt="" />
+				<span>用户信息</span>
+			</a>
+		</div>
+		<!--<div class="wait1">
+					数据加载中<span style="">……</span>
+				</div>-->
+		<div class="back_top hidden"><img src="../img/back_top.png" alt="" /></div>
+		<div class="JieChuBang_box hidden">
+			<div class="JieChuBang">
+				<div class="JieChuBang_top">
+					未发现位置信息
+				</div>
+				<div class="JieChuBang_footer">
+					<div class="JieChuBang_left">
+						确定
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--时间框-->
+		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/jquer_shijian.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script src="../My97DatePicker/WdatePicker.js" type="text/javascript" charset="utf-8"></script>-->
+		<script type="text/javascript" src="../js/hightcharts.js" charset="utf-8"></script>
+		<script type="text/javascript" src="../js/exporting.js" charset="utf-8"></script>
+		<script src="../js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/details_list.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/changeMs.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/iostime.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=XP1alssWsEscC3NfYAhj6YfqKvgQgUXF"></script>
+		<script>
+			if(window.localStorage.getItem("isonline") == null || window.localStorage.getItem("isonline") == undefined) {
+		window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_templatform.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
+	}
+		</script>
+	</body>
+
+</html>

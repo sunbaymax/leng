@@ -162,7 +162,7 @@
 		<div class="content">
 			<a class="personcenter"><img src="../images/myinfo.png" /><span>我的信息</span><img src="../img/right_shop_car.png" alt="" /></a>
 			<a href="invite.html"><img src="../images/myinvite.png" /><span style="margin-left: 0.8rem;">邀请家人</span><img src="../img/right_shop_car.png" alt="" /></a>
-			<!--<a href="pay_sheZhi.html" class="paybill"><img src="../images/mybill.png" /><span >服务费</span><img src="../img/right_shop_car.png" alt="" /></a>-->
+			<a href="pay_sheZhi.html" class="paybill"><img src="../images/mybill.png" /><span >服务费</span><img src="../img/right_shop_car.png" alt="" /></a>
 			<a href="bandinglist.html" class="account"><img src="../images/mytel.png" /><span>账户设置</span><img src="../img/right_shop_car.png" alt="" /></a>
 			<!--<a href="exprie_machine.html" class="daqitixing"><img src="../images/mytixing.png" /><span>设备到期提醒</span><img src="../img/right_shop_car.png" alt="" /></a>-->
 			<a href="voicebill.html" class="yuyin"><img src="../images/myyuyin.png" /><span>语音套餐</span><img src="../img/right_shop_car.png" alt="" /></a>
@@ -252,8 +252,9 @@
 							openID: "0000000000000000000000000000",
 							ip: ""
 						},
-						success: function(a) {
-							a = JSON.parse(a);
+						dataType:'json',
+						success: function(res) {
+							let a = res;
 							console.log(a);
 							"success" == a.resultCode ? (window.localStorage.removeItem("wyblisonline"),window.sessionStorage.clear(), window.location.href = 'register.html?openId=' + openid) : (alert("\u89e3\u9664\u7ed1\u5b9a\u5931\u8d25\uff0c\u8bf7\u91cd\u65b0\u64cd\u4f5c"), window.location.href = _url)
 						},
@@ -269,8 +270,9 @@
 							username:b,
 							openID:userinfo.copenid
 						},
-						success: function(a) {
-							a = JSON.parse(a);
+						dataType:'json',
+						success: function(res) {
+							let a = res;
 							"success" == a.code=='0' ? (window.localStorage.removeItem("wyblisonline"),window.sessionStorage.clear(), window.location.href = 'register.html?openId=' + openid) : (alert("\u89e3\u9664\u7ed1\u5b9a\u5931\u8d25\uff0c\u8bf7\u91cd\u65b0\u64cd\u4f5c"), window.location.href = _url)
 						},
 						error: function() {

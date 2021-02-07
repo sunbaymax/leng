@@ -7,6 +7,12 @@
 		<title>北京中集智冷科技有限公司</title>
 		<link rel="stylesheet" type="text/css" href="../css/index.css" />
 		<link rel="stylesheet" type="text/css" href="../css/set.css" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=8">
+		<meta http-equiv="Expires" content="0">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-control" content="no-cache">
+		<meta http-equiv="Cache" content="no-cache">
 		<style type="text/css">
 			.form div input {
 				display: block;
@@ -157,7 +163,7 @@
 
 			$.ajax({
 				type: "post",
-				url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/get_device_param",
+				url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/xiandun_get_device_param",
 				data: {
 					admin_permit: "zjly8888",
 					UserP: "w",
@@ -165,7 +171,8 @@
 					admin_user: _userName,
 					admin_pass: _userPass,
 					SheBeiBianHao: _num_m,
-					openid: copenid
+					openid: copenid,
+					userType:utype
 				},
 				success: function(data) {
 					var _json = JSON.parse(data);
@@ -285,7 +292,7 @@
 
 					$.ajax({
 						type: "post",
-						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/update_device",
+						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/xiandun_update_device",
 						data: {
 							devid: _num_m,
 							GPS_Start: _GPS_Start,
@@ -293,9 +300,9 @@
 							caiji_jiange_minute: _caiji_jiange_minute,
 							fasong_jiange_minute: _fasong_jiange_minute,
 							feixingmoshikaiqi: _feixingmoshikaiqi,
-
 							yejianshangchuankaiguan: _yejianshangchuankaiguan,
-							openid: copenid
+							openid: copenid,
+							userType:utype
 						},
 						dataType: "json",
 						success: function(res) {

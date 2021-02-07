@@ -18,12 +18,19 @@ img {
 	text-decoration: underline;
 }
 
-input {
+input[type="text"] {
 	font-size: 1.4rem;
 	outline: none;
 	border: none;
 	-webkit-appearance: none;
 }
+input[type="password"] {
+	font-size: 1.4rem;
+	outline: none;
+	border: none;
+	-webkit-appearance: none;
+}
+
 button{
 	cursor: pointer;
 }

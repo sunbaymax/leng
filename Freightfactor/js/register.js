@@ -187,9 +187,11 @@
 					pwd: _password,
 					weixin_openid: _openId
 				},
+				dataType:'json',
 				success: function(data) {
-					var _json = JSON.parse(data);
-
+//					var _json = JSON.parse(data);
+					var _json = data;
+                      
 					if(_json.code == 1) {
 						myPlay("登录失败，请检查用户名及密码");
 					} else {

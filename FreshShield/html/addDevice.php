@@ -142,8 +142,10 @@
 					admin_pass: _userPass,
 					shebeibianhao: _num
 				},
+				dataType:'json',
 				success: function(data) {
-					var _json = JSON.parse(data);
+					let _json=data
+					//var _json = JSON.parse(data);
 					if(_json.resultCode == "success") {
 						alert("设备绑定成功，重新进入页面即可看到新绑定的设备");
 //						window.location.href = '../machineList.php';
@@ -156,13 +158,17 @@
 				}else{
 					$.ajax({
 						type: "post",
-						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/Device/bind_device",
+//						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/Device/bind_device",
+						url: "https://www.zjcoldcloud.com/xiandun/public/index.php/index/device/xiandun_bind_device",
 						data: {
 							mainname: _userName,
-							devicenumber: _num
+							devicenumber: _num,
+							bandType:''
 						},
+						dataType:'json',
 						success: function(data) {
-							var _json = JSON.parse(data);
+							let _json=data
+							//var _json = JSON.parse(data);
 							if(_json.code == 0) {
 								alert("设备绑定成功，重新返回主页面即可看到新绑定的设备");
 //								window.location.href = '../machineList.php';

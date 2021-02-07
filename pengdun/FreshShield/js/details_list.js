@@ -1,5 +1,5 @@
 ﻿$(document).ready(function() {
-	var _httpUrl='https://www.zjcoldcloud.com/pengdun';
+	var _httpUrl='https://www.jfcss.com/api/public/index.php?s=';
 	window.sessionStorage.setItem("httpUrl", _httpUrl);
 	var _down_panDuan = 0;
 	//返回顶端的函数；
@@ -273,7 +273,7 @@
 	//获取页面当前时间；
 	//http://www.ccsc58.com/json/xiandun_history_data.php http://www.ccsc58.com/json/01_00_tb_history_data.php
 	$.ajax({
-		url: "https://www.zjcoldcloud.com/pengdun/index/device/get_history_data",
+		url: "https://www.jfcss.com/api/public/index.php?s=/index/device/get_history_data",
 		type: "post",
 		data: {
 			UserP: "w",

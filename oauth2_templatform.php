@@ -7,9 +7,9 @@ if (isset($_GET['code'])){
 			header('location:FreshShield/html/register.html?openId='.$openId);
 		 //   header('location:http://www.ccsc58.cc/IceKnight/Zlservices/repair.html?openId='.$openId);
 }else{
-	$openId=$arr['openid'];
-	header('location:FreshShield/html/register.html?openId='.$openId);
-    echo "NO CODE";
+	//$openId=$arr['openid'];
+	header('location:FreshShield/html/register.html?openId=123456');
+   // echo "NO CODE";
 };
 function https_request($url,$data = null){
 					$curl = curl_init();

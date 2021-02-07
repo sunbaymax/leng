@@ -35,6 +35,12 @@
 		margin-right: 3rem;
 		cursor: pointer;
 	}
+	.header .yunshu {
+		width: 2.5rem;
+		height: 2.5rem;
+		margin-right: 2.5rem;
+		cursor: pointer;
+	}
 	
 	.header .userCenter {
 		width: 1.9rem;
@@ -52,7 +58,65 @@
 		justify-content: center;
 		align-items: center;
 	}
+	.shebeitotal{
+		text-align: center;
+		color: #666;
+		padding: 3px 0 5px;
+	}
+	.shebeitotal .text-blue{
+		color: #0000FF;
+		margin: 0 2px;
+	}
+	.shebeitotal .text-red{
+		color: #FF0000;
+		margin: 0 2px;
+		position:relative;
+		padding:5px;
+		text-decoration: none;
+	}
 	
+	.tip {
+		display:block;
+		background:#f00;
+		border-radius:50%;
+		width:8px;
+		height:8px;
+		top:0px;
+		right:0px;
+		position:absolute;
+	}
+
+	.daoqi{
+		padding: 0 15px;
+		box-sizing: border-box;
+		position: absolute;
+	    top: 30px;
+	    background: #fefefe;
+	    z-index: 100;
+	    opacity: 0.9;
+	    height: 84%;
+	    display: flex;
+	    flex-direction: column;
+	    align-items: center;
+	}
+	.daoqi h4{
+		font-size: 16px;
+		padding: 0;
+		margin: 10px 0 5px;
+	}
+	.daoqi .daoqicontent{
+		margin: 10px 0;
+	}
+	.daoqi  button {
+	    width: 16rem;
+	    height: 4rem;
+	    background: #40C0C3;
+	    border-radius: 5rem;
+	    border: none;
+	    color: #ffffff;
+	    font-size: 1.5rem;
+	    cursor: pointer;
+	}
 	.searchdiv img {
 		width: 1.8rem;
 		height: 1.8rem;
@@ -60,7 +124,7 @@
 	}
 	
 	.searchdiv input {
-		width: 11rem;
+		width: 16rem;
 		height: 3rem;
 		padding: 0;
 		padding-left: 0.5rem;

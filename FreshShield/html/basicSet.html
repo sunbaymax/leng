@@ -75,10 +75,10 @@
 				$(".btnok button").attr('disabled', false);
 			}
 			//http://www.ccsc58.com/json/06_00_tb_device_chanshu.php
-			//http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/get_device_param
+			//http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/xiandun_get_device_param
 			$.ajax({
 				type: "post",
-				url: 'http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/get_device_param',
+				url: 'http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/xiandun_get_device_param',
 				data: {
 					admin_permit: "zjly8888",
 					UserP: "w",
@@ -86,17 +86,27 @@
 					admin_user: _userName,
 					admin_pass: _userPass,
 					SheBeiBianHao: _num_m,
-					openid: copenid
+					openid: copenid,
+					userType:utype
 				},
 				success: function(data) {
 					var _json = JSON.parse(data);
 					if(_json.code == 1) {
 						alert(_json.message);
-						window.location.href = "../machineList.php";
+						if(userinfo.userType=='c'){
+							window.location.href = "../machineList.php";
+						}else{
+							window.location.href = "../main.html";
+						}
+						
 						return false;
 					}else if(_json.code == 30000) {
 						alert("没有查询到该设备");
-						window.location.href = "../machineList.php";
+						if(userinfo.userType=='c'){
+							window.location.href = "../machineList.php";
+						}else{
+							window.location.href = "../main.html";
+						}
 						return false;
 					}
 					var _beizhu = _json.resultCode.beizhu == undefined ? '' : _json.resultCode.beizhu;
@@ -127,9 +137,10 @@
 			$(".btnok button").on("click", function() {
 				var bieming = $(".bieming").val();
 				var _GPS_Start = $(".shebeihao").attr('biao');
-				var _sort = $(".form .sort").val();
-				if(_sort<1){
-					alert("请输入1~100之间的数");
+				var _sort = $(".form .sort").val()==''?99999:parseInt($(".form .sort").val());
+				if(_sort!=''&&_sort<1){
+					alert("排序，请输入1~100之间的数");
+					$(".form .sort").focus()
 					return false;
 				}
 				var utype = userinfo.userType;
@@ -166,14 +177,15 @@
 					var _yejianshangchuankaiguan = $(".shebeihao").attr('yejian');
 					$.ajax({
 						type: "post",
-						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/update_device",
+						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/xiandun_update_device",
 						data: {
 							devid: _num_m,
 							beizhu: bieming,
 							GPS_Start: _GPS_Start,
 							yejianshangchuankaiguan: _yejianshangchuankaiguan,
 							sort:_sort,
-							openid:copenid
+							openid:copenid,
+							userType:utype
 						},
 						dataType: "JSON",
 						success: function(res) {

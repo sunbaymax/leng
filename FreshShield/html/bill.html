@@ -7,6 +7,14 @@
 		<meta name="format-detection" content="telephone=no">
 		<title>北京中集智冷科技有限公司</title>
 		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+		<link rel="stylesheet" type="text/css" href="../css/Machines.css" />
+		<link rel="stylesheet" type="text/css" href="../css/set.css" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=8">
+		<meta http-equiv="Expires" content="0">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-control" content="no-cache">
+		<meta http-equiv="Cache" content="no-cache">
 	</head>
 
 	<body>
@@ -14,19 +22,39 @@
 			body {
 				background-color: #F2F2F2!important;
 			}
-			/*.content {
-				width: 100vw;
-				height: auto;
-				min-height: 200px;
-				margin-top: 4rem;
-				
-			}*/
+			.header {
+			    
+			    display: flex;
+			    justify-content: center!important;
+			    align-items: center;
+			   
+			}
 			
+            .search_div {
+			    /*padding: 0.5rem 15px 0px;*/
+			    box-sizing: border-box;
+			    z-index: 99;
+			    position: fixed;
+			    width: 100%;
+			    top: 4.6rem;
+			    background: #fff;
+			}
+			 .search_div .searchdiv {
+			 	border:1px solid #D9D9D9!important;
+			 	margin-top: 0!important;
+			 }
+			 .search_div .tabar {
+			 	height: 5rem;
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+				
+			}
 			#wrapper {
 				width: 100%;
 				position: absolute;
 				left: 0;
-				top: 4rem;
+				top: 9.2rem;
 				overflow: hidden;
 				z-index: 1;
 				bottom: 0rem;
@@ -39,7 +67,12 @@
 				justify-content: center;
 				color: #8a8a8a;
 			}
-			
+			.list .list-content {
+			    padding: 0.5rem 0;
+			    box-sizing: border-box;
+			    color: #333333;
+			    display: contents;
+			}
 			.pull_icon {
 				width: 25px;
 				height: 25px;
@@ -65,6 +98,13 @@
 				background-size: 25px;
 			}
 			
+			.rechargelistitem{
+				margin-bottom: 10px;
+			    background: #fff;
+			    padding: 5px 15px;
+			    /*border-radius: 5px;*/
+			   border-radius: 15px;
+			}
 			.more .loading {
 				-webkit-transform: rotate(0deg) translateZ(0);
 				-webkit-transition-duration: 0;
@@ -93,7 +133,7 @@
 				margin: 1rem 0;
 				padding: 0 1rem;
 				box-sizing: border-box;
-				height: 10rem;
+				height: 12rem;
 				background: #FFFFFF;
 				border-radius: 0.5rem;
 			}
@@ -145,8 +185,6 @@
 				display: flex;
 				align-items: center;
 				height: 2rem;
-				line-height: 2rem;
-				padding: 5px 0;
 			}
 			
 			.list-content div p {
@@ -159,7 +197,7 @@
 				text-align: right;
 			}
 			
-			.btnpay {
+			/*.btnpay {
 				height: 2rem;
 				width: 6rem;
 				border-radius: 1rem;
@@ -167,7 +205,7 @@
 				border: 1px solid #40C0C3;
 				color: #40C0C3;
 			}
-			
+			*/
 			.paylist {
 				width: 1.8rem;
 				height: 2.2rem;
@@ -175,44 +213,143 @@
 				top: 1rem;
 				right: 1rem;
 			}
+			.content {
+				padding: 0 10px;
+				box-sizing: border-box;
+				margin-top: 9.6rem;
+			}
+			
+			.content ul {
+				height: auto;
+				/*padding: 5px 15px;
+				background: #FFFFFF;*/
+				
+				margin-top: 5px;
+			}
+			
+			.content ul li {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				height: 4rem;
+				line-height: 4rem;
+			}
+			
+			.top {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+			
+			.top img {
+				margin: 15px 0;
+				width: 100px;
+				height: 100px;
+			}
+			
+			.top span {
+				font-weight: 800;
+				font-size: 16px;
+			}
+			
+			.msg {
+				text-align: center;
+				font-size: 12px;
+				color: #FF0000;
+				margin-top: 15px;
+			}
+			
+			.nomsg {
+				text-align: center;
+				margin-top: 30px;
+				padding: 5px;
+			}
+			.btnpay {
+			    /*height: 3.6rem;
+			    line-height: 3.6rem;
+			    text-decoration: none;
+			    text-align: center;
+			    width: 9rem;
+			    border-radius: 2rem;
+			    background: #FFFFFF;
+			    border: 1px solid #40C0C3;
+			    color: #40C0C3;
+			    font-size: 14px;*/
+			    text-decoration: none;
+			     text-align: center;
+			    width: 25vw;
+			    height: 4rem;
+			    line-height: 4rem;
+			    box-sizing: border-box;
+			    outline: none;
+			    /* font-weight: bold; */
+			    background: #F0F5FB;
+			    color: #000000;
+			    /* margin-left: 4vw; */
+			    border: none;
+			    font-size: 1.4rem;
+			}
+			
+			.content ul li:first-child{
+				border-bottom: 1px solid #ccc;
+				margin-bottom: 1rem;
+			} 
+			.btnpay:hover{
+				background: #40C0C3;
+				color: #fff;
+			}
+			.hover{
+				background: #40C0C3;
+				color: #fff;
+			}
+			.messfooter{
+				border-top: 1px solid #CCCCCC;
+				width: 100%;
+				text-align: center;
+				height: 5rem;
+				line-height: 5rem;
+			}
+			.content ul .messfooterdiv{
+				height: 5rem;
+				line-height: 5rem;
+			}
+			.total{
+				 margin-bottom: 0;
+				margin-left: 10px;
+			    padding: 0px;
+			   
+			}
+			.hidden{
+				display: none;
+			}
+			.over{
+				overflow: hidden;
+				text-overflow:ellipsis;
+				white-space: nowrap;
+			}
 		</style>
 		<div class="header">
-			<img class="back_list" src="../img/back.png" ids='0' /> 代缴账单
-			<!--			<img src="../img/paylists.png" class="paylist"/>-->
+			<img class="back_list" src="../img/back.png" ids='0' /> 
+			<span>历史账单</span> 
+			<!--<img src="../img/paylists.png" class="paylist"/>-->
 		</div>
-
+		<div class="search_div">
+           <div class="tabar">
+           	  <a class="btnpay hover" href="javascript:void(0)">待缴账单</a>
+           	  <a class="btnpay" href="javascript:void(0)" >注销设备</a>
+           </div>
+		</div>	
 		<div class="content">
+			<div class="refreshmsg" style="display: none;">
+						<i class="pull_icon"></i><span>正在刷新...</span>
+				
+					</div>
 			<div id="wrapper">
+				
 				<div class="scroller">
 					<div class="scroll_box">
-
-						<div class="list hidden">
-							<div class="list_tittle">
-								<p class="tittlewen">
-									<span>设备号：</span>
-									<span class="shebeihao">15651</span>
-								</p>
-								<p>
-									<span class="ispay">代缴费</span>
-								</p>
-
-							</div>
-							<div class="list-content">
-								<div>
-									昵称：<span class="nickname">监控宝</span>
-								</div>
-								<div>
-									应缴日期：<span class="paytimer">2019-10-12 05:20:30</span>
-								</div>
-
-								<div>
-									<p>代缴费用：<span class="cssmoney">￥<label class="money"></label> </span></p>
-									<p><button class="btnpay">去支付</button></p>
-								</div>
-
-							</div>
-						</div>
-
+						
+                        
 					</div>
 					<div class="more">
 						<i class="pull_icon"></i><span>上拉加载...</span>
@@ -230,6 +367,9 @@
 			var userinfo = JSON.parse(localStorage.getItem('isonline'));
 			var _userName = userinfo.user;
 			var _userPass = userinfo.pwd;
+			var _openid = userinfo.copenid;
+			var _suoshujigou = userinfo.suoshujigou;
+			var _uid = userinfo.uid == undefined ? 'no' : userinfo.uid;
 			var _duodian = userinfo.duodian;
 			var _url;
 			if(_duodian == 1) {
@@ -246,6 +386,27 @@
 					} else {
 						$('.pull_icon').removeClass('flip loading');
 						$('.more span').text('上拉加载...')
+					   if(myscroll_x.y > 50) {
+							$(".refreshmsg").show();
+							$('.pull_icon').addClass('loading');
+						    $('.refreshmsg span').text('正在刷新...');
+						     let curtabar=$('.tabar .hover').text() 
+						     _start=1
+						     console.log(curtabar)
+						     //return false;
+						     if(curtabar=='待缴账单'){
+				                	setTimeout(function () {
+				                window.location.reload()
+				              }, 1500);
+				                }else{
+				              setTimeout(function () {
+				               xiaofei_list(_start);
+				               $('.refreshmsg').hide()
+				              }, 1500);
+				                	
+				                }
+			                
+						}
 					}
 				},
 				onScrollEnd: function() {
@@ -260,21 +421,25 @@
 					$('.more span').text('上拉加载...');
 				}
 			});
-			$(".paylist").on("click", function() {
-				if(_duodian == 1) {
-					window.location.href = "paylistduodian.html"
-				} else {
-					window.location.href = "paylist.html"
-				}
 
-			})
-
-			var _start = 0; //控制一次加载到页面条数的开头；
+			var _start = 1; //控制一次加载到页面条数的开头；
+			chongzhi_list(_start)
 			function pullUpActions() {
 				_start += 5;
-				$(".wait").removeClass("hidden");
-				machine_ajax_list(_start);
+//				$(".wait").removeClass("hidden");
+                let curtabar=$('.tabar .hover').text() 
+                if(curtabar=='待缴账单'){
+                	chongzhi_list(_start)
+                }else{
+                	xiaofei_list(_start);
+                }
+				
 			}
+			
+			function chongzhi_list(_start) {
+				if(_start==1){
+					$(".scroll_box").html('')
+				}
 			$.ajax({
 				url: _url,
 				type: "post",
@@ -288,7 +453,7 @@
 						var str = '';
 						$(".scroll_box").html("")
 						$.each(res.data.content, function(index, vaule) {
-							str = `	<div class="list">
+							str = `	<div class="list isdaijiao">
 							<div class="list_tittle">
 								<p class="tittlewen">
 									<span>设备号：</span>
@@ -327,41 +492,98 @@
 				}
 			})
 
-			//			function machine_ajax_list(_start) {
-			//				$(".more").html("未找到查询到缴费记录");
-			//			}
+			}
+			function xiaofei_list(_start) {
+				
+				if(_start==1){
+					$(".scroll_box").html('')
+				}
+				$.ajax({
+					url: "https://www.zjcoldcloud.com/xiandun/public/index.php/index/device/zhuxiaoDeviceList",
+					type: "post",
+					data: {
+						offset:_start,
+                        openid:_openid
+					},
+					dataType: 'json',
+					success: function(res) {
+							if(res.code == 0&&res.data.list.length>0) {
+							var str = '';
+							$.each(res.data.list, function(index, vaule) {
+								str = `<div class="list iszhuxiao">
+							<div class="list_tittle">
+								<p class="tittlewen">
+									<span>设备号：</span>
+									<span class="shebeihao">${vaule.shebeibianhao}</span>
+								</p>
+								<p>
+									<span class="ispay"></span>
+								</p>
+
+							</div>
+							<div class="list-content">
+								
+								<div>
+									到期时间：<span class="paytimer">${vaule.daoqishijian}</span>
+								</div>
+                                <div>
+									注销时间：<span class="paytimer">${vaule.zhuxiaoshijian}</span>
+								</div>
+								
+
+							</div>
+						</div>	`;
+								$(".scroll_box").append(str);
+								
+							});
+							if(res.data.list.length<20){
+								$(".more").html("没有更多记录");
+							}else{
+									$(".more").html('<i class="pull_icon"></i><span>上拉加载...</span>');
+								myscroll_x.refresh();
+							}
+
+						} 
+
+						 else {
+						 	
+							$(".more").html("没有更多记录");
+						}
+						myscroll_x.refresh();
+
+					},
+					error: function() {
+						alert("网络错误，请重新进入页面");
+
+						$(".wait").addClass("hidden");
+						myscroll_x.refresh();
+					}
+				})
+
+			}
+
 			$(".back_list").on("click", function() {
-				window.location.href = "pay_sheZhi.html"
-				//history.go(-1)
+				//				window.location.href = "user_sheZhi.html"
+				history.go(-1)
 			})
-			$("body").on("click", ".list", function() {
+			$("body").on("click", ".btnpay", function() {
+                 $(this).addClass('hover').siblings().removeClass('hover');
+                 _start = 1;
+                 if($(this).text()=='待缴账单'){
+                 	$('.consumelist').addClass('hidden')
+                 	$('.rechargelist').removeClass('hidden')
+                 	chongzhi_list(_start)
+                 }else{
+                 	$('.consumelist').removeClass('hidden')
+                 	$('.rechargelist').addClass('hidden')
+                 	xiaofei_list(_start)
+                 }
+			})
+			$("body").on("click", ".isdaijiao", function() {
 				var _shebeinum = $(this).find('.shebeihao').text();
 				window.location.href = 'buyflewpackage.html?num_m=' + _shebeinum;
 
 			})
-			//			$("body").on("click", ".btnpay",function() {
-			//				var _shebeinum=$(this).parents('.list').find('.shebeihao').text();
-			//				var _money=parseFloat($(this).parents('.list').find(".money").text())*100;
-			//				var userinfo = JSON.parse(localStorage.getItem('isonline'));
-			//				var _user = userinfo.user;
-			//				var _pass = userinfo.pwd;
-			//				var _openid = userinfo.copenid;	
-			//              var gopay={};
-			//              gopay={
-			//              	money:_money,
-			//              	ispayuser:_user,
-			//              	shebeinum:_shebeinum
-			//              };
-			//              window.sessionStorage.setItem("goingpay", JSON.stringify(gopay))
-			//              if(_duodian==1){
-			//				 window.location.href='http://www.ccsc58.cc/leng/weixin/zhifu/example/Duodianpay.php?total='+_money;
-			//				}else{
-			//					window.location.href='http://www.ccsc58.cc/leng/weixin/zhifu/example/freshdunpay.php?total='+_money;
-			//				}
-			//             
-			//				
-			//				
-			//			})
 		</script>
 	</body>
 

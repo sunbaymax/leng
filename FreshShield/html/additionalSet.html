@@ -46,17 +46,17 @@
 
 	<body>
 		<div class="header">
-			<img class="back_list" src="../img/back.png" /> 附加报警设置
+			<img class="back_list" src="../img/back.png" /> 消息提醒设置
 		</div>
 		<div class="content">
 			<div class="form">
-				<div>
+				<!--<div>
 					<span>解除绑定：</span>
 					<div class='switch-wrap'>
 						<input type='checkbox' id='switch1'>
 						<label for='switch1'></label>
 					</div>
-				</div>
+				</div>-->
 				<!--<div>
 					<span>夜间数据：</span>
 					<div class='switch-wrap'>
@@ -150,7 +150,7 @@
 			var mobans = 1;
 			$.ajax({
 				type: "post",
-				url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/get_device_param",
+				url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/xiandun_get_device_param",
 				data: {
 					admin_permit: "zjly8888",
 					UserP: "w",
@@ -296,6 +296,7 @@
 			//				}
 			//
 			//			});
+			var userType = userinfo.userType;
 			$(".btnok button").on("click", function() {
 				var _GPS_Start = $(this).attr('biao');
 				let arr = [];
@@ -318,6 +319,7 @@
 						yejianshangchuankaiguan: "1",
 						dingshifasong: arr,
 						openid: _copenid,
+						userType,
 						is_open:_is_warn,
 						warn_time:""
 					}
@@ -330,6 +332,7 @@
 						yejianshangchuankaiguan: "1",
 						dingshifasong: arr,
 						openid: _copenid,
+						userType,
 						is_open:_is_warn,
 						warn_time:""
 					}
@@ -342,7 +345,7 @@
 				console.log(_data);
 				$.ajax({
 					type: "post",
-					url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/update_device",
+					url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/xiandun_update_device",
 					data: _data,
 					dataType: "json",
 					success: function(res) {

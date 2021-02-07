@@ -205,8 +205,14 @@
 			var _userName = userinfo.user;
 			var _userPass = userinfo.pwd;
 			var _openid = window.localStorage.getItem("openId");
-			var _uid = userinfo.uid == undefined ? 'no' : userinfo.uid;
-
+            if( userinfo.uid==undefined) {
+				setTimeout(() => {
+					alert("未检测用户信息，请先登录");
+					window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_templatform.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
+				 }, 500);
+			}else{
+				var _uid = userinfo.uid;
+			}
 			function UrlSearch() {
 				var name, value;
 				var str = location.href; //取得整个地址栏
@@ -273,8 +279,10 @@
 					shebeihao: _num_m,
 					years:_year,
 				}
-				window.sessionStorage.setItem("sjgoingpay", JSON.stringify(sjuser));
-				window.location.href = 'http://www.ccsc58.cc/leng/weixin/zhifu/example/freshdun_flow_buy.php?total=' + parseFloat(_money * 100);
+				//window.sessionStorage.setItem("sjgoingpay", JSON.stringify(sjuser));
+				//window.location.href = 'http://www.ccsc58.cc/leng/weixin/zhifu/example/freshdun_flow_buy.php?total=' + parseFloat(_money * 100);
+				//window.location.href = 'http://www.ccsc58.cc/leng/weixin/zhifu/example/freshdun_flow_buy_back.php?shebeihao='+_num_m+'&money='+parseFloat(_money * 100)+'&years='+_year+'&u_id='+_uid+'&f_id='+_f_id+'&total='+parseFloat(_money * 100);
+				window.location.href = 'http://www.ccsc58.cc/leng/weixin/zhifu/example/freshdun_flow_buy.php?shebeihao='+_num_m+'&years='+_year+'&u_id='+_uid+'&f_id='+_f_id;
 
 			
 

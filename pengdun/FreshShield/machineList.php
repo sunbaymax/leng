@@ -146,7 +146,7 @@
 				window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80f7545ed03efa71&redirect_uri=http://www.ccsc58.cc/leng/pengdun/oauth2.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
 			}else{
 			var userinfo = JSON.parse(localStorage.getItem('onlinepengdun'));
-			var _httpUrl='https://www.zjcoldcloud.com/pengdun';
+			var _httpUrl='https://www.jfcss.com/api/public/index.php?s=';
 	        window.sessionStorage.setItem("httpUrl", _httpUrl);
 			var _userName = userinfo.user;
 			var _userPass = userinfo.pwd;

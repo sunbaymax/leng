@@ -142,8 +142,9 @@
 					admin_pass: _userPass,
 					shebeibianhao: _num
 				},
+				dataType:'json',
 				success: function(data) {
-					var _json = JSON.parse(data);
+					var _json = data;
 					if(_json.resultCode == "success") {
 						alert("设备绑定成功，重新进入页面即可看到新绑定的设备");
 //						window.location.href = '../machineList.php';
@@ -162,8 +163,9 @@
 							devicenumber: _num,
 							bandType: "ljll"
 						},
+						dataType:'json',
 						success: function(data) {
-							var _json = JSON.parse(data);
+							var _json = data;
 							if(_json.code == 0) {
 								alert("设备绑定成功，重新返回主页面即可看到新绑定的设备");
 //								window.location.href = '../machineList.php';

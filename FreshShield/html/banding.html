@@ -45,7 +45,7 @@
 				margin: 0;
 				/*box-sizing: border-box;*/
 			}
-			
+
 			header {
 				position: fixed;
 				top: 0;
@@ -56,7 +56,7 @@
 				background-color: #333;
 				color: #fff;
 			}
-			
+
 			header .back {
 				position: absolute;
 				top: 0;
@@ -65,21 +65,21 @@
 				padding-left: 5px;
 				font-size: 30px;
 			}
-			
+
 			header p {
 				margin: 0;
 				line-height: 49px;
 				font-size: 16px;
 				text-align: center;
 			}
-			
+
 			.register {
 				margin-top: 5rem;
 				font-size: 1.4rem;
 				padding: 0 2vw;
 				box-sizing: border-box;
 			}
-			
+
 			.res-item {
 				position: relative;
 				width: 100%;
@@ -88,7 +88,7 @@
 				height: 4rem;
 				margin-top: 1rem;
 			}
-			
+
 			.res-icon {
 				position: absolute;
 				left: 8px;
@@ -98,7 +98,7 @@
 				font-size: 18px;
 				color: #9c9c9c;
 			}
-			
+
 			.res-item .input-item {
 				display: inline-block;
 				width: 100%;
@@ -109,7 +109,7 @@
 				font-size: inherit;
 				border-radius: 0.5rem;
 			}
-			
+
 			.res-item .input-item:focus {
 				outline-offset: 0;
 				outline: -webkit-focus-ring-color auto -2px;
@@ -119,11 +119,11 @@
 				-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 5px rgba(226, 25, 69, .3);
 				box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 5px rgba(226, 25, 69, 0.3);
 			}
-			
+
 			.res-item .input-item:focus+.res-icon {
 				color: #e21945;
 			}
-			
+
 			.yanzhengma {
 				display: inline-block;
 				height: 3rem;
@@ -140,16 +140,16 @@
 				color: #fff;
 				border-radius: 0.5rem;
 			}
-			
+
 			.yanzhengma:disabled {
 				background-color: #ddd;
 			}
-			
+
 			.res-btn {
 				margin-top: 20rem;
 				text-align: center;
 			}
-			
+
 			.res-btn button {
 				/*margin-top: 2rem;
 				background-color: #3299fe;
@@ -177,18 +177,18 @@
 				color: #ffffff;
 				font-size: 1.5rem;
 			}
-			
+
 			.res-btn button:focus {
 				color: #fff;
 			}
-			
+
 			.jiediv {
 				height: 4rem;
 				line-height: 4rem;
 				text-align: end;
 				margin-right: 1rem;
 			}
-			
+
 			.jiediv a {
 				text-decoration: none;
 				color: #3299fe;
@@ -268,44 +268,48 @@
 			$(".back_list").on("click", function() {
 				window.history.go(-1);
 			});
+			    //获取短信验证码
+
 			var times = 60;
-
+            var countDown = 60;
 			function roof() {
+				var mobile = $('.mobile').val();
+				$.ajax({
+					type: "post",
+					url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/register/sendCode",
+					async: true,
+					data: {
+						phone: mobile,
+						action: 'regist'
+					},
+					dataType: "json",
+					success: function(res) {
+						if (res.code == 0) {
+	                        var newCode = setInterval(function () {
+	                             $('.yanzhengma').prop('disabled', true);
+	                             $('.yanzhengma').text( "重新发送(" + countDown + ")" );
+	                             countDown--;
+	                            if (countDown == 0) {
+	                                window.clearInterval(newCode);
+	                                $('.yanzhengma').prop('disabled', false);
+	                                $('.yanzhengma').text( "获取验证码");
+	                                countDown = 60;
+	                            }
+	                        }, 1000);
+	                    } else {
+	                        alert(res.message);
+	                         $('.yanzhengma').prop('disabled', false);
+	                         $('.yanzhengma').text( "获取验证码");
+	                         countDown = 60;
+	                    }
 
-				if(times == 0) {
-					$('.yanzhengma').text('发送验证码(' + times + 's)');
-					$('.yanzhengma').prop('disabled', false);
-					$('.yanzhengma').text('发送验证码');
-					times = 60;
-					return
-				}
-				if(times == 59) {
-					var mobile = $('.mobile').val();
-					$.ajax({
-						type: "post",
-						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/register/sendCode",
-						async: true,
-						data: {
-							phone: mobile
-						},
-						dataType: "json",
-						success: function(res) {
-							console.log(res);
-							if(res.code == 200) {
-								console.log("发送成功")
-							}
-						},
-						error: function(err) {
-							console.log(err);
-						}
-					});
-				}
-				$('.yanzhengma').text('发送验证码(' + times + 's)');
-				times--;
-				setTimeout(roof, 1000);
+					},
+					error: function(err) {
+						console.log(err);
+					}
+				});
 
-			}
-
+            }
 			$('.yanzhengma').on('click', function() {
 				var mobile = $('.mobile').val();
 				if(!mobile) {
@@ -318,7 +322,7 @@
 					document.querySelector('.mobile').placeholder = '手机号格式错误';
 					return
 				} else {
-					$(this).prop('disabled', true);
+
 					roof();
 				}
 
@@ -326,6 +330,7 @@
 
 			function isPoneAvailable($poneInput) {
 				var myreg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
+//				var myreg =  /^1(3[0-9]|4[5,7]|5[0,1,2,3,5,6,7,8,9]|6[2,5,6,7]|7[0,1,6,7,8]|8[0-9]|9[1,8,9])\d{8}$/;
 				if(!myreg.test($poneInput.val())) {
 					return false;
 				} else {
@@ -355,15 +360,18 @@
 
 				if(mobile == '') {
 					$('.mobile').focus();
-					document.querySelector('.mobile').placeholder = '请填写手机号码';
+//					document.querySelector('.mobile').placeholder = '请填写手机号码';
+					alert("请填写手机号码")
 					return
 				} else if(!isPoneAvailable($("#telphone"))) {
 					$('.mobile').focus();
-					document.querySelector('.mobile').placeholder = '手机号格式错误';
+					alert("手机号格式错误")
+					//document.querySelector('.mobile').placeholder = '手机号格式错误';
 					return
 				} else if(yanzheng == '') {
 					$('.yanzheng').focus();
-					document.querySelector('.yanzheng').placeholder = '请填写验证码';
+					alert("请填写验证码")
+//					document.querySelector('.yanzheng').placeholder = '请填写验证码';
 					return
 				}else if(_newpsd == '') {
 					alert("密码不能为空")
@@ -375,26 +383,23 @@
 					alert("两次密码输入不一致")
 					return
 				} else {
-
 					$.ajax({
 						type: "post",
-						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/register/weixin_add",
-						async: true,
+						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/register/xiandun_weixin_add",
 						data: {
 							weixin_openid: _openId,
 							phone: mobile,
 							code: yanzheng,
 							pwd:_newpsd2,
 						},
-						dataType: "JSON",
+						dataType: "json",
 						success: function(res) {
 							console.log(res);
-
-							if(res.code == 0 && res.message == 'success') {
-								alert("绑定成功");
+							if(res.code == 0) {
+								alert("绑定成功，请退出重新登录");
 								$('#res-btn').prop('disabled', true);
 								localStorage.removeItem("isonline");
-								location.href='register.html?openId='+_openId;
+								window.location.href='register.html?openId='+_openId+'&timestamp='+((new Date()).getTime()+Math.random());
 
 							} else {
 								alert(res.message);

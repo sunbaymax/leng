@@ -164,7 +164,7 @@
 			var _userPass = userinfo.pwd;
 			var _openid = window.localStorage.getItem("openId");
 			var _uid = userinfo.uid == undefined ? 'no' : userinfo.uid;
-
+		
 			function UrlSearch() {
 				var name, value;
 				var str = location.href; //取得整个地址栏
@@ -274,8 +274,10 @@
 					years:1
 				};
 				window.sessionStorage.setItem("sjgoingpay", JSON.stringify(sjuser));
-				window.location.href = 'http://www.ccsc58.cc/leng/weixin/zhifu/example/freshdun_flowpay.php?total=' + parseFloat(_money*100);
-				
+				let url='http://www.ccsc58.cc/leng/weixin/zhifu/example/freshdun_flowpay210126.php?f_id=2&phone='+_userName+'&shebeihao='+_num_m;
+			
+				//window.location.href = 'http://www.ccsc58.cc/leng/weixin/zhifu/example/freshdun_flowpay.php?total=' + parseFloat(_money*100);
+				window.location.href = url
 				}
 				
 			})

@@ -54,6 +54,12 @@
 					"name": "服务费充值",
 					"url": "http://www.ccsc58.cc/leng/FreshShield/html/yearfeepay.html",
 					"sub_button": []
+				},
+				{
+					"type": "view",
+					"name": "发票申请",
+					"url": "http://www.ccsc58.cc/leng/FreshShield/html/yearfeepay.html",
+					"sub_button": []
 				}
 			]
 		}

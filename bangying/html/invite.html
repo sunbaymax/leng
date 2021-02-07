@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>邦赢交投</title>
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+		<link rel="stylesheet" type="text/css" href="../css/changeM.css" />
+		<style type="text/css">
+			.content {
+				width: 100%;
+				height: auto;
+				margin-top: 5rem;
+				padding: 0 1rem;
+				box-sizing: border-box;
+				font-size: 1.4rem;
+			}
+			
+			.invitebtn {
+				padding: 0 2vw;
+				box-sizing: border-box;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				height: 5.6rem;
+				line-height: 5.6rem;
+				background: #ffffff;
+				margin-top: 1rem;
+				border-bottom: 1px solid #ccc;
+				font-size: 1.4rem;
+				margin: 0.6rem 0;
+				border-radius: 1rem;
+				cursor: pointer;
+			}
+			
+			.invitebtn img {
+				width: 1rem;
+				height: 1rem;
+			}
+			
+			.list {
+				height: auto;
+				width: 100%;
+			}
+			
+			.list div {
+				padding: 0 2vw;
+				box-sizing: border-box;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				height: 5.6rem;
+				background: #ffffff;
+				margin-top: 1rem;
+				border-bottom: 1px solid #ccc;
+				font-size: 1.4rem;
+				margin: 0.6rem 0;
+				cursor: pointer;
+				border-radius: 1rem
+			}
+			
+			.list img {
+				width: 1rem;
+				height: 1rem;
+			}
+			.list .right {
+				margin-right: 0.5rem;
+				width: 1rem;
+				height: 1.6rem;
+			}
+			.invitebtn .addimg {
+				width: 1.6rem;
+				height: 1.6rem;
+			}
+			.list div p{
+				display: flex;
+				width: 80%;
+			}
+			.list .name {
+				display: inline-block;
+				width: 25%;
+				/*margin-right: 1.5rem;*/
+			}
+			.list .tel {
+				display: inline-block;
+				width: 55%;
+				margin-right: 1.5rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="header">
+			<img class="back_list" src="../img/back.png" /> 邀请家人
+		</div>
+		<div class="content">
+			<div class="invitebtn">邀请家人<img src="../images/addinvite.png" class="addimg" /></div>
+			<div class="list">
+				<!--<div>
+					<p><span class="name">张三</span><span class="tel">18519887234</span></p>
+					<img src="../img/right_shop_car.png" />
+				</div>-->
+
+			</div>
+
+		</div>
+
+		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(".back_list").on("click", function() {
+				window.history.go(-1);
+			});
+			$(".invitebtn").on("click", function() {
+				window.location.href = 'addinvite.html';
+			});
+			/*
+			 * 获取用户的名称和密码；
+			 */
+			var userinfo = JSON.parse(localStorage.getItem('isonline'));
+			var _user = userinfo.user;
+			var _pass = userinfo.pwd;
+			$.ajax({
+				url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/share/membersList",
+				type: "post",
+				async: true,
+				data: {
+					mainname: _user
+
+				},
+				dataType: "json",
+				success: function(res) {
+					console.log(res);
+					if(res.code == 0) {
+						var strs = '';
+						//$(".list").html("");
+						$.each(res.data.content, function(index, val) {
+							strs = `<div>
+					<p><span class="name">${val.relation_name}</span><span class="tel">${val.phone}</span></p>
+					<img src="../img/right_shop_car.png"  class='right'/>
+				</div>`;
+							$(".list").append(strs);
+						});
+
+					}
+
+				},
+				error: function(err) {
+					console.log(err);
+				}
+
+			})
+			$("body").on("click", ".list div", function() {
+				var _tel = $(this).find('.tel').text();
+				var _name = $(this).find('.name').text();
+				console.log(_tel, _name)
+				location.href = 'editinvite.html?tel=' + _tel + '&name=' + _name;
+			})
+		</script>
+	</body>
+
+</html>

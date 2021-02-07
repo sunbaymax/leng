@@ -45,7 +45,7 @@
 				margin: 0;
 				/*box-sizing: border-box;*/
 			}
-			
+
 			header {
 				position: fixed;
 				top: 0;
@@ -56,7 +56,7 @@
 				background-color: #333;
 				color: #fff;
 			}
-			
+
 			header .back {
 				position: absolute;
 				top: 0;
@@ -65,14 +65,14 @@
 				padding-left: 5px;
 				font-size: 30px;
 			}
-			
+
 			header p {
 				margin: 0;
 				line-height: 49px;
 				font-size: 16px;
 				text-align: center;
 			}
-			
+
 			.register {
 				margin-top: 5rem;
 				/*padding: 8px 6px;*/
@@ -80,7 +80,7 @@
 				padding: 0 2vw;
 				box-sizing: border-box;
 			}
-			
+
 			.res-item {
 				position: relative;
 				width: 100%;
@@ -90,7 +90,7 @@
 				background-color: #fff;
 				margin-top: 1rem;
 			}
-			
+
 			.res-icon {
 				position: absolute;
 				left: 8px;
@@ -100,7 +100,7 @@
 				font-size: 18px;
 				color: #9c9c9c;
 			}
-			
+
 			.res-item .input-item {
 				display: inline-block;
 				width: 100%;
@@ -111,7 +111,7 @@
 				font-size: inherit;
 				border-radius: 0.5rem;
 			}
-			
+
 			.res-item .input-item:focus {
 				outline-offset: 0;
 				outline: -webkit-focus-ring-color auto -2px;
@@ -121,11 +121,11 @@
 				-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 5px rgba(226, 25, 69, .3);
 				box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 5px rgba(226, 25, 69, 0.3);
 			}
-			
+
 			.res-item .input-item:focus+.res-icon {
 				color: #e21945;
 			}
-			
+
 			.yanzhengma {
 				display: inline-block;
 				height: 3rem;
@@ -142,16 +142,16 @@
 				color: #fff;
 				border-radius: 0.5rem;
 			}
-			
+
 			.yanzhengma:disabled {
 				background-color: #ddd;
 			}
-			
+
 			.res-btn {
 				margin-top: 20rem;
 				text-align: center;
 			}
-			
+
 			.res-btn button {
 				width: 16rem;
 				height: 4rem;
@@ -162,18 +162,18 @@
 				font-size: 1.5rem;
 				cursor: pointer;
 			}
-			
+
 			.res-btn button:focus {
 				color: #fff;
 			}
-			
+
 			.jiediv {
 				height: 4rem;
 				line-height: 4rem;
 				text-align: end;
 				margin-right: 1rem;
 			}
-			
+
 			.jiediv a {
 				text-decoration: none;
 				color: #3299fe;
@@ -245,7 +245,7 @@
 			} else {
 				_openId = Request.openId;
 			}
-		
+
 			$(".back_list").on("click", function() {
 				window.history.go(-1);
 			});
@@ -260,27 +260,7 @@
 					times = 60;
 					return
 				}
-				if(times == 59) {
-					var mobile = $('.mobile').val();
-					$.ajax({
-						type: "post",
-						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/register/sendCode",
-						async: true,
-						data: {
-							phone: mobile
-						},
-						dataType: "json",
-						success: function(res) {
-							console.log(res);
-							if(res.code == 200) {
-								console.log("发送成功")
-							}
-						},
-						error: function(err) {
-							console.log(err);
-						}
-					});
-				}
+				$('.yanzhengma').prop('disabled', true);
 				$('.yanzhengma').text('发送验证码(' + times + 's)');
 				times--;
 				setTimeout(roof, 1000);
@@ -299,8 +279,29 @@
 					document.querySelector('.mobile').placeholder = '手机号格式错误';
 					return
 				} else {
-					$(this).prop('disabled', true);
-					roof();
+					var mobile = $('.mobile').val();
+					$.ajax({
+						type: "post",
+						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/register/sendCode",
+						async: true,
+						data: {
+							phone: mobile
+						},
+						dataType: "json",
+						success: function(res) {
+							console.log(res);
+							if(res.code == 0) {
+								// alert("发送成功")
+								$(this).prop('disabled', true);
+								roof();
+							} else {
+								alert(res.message);
+							}
+						},
+						error: function(err) {
+							alert(err);
+						}
+					});
 				}
 
 			});
@@ -334,7 +335,7 @@
 					document.querySelector('.yanzheng').placeholder = '请填写验证码';
 					return
 				} else {
-					var _url = "http://www.zjcoldcloud.com/xiandun/public/index.php/index/register/yanzheng_code";
+					var _url = "http://www.zjcoldcloud.com/xiandun/public/index.php/index/register/xiandun_yanzheng_code";
 
 					$.ajax({
 						type: "post",
@@ -346,7 +347,7 @@
 						},
 						dataType: "JSON",
 						success: function(res) {
-							if(res.code == 0 && res.message == "success") {
+							if(res.code == 0) {
 								location.href = 'editbanding.html?openId='+_openId;
 								$('#res-btn').prop('disabled', true);
 							} else {

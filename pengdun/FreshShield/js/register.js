@@ -14,7 +14,7 @@
 	//判断是否获取了用户的openID;
 	var _openId = "";
 	var _url = window.location.href;
-	var _httpUrl='https://www.zjcoldcloud.com/pengdun';
+	var _httpUrl='https://www.jfcss.com/api/public/index.php?s=';
 	window.sessionStorage.setItem("httpUrl", _httpUrl);
 	if(_url.indexOf("?") != -1) {
 		_openId = _url.match(/\?openId=\S+/)[0].replace("?openId=", "");

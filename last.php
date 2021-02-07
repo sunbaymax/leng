@@ -151,12 +151,12 @@ class wechatCallbackapiTest
                         break;
                      case "lianxiwomen":
                         $content = array(array("Title" =>"联系我们", 
-                        "Description" =>"热线电话: 010-83612390\n售后电话: 010-83613710（转）8009", 
-                        "PicUrl" =>"http://www.ccsc58.cc/leng/images/lxwm.jpg", 
-                        "Url" =>"http://ccsc58.com/folder/about.html"));
+                        "Description" =>"销售/商务合作: 010-83612720\n售后电话: 010-84612390\n公司官网：www.ccsc58.com", 
+                        "PicUrl" =>"http://qiniu.ccsc58.com/FgIMKZfHhcKskP_VxDdirK1tNlC3", 
+                        "Url" =>"http://www.ccsc58.com"));
                         break;
                     case "tel":
-                    	$content = "销售电话：010-8361-2390\n售后电话: 010-83613710-8009(分机号)";//点击公众下面的菜单想用户推送的内容匹配；
+                    	$content = "销售电话：010-83612390\n售后电话: 010-83612720";//点击公众下面的菜单想用户推送的内容匹配；
                         break;
                     
                     default:
@@ -239,20 +239,41 @@ class wechatCallbackapiTest
          //自动回复模式
         if (strstr($keyword, "文本")){
             $content = "请换一种说法"."\nOpenID：".$object->FromUserName."\n冷云冷链公众平台";
-        }else if($keyword=="设备"||$keyword=="查询"||$keyword=="冷链"||$keyword=="监控"||$keyword=="我的设备"||$keyword=="中集冷云"){
+        }else if($keyword=="设备"||$keyword=="查询"||$keyword=="冷链"||$keyword=="监控"||$keyword=="我的设备"||$keyword=="中集智冷"){
          $content = "<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_templatform.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">我的设备</a>";
             }
-        else if($keyword=="网址"||$keyword=="官网"||$keyword=="中集冷云（北京）冷链科技有限公司"||$keyword=="中集冷云"||$keyword=="冷云科技"||$keyword=="门户网站"||$keyword=="网站"){        
-            $content = "<a href=\"http://www.ccsc58.com\">中集冷云（北京）冷链科技有限公司</a>";
+        else if($keyword=="网址"||$keyword=="官网"||$keyword=="北京中集智冷科技有限公司"||$keyword=="中集智冷"||$keyword=="中集智冷"||$keyword=="门户网站"||$keyword=="网站"){        
+            $content = "<a href=\"http://www.ccsc58.com\">北京中集智冷科技有限公司</a>";
+        }
+        else if($keyword=="教程"||$keyword=="使用教程"){
+	        $content = "<a href=\"http://mp.weixin.qq.com/s/Tf87L9zLq4U0EhuMTSqkEg\">使用教程</a>";
+        }
+        else if($keyword=="数据"||$keyword=="数据导出"||$keyword=="历史数据"||$keyword=="记录"){
+	        //$content = "<a href=\"https://mp.weixin.qq.com/s/0FPQ8FTrGe7N6A5Ol4xkTQ\">使用教程</a>";
+	        $content = array();
+            $content[] = array("Title"=>"使用教程",  "Description"=>"数据记录", "PicUrl"=>"https://mmbiz.qpic.cn/mmbiz_jpg/Mq386YqibNyuQwXoFx6icu5Oib0HZ7D61gkZ1ibfpVic4VD8gVX92iarKdlFFyc0cGC3ia8tNoCuZ1WicG8BRRRdSAZcgA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1", "Url" =>"https://mp.weixin.qq.com/s/0FPQ8FTrGe7N6A5Ol4xkTQ");
+        }
+        else if($keyword=="报警"||$keyword=="超温"||$keyword=="通知"){
+            // $content = "<a href=\"https://mp.weixin.qq.com/s/U74hBe8xGF50_ytC5MTspg\">使用教程</a>";
+            $content = array();
+            $content[] = array("Title"=>"使用教程",  "Description"=>"报警设置", "PicUrl"=>"https://mmbiz.qpic.cn/mmbiz_png/Mq386YqibNyt3n27gcbvnfze2WfEyhfrGlgsER6cicTEZFlLrib0cfdvqHiadUeBSq73GG4iabBpE8icNTlCBoYfQMWQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1", "Url" =>"https://mp.weixin.qq.com/s/U74hBe8xGF50_ytC5MTspg");
+        }
+        else if(strstr($keyword, "邀请家人")||strstr($keyword, "邀请")){
+//	        $content = "<a href=\"https://mp.weixin.qq.com/s/jeE2TKAsRx0PcygTmq3xkw\">使用教程</a>";
+            $content = array();
+            $content[] = array("Title"=>"使用教程",  "Description"=>"报警设置", "PicUrl"=>"https://mmbiz.qpic.cn/mmbiz_png/Mq386YqibNyvtDiahpMkCCGibicI1oN1focicXYcoLMeXwMJO3hDyd0MIaZb16FZ8ImSZnbBsPA1cGuY5pKkvl54I4g/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1", "Url" =>"https://mp.weixin.qq.com/s/jeE2TKAsRx0PcygTmq3xkw");
         }
         else if($keyword=="商城"||$keyword=="购买"){
-	        $content = "/微笑<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_shop.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">微商城</a> \n 欢迎您光临，这里会给你更多意想不到的惊喜 /:heart";             
+	        $content = "/微笑<a href=\"https://shop92005288.youzan.com/v2/showcase/homepage?alias=8BZnwKvlhe&dc_ps=2665872149977290753.300001\">微商城</a> \n 欢迎您光临，这里会给你更多意想不到的惊喜 /:heart";             
 	    }
 	    else if($keyword=="多点"){
 	        $content = "<a href=\"www.ccsc58.cc/leng/FreshShield/html/dmallpay.html\">年费缴费</a>";             
 	    }
-	    else if($keyword=="年费"||$keyword=="付款"||$keyword=="收款"||$keyword=="付钱"||$keyword=="包年费"||$keyword=="支付"||$keyword=="金额"){
-	        $content = "/微笑<a href=\"http://www.ccsc58.cc/leng/weixin/index.html\">智冷微信商号平台</a> \n 智冷科技支付功能页面，帮助商户完成支付申请为基础，向用户提供安全、快捷、高效的服务 现在热线010-8361370";             
+	    else if($keyword=="年费"||$keyword=="续费"||$keyword=="缴费"){
+	       // $content = "/微笑<a href=\"http://www.ccsc58.cc/leng/weixin/index.html\">智冷微信商号平台</a> \n 智冷科技支付功能页面，帮助商户完成支付申请为基础，向用户提供安全、快捷、高效的服务 现在热线010-8361370";             
+//	        $content = "<a href=\"https://mp.weixin.qq.com/s/UnfecYe3df0z-pGq1BcWXg\">使用教程</a>";
+            $content = array();
+            $content[] = array("Title"=>"使用教程",  "Description"=>"报警设置", "PicUrl"=>"https://mmbiz.qpic.cn/mmbiz_jpg/Mq386YqibNyvubePJ8EgKl7jTCZYq3biaQq69VicUKFZuaKSRmnpSgTT0Oibp1LF9qyhZShibqW4GDC9SdRLHzicb6vA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1", "Url" =>"https://mp.weixin.qq.com/s/UnfecYe3df0z-pGq1BcWXg");
 	    }
 	    else if($keyword=="授权"||$keyword=="签到"||$keyword=="新年快乐"){
 	         //$content = "<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">授权</a>";
@@ -286,9 +307,7 @@ class wechatCallbackapiTest
         else if(is_numeric($keyword)&&strlen($keyword)==12){
              $content = "<a href=\"http://www.cccc58.com\">运单单号:".$keyword."</a>";
         }
-        else if($keyword=="报警"||$keyword=="异常"){
-             $content = "<a href=\"http://www.ccsc58.cc/weixinnew/html/warning_rukou.html\">设备报警列表</a>";
-        }
+        
         else if(is_numeric($keyword)&&strlen($keyword)>=5&&strlen($keyword)<=8){
              $content = "<a href=\"http://www.ccsc58.cc/weixinnew/details_rukou.html?num_m=".$keyword."\">".$keyword."</a>";
         }
@@ -340,15 +359,15 @@ class wechatCallbackapiTest
             $content = array("Title"=>"最炫民族风", "Description"=>"歌手：凤凰传奇", "MusicUrl"=>"http://121.199.4.61/music/zxmzf.mp3", "HQMusicUrl"=>"http://121.199.4.61/music/zxmzf.mp3"); 
         }
         else if(strstr($keyword, "你好。")){
-        	 $content = "中集冷云：".$this->bytes_to_emoji(0x2601);
+        	 $content = "中集智冷：".$this->bytes_to_emoji(0x2601);
            //$content = date("Y-m-d H:i:s",time())."\nOpenID：".$object->FromUserName."\n技术支持 方倍工作室";
         }else if (strstr($keyword, "表情")){
         	//$content = "中国：".$this->bytes_to_emoji(0x1F1E8).$this->bytes_to_emoji(0x1F1F3)."\n仙人掌：".$this->bytes_to_emoji(0x1F335);
-            $content = "中集冷云：".$this->bytes_to_emoji(0x2601)."\nOpenID：".$object->FromUserName."\n冷云冷链公众平台";
+            $content = "中集智冷：".$this->bytes_to_emoji(0x2601)."\nOpenID：".$object->FromUserName."\n冷云冷链公众平台";
         }
          else if (strstr($keyword, "bd")){
         	//$content = "中国：".$this->bytes_to_emoji(0x1F1E8).$this->bytes_to_emoji(0x1F1F3)."\n仙人掌：".$this->bytes_to_emoji(0x1F335);
-            $content = "中集冷云：".$this->bytes_to_emoji(0x2601);
+            $content = "中集智冷：".$this->bytes_to_emoji(0x2601);
         }
         else if(strstr($keyword, "天气")){
 	             	if($keyword=="天气"){
@@ -360,7 +379,7 @@ class wechatCallbackapiTest
 	            } 
         else{
         	//$content = date("Y-m-d H:i:s",time())."\nOpenID：".$object->FromUserName."\n技术支持 方倍工作室";
-           $content = "您好！您可以回复以下内容：\n\n☞【配置】:<a href=\"http://www.ccsc58.cc/leng/softwareconfig/index.html\">配置软件</a>\n\n☞【官网】:<a href=\"http://www.ccsc58.com\">客服电话</a>\n\n☞【天气】:<a href=\"https://m.tianqi.com\">城市天气</a>\n\n ☞【绑定】:<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx82dbac04fa8fd8ef&redirect_uri=http://www.ccsc58.cc/weixinnew/oauth_3.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">微信绑定</a>\n\n☞【说明书】:<a href=\"https://mp.weixin.qq.com/s/5O4lbFehdZT1kuJcDvj5sw\">操作说明</a>\n\n☞【设备号】:<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">设备详情</a>\n\n☞【报警/异常】:<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">报警设备</a>\n\n☞【设备/监控】:<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">我的设备</a>\n\n☞【鲜盾系统操作指南】:<a href=\"https://mp.weixin.qq.com/s/8uzz14RsOJwYVZJqdRGe_w\">查看指南</a>\n\n☞【监控宝使用说明书】:<a href=\"http://www.ccsc58.cc/leng/FreshShield/file/zlth10tp.pdf\">下载查看</a>\n\n ☎  客服电话:010-83612390\n\n📲销售电话及微信:19142641086";     
+           $content = "您好！您可以回复以下内容：\n\n☞【教程】:<a href=\"http://mp.weixin.qq.com/s/Tf87L9zLq4U0EhuMTSqkEg\">使用教学</a>\n\n☞【配置】:<a href=\"http://www.ccsc58.cc/leng/softwareconfig/index.html\">配置软件</a>\n\n☞【官网】:<a href=\"http://www.ccsc58.com\">公司官网</a>\n\n☞【天气】:<a href=\"https://m.tianqi.com\">城市天气</a>\n\n ☞【绑定】:<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx82dbac04fa8fd8ef&redirect_uri=http://www.ccsc58.cc/weixinnew/oauth_3.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">微信绑定</a>\n\n☞【说明书】:<a href=\"https://mp.weixin.qq.com/s/5O4lbFehdZT1kuJcDvj5sw\">操作说明</a>\n\n☞【邀请家人】:<a href=\"https://mp.weixin.qq.com/s/jeE2TKAsRx0PcygTmq3xkw\">邀请家人</a>\n\n☞【设备监控】:<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_templatform.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">监控云平台</a>\n\n☞【报警/异常】:<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_templatform.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">报警设备</a>\n\n☞【设备/监控】:<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_templatform.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">我的设备</a>\n\n☞【鲜盾系统操作指南】:<a href=\"https://mp.weixin.qq.com/s/8uzz14RsOJwYVZJqdRGe_w\">查看指南</a>\n\n☞【监控宝使用说明书】:<a href=\"http://www.ccsc58.cc/leng/FreshShield/file/zlth10tp.pdf\">下载查看</a>\n\n ☎  客服电话:010-83612390\n\n📲销售电话及微信:19142641086";     
 	    }
 	    
 		if(!empty($result)){
@@ -442,20 +461,23 @@ if (isset($object->Recognition) && !empty($object->Recognition)){
              $content = "请换一种说法,冷云科技公众平台欢迎你";           
         }
         else if($keyword=="授权"||$keyword=="签到"||$keyword=="新年快乐"){
-	          $content = "/微笑<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">参与现场签到</a> \n备注：请本人参与签到，代抽一律作废处理，感谢您的参与与配合!本次年会会给您更多意想不到的惊喜  /:heart";             
+	          $content = "/微笑<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_templatform.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">参与现场签到</a> \n备注：请本人参与签到，代抽一律作废处理，感谢您的参与与配合!本次年会会给您更多意想不到的惊喜  /:heart";             
 	    }else if (strstr($keyword, "你好")){
              $content = "你好！/微笑/微笑";
-        }else if($keyword=="设备"||$keyword=="查询"||$keyword=="监控"||$keyword=="我的设备"||$keyword=="中集冷云"){
+        }else if($keyword=="设备"||$keyword=="查询"||$keyword=="监控"||$keyword=="我的设备"||$keyword=="中集智冷"){
              $content = "<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx82dbac04fa8fd8ef&redirect_uri=http://www.ccsc58.cc/weixinnew/oauth2.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">我的设备</a>";
         }
         else if(strstr($keyword, "冷链运输")||strstr($keyword, "运输")||strstr($keyword, "冷链")){
         $content = "客服电话:400-6507168";
         }
-        else if($keyword=="网址"||$keyword=="官网"||$keyword=="中集冷云（北京）冷链科技有限公司"||$keyword=="中集冷云"||$keyword=="冷云科技"||$keyword=="门户网站"||$keyword=="网站"){        
-            $content = "<a href=\"http://www.ccsc58.com\">中集冷云（北京）冷链科技有限公司</a>";
+        else if($keyword=="网址"||$keyword=="官网"||$keyword=="北京中集智冷科技有限公司"||$keyword=="中集智冷"||$keyword=="中集智冷"||$keyword=="门户网站"||$keyword=="网站"){        
+            $content = "<a href=\"http://www.ccsc58.com\">北京中集智冷科技有限公司</a>";
         }
         else if(strstr($keyword, "客服电话")){
 	        $content = "客服电话:010-8361-2390";
+        }
+        else if(strstr($keyword, "邀请家人")||$keyword=="教程"||$keyword=="使用教程"||strstr($keyword, "邀请")){
+	        $content = "<a href=\"https://mp.weixin.qq.com/s/jeE2TKAsRx0PcygTmq3xkw\">分享教程</a>";
         }
          else if(strstr($keyword, "元旦")){
         	 $content = "你好/微笑 \n提前祝你:\n元旦快乐!2018年心想事成 ".$this->bytes_to_emoji(0x2764);
@@ -508,7 +530,7 @@ if (isset($object->Recognition) && !empty($object->Recognition)){
               $content = date("Y-m-d H:i:s", time()+6*60*60);
         }
 //      else if($keyword=="下载"||$keyword=="app"||$keyword=="APP"||$keyword=="App"||$keyword=="安卓"||$keyword=="ios"||$keyword=="IOS"||$keyword=="应用"||$keyword=="苹果"){
-//           $content = "<a href=\"http://fusion.qq.com/cgi-bin/qzapps/unified_jump?appid=42375908&isTimeline=false&actionFlag=0&params=pname%3Dcom.ccsc.coldcloud%26versioncode%3D1%26channelid%3D%26actionflag%3D0&from=singlemessage&isappinstalled=1\">中集冷云(安卓)</a>\n\n<a href=\"https://itunes.apple.com/us/app/zhong-ji-leng-yun-wen-shi/id1173609882?mt=8\">中集冷云(苹果)</a>";
+//           $content = "<a href=\"http://fusion.qq.com/cgi-bin/qzapps/unified_jump?appid=42375908&isTimeline=false&actionFlag=0&params=pname%3Dcom.ccsc.coldcloud%26versioncode%3D1%26channelid%3D%26actionflag%3D0&from=singlemessage&isappinstalled=1\">中集智冷(安卓)</a>\n\n<a href=\"https://itunes.apple.com/us/app/zhong-ji-leng-yun-wen-shi/id1173609882?mt=8\">中集智冷(苹果)</a>";
 //      }
         else if($keyword=="微信绑定"||$keyword=="手机号码绑定"||$keyword=="关联"){          
              $content = "<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx82dbac04fa8fd8ef&redirect_uri=http://www.ccsc58.cc/weixinnew/oauth_3.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">微信绑定</a>";
@@ -534,15 +556,15 @@ if (isset($object->Recognition) && !empty($object->Recognition)){
             $content = array("Title"=>"最炫民族风", "Description"=>"歌手：凤凰传奇", "MusicUrl"=>"http://121.199.4.61/music/zxmzf.mp3", "HQMusicUrl"=>"http://121.199.4.61/music/zxmzf.mp3"); 
         }
         else if(strstr($keyword, "你好。")){
-        	 $content = "中集冷云：".$this->bytes_to_emoji(0x2601);
+        	 $content = "中集智冷：".$this->bytes_to_emoji(0x2601);
            //$content = date("Y-m-d H:i:s",time())."\nOpenID：".$object->FromUserName."\n技术支持 方倍工作室";
         }else if (strstr($keyword, "表情")){
         	//$content = "中国：".$this->bytes_to_emoji(0x1F1E8).$this->bytes_to_emoji(0x1F1F3)."\n仙人掌：".$this->bytes_to_emoji(0x1F335);
-            $content = "中集冷云：".$this->bytes_to_emoji(0x2601)."\nOpenID：".$object->FromUserName."\n冷云冷链公众平台";
+            $content = "中集智冷：".$this->bytes_to_emoji(0x2601)."\nOpenID：".$object->FromUserName."\n冷云冷链公众平台";
         }
          else if (strstr($keyword, "bd")){
         	//$content = "中国：".$this->bytes_to_emoji(0x1F1E8).$this->bytes_to_emoji(0x1F1F3)."\n仙人掌：".$this->bytes_to_emoji(0x1F335);
-            $content = "中集冷云：".$this->bytes_to_emoji(0x2601);
+            $content = "中集智冷：".$this->bytes_to_emoji(0x2601);
         }
          else if(strstr($keyword, "天气")){
 	             	if($keyword=="天气"){

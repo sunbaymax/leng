@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="format-detection" content="telephone=no">
+		<title>页川云平台</title>
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+	</head>
+
+	<body>
+		<style>
+			body {
+				background-color: #F2F2F2!important;
+			}
+			
+			.content {
+				padding: 0 1rem;
+				box-sizing: border-box;
+				font-size: 1.4rem;
+				width: 100vw;
+				height: auto;
+				margin-top: 5.6rem;
+			}
+			
+			.formdata div {
+				height: 8rem;
+				line-height: 8rem;
+				margin-top: 1rem;
+				border-radius: 1rem;
+				background: #FFFFFF;
+				padding: 0 2vw;
+				box-sizing: border-box;
+			}
+			
+			.formdata div p {
+				height: 4rem;
+				line-height: 4rem;
+				display: flex;
+				justify-content: space-between;
+			}
+			
+			.formdata .msg {
+				display: block;
+				text-align: center;
+				height: 4rem;
+				line-height: 4rem;
+				margin-top: 1rem;
+				border-radius: 1rem;
+				background: none;
+				padding: 0 2vw;
+				font-size: 13px;
+			}
+			
+			.formdata .zhifu {
+				margin-top: 4rem;
+				height: 4rem;
+				line-height: 4rem;
+				display: flex;
+				justify-content: flex-end;
+				background: none;
+			}
+			
+			.formdata .zhifu button {
+				height: 4rem;
+				width: 10rem;
+				border-radius: 2rem;
+				background: #FFFFFF;
+				border: 1px solid #40C0C3;
+				color: #40C0C3;
+				width: 16rem;
+			    height: 4rem;
+			    background: #40C0C3;
+			    border-radius: 5rem;
+			    border: none;
+			    color: #ffffff;
+			    font-size: 1.5rem;
+			}
+			
+			.tip {
+				text-align: center;
+				position: absolute;
+				height: 100%;
+				width: 100%;
+				background-color: rgba(90, 90, 90, 0.5);
+				z-index: 99999;
+			}
+			
+			.tip p {
+				text-align: left;
+			}
+			
+			.collectSucc {
+				position: fixed;
+				height: auto;
+				width: 70%;
+				background-color: #ffffff;
+				margin-left: 15%;
+				margin-top: 50%;
+			}
+			
+			.collectSucc_top {
+				color: #666666;
+				font-size: 12px;
+			}
+			
+			.collectSucc_top img {
+				width: 60px;
+				margin-top: 20px;
+			}
+			
+			.collectSucc_buttom {
+				margin-top: 20px;
+				height: 40px;
+				line-height: 40px;
+				background-color: #2d99f5;
+				color: #FFFFFF;
+				font-size: 13px;
+			}
+			
+			.notclick {
+				pointer-events: none;
+			}
+			
+			.active {
+				border: 1px solid #37c0c4;
+				box-sizing: border-box;
+			}
+			select{
+				width: 80px;
+				height: 28px;
+			}
+		</style>
+		<div class="header">
+			<img class="back_list" src="../img/back.png" ids='0' /> 购买套餐
+
+		</div>
+
+		<div class="content">
+			<div class="formdata">
+				<div class="frist taocan active">
+					<p><span>套餐名：<span class="taocanname taocanname1">A</span></span>
+						<span>单价：<label class="Bmoney">12</label>元</span></p>
+					<p><span>说明：设备上传间隔5分钟及以上</span></p>
+				</div>
+				<div class="second taocan">
+					<p>
+						<span>套餐名：<span class="taocanname taocanname2">B</span></span>
+						<span>单价：<label class="Bmoney">60</label>元</span>
+					</p>
+
+					<p><span>说明：设备上传间隔1分钟及以上</span></p>
+				</div>
+				<div class="frist">
+					<p style="display: flex;align-items: center;">
+						<span>续期年限：</span>
+						<select name="type" id="typeId">
+				            <!--<option>请选择</option>-->
+				        </select>
+					</p>
+					<p>
+						<span>合计金额：<b class="cmoney">10</b> 元</span>
+					</p>	
+				</div>
+
+				<div class="zhifu">
+					<button>支付</button>
+				</div>
+			</div>
+
+		</div>
+		<script src="../js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="../js/jquery-1.11.0.js"></script>
+		<script src="../js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			/*iscroll代码；
+			 */
+			
+			for (let i = 1; i <= 10; i++) {
+				var option = document.createElement("option"); 
+						if(i==1){
+							 $(option).val(i);  
+                        $(option).text(i+"年");  
+                        $('#typeId').append(option);  
+							$(option).attr('selected', 'selected');
+
+						}else{
+							 $(option).val(i);  
+                        $(option).text(i+"年");  
+                        $('#typeId').append(option);  
+						}
+                          
+                    }  
+
+			if(!window.localStorage.getItem("isonline")) {
+				
+				setTimeout(() => {
+					alert("未检测用户信息，请先登录");
+					window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_templatform.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
+				 }, 500);
+				
+			}
+			var userinfo = JSON.parse(localStorage.getItem('isonline'));
+			var _userName = userinfo.user;
+			var _userPass = userinfo.pwd;
+			var _openid = window.localStorage.getItem("openId");
+			var _uid = userinfo.uid == undefined ? 'no' : userinfo.uid;
+
+			function UrlSearch() {
+				var name, value;
+				var str = location.href; //取得整个地址栏
+				var num = str.indexOf("?")
+				str = str.substr(num + 1); //取得所有参数 stringvar.substr(start [, length ]
+
+				var arr = str.split("&"); //各个参数放到数组里
+				for(var i = 0; i < arr.length; i++) {
+					num = arr[i].indexOf("=");
+					if(num > 0) {
+						name = arr[i].substring(0, num);
+						value = arr[i].substr(num + 1);
+						this[name] = value;
+					}
+				}
+			}
+			var _data='';
+			$.ajax({
+				url:"http://www.zjcoldcloud.com/xiandun/public/index.php/index/flow_package",
+				type:"post",
+				data:_data,
+				dataType:"json",
+				success:function(res){
+					$(".frist .taocanname1").text(res.data[1].name);
+					$(".frist .Bmoney").text(res.data[1].price);
+					$(".frist .cmoney").text(res.data[1].price);
+					$(".second .taocanname1").text(res.data[0].name);
+					$(".second .Bmoney").text(res.data[0].price);
+//					console.log(res.data);
+//					$(".taocanname1").text(res.data[0].name)
+				},
+				error:function(err){
+					console.log(err);
+				}
+			})
+			var Request = new UrlSearch(); //实例化
+			var _num_m = Request.num_m;
+			$(".back_list").on("click", function() {
+				window.history.go(-1);
+			})
+			$(".content .taocan").on("click", function() {
+				$(this).addClass('active').siblings().removeClass('active');
+				let _money = parseFloat($(".active .Bmoney").text());
+				let _year=$('select').val();
+				let total=_money*_year;
+				$(".frist .cmoney").text(total);
+			})
+			$("#typeId").change(function(){
+				console.log($(this).val())
+				let _money = parseFloat($(".active .Bmoney").text());
+				let _year=$(this).val();
+				let total=_money*_year;
+				$(".frist .cmoney").text(total);
+			 });	
+			$("button").on("click", function() {
+				let _money = parseFloat($(".frist .cmoney").text());
+//				let _money = 0.1;
+				let _f_id =$(".active .taocanname").text()=="A"?1:2;
+				let _year=$("#typeId").val();
+				var sjuser = {
+					u_id: _uid,
+					f_id: _f_id,
+					money: _money,
+					shebeihao: _num_m,
+					years:_year,
+				}
+				//window.sessionStorage.setItem("sjgoingpay", JSON.stringify(sjuser));
+				//window.location.href = 'http://www.ccsc58.cc/leng/weixin/zhifu/example/freshdun_flow_buy.php?total=' + parseFloat(_money * 100);
+				//window.location.href = 'http://www.ccsc58.cc/leng/weixin/zhifu/example/freshdun_flow_buy_back.php?shebeihao='+_num_m+'&money='+parseFloat(_money * 100)+'&years='+_year+'&u_id='+_uid+'&f_id='+_f_id+'&total='+parseFloat(_money * 100);
+				window.location.href = 'http://www.ccsc58.cc/leng/weixin/zhifu/example/freshdun_flow_buy.php?shebeihao='+_num_m+'&years='+_year+'&u_id='+_uid+'&f_id='+_f_id;
+
+			
+
+			})
+		</script>
+	</body>
+
+</html>
