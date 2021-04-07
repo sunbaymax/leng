@@ -241,12 +241,15 @@ class wechatCallbackapiTest
             $content = "请换一种说法"."\nOpenID：".$object->FromUserName."\n冷云冷链公众平台";
         }else if($keyword=="设备"||$keyword=="查询"||$keyword=="冷链"||$keyword=="监控"||$keyword=="我的设备"||$keyword=="中集智冷"){
          $content = "<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_templatform.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">我的设备</a>";
-            }
+        }
         else if($keyword=="网址"||$keyword=="官网"||$keyword=="北京中集智冷科技有限公司"||$keyword=="中集智冷"||$keyword=="中集智冷"||$keyword=="门户网站"||$keyword=="网站"){        
             $content = "<a href=\"http://www.ccsc58.com\">北京中集智冷科技有限公司</a>";
         }
         else if($keyword=="教程"||$keyword=="使用教程"){
 	        $content = "<a href=\"http://mp.weixin.qq.com/s/Tf87L9zLq4U0EhuMTSqkEg\">使用教程</a>";
+        }
+        else if($keyword=="LY-RTH1000B"||$keyword=="1000B"||$keyword=="1000b"||$keyword=="LY-RTH1000b"){
+	        $content = "<a href=\"https://mp.weixin.qq.com/s/pKgdBEz9kN8dOEd_mFiAAA\">LY-RTH1000B使用说明书</a>";
         }
         else if($keyword=="数据"||$keyword=="数据导出"||$keyword=="历史数据"||$keyword=="记录"){
 	        //$content = "<a href=\"https://mp.weixin.qq.com/s/0FPQ8FTrGe7N6A5Ol4xkTQ\">使用教程</a>";
@@ -351,10 +354,9 @@ class wechatCallbackapiTest
             $content[] = array("Title"=>"温湿度监控智能终端使用说明书（20TP与20DP）", "Description"=>" 温湿度监控智能终端使用说明书（20TP与20DP）", "PicUrl"=>"http://www.ccsc58.cc/weixinnew/img/shumingshu_tuisong.png", "Url" =>"http://mp.weixin.qq.com/s/a-7N3QysT4Bmn3eNGPldOw");
             $content[] = array("Title"=>"温度计使用说明书（LY-RTH1000系列）", "Description"=>"温度计使用说明书（LY-RTH1000系列）", "PicUrl"=>"http://www.ccsc58.cc/leng/images/1000B01.png", "Url" =>"http://www.ccsc58.com/folder/Download/1000A.pdf");
             $content[] = array("Title"=>"温湿度远程采集云分析平台（微信版本）", "Description"=>"温湿度远程采集云分析平台-微信", "PicUrl"=>"http://www.ccsc58.cc/leng/img/wxjm.jpg", "Url" =>"https://mp.weixin.qq.com/s?__biz=MzIxNzU1MzIyNA==&mid=2247483725&idx=1&sn=19baee7dea592c772d7b9f513e4c5f2a&chksm=97f9416aa08ec87cc846de9af8f2be8d16b8b76abb04269a8ab66415c5c19f5e007f978d1168#wechat_redirect");
-
-            
-         
-        }else if (strstr($keyword, "音乐")){
+        }else if ($keyword == "图片") {
+		    $content = array("PicUrl"=>"http://www.ccsc58.com","MediaId"=>"cjVy41BQEARosMhD3oG1oU3culO6D6SdcjV_cUwGZkiT-OPOLKeipxkYt7mNCVnL"); 
+		}else if (strstr($keyword, "音乐")){
             $content = array();
             $content = array("Title"=>"最炫民族风", "Description"=>"歌手：凤凰传奇", "MusicUrl"=>"http://121.199.4.61/music/zxmzf.mp3", "HQMusicUrl"=>"http://121.199.4.61/music/zxmzf.mp3"); 
         }
@@ -390,6 +392,8 @@ class wechatCallbackapiTest
                 $result = $this->transmitNews($object, $content);
             }else if (isset($content['MusicUrl'])){
                 $result = $this->transmitMusic($object, $content);
+            }else if(isset($content['PicUrl'])){
+            	$result = $this->transmitImage($object, $content);
             }
         }else{
             $result = $this->transmitText($object, $content);
@@ -440,7 +444,8 @@ class wechatCallbackapiTest
         $result = $this->transmitText($object, $content);
         return $result;
     }
-
+   //图片素材ID
+ 
     //接收语音消息
     private function receiveVoice($object)
     {

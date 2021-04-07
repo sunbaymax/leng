@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="format-detection" content="telephone=no">
+		<title>上海视笳物联网科技有限公司</title>
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+	</head>
+
+	<body>
+		<style>
+			body {
+				background-color: #F2F2F2!important;
+			}
+			/*.content {
+				width: 100vw;
+				height: auto;
+				min-height: 200px;
+				margin-top: 4rem;
+				
+			}*/
+			
+			#wrapper {
+				width: 100%;
+				position: absolute;
+				left: 0;
+				top: 4rem;
+				overflow: hidden;
+				z-index: 1;
+				bottom: 0rem;
+			}
+			
+			.more {
+				height: 4rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: #8a8a8a;
+			}
+			
+			.pull_icon {
+				width: 25px;
+				height: 25px;
+				background-image: url('../images/pull.png');
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: 25px;
+				transition: all .5s;
+			}
+			
+			.more span {
+				padding-left: .5rem;
+			}
+			
+			.more .flip {
+				transform: rotate(180deg);
+			}
+			
+			.loading {
+				background-image: url('../images/loading.png');
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: 25px;
+			}
+			
+			.more .loading {
+				-webkit-transform: rotate(0deg) translateZ(0);
+				-webkit-transition-duration: 0;
+				-webkit-animation-name: loading;
+				-webkit-animation-duration: 2s;
+				-webkit-animation-iteration-count: infinite;
+				-webkit-animation-timing-function: linear;
+			}
+			
+			@-webkit-keyframes loading {
+				from {
+					-webkit-transform: rotate(0deg) translateZ(0);
+				}
+				to {
+					-webkit-transform: rotate(360deg) translateZ(0);
+				}
+			}
+			
+			.scroll_box {
+				padding: 0 2vw;
+				box-sizing: border-box;
+				border-radius: 0.5rem;
+			}
+			
+			.list {
+				margin: 1rem 0;
+				padding: 0 1rem;
+				box-sizing: border-box;
+				height: 12rem;
+				background: #FFFFFF;
+				border-radius: 0.5rem;
+			}
+			
+			.list .list_tittle {
+				/*display: flex;
+				align-items: center;*/
+				height: 7rem;
+				width: 100%;
+				padding: 1rem 0;
+				box-sizing: border-box;
+				/*justify-content: space-between;*/
+				border-bottom: 1px solid #ccc;
+			}
+			
+			.list .list_tittle .taocanleft {
+				display: inline-block;
+				width: 50%;
+				padding: 0.5rem 0;
+			}
+			
+			.list .list_tittle .lasttaocanleft {
+				text-align: right;
+			}
+			
+			.list .list_tittle .tittlewen {
+				font-size: 1.4rem;
+				font-weight: bold;
+			}
+			
+			.list_tittle .device_img {
+				width: 1rem;
+				height: auto;
+				margin-right: 1rem;
+			}
+			
+			.list_tittle .ispay {
+				color: #999999;
+			}
+			
+			.list-content .nickname {
+				color: #999999;
+			}
+			
+			.list-content .paytimer {
+				color: #999999;
+			}
+			
+			.list-content .cssmoney {
+				color: #FA7183;
+			}
+			
+			.list_tittle p {
+				display: flex;
+				align-items: center;
+			}
+			
+			.list-content div {
+				float: none;
+				display: flex;
+				align-items: center;
+				height: 2rem;
+			}
+			
+			.list-content div p {
+				width: 50%;
+				text-align: left;
+			}
+			
+			.list-content div p:last-child {
+				width: 50%;
+				text-align: right;
+			}
+			
+			.btnpay {
+				height: 3.6rem;
+			    width: 9rem;
+			    border-radius: 2rem;
+			    background: #FFFFFF;
+			    border: 1px solid #40C0C3;
+			    color: #40C0C3;
+			    font-size: 14px;
+			}
+			
+			.paylist {
+				width: 1.8rem;
+				height: 2.2rem;
+				position: absolute;
+				top: 1rem;
+				right: 1rem;
+			}
+			
+			.list-content {
+				padding: 1.5rem 0;
+				box-sizing: border-box;
+			}
+		</style>
+		<div class="header">
+			<img class="back_list" src="../img/back.png" ids='0' /> 语音套餐
+			<img src="../img/paylists.png" class="paylist" />
+		</div>
+
+		<div class="content">
+			<div id="wrapper">
+				<div class="scroller">
+					<div class="scroll_box">
+
+						<!--<div class="list">
+							<div class="list_tittle">
+								<p class="tittlewen">
+									<span>套餐名：</span>
+									<span class="shebeihao">A</span>
+								</p>
+								<p>
+									<span class="taocanleft">价格：<label >11</label>元/次</span>
+									<span class="taocanleft lasttaocanleft">次数：<label>22</label>次/年</span>
+								</p>
+
+							</div>
+							<div class="list-content">
+
+								<div>
+									<p>金额：<span class="cssmoney">￥<label class="money"></label> </span></p>
+									<p><button class="btnpay">去支付</button></p>
+								</div>
+
+							</div>
+						</div>-->
+
+					</div>
+					<div class="more">
+						<i class="pull_icon"></i><span>上拉加载...</span>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<script src="../js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="../js/jquery-1.11.0.js"></script>
+		<script src="../js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			/*iscroll代码；
+			 */
+			var userinfo = JSON.parse(localStorage.getItem('isonline'));
+			var _userName = userinfo.user;
+			var _userPass = userinfo.pwd;
+			var _openid = window.localStorage.getItem("openId");
+            var _uid = userinfo.uid==undefined?'no':userinfo.uid;
+            if(_uid=='no'){
+            	  if(confirm("系统更新，退出登录才能购买？")){
+                      window.location.href = 'register.html?openId=' + _openid;
+                      localStorage.removeItem('isonline');
+                      sessionStorage.clear()
+                  }else {
+                    window.location.href = "user_sheZhi.html"
+                  }
+            }
+            console.log(_uid)
+			var myscroll_x = new iScroll("wrapper", {
+				onScrollMove: function() {
+					if(this.y < (this.maxScrollY)) {
+						$('.pull_icon').addClass('flip');
+						$('.pull_icon').removeClass('loading');
+						$('.more span').text('释放加载...');
+					} else {
+						$('.pull_icon').removeClass('flip loading');
+						$('.more span').text('上拉加载...')
+					}
+				},
+				onScrollEnd: function() {
+					if($('.pull_icon').hasClass('flip')) {
+						$('.pull_icon').addClass('loading');
+						$('.more span').text('加载中...');
+						pullUpActions();
+					}
+				},
+				onRefresh: function() {
+					$('.more').removeClass('flip');
+					$('.more span').text('上拉加载...');
+				}
+			});
+			$(".paylist").on("click", function() {
+                location.href='payvoicelist.html'
+			})
+
+			var _start = 0; //控制一次加载到页面条数的开头；
+			function pullUpActions() {
+				_start += 5;
+				$(".wait").removeClass("hidden");
+				machine_ajax_list(_start);
+			}
+			$.ajax({
+				url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/voice_package",
+				type: "post",
+				data: {
+					type: "C"
+
+				},
+				dataType: 'json',
+				success: function(res) {
+					if(res.code == 0 && res.message == 'success') {
+						var str = '';
+						$(".scroll_box").html("")
+						$.each(res.data, function(index, vaule) {
+							str = `	<div class="list">
+							<div class="list_tittle">
+								<p class="tittlewen">
+									<span>套餐名：</span>
+									<span class="shebeihao" pid='${vaule.id}'>${vaule.names}</span>
+								</p>
+								<p>
+									<span class="taocanleft">价格：<label class='price'>${vaule.price}</label>元/次</span>
+									<span class="taocanleft lasttaocanleft">次数：<label class='numbers'>${vaule.numbers}</label>次/年</span>
+								</p>
+
+							</div>
+							<div class="list-content">
+
+								<div>
+									<p>金额：<span class="cssmoney">￥<label class="money">${vaule.money}</label> </span></p>
+									<p><button class="btnpay">去支付</button></p>
+								</div>
+
+							</div>
+						</div>`
+							$(".scroll_box").append(str);
+							$(".more").hide();
+						});
+
+					} else {
+						$(".more").html("没有查询记录");
+					}
+					myscroll_x.refresh();
+
+				},
+				error: function() {
+					alert("网络错误，请重新进入页面");
+
+					$(".wait").addClass("hidden");
+					myscroll_x.refresh();
+				}
+			})
+
+			function machine_ajax_list(_start) {
+				$(".more").html("没有查询记录");
+			}
+			$(".back_list").on("click", function() {
+				window.location.href = "user_sheZhi.html"
+			})
+			$("body").on("click", ".btnpay", function() {
+				var _p_id = $(this).parents('.list').find('.shebeihao').attr('pid');
+				var _numbers = $(this).parents('.list').find('.numbers').text();
+				var _money = parseFloat($(this).parents('.list').find(".money").text());
+//				var gopay = {};
+//				gopay = {
+//					p_id: _p_id,
+//					u_id: _uid,
+//					numbers: _numbers,
+//					money: _money,
+//					usertype: "C"
+//				};
+				//window.sessionStorage.setItem("goingvociepay", JSON.stringify(gopay))
+				//window.location.href = 'http://www.ccsc58.cc/leng/weixin/zhifu/example/freshdun_voicepay.php?total=' + parseFloat(_money*100);
+				window.location.href = 'http://www.ccsc58.cc/leng/weixin/zhifu/example/freshdun_voicepay210301.php?pid='+_p_id+'&uid='+_uid;
+				
+//				if(_duodian == 1) {
+//					window.location.href = 'http://www.ccsc58.cc/leng/weixin/zhifu/example/Duodianpay.php?total=' + _money;
+//				} else {
+//					window.location.href = 'http://www.ccsc58.cc/leng/weixin/zhifu/example/freshdunpay.php?total=' + _money;
+//				}
+
+			})
+		</script>
+	</body>
+
+</html>

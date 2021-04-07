@@ -92,9 +92,9 @@ $data = '{
 					"sub_button": []
 				},
 				{
-					"type": "click",
+					"type": "view",
 					"name": "联系我们",
-					"key": "http://www.ccsc58.cc/weixinnew/menuSwiper/contact.html",
+					"url": "http://www.ccsc58.cc/weixinnew/menuSwiper/contact.html",
 					"sub_button": []
 				}
 			]

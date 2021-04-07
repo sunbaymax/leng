@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>上海视笳物联网科技有限公司</title>
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+		<link rel="stylesheet" type="text/css" href="../css/set.css" />
+		<style type="text/css">
+
+		</style>
+	</head>
+
+	<body>
+		<div class="header">
+			<img class="back_list" src="../img/back.png" /> 设备打印设置
+		</div>
+		<div class="content">
+			<div class="form">
+				<div>
+					<span>打印表头设置：</span><input type="text" class="company" />
+				</div>
+				<div>
+					<span>逆序打印数据：</span>
+					<div class='switch-wrap'>
+						<input type='checkbox' id='switch'>
+						<label for='switch'></label>
+					</div>
+				</div>
+				<div>
+					<span>是否打印湿度：</span>
+					<div class='switch-wrap'>
+						<input type='checkbox' id='switch1'>
+						<label for='switch1'></label>
+					</div>
+				</div>
+
+				<div>
+					<span>开启设备工作状态：</span>
+					<div class='switch-wrap'>
+						<input type='checkbox' id='switch2'>
+						<label for='switch2'></label>
+					</div>
+				</div>
+				<div>
+					<span>设备开始时间：</span><input type="text" readonly="readonly" id="demo1" class="Happentime" />
+				</div>
+				<div>
+					<span>结束设备工作状态：</span>
+					<div class='switch-wrap'>
+						<input type='checkbox' id='switch3'>
+						<label for='switch3'></label>
+					</div>
+				</div>
+				<div>
+					<span>设备结束时间：</span><input type="text" readonly="readonly" id="demo2" class="endtime" />
+				</div>
+
+			</div>
+			<div class="btnok">
+				<button>保存</button>
+			</div>
+
+		</div>
+
+		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/iostime.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(".back_list").on("click", function() {
+				window.history.go(-1);
+			});
+			$(".invitebtn").on("click", function() {
+				window.location.href = 'banding.html?openId=' + _openid;
+			});
+			/*
+			 * 获取用户的名称和密码；
+			 */
+			var _url = window.location.href;
+			var userinfo = JSON.parse(localStorage.getItem('isonline'));
+			var _userName = userinfo.user;
+			var _userPass = userinfo.pwd;
+			var _num_m = "";
+			if(_url.indexOf("&") != -1) {
+				_num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "").replace("&", "");
+			} else {
+				_num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "");
+			}
+			var _openid = localStorage.getItem('openId');
+
+			var calendar = new datePicker();
+			calendar.init({
+				'trigger': '#demo1',
+				/*按钮选择器，用于触发弹出插件*/
+				'type': 'datetime',
+				/*模式：date日期；datetime日期时间；time时间；ym年月；*/
+				'minDate': '1900-1-1',
+				/*最小日期*/
+				'maxDate': '2100-12-31',
+				/*最大日期*/
+				'onSubmit': function() { /*确认时触发事件*/
+					var theSelectData = calendar.value;
+				},
+				'onClose': function() { /*取消时触发事件*/ }
+			});
+
+			var calendar = new datePicker();
+			calendar.init({
+				'trigger': '#demo2',
+				/*按钮选择器，用于触发弹出插件*/
+				'type': 'datetime',
+				/*模式：date日期；datetime日期时间；time时间；ym年月；*/
+				'minDate': '1900-1-1',
+				/*最小日期*/
+				'maxDate': '2100-12-31',
+				/*最大日期*/
+				'onSubmit': function() { /*确认时触发事件*/
+					var theSelectData = calendar.value;
+				},
+				'onClose': function() { /*取消时触发事件*/ }
+			});
+			$.ajax({
+				type: "post",
+				url: "http://www.ccsc58.com/json/06_00_tb_device_chanshu.php",
+				data: {
+					admin_permit: "zjly8888",
+					UserP: "w",
+					controller: "update",
+					admin_user: _userName,
+					admin_pass: _userPass,
+					SheBeiBianHao: _num_m
+				},
+				success: function(data) {
+					var _json = JSON.parse(data);
+					<!-- 设备打印设置  -->
+					$(".btnok button").attr('biao', _json.resultCode.GPS_Start);
+					$(".company").val(_json.resultCode.device_printhead); //打印表头
+					if(_json.resultCode.GPS_Start == 0) {
+						$("#switch").attr("checked", false);
+					} else {
+						$("#switch").attr("checked", true);
+					}
+					if(_json.resultCode.printshidu == 0) {
+						$("#switch1").attr("checked", false);
+					} else {
+						$("#switch1").attr("checked", true);
+					}
+					if(_json.resultCode.yuanchengjiluopen == 0) {
+						$("#switch2").attr("checked", false);
+						$(".Happentime").attr("disabled", "true");
+					} else {
+						$("#switch2").attr("checked", true);
+						$(".Happentime").removeAttr('disabled');
+					}
+					$(".Happentime").val(_json.resultCode.feixingmoshi_kaiqishijian); //飞行模式开启时间
+					if(_json.resultCode.yuanchengjiluclose == 0) {
+						$("#switch3").attr("checked", false);
+						$(".endtime").attr("disabled", "true");
+					} else {
+						$("#switch3").attr("checked", true);
+						$(".endtime").removeAttr('disabled');
+					}
+					$(".endtime").val(_json.resultCode.feixingmoshi_guanbishijian); //飞行模式停止时间
+
+				},
+				error: function() {
+					alert("网络错误！！！")
+				}
+			});
+			$(".btnok button").on("click", function() {
+				var _device_printhead = $(".company").val(); //打印表头
+				var _GPS_Start;
+				if($("#switch").is(":checked")) {
+					_GPS_Start = 1;
+				} else {
+					_GPS_Start = 0;
+				} //是否逆序；
+				if($("#switch1").is(":checked")) {
+					_printshidu = 1;
+				} else {
+					_printshidu = 0;
+				} //是否打印湿度；
+				//是否开启远程时间；
+				var _yuanchengjiluopen;
+				if($("#switch2").is(":checked")) {
+					_yuanchengjiluopen = 1;
+				} else {
+					_yuanchengjiluopen = 0;
+				} //远程记录开启开关
+
+				var _yuanchengjiluclose;
+				if($("#switch3").is(":checked")) {
+					_yuanchengjiluclose = 1;
+				} else {
+					_yuanchengjiluclose = 0;
+				}
+				var _feixingmoshi_kaiqishijian = $(".Happentime").val(); //开启远程记录时间
+				var _feixingmoshi_guanbishijian = $(".endtime").val(); //远程关闭记录时间
+				var utype = userinfo.userType;
+				var _openid = localStorage.getItem('openId');
+				if(utype == 'b') {
+					$.ajax({
+						type: "post",
+						url: "http://www.ccsc58.com/json/05_00_tb_device.php",
+						data: {
+							controller: "update",
+							admin_permit: "zjly8888",
+							UserP: "w",
+							shebeibianhao: _num_m,
+							admin_user: _userName,
+							admin_pass: _userPass,
+							device_printhead: _device_printhead,
+							printshidu: _printshidu,
+							GPS_Start: _GPS_Start,
+							yuanchengjiluopen: _yuanchengjiluopen,
+							feixingmoshi_kaiqishijian: _feixingmoshi_kaiqishijian,
+							yuanchengjiluclose: _yuanchengjiluclose,
+							feixingmoshi_guanbishijian: _feixingmoshi_guanbishijian
+						},
+						dataType: "json",
+						success: function(res) {
+							console.log(res)
+							if(res.code == 10000) {
+								alert("参数同步成功");
+
+							} else {
+								alert("信息保存失败，请重试！")
+							}
+						},
+						error: function() {
+							alert("网络错误")
+						}
+					});
+				} else {
+					$.ajax({
+						type: "post",
+						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/xiandun_update_device",
+						data: {
+							devid: _num_m,
+							GPS_Start: _GPS_Start,
+							UserP: "w",
+							device_printhead: _device_printhead,
+							printshidu: _printshidu,
+							GPS_Start: _GPS_Start,
+							yuanchengjiluopen: _yuanchengjiluopen,
+							feixingmoshi_kaiqishijian: _feixingmoshi_kaiqishijian,
+							yuanchengjiluclose: _yuanchengjiluclose,
+							feixingmoshi_guanbishijian: _feixingmoshi_guanbishijian
+
+						},
+						dataType: "json",
+						success: function(res) {
+							if(res.code == 0 && res.message == "success") {
+								alert("参数同步成功");
+
+							} else {
+								alert("信息保存失败，请重试！")
+							}
+						},
+						error: function() {
+							alert("网络错误")
+						}
+					});
+				}
+
+			})
+			$("#switch2").on("click", function() {
+				if($(this).is(":checked")) {
+					$(".Happentime").attr("disabled", false);
+				} else {
+					$(".Happentime").attr("disabled", true);
+				}
+
+			});
+			$("#switch3").on("click", function() {
+				if($(this).is(":checked")) {
+					$(".endtime").attr("disabled", false);
+				} else {
+					$(".endtime").attr("disabled", true);
+				}
+
+			});
+		</script>
+	</body>
+
+</html>

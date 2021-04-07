@@ -1,0 +1,278 @@
+.banner {
+	margin-top: 4rem;
+	width: 100%;
+	height: 12rem;
+	/*border:1px solid #a5a5a5;*/
+	box-sizing: border-box;
+}
+
+.swiper-container {
+	width: 100%;
+	height: 100%;
+}
+
+.swiper-slide {
+	width: 100%;
+	height: 100%;
+}
+
+.swiper-slide .banner1 {
+	width: 100%;
+	height: 12rem;
+	/*background: url(../images/banner.png) no-repeat;
+	background-size: 100% 100%;*/
+}
+
+.user_index_img {
+	width: 100%;
+	height: 240px;
+	background: #3299fe;
+	display: none;
+	position: relative;
+}
+
+.user_index_img .index_right {
+	position: absolute;
+	width: 0.8rem;
+	right: 1rem;
+	top: 3.5rem;
+}
+
+.user_index_img div:nth-of-type(1) {
+	width: 5rem;
+	height: 5rem;
+	float: left;
+	margin-top: 1.5rem;
+	margin-left: 5rem;
+	background: #fefefe;
+	background-image: url("../img/user_di02.png");
+	background-size: 100% 100%;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.user_index_img div:nth-of-type(1) img {
+	display: block;
+	width: 110%;
+	height: 110%;
+	margin-top: -5%;
+	margin-left: -5%;
+}
+
+.user_index_img div:nth-of-type(2) {
+	float: left;
+	height: 4.5rem;
+	margin-top: 1.5rem;
+	margin-left: 2rem;
+	padding-top: 0.5rem;
+}
+
+.user_index_img div:nth-of-type(2) p {
+	height: 2rem;
+	color: #fefefe;
+	font: 1.5rem/2rem "微软雅黑";
+}
+
+.index_content {
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+}
+
+.index_content div {
+	display: flex;
+}
+
+.index_content a {
+	display: block;
+	width: 46%;
+	margin-left: 3%;
+	height: 8rem;
+	/*float:left;*/
+	color: #929292;
+	text-decoration: none;
+	/*background: url(../images/bg1.png) no-repeat center;*/
+	background-size: 100% 100%;
+	margin-top: 1rem;
+	position: relative;
+	border-radius: 5px;
+}
+
+.index_content .lljk {
+	background: url(../images/bg1.png) no-repeat center;
+}
+
+.index_content .wyys {
+	background: url(../images/bg2.png) no-repeat center;
+}
+
+.index_content .Upjly {
+	background: url(../images/bg3.png) no-repeat center;
+}
+
+.index_content .lysb {
+	background: url(../images/bg4.png) no-repeat center;
+}
+
+.index_content a img {
+	width: 2.6rem;
+	height: 2.6rem;
+	display: inline-block;
+	position: absolute;
+	top: 4rem;
+	left: 1.6rem;
+}
+
+.index_content a span {
+	display: block;
+	width: 100%;
+	height: 3rem;
+	line-height: 3rem;
+	text-align: center;
+	font-size: 1.5rem;
+	color: #FFFFFF;
+	font-family: "微软雅黑";
+	position: absolute;
+	bottom: 1.1rem;
+	right: 0rem;
+}
+
+
+/*报警样式；
+ */
+
+.content .index_warning {
+	width: 100%;
+	height: 4rem;
+	overflow: hidden;
+	/*margin-top: 2rem;
+	margin-bottom: 6rem;*/
+	text-align: center;
+	line-height: 4rem;
+	font-size: 1.5rem;
+	color: red;
+	border-radius: 3rem;
+	position: relative;
+	display: none;
+}
+
+.content .index_warning img {
+	width: 2rem;
+	height: 2rem;
+	display: inline-block;
+	position: absolute;
+	top: 1rem;
+	left: 0%;
+}
+
+.content .index_warning a {
+	display: inline-block;
+	height: 4rem;
+	line-height: 4rem;
+	overflow: hidden;
+	margin-left: 2rem;
+	color: red;
+	font-size: 1.5rem;
+}
+
+.index_warning .swiper-wrapper {
+	width: 100%;
+	height: 100%;
+}
+
+.index_warning .swiper-wrapper .swiper-slide {
+	width: 100%;
+	height: 100%;
+}
+.swiper-container{
+	width: 100%;
+	height: 16rem;
+}
+
+.warnlist {
+	width: 100%;
+	height: auto;
+	padding: 0 3%;
+	margin-top: 1rem;
+	box-sizing: border-box;
+	/*background: #0000FF;*/
+	position: relative;
+	/*margin:20px auto;*/
+    overflow:hidden;
+}
+
+.warnlist .warning1 {
+	width: 100%;
+	height: 4rem;
+	position: relative;
+	border-bottom: 1px solid #CCCCCC;
+}
+
+.warnlist .warning-titile {
+	display: inline-block;
+	height: 2rem;
+	position: absolute;
+	left: 0;
+	color: #666666;
+	font-size: 1.5rem;
+	top: 1rem;
+	border-left: 0.3rem #666666 solid;
+	padding-left: 1rem;
+}
+
+.warnlist .warningnums {
+	display: inline-block;
+	width: 3rem;
+	height: 2rem;
+	border-radius: 2rem;
+	background: url(../images/alarmnum.png) no-repeat center;
+	background-size: cover;
+	position: absolute;
+	right: 0;
+	top: 1rem;
+	color: #666666;
+	font-size: 1.2rem;
+	color: #FFFFFF;
+	text-align: center;
+}
+/*.warncontent{
+	
+	width: 100%;
+	height: 16rem;
+	overflow: hidden;
+}
+.warncontent .warnline{
+	width: 100%;
+	height: 4rem;
+	line-height: 4rem;
+	display: flex;
+	position: relative;
+	color: #666666;
+	font-size: 1.5rem;
+}
+.warncontent .warnline img{
+	width: 1.5rem;
+	height: 1.7rem;
+	position: absolute;
+	left: 0.3rem;
+	top: 1.1rem;
+}
+.warncontent .warnline .shebeinums{
+	display: inline-block;
+	height: 4rem;
+	line-height: 4rem;
+	position: absolute;
+	left: 3rem;
+	top: 0rem;
+}
+.warncontent .warnline .warntime{
+	display: inline-block;
+	height: 4rem;
+	line-height: 4rem;
+	position: absolute;
+	right: 0rem;
+	top: 0rem;
+	
+}*/

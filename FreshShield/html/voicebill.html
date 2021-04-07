@@ -347,16 +347,17 @@
 				var _p_id = $(this).parents('.list').find('.shebeihao').attr('pid');
 				var _numbers = $(this).parents('.list').find('.numbers').text();
 				var _money = parseFloat($(this).parents('.list').find(".money").text());
-				var gopay = {};
-				gopay = {
-					p_id: _p_id,
-					u_id: _uid,
-					numbers: _numbers,
-					money: _money,
-					usertype: "C"
-				};
-				window.sessionStorage.setItem("goingvociepay", JSON.stringify(gopay))
-				window.location.href = 'http://www.ccsc58.cc/leng/weixin/zhifu/example/freshdun_voicepay.php?total=' + parseFloat(_money*100);
+//				var gopay = {};
+//				gopay = {
+//					p_id: _p_id,
+//					u_id: _uid,
+//					numbers: _numbers,
+//					money: _money,
+//					usertype: "C"
+//				};
+				//window.sessionStorage.setItem("goingvociepay", JSON.stringify(gopay))
+				//window.location.href = 'http://www.ccsc58.cc/leng/weixin/zhifu/example/freshdun_voicepay.php?total=' + parseFloat(_money*100);
+				window.location.href = 'http://www.ccsc58.cc/leng/weixin/zhifu/example/freshdun_voicepay210301.php?pid='+_p_id+'&uid='+_uid;
 				
 //				if(_duodian == 1) {
 //					window.location.href = 'http://www.ccsc58.cc/leng/weixin/zhifu/example/Duodianpay.php?total=' + _money;

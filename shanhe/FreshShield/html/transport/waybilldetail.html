@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="format-detection" content="telephone=no">
+		<title>山河检测技术有限公司</title>
+		<link rel="stylesheet" type="text/css" href="../../css/index.css" />
+	</head>
+
+	<body>
+		<style>
+			body {
+				background-color: #F2F2F2!important;
+			}
+			.paylist {
+				position: absolute;
+			    right: 1.5rem;
+			    top: 1.3rem;
+			    width: 2rem;
+			    height: 2rem;
+			    /*margin-right: 3rem;*/
+			    cursor: pointer;
+			}
+			
+			#wrapper {
+				width: 100%;
+				position: absolute;
+				left: 0;
+				top: 4rem;
+				overflow: auto;
+				z-index: 1;
+				bottom: 0rem;
+			}
+			
+			.more {
+				height: 4rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: #8a8a8a;
+			}
+			
+			.pull_icon {
+				width: 25px;
+				height: 25px;
+				background-image: url('../../images/pull.png');
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: 25px;
+				transition: all .5s;
+			}
+			
+			.more span {
+				padding-left: .5rem;
+			}
+			
+			.more .flip {
+				transform: rotate(180deg);
+			}
+			
+			.loading {
+				background-image: url('../../images/loading.png');
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: 25px;
+			}
+			
+			.more .loading {
+				-webkit-transform: rotate(0deg) translateZ(0);
+				-webkit-transition-duration: 0;
+				-webkit-animation-name: loading;
+				-webkit-animation-duration: 2s;
+				-webkit-animation-iteration-count: infinite;
+				-webkit-animation-timing-function: linear;
+			}
+			
+			@-webkit-keyframes loading {
+				from {
+					-webkit-transform: rotate(0deg) translateZ(0);
+				}
+				to {
+					-webkit-transform: rotate(360deg) translateZ(0);
+				}
+			}
+			
+			.scroll_box {
+				padding: 0 2vw;
+				box-sizing: border-box;
+				border-radius: 0.5rem;
+			}
+	
+			.list {
+				margin: 1rem 0;
+				padding: 0 1rem;
+				box-sizing: border-box;
+				height: 12rem;
+				background: #FFFFFF;
+				border-radius: 0.5rem;
+			}
+			
+			.list .list_tittle {
+				display: flex;
+				align-items: center;
+				height: 4rem;
+				width: 100%;
+				box-sizing: border-box;
+				justify-content: space-between;
+				border-bottom: 1px solid #ccc;
+			}
+			
+			.list .list_tittle .tittlewen {
+				font-size: 1.4rem;
+				font-weight: bold;
+			}
+			
+			.list_tittle .device_img {
+				width: 1rem;
+				height: auto;
+				margin-right: 1rem;
+			}
+			
+			.list_tittle .ispay {
+				color: #999999;
+			}
+			
+			.list-content .nickname {
+				color: #999999;
+			}
+			
+			.list-content .paytimer {
+				color: #999999;
+			}
+			
+			.list-content .cssmoney {
+				color: #FA7183;
+			}
+			
+			.list_tittle p {
+				display: flex;
+				align-items: center;
+			}
+			
+			.list-content div {
+				float: none;
+				display: flex;
+				align-items: center;
+				height: 2rem;
+			}
+			
+			.list-content div p {
+				width: 50%;
+				text-align: left;
+			}
+			
+			.list-content div p:last-child {
+				width: 50%;
+				text-align: right;
+			}
+			
+			.btnpay {
+				height: 2rem;
+				width: 6rem;
+				border-radius: 1rem;
+				background: #FFFFFF;
+				border: 1px solid #40C0C3;
+				color: #40C0C3;
+			}
+			
+			.content {
+				padding: 0 10px;
+				box-sizing: border-box;
+				margin-top: 5rem;
+			}
+			
+			.content ul {
+				height: auto;
+				padding: 5px 10px;
+				background: #FFFFFF;
+				border-radius: 15px;
+				margin-top: 15px;
+			}
+			
+			.content ul li {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				height: 4rem;
+				line-height: 4rem;
+			}
+			.content ul li:first-child{
+				border-bottom: 1px solid #CCCCCC;
+			}
+			.top {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+			
+			.top img {
+				margin: 15px 0;
+				width: 100px;
+				height: 100px;
+			}
+			
+			.top span {
+				font-weight: 800;
+				font-size: 16px;
+			}
+			
+			.msg {
+				text-align: center;
+				font-size: 12px;
+				color: #FF0000;
+				margin-top: 15px;
+			}
+			
+			.nomsg {
+				text-align: center;
+				margin-top: 30px;
+				padding: 5px;
+			}
+			.warning{
+				border: 1px solid red;
+			    height: 3rem;
+			    line-height: 3rem;
+			    padding: 0 5px;
+			    border-radius: 5px;
+			    color: red;
+			}
+			.success{
+				border: 1px solid #2BA245;
+			    height: 3rem;
+			    line-height: 3rem;
+			    padding: 0 5px;
+			    border-radius: 5px;
+			    color: #2BA245;
+			}
+			.info{
+				border: 1px solid #0297D7;
+			    height: 3rem;
+			    line-height: 3rem;
+			    padding: 0 5px;
+			    border-radius: 5px;
+			    color: #0297D7;
+			}
+			.content ul .address {
+			    display: flex;
+			    align-items: center;
+			    justify-content: space-between;
+			    height: 4rem;
+			    line-height: normal;
+			}
+			.content ul .allbtn {
+				display: flex;
+				justify-content: flex-end;
+				border-top: 1px solid #CCCCCC;
+			}
+			.content ul .allbtn button{
+				margin-left: 10px;
+			    width: 7.4rem;
+			    height: 30px;
+			    background: #40C0C3;
+			    color: #FFFFFF;
+			    border: none;
+			    border-radius: 15px;
+			}
+			.footer-content{
+				margin-top: 10px;
+				height: auto;
+				border-radius: 10px;
+				/*background: #FFFFFF;
+				padding: 5px 10px;*/
+				box-sizing: border-box;
+			}
+			.footer-content .shebeiinfo{
+				background: #fff;
+			    padding: 5px 10px;
+			    border-radius: 10px;
+			    margin-bottom: 10px;
+			}
+			.footer-content .line{
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				height: 4rem;
+			}
+			.content ul .allbtn .upload {
+			    width: 80px;
+			    height: 30px;
+			}
+			.fristname {
+			    height: 4rem;
+			    line-height: normal;
+			}
+			.state {
+			    width: 50px;
+			}
+			.chooseimg{
+				padding: 15px;
+				box-sizing: border-box;
+				text-align: center;
+				
+			}
+			.chooseimg img{
+				display: inline-block;
+				width: 100%;
+				height: 240px;
+			}
+			.chooseimg img[src=""],.chooseimg img:not([src]){
+		        opacity:0;
+		    }
+		</style>
+		<div class="header">
+			<img class="back_list" src="../../img/back.png" ids='0' /> 运单详情
+		</div>
+
+		<div class="content">
+			<div id="wrapper">
+				<div class="scroller">
+					<div class="scroll_box">
+                            <ul>
+								<li>
+									<div class="fristname">运输单号：<span class="yundanhao"></span></div>
+									<div class="state"></div>
+								</li>
+								<li>
+									<div>业务单号：<span class="yewuhao"></span></div>
+								</li>
+								<li>
+									<div>发货人：<span class="fahuoren"></span> </div>
+								</li>
+								<li>
+									<div>发货单位：<span class="facompany"></span></div>
+								</li>
+								<li class="address">
+									<div>发货地址：<span class="faaddress"></span></div>
+								</li>
+								<li>
+									<div>收货人：<span class="shouname"></span></div>
+								</li>
+								<li class="address">
+									<div>收货地址：<span class="shouaddress"></span></div>
+								</li>
+								<li>
+									<div>货物编号：<span class="drugid"></span></div>
+								</li>
+								<li>
+									<div>货物名称：<span class="drugname"></span></div>
+								</li>
+								<li>
+									<div>货物数量：<span class="drugnum"></span></div>
+								</li>
+								<li>
+									<div>下单时间：<span class="time"></span></div>
+								</li>
+								<li class="state1">
+									<div>装车时间：<span class="zhuangchetime"></span></div>
+								</li>
+								<li class="state2">
+									<div>到达时间：<span class="daodatime"></span></div>
+								</li>
+								<li class="allbtn">
+									<div>
+										<button class="zhuangche">装车</button><button class="upload" onclick="uploadPhoto()">上传图片</button><button class="yunda">运达</button> <button class="download">下载</button>
+									</div>
+									<input type="file" id="photoFile" style="display: none;" >
+								</li>
+							</ul>
+							<div class="footer-content">
+								
+							</div>
+							<div class="chooseimg">
+								<img id="preview_photo" src="">
+							</div>
+					</div>
+					
+				</div>
+			</div>
+
+		</div>
+		<script type="text/javascript" src="../../js/jquery-1.11.0.js"></script>
+		<script src="../../js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			/*iscroll代码；
+			 */
+			var userinfo = JSON.parse(localStorage.getItem('isonline'));
+			var _userName = userinfo.user;
+			var _userPass = userinfo.pwd;
+			var _openid = userinfo.copenid;
+			var _suoshujigou = userinfo.suoshujigou;
+			var _uid = userinfo.uid == undefined ? 'no' : userinfo.uid;
+		    function getQueryVariable(variable){
+		       var query = window.location.search.substring(1);
+		       var vars = query.split("&");
+		       for (var i=0;i<vars.length;i++) {
+		               var pair = vars[i].split("=");
+		               if(pair[0] == variable){return pair[1];}
+		       }
+		       return(false);
+			}
+			let _danhao=getQueryVariable("danhao");
+			
+			$.ajax({
+				url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/transport/detail",
+				type: "post",
+				data: {
+					admin_permit:"zjly8888",
+					danhao:_danhao
+				},
+				dataType: 'json',
+				success: function(res) {
+					console.log(res)
+							if(res.code == 0) {
+								$('.yundanhao').text(res.data.danhao)
+								$('.yewuhao').text(res.data.yewudanhao)
+								if(res.data.state==0){
+									$('.state').addClass('warning')
+									$('.state').text('未装车')
+									$('.upload,.yunda,.state1,.state2,.chooseimg').hide()
+								}else if(res.data.state==1){
+									$('.state').addClass('success')
+									$('.state').text('运输中')
+									$('.zhuangche,.state2').hide()
+									
+									if(res.data.bmptype==''){
+										$('.yunda').css({'background-color':'#FFFFFF','border':'1px solid #ccc','color':'#000'})
+										$('.yunda').attr('disabled',true)
+										$('.chooseimg').hide()
+									}else{
+										$('#preview_photo').attr('src','http://www.ccsc58.com/json/bmp_yundan.php?danhao='+_danhao)
+									}
+								}else if(res.data.state==2){
+									$('.state').addClass('info')
+									$('.state').text('已完成')
+									$('.upload, .yunda, .zhuangche').hide()
+									$('#preview_photo').attr('src','http://www.ccsc58.com/json/bmp_yundan.php?danhao='+_danhao)
+								}
+								$('.fahuoren').text(res.data.fahuoren)
+								$('.facompany').text(res.data.fahuodanwei)
+								$('.faaddress').text(res.data.fahuodizhi)
+								$('.shouname').text(res.data.shouhuoren)
+								$('.shouaddress').text(res.data.shouhuodizhi)
+								$('.drugid').text(res.data.bianhao)
+								$('.drugname').text(res.data.pinming)
+								$('.drugnum').text(res.data.yaopinshuliang)
+								$('.time').text(res.data.createtime)
+								$('.zhuangchetime').text(res.data.zhuangchetime)
+								$('.daodatime').text(res.data.yundatime)
+								var str = '';
+								$.each(res.data.data, function(index, val) {
+									str = `<div class="shebeiinfo">
+											<div class="line">
+												<span>设备名称：${val.shebeibianhao}</span>
+												<span>平均温度：${val.avgtemperature01}°C</span>
+											</div>
+											<div class="line">
+												<span>最高温度：${val.maxtemperature01}°C</span>
+												<span>最低温度：${val.mintemperature01}°C</span>
+											</div>
+										</div>`;
+									$(".footer-content").append(str);
+								});
+					} 
+
+					 else {
+						$("#wrapper").html("没有查到记录");
+					}
+					
+
+				},
+				error: function() {
+					alert("网络错误，请重新进入页面");
+
+					$(".wait").addClass("hidden");
+					
+				}
+			})
+			
+
+			function uploadPhoto() {
+			        $("#photoFile").click();
+			}
+			$("#photoFile").change(function (e) {
+                console.log(e.target.files[0])
+                var file = e.target.files[0] || e.dataTransfer.files[0];
+                if (file) {
+                    var reader = new FileReader();
+                    reader.onload = function () {
+//                  	var image = new Image(); 
+//						image.src =  this.result; 
+//						image.onload = function(){ 
+//						  var base64 = getBase64Image(image); 
+//						  console.log(base64); 
+//						} 
+                        $("#preview_photo").attr("src", this.result);
+                    }
+                    reader.readAsDataURL(file);
+                    //调用上传接口，拿到服务器图片地址,提交表单直接提交服务器src
+                    upload()
+                }
+            });
+       
+            function upload() {
+		        if ($("#photoFile").val() == '') {
+		            return;
+		        }
+		        var formData = new FormData();
+		        formData.append('image', document.getElementById('photoFile').files[0]);
+		        formData.append('danhao',_danhao); //添加其他参数
+		        $.ajax({
+		            url:"http://www.zjcoldcloud.com/xiandun/public/index.php/index/transport/upload_image",
+		            type:"post",
+		            data: formData,
+		            contentType: false,
+		            processData: false,
+		            success: function(data) {
+		            	console.log(data);
+		                if (data.code == "0") {
+		                	alert('上传成功');
+		                	setTimeout(function(){
+								location.href='waybilldetail.html?danhao='+_danhao
+							},1500)
+//		                    $("#preview_photo").attr("src", data.filepath+data.filename);
+//		                    $("#productImg").val(data.filename);
+		                } else {
+		                    alert(data.msg);
+		                }
+		            },
+		            error:function(data) {
+		                alert("上传失败")
+		            }
+		        });
+		    }
+			
+
+			$(".back_list").on("click", function() {
+				//				window.location.href = "user_sheZhi.html"
+				history.go(-1)
+			})
+			//装车
+			$(".zhuangche").on("click", function() {
+				
+				$.ajax({
+					type:"post",
+					url:"http://www.zjcoldcloud.com/xiandun/public/index.php/index/transport/save",
+					async:true,
+					data:{
+						controller:"update_zhuangche",
+						admin_permit:"zjly8888",
+						readonly:0,
+						yonghuming:_userName,
+						suoshujigou:_suoshujigou,
+						state:1,
+						danhao:_danhao
+					},
+					dataType:'json',
+					success:function(res){
+						console.log(res)
+						if(res.code==0){
+							alert('装车成功');
+							setTimeout(function(){
+								location.href='waybilldetail.html?danhao='+_danhao
+							},1500)
+						}else{
+							alert(res.message)
+						}
+					},
+					error:function(err){
+						console.log(err)
+					}
+				});
+			})
+			$(".yunda").on("click", function() {
+				$.ajax({
+					type:"post",
+					url:"http://www.zjcoldcloud.com/xiandun/public/index.php/index/transport/save",
+					async:true,
+					data:{
+						controller:"update_yunda",
+						admin_permit:"zjly8888",
+						readonly:0,
+						yonghuming:_userName,
+						suoshujigou:_suoshujigou,
+						state:2,
+						danhao:_danhao
+					},
+					dataType:'json',
+					success:function(res){
+						console.log(res)
+						if(res.code==0){
+							alert('运达成功');
+							setTimeout(function(){
+								location.href='waybilldetail.html?danhao='+_danhao
+							},1500)
+						}else{
+							alert(res.message)
+						}
+					},
+					error:function(err){
+						console.log(err)
+					}
+				});
+			})
+			$("body").on("click", ".download", function() {
+				const a = document.createElement('a'); // 创建a标签
+				a.setAttribute('download', '');// download属性
+				a.setAttribute('href', 'http://www.zjcoldcloud.com/xiandun/public/index.php/index/transport/download_detail_pdf?danhao='+_danhao);// href链接
+				a.click();// 自执行点击事件
+				//window.location.href = ';
+			})
+		</script>
+	</body>
+
+</html>

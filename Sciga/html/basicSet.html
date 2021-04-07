@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>上海视笳物联网科技有限公司</title>
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+		<link rel="stylesheet" type="text/css" href="../css/set.css" />
+		<style type="text/css">
+           
+		</style>
+	</head>
+
+	<body>
+		<div class="header">
+			<img class="back_list" src="../img/back.png" /> 基础信息设置
+		</div>
+		<div class="content">
+			<div class="form">
+				<div>
+					<span>设备编号：</span><input type="number" class="shebeihao" readonly="readonly" />
+				</div>
+				<div>
+					<span>设备名称：</span><input type="text" class="shebeihaoname" readonly="readonly" />
+				</div>
+				<div class="twoc">
+					<span>设备昵称：</span><input type="text" class="bieming" placeholder="如一号大门" />
+				</div>
+				<div>
+					<span>设备排序：</span><input type="number" class="sort" placeholder="请输入排序数" />
+				</div>
+				<div class="twoc divjihuo">
+					<span>激活时间：</span><input type="text" class="activeTime" readonly="readonly" />
+				</div>
+				<div>
+					<span>到期时间：</span><input type="text" class="daoqiTime" readonly="readonly" /><button class="ispay isgopay">续费</button>
+				</div>
+				
+			</div>
+			<div class="btnok">
+				<button>保存</button>
+			</div>
+
+		</div>
+
+		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var _url = window.location.href;
+			var _num_m = "";
+			if(_url.indexOf("&") != -1) {
+				_num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "").replace("&", "");
+			} else {
+				_num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "");
+			}
+			var userinfo = JSON.parse(localStorage.getItem('isonline'));
+			var _userName = userinfo.user;
+			var _userPass = userinfo.pwd;
+			var utype = userinfo.userType;
+			var copenid = userinfo.copenid == undefined ? '' : userinfo.copenid;
+			var _openid = localStorage.getItem('openId');
+			if(utype == 'b') {
+				$('.twoc').hide();
+				$('.ispay').hide();
+			} else {
+				$('.twoc').show();
+			}
+			var _ismaster = sessionStorage.getItem('ismaster');
+			if(_ismaster == 0) {
+				$("input").attr("disabled", true);
+				$(".btnok button").css("background", "#ccc");
+				$(".btnok button").attr('disabled', true);
+			} else {
+				$(".btnok button").attr('disabled', false);
+			}
+			//http://www.ccsc58.com/json/06_00_tb_device_chanshu.php
+			//http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/xiandun_get_device_param
+			$.ajax({
+				type: "post",
+				url: 'http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/xiandun_get_device_param',
+				data: {
+					admin_permit: "zjly8888",
+					UserP: "w",
+					controller: "update",
+					admin_user: _userName,
+					admin_pass: _userPass,
+					SheBeiBianHao: _num_m,
+					openid: copenid,
+					userType:utype
+				},
+				success: function(data) {
+					var _json = JSON.parse(data);
+					if(_json.code == 1) {
+						alert(_json.message);
+						if(userinfo.userType=='c'){
+							window.location.href = "../machineList.php";
+						}else{
+							window.location.href = "../main.html";
+						}
+						
+						return false;
+					}else if(_json.code == 30000) {
+						alert("没有查询到该设备");
+						if(userinfo.userType=='c'){
+							window.location.href = "../machineList.php";
+						}else{
+							window.location.href = "../main.html";
+						}
+						return false;
+					}
+					var _beizhu = _json.resultCode.beizhu == undefined ? '' : _json.resultCode.beizhu;
+					var _jihuoshijian = _json.resultCode.jihuoshijian == undefined ? '' : _json.resultCode.jihuoshijian;
+					<!-- 当前用户模块  -->
+					//					$(".userN_form span").html(_userName);
+					if(_json.resultCode.jihuoshijian == undefined || _json.resultCode.jihuoshijian == '' || _json.resultCode.jihuoshijian == '0000-00-00 00:00:00') {
+						$(".divjihuo").hide();
+					}
+					<!-- 设备基本信息  -->
+					$(".form .shebeihao").val(_json.resultCode.shebeibianhao);
+					$(".form .shebeihao").attr('biao', _json.resultCode.GPS_Start);
+					$(".form .shebeihao").attr('yejian', _json.resultCode.yejianshangchuankaiguan);
+					$(".form .shebeihaoname").val(_json.resultCode.device_name);
+					$(".form .daoqiTime").val(_json.resultCode.daoqishijian);
+					$(".form .sort").val(_json.resultCode.sort==99999?'':_json.resultCode.sort);
+					$(".form .bieming").val(_beizhu);
+					$(".form .activeTime").val(_jihuoshijian);
+				},
+				error: function() {
+					console.log("网络错误！！！")
+				}
+			});
+			$(".ispay").on("click",function(){
+				let num=$(".shebeihao").val();
+				location.href='buyflewpackage.html?num_m='+num;
+			})
+			$(".btnok button").on("click", function() {
+				var bieming = $(".bieming").val();
+				var _GPS_Start = $(".shebeihao").attr('biao');
+				var _sort = $(".form .sort").val()==''?99999:parseInt($(".form .sort").val());
+				if(_sort!=''&&_sort<1){
+					alert("排序，请输入1~100之间的数");
+					$(".form .sort").focus()
+					return false;
+				}
+				var utype = userinfo.userType;
+				if(utype == 'b') {
+					$.ajax({
+						type: "post",
+						url: "http://www.ccsc58.com/json/05_00_tb_device.php",
+						data: {
+							controller: "update",
+							admin_permit: "zjly8888",
+							UserP: "w",
+							shebeibianhao: _num_m,
+							admin_user: _userName,
+							admin_pass: _userPass,
+							beizhu: bieming,
+							sort:_sort,
+							GPS_Start: _GPS_Start
+						},
+						dataType: "JSON",
+						success: function(res) {
+							console.log(res)
+							if(res.code == 10000 && res.message == "success") {
+								alert("参数同步成功");
+								location.reload()
+							} else {
+								alert("信息保存失败，请重试！")
+							}
+						},
+						error: function() {
+							console.log("网络错误")
+						}
+					});
+				} else {
+					var _yejianshangchuankaiguan = $(".shebeihao").attr('yejian');
+					$.ajax({
+						type: "post",
+						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/xiandun_update_device",
+						data: {
+							devid: _num_m,
+							beizhu: bieming,
+							GPS_Start: _GPS_Start,
+							yejianshangchuankaiguan: _yejianshangchuankaiguan,
+							sort:_sort,
+							openid:copenid,
+							userType:utype
+						},
+						dataType: "JSON",
+						success: function(res) {
+							console.log(res)
+							if(res.code == 0 && res.message == "success") {
+								alert("参数同步成功");
+								location.reload()
+							} else {
+								alert("信息保存失败，请重试！")
+							}
+						},
+						error: function() {
+							console.log("网络错误")
+						}
+					});
+				}
+
+			})
+			$(".back_list").on("click", function() {
+				//window.history.go(-1);
+				sessionStorage.setItem('paraset', 1);
+				window.location.href = 'details_lists.html?num_m=' + _num_m + '&'
+			});
+			$(".invitebtn").on("click", function() {
+				window.location.href = 'banding.html?openId=' + _openid;
+			});
+		</script>
+	</body>
+
+</html>

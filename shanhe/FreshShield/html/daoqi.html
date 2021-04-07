@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>山河检测技术有限公司</title>
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+		<link rel="stylesheet" type="text/css" href="../css/changeM.css" />
+		<style type="text/css">
+			.content {
+				width: 100%;
+				height: auto;
+				margin-top: 14.2rem;
+				padding: 0 1rem;
+				box-sizing: border-box;
+				font-size: 1.4rem;
+				overflow: hidden;
+			}
+			
+			.formdata {
+				margin-top: 5rem;
+				box-sizing: border-box;
+			}
+			
+			.formdata .divbar {
+				height: 4rem;
+				line-height: 4rem;
+				margin-top: 1rem;
+				border-radius: 1rem;
+			}
+			
+			.formdata .divbar input {
+				height: 4rem;
+				line-height: 4rem;
+				width: 100%;
+				padding: 0 2vw;
+				box-sizing: border-box;
+				border-radius: 1rem;
+			}
+			
+			.last {
+				/*margin-top: 20rem;
+				width: 100%;
+				text-align: center;*/
+				position: fixed;
+				bottom: 0px;
+				width: 100%;
+				background: #fff;
+				z-index: 99;
+			}
+			
+			.last p {
+				padding: 0 10px;
+				box-sizing: border-box;
+				height: 4.6rem;
+				display: flex;
+				align-items: center;
+			}
+			
+			.last p:first-child {
+				display: flex;
+				align-items: center;
+				justify-content: flex-end;
+			}
+			
+			.last p:last-child {
+				justify-content: space-between;
+			}
+			
+			.last button {
+				width: 16rem;
+				height: 4rem;
+				background: #40C0C3;
+				border-radius: 5rem;
+				border: none;
+				color: #ffffff;
+				font-size: 1.5rem;
+				cursor: pointer;
+			}
+			
+			.choose {
+				position: relative;
+			}
+			#wrapper .choose {
+			    width: 88px;
+			}
+			.input_check {
+				position: absolute;
+				visibility: hidden;
+			}
+			
+			.input_check+label {
+				display: inline-block;
+				width: 16px;
+				height: 16px;
+				border: 1px solid #40C0C3;
+				cursor: pointer;
+				border-radius: 50%;
+				margin-right: 3px;
+			}
+			
+			.input_check:checked+label:after {
+				content: "";
+				position: absolute;
+				left: 2px;
+				bottom: 24px;
+				width: 9px;
+				height: 4px;
+				border: 2px solid #40C0C3;
+				border-top-color: transparent;
+				border-right-color: transparent;
+				-ms-transform: rotate(-60deg);
+				-moz-transform: rotate(-60deg);
+				-webkit-transform: rotate(-60deg);
+				transform: rotate(-45deg);
+			}
+			
+			.tittle {
+				position: fixed;
+				top: 9.6rem;
+				display: flex;
+				align-items: center;
+				height: 4rem;
+				line-height: 4rem;
+				width: 100%;
+				background: #FFFFFF;
+				z-index: 999;
+				border-top: 2px solid #F2F5F8;
+			}
+			
+			.tittle .searchbox {
+				margin-left: 30px;
+				display: flex;
+				/*background: url('../images/searchbox.png') no-repeat;*/
+				border:1px solid #37C0C4;
+				border-radius: 15px;
+				width: 240px;
+				height: 3rem;
+				background-size: 100% 100%;
+				position: relative;
+				align-items: center;
+			}
+			
+			.tittle .searchbox a {
+				display: flex;
+				position: absolute;
+				right: 15px;
+				align-items: center;
+				text-decoration: none;
+				z-index: 99;
+			}
+			
+			.tittle .searchbox img {
+				width: 20px;
+				height: 20px;
+			}
+			
+			.tittle .searchbox label {
+				font-size: 14px;
+			}
+			
+			/*.device-content {
+				margin-bottom: 4.6rem;
+			}*/
+			
+			.tittle .searchbox input {
+				padding-left: 5px;
+				border: none;
+				background: none;
+			}
+			
+			.choosebar {
+				width: auto;
+				display: flex;
+				justify-content: flex-end;
+				align-items: center;
+				margin-left: 5px;
+				height: 4rem;
+				line-height: 4rem;
+			}
+			
+			.choosebar .choose {
+				margin-left: 5px;
+				position: relative;
+			}
+			
+			#box .chooseitem {
+				border-top: 1px solid #ccc;
+				border-radius: 0;
+				height: 4rem;
+				line-height: 4rem;
+				display: flex;
+				justify-content: space-between;
+			}
+			
+			.numname {
+				display: inline-block;
+				width: 140px;
+			}
+			
+			.search_div {
+				/*padding: 0.5rem 15px 0px;*/
+				box-sizing: border-box;
+				z-index: 99;
+				position: fixed;
+				width: 100%;
+				top: 4.6rem;
+				background: #fff;
+				height: 5rem;
+			}
+			
+			.search_div .searchdiv {
+				border: 1px solid #D9D9D9!important;
+				margin-top: 0!important;
+			}
+			
+			.search_div .tabar {
+				height: 5rem;
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+			}
+			
+			.btnpay {
+				text-decoration: none;
+				text-align: center;
+				width: 25vw;
+				height: 4rem;
+				line-height: 4rem;
+				box-sizing: border-box;
+				outline: none;
+				background: #F0F5FB;
+				color: #000000;
+				border: none;
+				font-size: 1.4rem;
+				border-radius: 1rem;
+			}
+			
+			.btnpay:hover {
+				background: #40C0C3;
+				color: #fff;
+			}
+			
+			.hover {
+				background: #40C0C3;
+				color: #fff;
+			}
+			
+			.th {
+				height: 4rem;
+				width: 100%;
+				display: flex;
+				justify-content: space-between;
+				line-height: 4rem;
+			}
+			
+			.yearbox {
+				margin: 0 5px;
+			}
+			
+			.myicon {
+				width: 20px;
+				height: 20px;
+			}
+			
+			.addicon {
+				margin-left: 5px;
+			}
+			
+			.chooseyear {
+				display: flex;
+				align-items: center;
+			}
+			
+			.hidden {
+				display: none;
+			}
+			#wrapper {
+				width: 100%;
+				position: absolute;
+				left: 0;
+				top: 18rem;
+				overflow: hidden;
+				z-index: 1;
+				bottom: 0rem;
+			    padding: 0 10px;
+                box-sizing: border-box;
+			}
+			
+			.more {
+				height: 4rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: #8a8a8a;
+			}
+			.numname{
+				display: inline-block;
+				width: 128px;
+			}
+			.paytime{
+				display: inline-block;
+				width: 114px!important;
+			}
+			.daoqiname{
+				width: 180px!important;
+				max-width: 180px;
+				white-space: nowrap;/*内容超宽后禁止换行显示*/
+                overflow: hidden;/*超出部分隐藏*/
+                text-overflow:ellipsis;/*文字超出部分以省略号显示*/
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="header">
+			<img class="back_list" src="../img/back.png" /> 到期设备提醒
+		</div>
+		<div class="search_div">
+			<div class="tabar">
+				<a class="btnpay hover" href="javascript:void(0)">待缴设备</a>
+				<a class="btnpay" href="javascript:void(0)">到期设备</a>
+			</div>
+		</div>
+		<div class="tittle">
+			<p class="choosebar ispay">
+				<span class="choose"><input type="checkbox" class="input_check" id='ischoose'><label for='ischoose'></label></span>全选
+			</p>
+			<p class="searchbox">
+				<input type="text" placeholder="按设备号或昵称搜索" class="searchinput" />
+				<a class="searchbtn">
+					<img src="../images/searchicon@2x.png" />
+					<label>搜索</label>
+				</a>
+
+			</p>
+
+		</div>
+		<div class="content">
+			<!--<div class="formdata">-->
+				<div class="th">
+					<span>设备号</span>
+					<span>到期时间</span>
+					<span class="ispay">续费(单位：年)</span>
+				</div>
+			
+			<!--</div>-->
+				<div id="wrapper">
+					
+					<div class="scroller" id="box">
+						<!--<div class="device-content">-->
+							
+
+							<!--<div id="box">
+
+							</div>-->
+						<!--</div>-->
+
+	
+					</div>
+					<div class="more">
+						<i class="pull_icon"></i><span>上拉加载...</span>
+					</div>
+				</div>
+		</div>
+		<div class="last ispay">
+			<!--<p>
+				批量添加：<label class="chooseyear"><img src="../images/addtime.png" class="addicon myicon"/><label class="yearbox"> x<span class="year">1</span> </label><img class="myicon jiantime" src="../images/jiantime.png" /> </label>	
+			</p>-->
+			<p>
+				<label>已选：<span class="choosenum">0</span>台设备，共计<span class="total">0</span>元</label>
+				<button class="btn-ok">前往续费</button>
+			</p>
+
+		</div>
+		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var myscroll_x = new iScroll("wrapper", {
+				onScrollMove: function() {
+					if(this.y < (this.maxScrollY)) {
+						$('.pull_icon').addClass('flip');
+						$('.pull_icon').removeClass('loading');
+						$('.more span').text('释放加载...');
+					} else {
+						$('.pull_icon').removeClass('flip loading');
+						$('.more span').text('上拉加载...')
+//						if(myscroll_x.y > 50) {
+//							$(".refreshmsg").show();
+//							$('.pull_icon').addClass('loading');
+//							$('.refreshmsg span').text('正在刷新...');
+//							
+//						}
+					}
+				},
+				onScrollEnd: function() {
+					if($('.pull_icon').hasClass('flip')) {
+						$('.pull_icon').addClass('loading');
+						$('.more span').text('加载中...');
+						pullUpActions();
+                        
+					}
+				},
+				onRefresh: function() {
+					console.log("上拉加载")
+					$('.more').removeClass('flip');
+					$('.more span').text('上拉加载...');
+				}
+			});
+			function pullUpActions() {
+				_start += 10;
+//				$(".wait").removeClass("hidden");
+                let curtabar=$('.tabar .hover').text() 
+                if(curtabar=='待缴设备'){
+                	pay(_start)
+                }else{
+                	daoqi(_start);
+                }
+				
+			}
+			$(".back_list").on("click", function() {
+				window.history.go(-1);
+			});
+			var userinfo = JSON.parse(localStorage.getItem('isonline'));
+			var _user = userinfo.user;
+			var _pass = userinfo.pwd;
+			var _uid = userinfo.uid;
+			var ischoose = [];
+			var _start = 1;
+			pay(_start)
+			function pay(_start){
+				let val = $(".searchinput").val();
+				if(_start==1){
+					$("#box").html('')
+				}
+			$.ajax({
+				type: "post",
+				url: "https://www.zjcoldcloud.com/xiandun/public/index.php/index/device/device_list_v1",
+				async: true,
+				data: {
+					userName: _user,
+					offset: _start,
+					pagesize: 10,
+					suoshujigou: '',
+					status: 4,
+					vague:val
+				},
+				dataType: 'json',
+				success: function(res) {
+					console.log(res)
+					//					return false;
+					if(res.code == 0) {
+						if(res.data.data.length<10){
+								$(".more").html("没有更多记录");
+								$(".wait").addClass("hidden");
+							}
+						let strs = ''
+						$.each(res.data.data, function(index, val) {
+							let time=val.daoqishijian.substring(0,val.daoqishijian.length-8);
+							strs = `
+								<div class='chooseitem'>
+								<span class="choose"><input type="checkbox" class="input_check" id='${val.shebeibianhao}' value='${val.shebeibianhao}'><label for='${val.shebeibianhao}'></label><span>${val.shebeibianhao}</span></span>
+								  
+								  <label> <span class="numname paytime">${time}</span>	 </label>
+									<label class="chooseyear">￥<span class='price'>${val.year_price}</span>/年<img src="../images/addtime.png" class="addicon myicon"/><label class="yearbox"> x<span class="year">1</span> </label><img class="myicon jiantime" src="../images/jiantime.png" /> </label>	
+								   </div>`;
+							$("#box").append(strs);
+						});
+						myscroll_x.refresh();
+					}else{
+							$(".more").html("没有更多记录");
+								$(".wait").addClass("hidden");
+					}
+					myscroll_x.refresh();
+				},
+				error: function(err) {
+                        alert("网络错误，请重新进入页面");
+						$(".wait").addClass("hidden");
+						myscroll_x.refresh();
+				}
+			});
+			}
+			function daoqi(_start){
+				let val = $(".searchinput").val();
+				if(_start==1){
+					$("#box").html('')
+				}
+			$.ajax({
+				type: "post",
+				url: "https://www.zjcoldcloud.com/xiandun/public/index.php/index/device/device_list_v1",
+				async: true,
+				data: {
+					userName: _user,
+					offset: _start,
+					pagesize: 10,
+					suoshujigou: '',
+					status: 3,
+					vague: val
+				},
+				dataType: 'json',
+				success: function(res) {
+					console.log(res)
+					//					return false;
+					if(res.code == 0) {
+						if(res.data.data.length<10){
+								$(".more").html("没有更多记录");
+								$(".wait").addClass("hidden");
+							}
+						let strs = ''
+						$.each(res.data.data, function(index, val) {
+							let time=val.daoqishijian.substring(0,val.daoqishijian.length-3);
+							strs = `
+								
+								<div class='chooseitem'>
+								<span class="choose daoqiname ">${val.shebeibianhao}${val.beizhu}</span>
+								  <label> <span class="numname">${time}</span>	 </label>
+								   </div>`;
+							$("#box").append(strs);
+						});
+						myscroll_x.refresh();
+					} else {
+						 	
+							$(".more").html("没有更多记录");
+								$(".wait").addClass("hidden");
+						}
+						myscroll_x.refresh();
+				},
+				error: function(err) {
+                       alert("网络错误，请重新进入页面");
+						$(".wait").addClass("hidden");
+						myscroll_x.refresh();
+				}
+			});
+			}
+			
+
+			$("body").on("click", ".btnpay", function() {
+				$(this).addClass('hover').siblings().removeClass('hover');
+				_start = 1;
+				$('.searchinput').val('')
+				if($(this).text() == '待缴设备') {
+					$('.ispay').removeClass('hidden')
+					pay(_start)
+					curchoose=[]
+				} else {
+					$('.ispay').addClass('hidden')
+					daoqi(_start)
+				}
+			})
+
+			//防止重复
+			function unique(arr) {
+				return Array.from(new Set(arr))
+			}
+		
+			$('.searchbtn').on('click', function() {
+				
+				_start=0
+				curchoose=[]
+				let val = $(".searchinput").val();
+				if(val==''){
+					location.reload()
+				}
+				let _state=''
+				if($('.tabar .hover').text() == '待缴设备') {
+					_state=4
+				}else{
+					_state=3
+				}
+				$("#box").html('')
+				$.ajax({
+					type: "post",
+					url: "https://www.zjcoldcloud.com/xiandun/public/index.php/index/device/device_list_v1",
+					async: true,
+					data: {
+						userName: _user,
+						offset: _start,
+						pagesize: 10,
+						suoshujigou: '',
+						status: _state,
+						vague: val
+					},
+					dataType: 'json',
+					success: function(res) {
+						$('.last .choosenum').text(0)
+				  	    $('.total').text(0)
+				  	    $('.tittle .choosebar .input_check').prop('checked',false);
+						console.log(res)
+						if(res.code == 0) {
+							if(res.data.data.length<10){
+								$(".more").html("没有更多记录");
+								$(".wait").addClass("hidden");
+							}
+				           if(_state==4){
+				           			let strs = ''
+						$.each(res.data.data, function(index, val) {
+							let time=val.daoqishijian.substring(0,val.daoqishijian.length-8);
+							strs = `
+								<div class='chooseitem'>
+								<span class="choose"><input type="checkbox" class="input_check" id='${val.shebeibianhao}' value='${val.shebeibianhao}'><label for='${val.shebeibianhao}'></label><span>${val.shebeibianhao}</span></span>
+								  
+								  <label> <span class="numname paytime">${time}</span>	 </label>
+									<label class="chooseyear">￥<span class='price'>${val.year_price}</span>/年<img src="../images/addtime.png" class="addicon myicon"/><label class="yearbox"> x<span class="year">1</span> </label><img class="myicon jiantime" src="../images/jiantime.png" /> </label>	
+								   </div>`;
+							$("#box").append(strs);
+						});
+						myscroll_x.refresh();
+				           }else{
+				           	let strs = ''
+						$.each(res.data.data, function(index, val) {
+							let time=val.daoqishijian.substring(0,val.daoqishijian.length-3);
+							strs = `
+								
+								<div class='chooseitem'>
+								<span class="choose daoqiname">${val.shebeibianhao}${val.beizhu}</span>
+								  <label> <span class="numname">${time}</span>	 </label>
+								   </div>`;
+							$("#box").append(strs);
+						});
+						myscroll_x.refresh();
+				           }
+						} else {
+						 	
+							$(".more").html("没有更多记录");
+								$(".wait").addClass("hidden");
+						}
+					},
+					error: function(err) {
+
+					}
+				});
+
+			})
+			$("body").on("click", ".addicon", function() {
+				let cyear = parseFloat($(this).parent().find('.year').text()) + 1;
+				$(this).parent().find('.year').text(cyear)
+				let shebei=$(this).parents('.chooseitem').find('.input_check').attr('id')
+				if($(this).parents('.chooseitem').find('.input_check').is(':checked')){
+					for(var i=0;i<curchoose.length;i++){
+				    if(curchoose[i].shebeihao==shebei){
+				      curchoose[i].years=cyear;
+				    }
+					}
+	                console.log(curchoose)
+	                
+			         let price=parseFloat($(this).parents('.chooseitem').find('.price').text())
+			         
+			         let curqian=parseFloat($('.total').text())+price
+			         curqian=curqian.toFixed(2)
+			         $('.total').text(curqian)
+				}
+		
+			})
+			$("body").on("click", ".jiantime", function() {
+				let cyear = parseFloat($(this).parent().find('.year').text()) - 1;
+				if(cyear >= 1) {
+					$(this).parent().find('.year').text(cyear)
+					let shebei=$(this).parents('.chooseitem').find('.input_check').attr('id')
+				console.log(shebei+','+cyear)
+				if($(this).parents('.chooseitem').find('.input_check').is(':checked')){
+				for(var i=0;i<curchoose.length;i++){
+				    if(curchoose[i].shebeihao==shebei){
+				      curchoose[i].years=cyear;
+				    }
+				}
+				
+                console.log(curchoose)
+                 let price=parseFloat($(this).parents('.chooseitem').find('.price').text())
+		         let curqian=parseFloat($('.total').text())-price
+		         curqian=curqian.toFixed(2)
+		         $('.total').text(curqian)
+                }
+				}
+			})
+			//一键控制全选、反选
+			$('#ischoose').change(function() {
+				if($(this).is(':checked')){
+					   curchoose=[]
+				       $('#box').find(':checkbox').prop('checked',true);
+					 	var checks=$("#wrapper input[type='checkbox']")
+					 	let total=0
+					 	
+						checks.each(function(){
+							let shebei=$(this).val()
+							let num=parseFloat($(this).parents('.chooseitem').find('.year').text())
+							let price=parseFloat($(this).parents('.chooseitem').find('.price').text())
+							let qian=parseFloat(num*price)
+                            total=qian+total
+							curobj={
+					         	shebeihao:shebei,
+					         	years:num
+					         }
+							curchoose.push(curobj)
+						})
+//						 console.log(curchoose)
+//						 console.log(total)
+						 $('.last .choosenum').text(curchoose.length)
+						 $('.total').text(total)
+				        
+				         
+				         
+				        
+				  }else{
+				  	  curchoose=[]
+				  	   console.log(curchoose)
+				  	   $('.last .choosenum').text(0)
+				  	   $('.total').text(0)
+				      $('#box').find(':checkbox').prop('checked',false);    // 如控制键取消选中，剩余的checkbox也取消选中
+				  }
+			});
+			var curchoose=[]
+			var curobj={}
+			$(document).on('click',".input_check",function(){
+				    if (!$(this).is(':checked')) {
+				      console.log("取消选中")
+				       let shebei=$(this).val()
+				       var arrs=  curchoose.filter(item => item.shebeihao !== shebei);
+	                   curchoose=arrs
+	                    console.log(curchoose);
+	                    $('.last .choosenum').text(curchoose.length)
+	                    
+	                     let num=parseFloat($(this).parents('.chooseitem').find('.year').text())
+				         let price=parseFloat($(this).parents('.chooseitem').find('.price').text())
+				         let qian=num*price
+				         let curqian=parseFloat($('.total').text())-qian
+				          curqian=curqian.toFixed(2)
+				         $('.total').text(curqian)
+				    }else{
+				         console.log("选中")
+//				         console.log($(this).val())
+				         let shebei=$(this).val()
+				         let num=parseFloat($(this).parents('.chooseitem').find('.year').text())
+				         let price=parseFloat($(this).parents('.chooseitem').find('.price').text())
+				         let qian=num*price
+				         let curqian=qian+parseFloat($('.total').text())
+				          curqian=curqian.toFixed(2)
+				         $('.total').text(curqian)
+				         curobj={
+				         	shebeihao:shebei,
+				         	years:num
+				         }
+				         curchoose.push(curobj)
+				         $('.last .choosenum').text(curchoose.length)
+				         
+				         console.log(curchoose)
+				    }
+			})
+       
+
+        /*
+        *功能： 模拟form表单的提交
+        *参数： URL 跳转地址 PARAMTERS 参数
+        */
+
+
+			$(".btn-ok").on("click", function() {
+				if(curchoose.length==0){
+					alert('请选择代缴费的设备');
+					return false;
+				}else{
+					
+					let str=JSON.stringify(curchoose)
+//                 var parames = new Array();
+//		            parames.push({ name: "list", value: str});
+//		            parames.push({ name: "uid", value: _uid});
+//		             
+//		            Post("http://www.ccsc58.cc/leng/weixin/zhifu/example/freshdun_year_price.php", parames);
+//		
+//		            return false;
+                    $.ajax({
+                    	type:"post",
+                    	url:"http://www.zjcoldcloud.com/xiandun/public/index.php/index/pay_bill/new_payment_record",
+                    	data:{
+                    		list:str,
+                    		uid:_uid
+                    	},
+                    	dataType:'JSON',
+                    	success:function(res){
+                    		if(res.code==0){
+                    			let _tradeNo=res.data.tradeNo
+                    			
+                    			location.href='http://www.ccsc58.cc/leng/weixin/zhifu/example/freshdun_year_price.php?tradeNo='+_tradeNo+'&id=2'
+                    		}
+                    	},
+                    	error:function(err){
+                    		
+                    	}
+                    }); 
+                    
+				}
+                 
+			})
+			
+		</script>
+	</body>
+
+</html>

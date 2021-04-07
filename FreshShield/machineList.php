@@ -113,7 +113,7 @@
 								<span class="left15">昵称：<label class="beizhu"></label></span>
 								<button class="Untyingbtn">解绑</button>
 							</div>
-							<div class="daoqi">
+							<div class="daoqi" id="daoqi">
 								<h4>设备已到期</h4>
 								<div class="daoqicontent">
 									您的设备服务已到期，请于<span class="daoqiTime">2020-12-12  09:35:35</span>前进行缴费，逾期该设备SIM卡将被注销。
@@ -140,71 +140,71 @@
 		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=XP1alssWsEscC3NfYAhj6YfqKvgQgUXF" charset="utf-8"></script>
 		<script type="text/javascript" src="../js/jquery-1.11.0.js"></script>
 		<script type="text/javascript" src="../js/index.js"></script>
-		<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" charset="utf-8"></script>
+		<!--<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" charset="utf-8"></script>-->
 	
 
 		<script>
 			
-			window.alert = function(name) {
-				var iframe = document.createElement("IFRAME");
-				iframe.style.display = "none";
-				iframe.setAttribute("src", 'data:text/plain,');
-				document.documentElement.appendChild(iframe);
-				window.frames[0].window.alert(name);
-				iframe.parentNode.removeChild(iframe);
-			}
-			 window.confirm = function (message) {
-		        var iframe = document.createElement("IFRAME");
-		        iframe.style.display = "none";
-		        iframe.setAttribute("src", 'data:text/plain,');
-		        document.documentElement.appendChild(iframe);
-		        var alertFrame = window.frames[0];
-		        var result = alertFrame.window.confirm(message);
-		        iframe.parentNode.removeChild(iframe);
-		        return result;
-		    };
+//			window.alert = function(name) {
+//				var iframe = document.createElement("IFRAME");
+//				iframe.style.display = "none";
+//				iframe.setAttribute("src", 'data:text/plain,');
+//				document.documentElement.appendChild(iframe);
+//				window.frames[0].window.alert(name);
+//				iframe.parentNode.removeChild(iframe);
+//			}
+//			 window.confirm = function (message) {
+//		        var iframe = document.createElement("IFRAME");
+//		        iframe.style.display = "none";
+//		        iframe.setAttribute("src", 'data:text/plain,');
+//		        document.documentElement.appendChild(iframe);
+//		        var alertFrame = window.frames[0];
+//		        var result = alertFrame.window.confirm(message);
+//		        iframe.parentNode.removeChild(iframe);
+//		        return result;
+//		    };
              //console.log(new Date().getTime())
 			/*iscroll代码；
 			 */
-			wx.config({
-				debug: false,
-				appId: '<?php echo $signPackage["appId"];?>',
-				timestamp: '<?php echo $signPackage["timestamp"];?>',
-				nonceStr: '<?php echo $signPackage["nonceStr"];?>',
-				signature: '<?php echo $signPackage["signature"];?>',
-				jsApiList: [
-					'chooseImage',
-					'scanQRCode'
-				]
-			});
-			function onBridgeReady() {
-			  WeixinJSBridge.call('hideOptionMenu');
-			}
+//			wx.config({
+//				debug: false,
+//				appId: '<?php echo $signPackage["appId"];?>',
+//				timestamp: '<?php echo $signPackage["timestamp"];?>',
+//				nonceStr: '<?php echo $signPackage["nonceStr"];?>',
+//				signature: '<?php echo $signPackage["signature"];?>',
+//				jsApiList: [
+//					'chooseImage',
+//					'scanQRCode'
+//				]
+//			});
+//			function onBridgeReady() {
+//			  WeixinJSBridge.call('hideOptionMenu');
+//			}
 			
-			if (typeof WeixinJSBridge == "undefined") {
-			if (document.addEventListener) {
-			document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-			} else if (document.attachEvent) {
-			document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
-			document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
-			}
-			} else {
-			onBridgeReady();
-			}
-			$("#test00").on("click", function() {
-				wx.scanQRCode({
-					needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
-					scanType: ["qrCode", "barCode"], // 可以指定扫二维码还是一维码，默认二者都有
-					success: function(res) {
-						var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果;
-							 if(result.includes(',')){
-		                      result = result.split(',')[1];        
-		                     }
-							$("#post_add").val(result);
-						
-					}
-				});
-			});
+//			if (typeof WeixinJSBridge == "undefined") {
+//			if (document.addEventListener) {
+//			document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+//			} else if (document.attachEvent) {
+//			document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+//			document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+//			}
+//			} else {
+//			onBridgeReady();
+//			}
+//			$("#test00").on("click", function() {
+//				wx.scanQRCode({
+//					needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+//					scanType: ["qrCode", "barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+//					success: function(res) {
+//						var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果;
+//							 if(result.includes(',')){
+//		                      result = result.split(',')[1];        
+//		                     }
+//							$("#post_add").val(result);
+//						
+//					}
+//				});
+//			});
 			if(!window.localStorage.getItem("isonline")) {
 				window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_templatform.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
 			}else{
@@ -433,6 +433,7 @@
 										_dem.find(".daoqi").addClass('hidden');
 									}else{
 										_dem.find(".daoqi").removeClass('hidden');
+										_dem.find(".daoqi").addClass('yidaoqi');
 									}
 									//my_machine_list(res.data.data[i].last_jingdu, res.data.data[i].last_weidu, _dem)
 									/*$(".more_machine").before(_dem);*/
@@ -607,6 +608,7 @@
 				})
 				
 				$(".content .list").on("click", function() {
+					
 					var _val = $(this).find('.shebeihao').text();
 					var _is_master = $(this).find('.shebeihao').attr("is_master")==undefined?'1':$(this).find('.shebeihao').attr("is_master");
 					if(_is_master=='0'){
@@ -624,11 +626,16 @@
 				 * */
 			$("body").on("click", ".scroll_box .list .item", function() {
 				var num = $(this).find(".shebeihao").text();
-				var _is_master = $(this).find('.shebeihao').attr("is_master")==undefined?'1':$(this).find('.shebeihao').attr("is_master");
-//				console.log(_is_master);
-//				return false;
-				sessionStorage.setItem('ismaster',_is_master)
-				window.location.href = "html/details_lists.html?num_m=" + num
+				if($(this).parent().find(".yidaoqi").length > 0){
+					 // console.log('到期')	
+	        	     window.location.href='html/buyflewpackage.html?num_m='+num
+				}else{
+					var _is_master = $(this).find('.shebeihao').attr("is_master")==undefined?'1':$(this).find('.shebeihao').attr("is_master");
+				    sessionStorage.setItem('ismaster',_is_master)
+				    window.location.href = "html/details_lists.html?num_m=" + num
+				}
+				//return false;
+				
 			})
 		    //解绑
 			$("body").on("click", ".scroll_box .list .Untyingbtn", function() {
