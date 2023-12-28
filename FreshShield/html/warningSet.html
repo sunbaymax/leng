@@ -177,14 +177,14 @@
 					</select>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%
 				</div>
-				<div>
+				<div class="TPA">
 					<span>微信报警：</span>
 					<div class='switch-wrap'>
 						<input type='checkbox' id='switch5'>
 						<label for='switch5'></label>
 					</div>
 				</div>
-				<div class="telwarning">
+				<div class="TPA telwarning">
 					<span>电话报警：</span>
 					<div class='switch-wrap'>
 						<input type='checkbox' id='switch6'>
@@ -219,26 +219,6 @@
 		<script src="../js/iostime.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/index.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
-			for(var i = -99; i <= 99; i++) {
-				var options = "<option value='" + i + "'>" + i + "</option>";
-				$(".tempHighbaojing").append(options);
-				$(".templowbaojing").append(options);
-				$(".tempHighbaojing2").append(options);
-				$(".templowbaojing2").append(options);
-			}
-			for(var i = 0; i <= 30; i++) {
-				var diliangzhi = "<option value='" + i + "'>" + i + "</option>";
-				$(".baojingpower").append(diliangzhi);
-			}
-			for(var i = 1; i <= 100; i++) {
-				var shiduzhi = "<option value='" + i + "'>" + i + "</option>";
-				$(".humidityHighbaojing").append(shiduzhi);
-				$(".humiditylowbaojing").append(shiduzhi);
-			}
-
-			$(".invitebtn").on("click", function() {
-				window.location.href = 'banding.html?openId=' + _openid;
-			});
 			/*
 			 * 获取用户的名称和密码；
 			 */
@@ -260,6 +240,33 @@
 			} else {
 				_num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "");
 			}
+//			console.log(_num_m)
+			if(_num_m.substr(0, 1)=='2'&&_num_m.length==7){
+//				console.log('TPA')
+				$('.content .form').children().not('.TPA').hide()
+			}
+//			console.log("normal")
+			for(var i = -99; i <= 99; i++) {
+				var options = "<option value='" + i + "'>" + i + "</option>";
+				$(".tempHighbaojing").append(options);
+				$(".templowbaojing").append(options);
+				$(".tempHighbaojing2").append(options);
+				$(".templowbaojing2").append(options);
+			}
+			for(var i = 0; i <= 30; i++) {
+				var diliangzhi = "<option value='" + i + "'>" + i + "</option>";
+				$(".baojingpower").append(diliangzhi);
+			}
+			for(var i = 1; i <= 100; i++) {
+				var shiduzhi = "<option value='" + i + "'>" + i + "</option>";
+				$(".humidityHighbaojing").append(shiduzhi);
+				$(".humiditylowbaojing").append(shiduzhi);
+			}
+
+			$(".invitebtn").on("click", function() {
+				window.location.href = 'banding.html?openId=' + _openid;
+			});
+
 			$(".back_list").on("click", function() {
 				//				window.history.go(-1);
 				sessionStorage.setItem('paraset', 1);
@@ -531,7 +538,9 @@
 							chaogaoshidubaojing: _chaogaoshidubaojing,
 							chaogaoshidubaojingfazhi: _humidityHighbaojing,
 							chaodishidubaojing: _chaodishidubaojing,
-							chaodishidubaojingfazhi: _humiditylowbaojing
+							chaodishidubaojingfazhi: _humiditylowbaojing,
+							weixintuisong_baojing: _weixintuisong_baojing,
+							is_open: _is_open,
 						}
 					} else {
 						_data = {
@@ -555,7 +564,9 @@
 							baojingwendu_two_shangxian: _baojingwendu_two_shangxian,
 							baojingwendu_two_shangxian_baojing: _baojingwendu_two_shangxian_baojing,
 							baojingwendu_two_xiaxian: _baojingwendu_two_xiaxian,
-							baojingwendu_two_xiaxian_baojing: _baojingwendu_two_xiaxian_baojing
+							baojingwendu_two_xiaxian_baojing: _baojingwendu_two_xiaxian_baojing,
+							weixintuisong_baojing: _weixintuisong_baojing,
+							is_open: _is_open,
 						}
 
 					}

@@ -1,0 +1,5 @@
+.group .item .itemleft,.group .item .itemcenter{
+	 overflow: hidden; /*超出长度的文字隐藏*/
+                 text-overflow:ellipsis;/*文字隐藏以后添加省略号*/
+                 white-space: nowrap; /*强制不换行*/
+}

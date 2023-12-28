@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>消息绑定</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/bangding.css" />
+	</head>
+	<!--	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>-->
+	<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+	<script>
+		var _url = window.location.href;
+		var _openId = _url.match(/\?openId=\S+/)[0].replace("?openId=", "");
+	</script>
+
+	<body>
+		<div style="position: absolute;top: 80px;width: 80%;left: 10%;text-align: center;">
+			<p style="font-size: 3.3rem;color:#ffffff;font-family: " 宋体 ";font-weight: bold;">手机号码绑定</p>
+			<h6 style="text-align: left;color: #333;margin-top: 12rem;font-size: 1.4rem;">使用洋泰电子温湿度云平台的用户，需在此页面绑定手机号方可接收到报警消息！</h6>
+		</div>
+		<form class="hong_box">
+
+			<div><input type="text" class="phone" name="phone" placeholder="请输入手机号" /></div>
+			<!--<div class="yanZhengMa">获取验证码</div>-->
+			<div class="button" id="btnok">确认提交</div>
+
+		</form>
+		<script type="text/javascript">
+			function onBridgeReady() {
+
+				WeixinJSBridge.call('hideOptionMenu');
+
+			}
+
+			if(typeof WeixinJSBridge == "undefined") {
+
+				if(document.addEventListener) {
+
+					document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+
+				} else if(document.attachEvent) {
+
+					document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+
+					document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+
+				}
+
+			} else {
+
+				onBridgeReady();
+
+			}
+			$("#btnok").on('click', function() {
+				var phone = $("input[name='phone']").val();
+				window.localStorage.setItem("phone", phone);
+				var messageCode = $("input[name='messageCode']").val();
+				var admin_permit = "zjly8888";
+				var reg = /^1[345789]\d{9}$/;
+				if($(".phone").val() == "") {
+					alert("手机号不能为空!");
+					return false;
+				}
+				if(!reg.test(phone)) {
+					alert("请输入正确格式的手机号!");
+					return false;
+				}
+				$.ajax({
+					url: "https://www.zjcoldcloud.com/xiandun/public/index.php/index/contact/alarmBindingCustomized",
+					type: "get",
+					dataType: "JSON",
+					data: {
+						phone,
+						openid: _openId
+					},
+					success: function(res) {
+						console.log(res);
+						if(res.code == 0) {
+							window.location.href = "binding_ok.html";
+						} else {
+							alert(res.message);
+						}
+					},
+					error: function() {
+						alert("网络错误！！");
+					}
+				});
+			});
+		</script>
+	</body>
+
+</html>

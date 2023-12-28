@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>棚盾</title>
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+		<link rel="stylesheet" type="text/css" href="../css/changeM.css" />
+		<style type="text/css">
+			.content {
+				width: 100%;
+				height: auto;
+				margin-top: 5rem;
+				padding: 0 1rem;
+				box-sizing: border-box;
+			}
+			
+			.content a {
+				display: block;
+				align-items: center;
+				width: 100%;
+				height: 5.4rem;
+				line-height: 5.4rem;
+				border-bottom: 1px solid #ccc;
+				text-decoration: none;
+				font-size: 1.4rem;
+				background: #FFFFFF;
+				margin: 0.6rem 0;
+				border-radius: 1rem;
+			}
+			
+			.content a span {
+				display: block;
+				height: 5.4rem;
+				line-height: 5.4rem;
+				float: left;
+				margin-left: 3vw;
+				color: #232323;
+			}
+			
+			.content a img:nth-of-type(1) {
+				float: left;
+				margin-left: 3vw;
+				width: 2rem;
+				margin-right: 0.2rem;
+				height: 1.7rem;
+				margin-top: 1.8rem;
+			}
+			
+			.content a img:nth-of-type(2) {
+				float: right;
+				width: 1rem;
+				height: 1.6rem;
+				margin-top: 2rem;
+				margin-right: 5.2vw;
+			}
+			
+			.JieChuBang_box {
+				width: 100%;
+				height: 100%;
+				position: fixed;
+				top: 0px;
+				left;
+				0px;
+				z-index: 99999;
+				background: rgba(255, 250, 250, 0.5);
+			}
+			
+			.JieChuBang {
+				width: 50vw;
+				height: 30vw;
+				background: rgba(0, 0, 0, .8);
+				color: #fefefe;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin-top: -25vw;
+				margin-left: -25vw;
+				font-size: 1.5rem;
+			}
+			
+			.JieChuBang_top {
+				width: 100%;
+				height: 70%;
+				text-align: center;
+				line-height: 21vw;
+			}
+			
+			.JieChuBang_footer {
+				width: 100%;
+				height: 30%;
+			}
+			
+			.JieChuBang_left {
+				width: 50%;
+				height: 100%;
+				text-align: center;
+				float: left;
+				box-sizing: border-box;
+				border-top: 1px solid #ccc;
+				line-height: 9vw;
+			}
+			
+			.JieChuBang_right {
+				width: 50%;
+				height: 100%;
+				text-align: center;
+				float: left;
+				box-sizing: border-box;
+				border: 1px solid #ccc;
+				border-right: none;
+				border-bottom: none;
+				line-height: 9vw;
+			}
+			
+			.content a:nth-child(2) img:nth-of-type(1) {
+				width: 1.6rem;
+				height: 1.6rem;
+			}
+			
+			.content a:nth-child(6) img:nth-of-type(1) {
+				width: 1.6rem;
+				height: 1.65rem;
+			}
+			
+			.content .exit img:nth-of-type(1) {
+				width: 1.6rem;
+				height: 1.65rem;
+			}
+			
+			.content .paybill img:nth-of-type(1) {
+				/*margin-left: 0.2rem;*/
+				width: 1.4rem;
+				margin-right: 0.7rem;
+				height: 1.65rem;
+			}
+			.content a  .pay_list{
+				margin-left: 1.2rem;
+			}
+
+		</style>
+	</head>
+
+	<body>
+		<div class="header">
+			<img class="back_list" src="../img/back.png" /> 服务费
+		</div>
+		<div class="content">
+			<a href="upbill.html" class="personcenter"><img src="../images/myshengj.png" /><span>流量套餐升级</span><img src="../img/right_shop_car.png" alt="" /></a>
+			<a href="bill.html" class="paybill"><img src="../images/mybill.png" /><span>待缴服务费</span><img src="../img/right_shop_car.png" alt="" /></a>
+			<a href="paylist.html"><img src="../images/mypaylist.png" /><span class="pay_list">缴费记录</span><img src="../img/right_shop_car.png" alt="" /></a>
+		</div>
+
+		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/index.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script src="../js/register.js" type="text/javascript" charset="utf-8"></script>-->
+		<script type="text/javascript">
+			$(".back_list").on("click", function() {
+				window.location.href = "user_sheZhi.html";
+
+			});
+			/*
+			 * 获取用户的名称和密码；
+			 */
+			var userinfo = JSON.parse(localStorage.getItem('isonline'));
+			var b = userinfo.user;
+			var c = userinfo.pwd;
+			var _userType = userinfo.userType;
+			var _duodian = userinfo.duodian;
+
+			openid = window.localStorage.getItem("openId");
+		</script>
+	</body>
+
+</html>

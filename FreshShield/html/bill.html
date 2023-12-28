@@ -444,8 +444,8 @@
 				url: _url,
 				type: "post",
 				data: {
-					mainname: _userName
-
+					mainname: _userName,
+                    uid:_uid
 				},
 				dataType: 'json',
 				success: function(res) {
@@ -503,7 +503,8 @@
 					type: "post",
 					data: {
 						offset:_start,
-                        openid:_openid
+                        openid:_openid,
+                        uid:_uid
 					},
 					dataType: 'json',
 					success: function(res) {

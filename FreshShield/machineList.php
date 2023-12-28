@@ -69,7 +69,7 @@
 							<div class="item">
 								<div class="list_tittle">
 									<p class="tittlewen">
-										<span>设备号：</span>
+										<!--<span>设备号：</span>-->
 										<span class="shebeihao"></span>
 										<span>(<b class="main"></b>)</span>
 										<!--<span class="left15">昵称：<label class="beizhu"></label></span>-->
@@ -110,13 +110,13 @@
 							</div>
 							
 							<div id="caozuo">
-								<span class="left15">昵称：<label class="beizhu"></label></span>
+								<span class="left15"><label class="beizhu"></label></span>
 								<button class="Untyingbtn">解绑</button>
 							</div>
 							<div class="daoqi" id="daoqi">
 								<h4>设备已到期</h4>
 								<div class="daoqicontent">
-									您的设备服务已到期，请于<span class="daoqiTime">2020-12-12  09:35:35</span>前进行缴费，逾期该设备SIM卡将被注销。
+									设备号<span class="device_num"></span>服务已到期，请于<span class="daoqiTime"></span>前进行缴费，过期将注销SIM卡，如需再次使用请返厂换卡.
 								</div>
 								<div>
 									<button>前往缴费</button>
@@ -133,78 +133,31 @@
 					</div>
 				</div>
 			</div>
-       
+		<div id="success_mao" style="display: none;">
+			<div class="success_box_info">
+				<div class="register_right">
+					<img src="img/ku.png" />
+				</div>
+				<div class="success_information_info ">
+					<p>用户您好，新版移动端平台已经上线，此网页将于2022年5月16日停止运行。请在公众号左下角选择小程序版登录或微信小程序搜索“盾管家”进入。</p>
+					<p>如果您对新平台有任何建议也可以通过在“中集智冷科技”公众号内找到“投诉/建议”告诉我们。</p>
+				</div>
+				<form action="">
+					<input type="button" value="我知道" class="remindbtn"/>
+				</form>
+			</div>
+		</div>
 		</div>
 
 		<script src="../js/iscroll.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=XP1alssWsEscC3NfYAhj6YfqKvgQgUXF" charset="utf-8"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=jmgKloGf3cOvRl3Y9pUAfvKZCTtCNGwj" charset="utf-8"></script>
 		<script type="text/javascript" src="../js/jquery-1.11.0.js"></script>
 		<script type="text/javascript" src="../js/index.js"></script>
 		<!--<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" charset="utf-8"></script>-->
 	
 
 		<script>
-			
-//			window.alert = function(name) {
-//				var iframe = document.createElement("IFRAME");
-//				iframe.style.display = "none";
-//				iframe.setAttribute("src", 'data:text/plain,');
-//				document.documentElement.appendChild(iframe);
-//				window.frames[0].window.alert(name);
-//				iframe.parentNode.removeChild(iframe);
-//			}
-//			 window.confirm = function (message) {
-//		        var iframe = document.createElement("IFRAME");
-//		        iframe.style.display = "none";
-//		        iframe.setAttribute("src", 'data:text/plain,');
-//		        document.documentElement.appendChild(iframe);
-//		        var alertFrame = window.frames[0];
-//		        var result = alertFrame.window.confirm(message);
-//		        iframe.parentNode.removeChild(iframe);
-//		        return result;
-//		    };
-             //console.log(new Date().getTime())
-			/*iscroll代码；
-			 */
-//			wx.config({
-//				debug: false,
-//				appId: '<?php echo $signPackage["appId"];?>',
-//				timestamp: '<?php echo $signPackage["timestamp"];?>',
-//				nonceStr: '<?php echo $signPackage["nonceStr"];?>',
-//				signature: '<?php echo $signPackage["signature"];?>',
-//				jsApiList: [
-//					'chooseImage',
-//					'scanQRCode'
-//				]
-//			});
-//			function onBridgeReady() {
-//			  WeixinJSBridge.call('hideOptionMenu');
-//			}
-			
-//			if (typeof WeixinJSBridge == "undefined") {
-//			if (document.addEventListener) {
-//			document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-//			} else if (document.attachEvent) {
-//			document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
-//			document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
-//			}
-//			} else {
-//			onBridgeReady();
-//			}
-//			$("#test00").on("click", function() {
-//				wx.scanQRCode({
-//					needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
-//					scanType: ["qrCode", "barCode"], // 可以指定扫二维码还是一维码，默认二者都有
-//					success: function(res) {
-//						var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果;
-//							 if(result.includes(',')){
-//		                      result = result.split(',')[1];        
-//		                     }
-//							$("#post_add").val(result);
-//						
-//					}
-//				});
-//			});
+
 			if(!window.localStorage.getItem("isonline")) {
 				window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_templatform.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
 			}else{
@@ -269,7 +222,9 @@
 			 */
 
 			machine_ajax_list(0)
-
+            $('.remindbtn').on('click',function(){
+              	$(this).parents('#success_mao').hide()
+            })
 			function machine_ajax_list(_start) {
 				let _search_num = $("#search").val();
 				let userinfo = JSON.parse(localStorage.getItem('isonline'));
@@ -343,8 +298,6 @@
 									}else{
 										_dem.find(".daoqi").addClass('hidden');
 									}
-									//my_machine_list(res.data.data[i].last_jingdu, res.data.data[i].last_weidu, _dem)
-									/*$(".more_machine").before(_dem);*/
 								}
 
 							} else {
@@ -368,9 +321,9 @@
 					let copenid=userinfo.copenid;
 					let uid=userinfo.uid;
 					let userType=userinfo.userType;
-					console.log(copenid,33)
+//					console.log(copenid,33)
 					$.ajax({
-						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/xiandu_device_list",
+						url: "http://www.zjcoldcloud.com/xiandun_back/public/index.php/index/device/xiandu_device_list",
 						type: "post",
 						data: {
 							openid: copenid,
@@ -395,45 +348,59 @@
 								}
 								
 								for(var i = 0; i < res.data.data.length; i++) {
+									
 									var _dem = $(".list").eq(0).clone().removeClass("hidden").appendTo(".scroll_box");
-									_dem.find(".list-content .temp1").html(res.data.data[i].last_temperature01);
-									if(res.data.data[i].model_type=='TT'){
-										_dem.find(".list-content .temp2").html(res.data.data[i].last_temperature02==0?'-':res.data.data[i].last_temperature02+"℃");
-										_dem.find(".list-content .humidity").parents('p').addClass('hidden');
-									}else{
-										_dem.find(".list-content .temp1").parents('p').find('.wen').text('温度：');
-										_dem.find(".list-content .temp2").parents('p').addClass('hidden');
-										_dem.find(".list-content .humidity").html(res.data.data[i].last_humidity==0?'-':res.data.data[i].last_humidity+"%RH");
-									}
-									_dem.find(".list-content .speed").html(res.data.data[i].speed);
-									_dem.find("#caozuo .beizhu").html(res.data.data[i].beizhu==''?'':res.data.data[i].beizhu);
-									_dem.find(".list-content .power").html(res.data.data[i].last_power == null ? "0" : res.data.data[i].last_power);
-									_dem.find(".list_tittle .shebeihao").html(res.data.data[i].shebeibianhao);
-									_dem.find(".list_tittle .shebeihao").attr('is_master',res.data.data[i].is_master);
-									_dem.find(".list_tittle .main").html(res.data.data[i].is_master==0?'分':"主");
-									_dem.find(".list-content .worktime").html(res.data.data[i].last_time);
-									_dem.find(".list-content .boxstate").html(res.data.data[i].xiangzistate == 'close' ? "关闭" : "开启");
-									_dem.find(".list-content .AcceptableArea").html(res.data.data[i].hegewenduqujian);
-									_dem.find(".list-content .alarmArea").html(res.data.data[i].baojingwenduqujian);
-									_dem.find(".list-content .address").html(res.data.data[i].address);
-									if(res.data.data[i].xinhaoqiangdu >= 0 && res.data.data[i].xinhaoqiangdu < 5) {
-										_dem.find(".list-content  .signal").html("无");
-									} else if(res.data.data[i].xinhaoqiangdu >= 5 && res.data.data[i].xinhaoqiangdu < 13) {
-										_dem.find(".list-content  .signal").html("弱");
-									} else if(res.data.data[i].xinhaoqiangdu >= 13 && res.data.data[i].xinhaoqiangdu < 20) {
-										_dem.find(".list-content  .signal").html("良");
-									} else if(res.data.data[i].xinhaoqiangdu >= 20 && res.data.data[i].xinhaoqiangdu < 26) {
-										_dem.find(".list-content  .signal").html("好");
-									} else if(res.data.data[i].xinhaoqiangdu >= 26) {
-										_dem.find(".list-content  .signal").html("强");
-									} else {
-										_dem.find(".list-content  .signal").html("无");
-									}
-									if(res.data.data[i].is_guoqi==false){
+									if(res.data.data[i].shebeibianhao.substr(0, 1)=='2'&&res.data.data[i].shebeibianhao.length==7){
+										console.log(res.data.data[i].shebeibianhao,9999)
+										_dem.find(".list_tittle").parent().addClass('Interruptpower')
+										_dem.find(".list_tittle .shebeihao").html(res.data.data[i].shebeibianhao).next().remove();
 										_dem.find(".daoqi").addClass('hidden');
+										_dem.find(".list-content").children('div').html('');
+										_dem.find(".list-content").html(`<div>最近断电时间: ${res.data.data[i].power_failure_time}</div><div>最近上电时间: ${res.data.data[i].power_up_time}</div><div>今天断电次数：${res.data.data[i].today_power_failure_num}</div><div>最近采集时间：${res.data.data[i].last_time}</div>`);
+										_dem.find("#caozuo .beizhu").html(res.data.data[i].beizhu==''?'':res.data.data[i].beizhu);
+//										_dem.find("#caozuo").remove();
 									}else{
-										_dem.find(".daoqi").removeClass('hidden');
-										_dem.find(".daoqi").addClass('yidaoqi');
+										_dem.find(".list-content .temp1").html(res.data.data[i].last_temperature01);
+										if(res.data.data[i].model_type=='TT'){
+											_dem.find(".list-content .temp2").html(res.data.data[i].last_temperature02==0?'-':res.data.data[i].last_temperature02+"℃");
+											_dem.find(".list-content .humidity").parents('p').addClass('hidden');
+										}else{
+											_dem.find(".list-content .temp1").parents('p').find('.wen').text('温度：');
+											_dem.find(".list-content .temp2").parents('p').addClass('hidden');
+											_dem.find(".list-content .humidity").html(res.data.data[i].last_humidity==0?'-':res.data.data[i].last_humidity+"%RH");
+										}
+										_dem.find(".list-content .speed").html(res.data.data[i].speed);
+										_dem.find("#caozuo .beizhu").html(res.data.data[i].beizhu==''?'':res.data.data[i].beizhu);
+										_dem.find(".list-content .power").html(res.data.data[i].last_power == null ? "0" : res.data.data[i].last_power);
+										_dem.find(".list_tittle .shebeihao").html(res.data.data[i].shebeibianhao);
+										_dem.find(".list_tittle .shebeihao").attr('is_master',res.data.data[i].is_master);
+										_dem.find(".list_tittle .main").html(res.data.data[i].is_master==0?'分':"主");
+										_dem.find(".list-content .worktime").html(res.data.data[i].last_time);
+										_dem.find(".list-content .boxstate").html(res.data.data[i].xiangzistate == 'close' ? "关闭" : "开启");
+										_dem.find(".list-content .AcceptableArea").html(res.data.data[i].hegewenduqujian);
+										_dem.find(".list-content .alarmArea").html(res.data.data[i].baojingwenduqujian);
+										_dem.find(".list-content .address").html(res.data.data[i].address);
+										if(res.data.data[i].xinhaoqiangdu >= 0 && res.data.data[i].xinhaoqiangdu < 5) {
+											_dem.find(".list-content  .signal").html("无");
+										} else if(res.data.data[i].xinhaoqiangdu >= 5 && res.data.data[i].xinhaoqiangdu < 13) {
+											_dem.find(".list-content  .signal").html("弱");
+										} else if(res.data.data[i].xinhaoqiangdu >= 13 && res.data.data[i].xinhaoqiangdu < 20) {
+											_dem.find(".list-content  .signal").html("良");
+										} else if(res.data.data[i].xinhaoqiangdu >= 20 && res.data.data[i].xinhaoqiangdu < 26) {
+											_dem.find(".list-content  .signal").html("好");
+										} else if(res.data.data[i].xinhaoqiangdu >= 26) {
+											_dem.find(".list-content  .signal").html("强");
+										} else {
+											_dem.find(".list-content  .signal").html("无");
+										}
+										if(res.data.data[i].is_guoqi==false){
+											_dem.find(".daoqi").addClass('hidden');
+										}else{
+											_dem.find(".daoqi").removeClass('hidden');
+											_dem.find(".daoqi").addClass('yidaoqi');
+											_dem.find(".device_num").text(res.data.data[i].shebeibianhao);
+											_dem.find(".daoqiTime").text(res.data.data[i].daoqishijian);
+										}
 									}
 									//my_machine_list(res.data.data[i].last_jingdu, res.data.data[i].last_weidu, _dem)
 									/*$(".more_machine").before(_dem);*/
@@ -455,30 +422,7 @@
 				}
 
 			}
-						
-//$(".search-input").on("propertychange input",function(){
-//   var searchBox_val = $(".search-input").val();
-////   alert(searchBox_val);
-//   if(searchBox_val == ""){
-//      window.location.reload();//刷新页面
-//   }else{
-//      $(this).prev().hide();
-//		$(this).next().show();
-//   }
-//});
-//		$(".search-input").bind('input propertychange', function() {
-//				var inputValue = $(this).val();
-//				if(inputValue.length > 0) {
-//					$(this).prev().hide();
-//					$(this).next().show();
-//				} else {
-//					$(this).next().hide();
-//					$(this).prev().show();
-//					
-//				}
-//
-//			});	
-			
+									
 	/*
 	 * 搜索点击事件；
 	 */
@@ -490,57 +434,11 @@
 		} else {
 			$(".scroll_box .list").not(".hidden").remove();
 			machine_ajax_list(0)
-			
-							  
-								
-					
 
-			
-			
-			
-			
-//			$.ajax({
-//				url: "http://www.ccsc58.com/json/01_00_tb_history_data.php",
-//				type: "post",
-//				data: {
-//					UserP: "w",
-//					admin_permit: "zjly8888",
-//					admin_user: _userName,
-//					admin_pass: _userPass,
-//					SheBeiBianHao: _search_num.replace(/\s*/g, ""),
-//					StartTime: "2000-08-26 00:00:00",
-//					EndTime: "3000-01-01 00:00:00",
-//					StartNo: 0,
-//					Length: 1
-//				},
-//				success: function(data) {
-//					var _json = JSON.parse(data);
-//					if(_json.code == 1) {
-//						$(".wait").addClass("hidden");
-//						alert("未找到您搜索的设备！");
-//						$("#search").val("");
-//						$("#search").next().hide();
-//						$("#search").prev().show();
-//					}else if(_json.code==30000){
-//						alert(_json.message);
-//						return false;
-//					} else {
-//						$("#search").val("");
-//						$("#search").next().hide();
-//						$("#search").prev().show();
-//						window.location.href = "html/details_lists.html?num_m=" +_search_num.replace(/\s*/g, "");
-//					}
-//				},
-//				error: function() {
-//					$(".wait").addClass("hidden");
-//					alert("未找到您搜索的设备！");
-//				}
-//			});
 		}
 	});
 	        //到期点击跳转
 	        $(document).on('click','.daoqi',function(){
-	        	
 	        	let shebeihao= $(this).parents('.list').find('.shebeihao').text();
 	        	window.location.href='html/buyflewpackage.html?num_m='+shebeihao
 	        })
@@ -548,7 +446,7 @@
 			function my_machine_list(_jingDu, _weiDu, _dem) {
 				//console.log(_jingDu+","+_weiDu)
 				$.ajax({
-					url: "http://api.map.baidu.com/geoconv/v1/?ak=XP1alssWsEscC3NfYAhj6YfqKvgQgUXF&from=1&to=5",
+					url: "http://api.map.baidu.com/geoconv/v1/?ak=jmgKloGf3cOvRl3Y9pUAfvKZCTtCNGwj&from=1&to=5",
 					type: "post",
 					dataType: "JSONP",
 					data: {
@@ -636,6 +534,11 @@
 				}
 				//return false;
 				
+			})
+			$("body").on("click", ".scroll_box .list .Interruptpower", function() {
+				let num = $(this).find(".shebeihao").text();		
+				window.location.href = "html/details_lists.html?num_m=" + num
+				sessionStorage.setItem('ismaster','3')//断电报警				
 			})
 		    //解绑
 			$("body").on("click", ".scroll_box .list .Untyingbtn", function() {

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>洋泰电子科技有限公司云平台</title>
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+		<link rel="stylesheet" type="text/css" href="../css/changeM.css" />
+		<link rel="stylesheet" type="text/css" href="../css/Upan_list.css" />
+	</head>
+
+	<body>
+		<div class="header">
+			<img class="back_list" src="../img/back.png" />详细信息
+		</div>
+		<div class="content">
+			<p class="content_top">
+				<span class="xinXi_choosed">信息</span>
+				<span>温度</span>
+			</p>
+			<div class="content_sheBei">
+				<p>设备信息：</p>
+				<div class="sheBei_xinxi">
+					<ul>
+						<li>设备：<span>暂无</span></li>
+						<li>启动延时：<span>暂无</span></li>
+						<li>上限温度：<span>暂无</span></li>
+					</ul>
+					<ul>
+						<li>设备编号：<span>暂无</span></li>
+						<li>采样间隔：<span>暂无</span></li>
+						<li>下限温度：<span>暂无</span></li>
+					</ul>
+				</div>
+				<p>记录概要：</p>
+				<div class="sheBei_jiYao">
+					<ul>
+						<li>最高温度：<span>暂无</span></li>
+						<li>平均温度：<span>暂无</span></li>
+					</ul>
+					<ul>
+						<li>最低温度：<span>暂无</span></li>
+						<li>MKT温度：<span>暂无</span></li>
+					</ul>
+					<p class="margin_top">启动时间：<span>暂无</span></p>
+					<p>停止时间：<span>暂无</span></p>
+					<p>记录总点数：<span>暂无</span></p>
+					<p>记录总时长：<span>暂无</span></p>
+				</div>
+				<p>警告统计：</p>
+				<div class="warning_Tong">
+					<ul>
+						<li>警告类型</li>
+						<li>温度范围</li>
+						<li>区间点数</li>
+						<li>总时长</li>
+						<li>状态</li>
+					</ul>
+					<ul>
+						<li>高温警告</li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
+					<ul>
+						<li>低温警告</li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
+				</div>
+				<p>收货信息：<button class="shouHuo_button">保存</button></p>
+				<div class="shouHuo">
+					<ul>
+						<li>运输单号</li>
+						<li>收货人</li>
+						<li>联系电话</li>
+						<li>地址</li>
+					</ul>
+					<ul>
+						<li><input type="text" value="" placeholder="请输入运输单号" /></li>
+						<li><input type="text" value="" placeholder="请输入收货人姓名" /></li>
+						<li><input type="text" value="" placeholder="请输入联系电话" /></li>
+						<li><input type="text" value="" placeholder="请输入收货地址" /></li>
+					</ul>
+				</div>
+			</div>
+			<div class="content_wenDu hidden" id="wrapper" style="top:7rem;">
+				<div class="wenDu scroller">
+					<p>设备编号：<span></span></p>
+					<div id="scroll_boxXiang">
+						<ul class="hidden">
+							<li>温度：<span>24.6℃</span></li>
+							<li>时间：<span>2017-04-18 12:00:00</span></li>
+						</ul>
+					</div>
+					<div class="more"><i class="pull_icon"></i><span>上拉加载...</span></div>
+				</div>
+
+			</div>
+		</div>
+		<div class="wait">
+			数据加载中<span style="">……</span>
+		</div>
+		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/Upan_list.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>

@@ -64,6 +64,12 @@
 					"name": "📋使用说明书",
 					"key": "shuomingshu",
 					"sub_button": []
+				},
+				 {
+					"type": "view",
+					"name": "🔚消息推送",
+					"url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_messbangding.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect",
+					"sub_button": []
 				}
 			]
 		}

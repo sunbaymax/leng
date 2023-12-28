@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>杭州科拓供应链科技有限公司</title>
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/bangding.css" />
+	</head>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+	<body>
+		<!--<img class="hong_bj" src="img/bangding.png"/  disabled="true">	-->
+		<form class="hong_box">
+			<p>手机号码绑定</p>
+			<input type="text" class="" placeholder="" style="display: none;" />
+		<p >
+			<input type="text" class="phone" name="phone" placeholder="请输入手机号" />
+		</p>	
+			<!--<div class="yanZhengMa">获取验证码</div>
+			<input type="text" class="messageCode" name="messageCode" placeholder="请输入验证码" />-->
+				<div class="button" id="btnok">确认提交</div>
+			     <div class="button" id="banding">解除绑定</div>
+			
+		</form>
+		<script type="text/javascript">
+			var _url = window.location.href;
+		    var _openId = _url.match(/\?openId=\S+/)[0].replace("?openId=", "");
+		    if(_openId==''||_openId==null){
+		    	_openId=window.localStorage.getItem('openId')
+		    }
+			$("#banding").on('click', function() {
+				var phone = $("input[name='phone']").val();
+				var reg = /^1[345789]\d{9}$/;
+				if($(".phone").val() == "") {
+					alert("手机号不能为空!");
+					return false;
+				} else if(!reg.test(phone)) {
+					alert("请输入正确格式的手机号!");
+					return false;
+				} else {
+					$.ajax({
+						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/contact/unbundle",
+						type: "post",
+						dataType: "JSON",
+						data: {
+							phone: phone,
+							openid: _openId
+						},
+						success: function(data) {
+							console.log(data);
+							if(data.message == "success") {
+								alert('解绑成功');
+								window.location.reload()
+							} else {
+								alert('解绑失败');
+							}
+
+						},
+						error: function() {
+							alert("网络错误！！");
+							//window.location.href="binding_ok.html";
+						}
+					});
+				}
+
+			});
+
+			$("#btnok").on('click', function() {
+				var url = "http://www.ccsc58.com/json/03_00_tb_contact_openid.php";
+				console.log(_openId);
+				var phone = $("input[name='phone']").val();
+				window.localStorage.setItem("phone", phone);
+				var messageCode = $("input[name='messageCode']").val();
+				var admin_permit = "zjly8888";
+				var reg = /^1[3456789]\d{9}$/;
+				if($(".phone").val() == "") {
+					alert("手机号不能为空!");
+					return false;
+				}
+				if(!reg.test(phone)) {
+					alert("请输入正确格式的手机号!");
+					return false;
+				}
+				$.ajax({
+					url: "http://www.ccsc58.com/json/03_00_tb_contact_openid.php",
+					type: "post",
+					dataType: "JSON",
+					data: {
+						admin_permit: "zjly8888",
+						mobile: phone,
+						openid: _openId
+					},
+					success: function(data) {
+						console.log(data);
+						if(data.message == "sucess") {
+							console.log('恭喜您绑定成功,邦赢交投会推送最新消息给您！');
+							window.location.href = "binding_ok.html";
+						}
+						if(data.code == '20000') {
+							alert('微信号被绑定过了，请换一个手机号！');
+						}
+						if(data.code == '30000') {
+							alert('微信号被绑定过了，请换一个手机号！');
+						}
+					},
+					error: function() {
+						alert("网络错误！！");
+						//window.location.href="binding_ok.html";
+					}
+				});
+			});
+			$(".yanZhengMa").on('click', function() {
+				var val = $(this).text();
+
+				switch(val) {
+					case "获取验证码":
+						var url = "./yanzhengma.php";
+						var tel = $("input[name='phone']").val();
+						if(tel.length) {
+							var reg = /^1[345789]\d{9}$/;
+							if(reg.test(tel)) {
+								console.log("短信已发至您的手机");
+								var num = 60;
+								var setint = setInterval(function() {
+									$(".yanZhengMa").css({
+										'font-size': '14px'
+									});
+									$(".yanZhengMa").text(num + "秒后重新获取");
+									num -= 1;
+									if(num < 0) {
+										clearInterval(setint);
+										$(".yanZhengMa").css({
+											'font-size': '14px'
+										});
+										$(".yanZhengMa").text("获取验证码");
+									}
+								}, 1000);
+								$.post(url, {
+									tel: tel
+								}, function(msg) {
+
+									console.log(msg); //发送成功
+								});
+							} else {
+								alert('手机格式不正确');
+							}
+						} else {
+							alert('手机号不能为空');
+						}
+				}
+			});
+		</script>
+	</body>
+
+</html>

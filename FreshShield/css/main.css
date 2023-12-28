@@ -287,6 +287,7 @@ input {-webkit-appearance:none;border-radius: 0; /*去除input默认样式*/}
 	display: inline-block;
 	width: 18px;
 	height: 18px;
+	cursor: pointer;
 }
 .top02 .searchbox select{
 	  display: inline-block;
@@ -806,9 +807,9 @@ footer {
 .daoqi h4 {
     font-size: 16px;
     padding: 0;
-    margin: 10px 0 5px;
+    margin: 20px 0 5px;
 }
-.daoqi {
+/*.daoqi {
     padding: 0 15px;
     box-sizing: border-box;
     position: absolute;
@@ -820,7 +821,18 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
+}*/
+.daoqi {
+    padding: 0 15px;
+    box-sizing: border-box;
+    z-index: 100;
+    opacity: 0.95;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
 .pull_icon {
 	width: 25px;
 	height: 25px;

@@ -249,7 +249,7 @@
 	function my_machine_list(_jingDu, _weiDu, _dem) {
 		//console.log(_jingDu+","+_weiDu)
 		$.ajax({
-			url: "http://api.map.baidu.com/geoconv/v1/?ak=XP1alssWsEscC3NfYAhj6YfqKvgQgUXF&from=1&to=5",
+			url: "http://api.map.baidu.com/geoconv/v1/?ak=jmgKloGf3cOvRl3Y9pUAfvKZCTtCNGwj&from=1&to=5",
 			type: "post",
 			dataType: "JSONP",
 			data: {

@@ -294,6 +294,7 @@
 						let isbanben = $('input[name="banben"]:checked').val();
 						let surl = ''
 						if(isbanben == 'base') {
+							
 							surl = 'http://www.ccsc58.cc/wlgl/Admin/Humiture/downloadPDF/s/' + _machine_number + '/t1/' + _start_time + '/t2/' + _end_time + '/hanzi/1/total/2000/showShidu/' + ischoose
 						} else {
 							surl = "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/import_pdf?shebeibianma=" + _machine_number + "&t1=" + _start_time + "&t2=" + _end_time + "&showShidu="+ischoose+"&hanzi=1";
@@ -303,7 +304,9 @@
                         console.log(surl)
 						window.location.href = surl
 					} else if(_geshi == 2) {
-						window.location.href = "http://www.ccsc58.com/PHPExcel/PHPExcel/xls_out.php?s=" + _machine_number + "&t1=" + _start_time + "&t2=" + _end_time;
+						let excelurl="http://www.ccsc58.com/PHPExcel/PHPExcel/xls_out210811.php?s=" + _machine_number + "&t1=" + _start_time + "&t2=" + _end_time;
+						console.log(excelurl)
+						window.location.href = "http://www.ccsc58.com/PHPExcel/PHPExcel/xls_out210811.php?s=" + _machine_number + "&t1=" + _start_time + "&t2=" + _end_time;
 					}
 				}
 

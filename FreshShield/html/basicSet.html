@@ -18,8 +18,8 @@
 		</div>
 		<div class="content">
 			<div class="form">
-				<div>
-					<span>设备编号：</span><input type="number" class="shebeihao" readonly="readonly" />
+				<div style="display: flex;justify-content: space-between;">
+					<span>设备编号：</span><span class="shebeihao" style="text-align: right;padding-right: 5px;"></span>
 				</div>
 				<div>
 					<span>设备名称：</span><input type="text" class="shebeihaoname" readonly="readonly" />
@@ -30,9 +30,9 @@
 				<div>
 					<span>设备排序：</span><input type="number" class="sort" placeholder="请输入排序数" />
 				</div>
-				<div class="twoc divjihuo">
+				<!--<div class="twoc divjihuo">
 					<span>激活时间：</span><input type="text" class="activeTime" readonly="readonly" />
-				</div>
+				</div>-->
 				<div>
 					<span>到期时间：</span><input type="text" class="daoqiTime" readonly="readonly" /><button class="ispay isgopay">续费</button>
 				</div>
@@ -117,7 +117,7 @@
 						$(".divjihuo").hide();
 					}
 					<!-- 设备基本信息  -->
-					$(".form .shebeihao").val(_json.resultCode.shebeibianhao);
+					$(".form .shebeihao").text(_json.resultCode.shebeibianhao);
 					$(".form .shebeihao").attr('biao', _json.resultCode.GPS_Start);
 					$(".form .shebeihao").attr('yejian', _json.resultCode.yejianshangchuankaiguan);
 					$(".form .shebeihaoname").val(_json.resultCode.device_name);
@@ -131,8 +131,8 @@
 				}
 			});
 			$(".ispay").on("click",function(){
-				let num=$(".shebeihao").val();
-				location.href='buyflewpackage.html?num_m='+num;
+				
+				location.href='buyflewpackage.html?num_m='+_num_m;
 			})
 			$(".btnok button").on("click", function() {
 				var bieming = $(".bieming").val();

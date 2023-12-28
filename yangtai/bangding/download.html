@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>中集冷云</title>
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/bangding.css" />
+	</head>
+	<style>
+		body{
+			background: none;
+		}
+		.content{
+			width: 100vw;
+			height: 100vh;
+			background: #EEEEEE;
+		}
+		.title{
+			width: 100vw;
+			height: 20vh;
+			background: url(img/timg.jpg) no-repeat;
+		}
+		.bg{
+			text-align: center;
+		    font-size: 40px;
+		    line-height: 20vh;
+		    color: #ffffff;
+		  /*  margin: 80px 0px;*/
+		}
+		.content_img img{
+			width: 100vw;
+			height: 50vh;
+		}
+		.tupiao .android{
+			width: 35vw;
+			height: 6vh;
+			position: absolute;
+			top: 62vh;
+			left: 10vw;
+		}
+		.tupiao .apple{
+			width: 35vw;
+			height: 6vh;
+			position: absolute;
+			top: 62vh;
+			right: 10vw;
+		}
+		.titleW{
+			font-size: 14px;
+			margin-top: 8px;
+			text-align: center;
+            color: green;
+		}
+		.center{
+			text-align: center;
+		}
+		.margin1{
+			margin-left: 5vw;
+			margin-top: 2vh;
+			text-align: center;
+			width: 90vw;
+			color: #696969;
+		} 
+		.p-t-t{
+			text-align: center;
+		}
+	</style>
+	<body>
+		<div class="content">
+			<div class="title">
+				<p class="bg">下载中心</p>
+			</div>
+			<div class="content_img">
+				<img src="img/wd.png" />
+			</div>
+			<div class="tupiao">
+				<img src="img/xzazx.png"  class="android"/>
+				<img src="img/xzpgx.png"  class="apple" />
+			</div>
+			<div>
+				<div class="p-t-t ">
+                  <strong><p class="center margin1 fontSize" style="font-size: 20px; text-align: center;color: #161415;">中集冷云</p></strong>
+                  <p class="titleW" >——温湿度监控APP</p>
+                  <p class="center margin1 ">全程冷链监控，24小时监控设备信息的云平台
+                    <br>主要是对冷链物流过程中的货物和设备进行温度、湿度、位置、运行状态等全方位的实时监控，用户操作简单，可以实时查看设备当前运行状态、温湿度曲线、行驶轨迹、报警推送等</p>
+                  </div>
+			</div>
+		</div>
+	<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+	<script>
+		$(".android").on("click",function(){
+			window.location.href="https://sj.qq.com/myapp/detail.htm?apkName=com.ccsc.coldcloud";
+		});
+		$(".apple").on("click",function(){
+			window.location.href="https://itunes.apple.com/us/app/zhong-ji-leng-yun-wen-shi/id1173609882?mt=8";
+		});
+	 
+	</script>	
+	</body>
+</html>

@@ -1,6 +1,6 @@
 <?php	
 header("Content-type: text/html; charset=utf-8");
-$url = "http://www.zjcoldcloud.com/weixin/get_token_zlkj.php";
+$url = "http://www.ccsc58.com/weixin/get_token_zlkj.php";
 $access_token=file_get_contents($url);
 
 define("ACCESS_TOKEN", $access_token);
@@ -44,26 +44,38 @@ return file_get_contents("https://api.weixin.qq.com/cgi-bin/menu/delete?access_t
 $data = '{
 	"button": [
 		{
-			"name": "云平台",
+			"name": "温控平台",
 			"sub_button": [
 				{
+					"type": "miniprogram",
+					"name": "小程序版",
+					"url": "http://mp.weixin.qq.com",
+					"appid": "wx28db04fa5b729118",
+					"pagepath": "pages/index/index"
+				}, {
 					"type": "view",
-					"name": "温控平台",
+					"name": "微信版",
 					"url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_templatform.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect",
 					"sub_button": []
 				}, {
-					"type": "miniprogram",
-					"name": "智慧养殖",
-					"url": "http://mp.weixin.qq.com",
-					"appid": "wx3aefe01c475fe181",
-					"pagepath": "pages-breed/Login/main"
+					"type": "view",
+					"name": "电脑版",
+					"url": "https://mp.weixin.qq.com/s?__biz=MzIxNzU1MzIyNA==&mid=2247485770&idx=2&sn=27cbf7403467ecc0192c44bee311a05a&chksm=97f9496da08ec07b83027d93ce9afc15c1a0ca83c6179ae41c46990582bd9f905283dc08a97f&token=1988235242&lang=zh_CN#rd",
+					"sub_button": []
+				}, {
+					"type": "view",
+					"name": "微信报警",
+					"url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_messbangding.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect",
+					"sub_button": []
 				}
 			]
+			
 		}, {
-			"type": "view",
+			"type": "miniprogram",
 			"name": "智冷商城",
-			"url": "https://shop92005288.youzan.com/v2/showcase/homepage?alias=8BZnwKvlhe&dc_ps=2665872149977290753.300001",
-			"sub_button": []
+			"url": "http://mp.weixin.qq.com",
+			"appid": "wx2f42e1cbacc765d8",
+			"pagepath": "pages/common/blank-page/index?weappSharePath=pages%2Fhome%2Fdashboard%2Findex%3Fkdt_id%3D91813120"
 		},{
 			"name": "智冷服务",
 			"sub_button": [
@@ -82,7 +94,7 @@ $data = '{
 				{
 					"type": "view",
 					"name": "设备报修",
-					"url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_repair.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect",
+					"url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/RepairOrder/oauth2.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect",
 					"sub_button": []
 				},
 				{

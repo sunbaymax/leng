@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title>温湿度监控宝</title>
+	<link rel="stylesheet" type="text/css" href="../css/index.css" />
+	<link rel="stylesheet" type="text/css" href="../css/set.css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=8">
+	<meta http-equiv="Expires" content="0">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-control" content="no-cache">
+	<meta http-equiv="Cache" content="no-cache">
+	<style type="text/css">
+		.form div input {
+			display: block;
+			height: 3rem;
+			width: 10rem;
+			text-align: right;
+		}
+
+		.form div select {
+			display: block;
+			height: 3rem;
+			width: 14rem;
+			text-align: center;
+			background: none;
+		}
+
+		#message {
+			/*text-align: center;*/
+			color: #999999;
+			font-size: 13px;
+			height: 4rem;
+			line-height: 4rem;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.upgrade {
+			height: 2rem;
+			width: 6rem;
+			border-radius: 1rem;
+			background: #FFFFFF;
+			border: 1px solid #40C0C3;
+			color: #40C0C3;
+			margin-left: 5px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="header">
+		<img class="back_list" src="../img/back.png" /> 设备参数设置
+	</div>
+	<div class="content">
+		<div class="form">
+			<div>
+				<span>采集间隔：</span>
+				<!--<input type="number" class="cjjg" />-->
+				<select class="cjjg">
+
+				</select>
+				分钟
+			</div>
+			<div>
+				<span>上传间隔：</span>
+				<select class="scjg">
+
+				</select>
+				分钟
+				<!--<input type="text" type="number" class="scjg" />分钟-->
+			</div>
+			<p id="message">
+				<span></span><button class="upgrade">升级</button>
+			</p>
+			<!--<div>
+					<span>超温采集间隔：</span>
+					<select class="cwcjjg">
+						
+					</select>
+					分钟
+				</div>
+				<div>
+					<span>超温上传间隔：</span>
+					<select class="cwscjg">
+						
+					</select>
+					分钟
+				</div>-->
+			<!--<div>
+					<span>飞行模式开启：</span>
+					<div class='switch-wrap'>
+						<input type='checkbox' id='switch'>
+						<label for='switch'></label>
+					</div>
+				</div>-->
+			<!--<div class="starttime">
+					<span>开启时间：</span><input id="demo1" type="text" readonly="readonly" class="feixingstime">
+				</div>
+				<div class="endtime">
+					<span>关闭时间：</span><input id="demo2" type="text" readonly="readonly" class="feixingetime">
+				</div>-->
+		</div>
+		<div class="btnok">
+			<button>保存</button>
+		</div>
+
+	</div>
+
+	<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/iostime.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/index.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		for (var i = 1; i <= 200; i++) {
+			var options = "<option value='" + i + "'>" + i + "</option>";
+			$(".cjjg").append(options);
+			$(".scjg").append(options);
+			//			        $(".cwcjjg").append(options);
+			//			        $(".cwscjg").append(options);
+		}
+		/*
+		 * 获取用户的名称和密码；
+		 */
+		var _url = window.location.href;
+		var userinfo = JSON.parse(localStorage.getItem('isonline'));
+		var _userName = userinfo.user;
+		var _userPass = userinfo.pwd;
+		var copenid = userinfo.copenid == undefined ? '' : userinfo.copenid;
+		var _num_m = "";
+		var utype = userinfo.userType;
+
+		if (_url.indexOf("&") != -1) {
+			_num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "").replace("&", "");
+		} else {
+			_num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "");
+		}
+
+		$(".upgrade").on("click", function () {
+			window.location.href = "upbilldetail.html?num_m=" + _num_m + "&fid=" + 1;
+		});
+		$(".back_list").on("click", function () {
+			//				window.history.go(-1);
+			sessionStorage.setItem('paraset', 1);
+			window.location.href = 'details_lists.html?num_m=' + _num_m + '&'
+		});
+		var _openid = localStorage.getItem('openId');
+		var _ismaster = sessionStorage.getItem('ismaster');
+		if (_ismaster == 0) {
+			//				$("input[type='checkbox']").attr("disabled", true);
+			$("input").attr("disabled", true);
+			$("select").each(function () {
+				$(this).attr("disabled", "disabled");
+			});
+			$(".btnok button").css("background", "#ccc");
+			$(".btnok button").attr('disabled', true);
+		} else {
+			$(".btnok button").attr('disabled', false);
+		}
+
+		$.ajax({
+			type: "post",
+			url: "http://erpapi.ccsc58.com/xiandun/public/index.php/index/device/xiandun_get_device_param",
+			data: {
+				admin_permit: "zjly8888",
+				UserP: "w",
+				controller: "update",
+				admin_user: _userName,
+				admin_pass: _userPass,
+				SheBeiBianHao: _num_m,
+				openid: copenid,
+				userType: utype
+			},
+			success: function (data) {
+				var _json = JSON.parse(data);
+				if (_json.code == 1) {
+					alert(_json.message);
+					window.location.href = "../machineList.php";
+					return false;
+				} else if (_json.code == 30000) {
+					alert("没有查询到该设备");
+					window.location.href = "../machineList.php";
+					return false;
+				}
+				$(".cjjg").val(_json.resultCode.caiji_jiange_minute);
+				$(".scjg").val(_json.resultCode.fasong_jiange_minute);
+				//					$(".cwcjjg").val(_json.resultCode.chaowenchucunshijianjiange);
+				//					$(".cwscjg").val(_json.resultCode.chaowenshangchuanshijianjiange);
+				<!-- 设备工作参数设置  -->
+				//					if(_json.resultCode.feixingmoshikaiqi == 0) {
+				//						$("#switch").attr("checked", false);
+				//						$(".starttime").hide();
+				//						$(".endtime").hide();
+				//
+				//					} else {
+				//						$("#switch").attr("checked", true);
+				//						$(".starttime").show();
+				//						$(".endtime").show();
+				//					}
+				$(".btnok button").attr('biao', _json.resultCode.GPS_Start);
+				$(".btnok button").attr('taocan', _json.resultCode.flow_type);
+				$(".btnok button").attr('yejian', _json.resultCode.yejianshangchuankaiguan);
+				if (_json.resultCode.flow_type == 1) {
+
+					if (utype == 'b') {
+						$("#message").hide()
+					} else {
+						$("#message").show()
+						$("#message span").text("*该为A套餐上传间隔为5分钟及以上,请点击");
+					}
+				} else {
+					$("#message").hide()
+				}
+
+			},
+			error: function () {
+				console.log("网络错误！！！")
+			}
+		});
+
+		//						$("#switch").on("click", function() {
+		//							if($(this).is(":checked")) {
+		//								$(".starttime").show();
+		//								$(".endtime").show();
+		//							} else {
+		//								$(".starttime").hide();
+		//								$(".endtime").hide();
+		//								
+		//							}
+		//			
+		//						});
+		$(".btnok button").on("click", function () {
+			var _caiji_jiange_minute = $(".cjjg").val();
+			var _fasong_jiange_minute = $(".scjg").val();
+			//				var _cwcaiji_jiange_minute = $(".cwcjjg").val();
+			//				var _cwfasong_jiange_minute = $(".cwscjg").val();
+			var _GPS_Start = $(this).attr('biao');
+			var _feixingmoshikaiqi; //飞行开启时间
+			//				if($("#switch").is(":checked")) {
+			//					_feixingmoshikaiqi = 1;
+			//				} else {
+			//					_feixingmoshikaiqi = 0;
+			//				} //是否打印湿度；
+			//chaowenchucunshijianjiange:_cwcaiji_jiange_minute,
+			//							chaowenshangchuanshijianjiange:_cwfasong_jiange_minute
+			var utype = userinfo.userType;
+			var _openid = localStorage.getItem('openId');
+			if (utype == 'b') {
+				$.ajax({
+					type: "post",
+					url: "http://www.ccsc58.com/json/05_00_tb_device.php",
+					data: {
+						controller: "update",
+						admin_permit: "zjly8888",
+						UserP: "w",
+						shebeibianhao: _num_m,
+						admin_user: _userName,
+						admin_pass: _userPass,
+						caiji_jiange_minute: _caiji_jiange_minute,
+						fasong_jiange_minute: _fasong_jiange_minute,
+						feixingmoshikaiqi: _feixingmoshikaiqi
+
+					},
+					dataType: "json",
+					success: function (res) {
+						console.log(res)
+						if (res.code == 10000 && res.message == "success") {
+							alert("参数同步成功");
+							location.reload()
+
+						} else {
+							alert("信息保存失败，请重试！")
+						}
+					},
+					error: function () {
+						console.log("网络错误")
+					}
+				});
+			} else {
+				var _yejianshangchuankaiguan = $(".btnok button").attr('yejian');
+
+				var istaocan = $(".btnok button").attr('taocan');
+				console.log(istaocan, _fasong_jiange_minute)
+				if (istaocan == 1 && _fasong_jiange_minute < 5) {
+					alert('上传不能小于5分钟，请需升级套餐');
+					$(".scjg").val("5");
+					return false;
+				}
+
+				$.ajax({
+					type: "post",
+					url: "http://erpapi.ccsc58.com/xiandun/public/index.php/index/device/xiandun_update_device",
+					data: {
+						devid: _num_m,
+						GPS_Start: _GPS_Start,
+						UserP: "w",
+						caiji_jiange_minute: _caiji_jiange_minute,
+						fasong_jiange_minute: _fasong_jiange_minute,
+						feixingmoshikaiqi: _feixingmoshikaiqi,
+						yejianshangchuankaiguan: _yejianshangchuankaiguan,
+						openid: copenid,
+						userType: utype
+					},
+					dataType: "json",
+					success: function (res) {
+						if (res.code == 0 && res.message == "success") {
+							alert("参数同步成功");
+							location.reload()
+						} else {
+							alert("信息保存失败，请重试！")
+						}
+					},
+					error: function () {
+						console.log("网络错误")
+					}
+				});
+			}
+
+		})
+	</script>
+</body>
+
+</html>

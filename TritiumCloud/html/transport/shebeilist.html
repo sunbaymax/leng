@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>氚云温湿度在线监测系统</title>
+		<link rel="stylesheet" type="text/css" href="../../css/index.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/set.css" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=8">
+		<meta http-equiv="Expires" content="0">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-control" content="no-cache">
+		<meta http-equiv="Cache" content="no-cache">
+		<style type="text/css">
+			.content {
+			    width: 100%;
+			    height: auto;
+			    margin-top: 5.6rem;
+			    font-size: 1.4rem;
+			    padding: 0;
+			}
+          .paylist {
+				width: 1.8rem;
+				height: 2.2rem;
+				position: absolute;
+				top: 1rem;
+				right: 1rem;
+			}
+			.content .group{
+				background:#FFFFFF;
+				height: auto;
+				 padding: 0 2vw;
+				 box-sizing: border-box;
+				 margin: 15px 0 0;
+			}
+			.content .group .item{
+				display: flex;
+				height: 4rem;
+				align-items: center;
+				border-bottom: 1px solid #CCCC;
+			}
+			.content .group .item:last-child{
+				border:none
+			}
+			.group .item .itemleft{
+				display: inline-block;
+				width: 25vw;
+			}
+			.group .item .itemcenter{
+				display: flex;
+			    align-items: end;
+			    justify-content: space-between;
+				width: 60vw;
+			}
+			.group .item .wendu{
+				display: flex;
+			    align-items: end;
+			    justify-content: flex-start;
+				width: 60vw;
+			}
+			.group .item .itemcenter .delicon{
+				display: inline-block;
+				width: 1.6rem;
+				height: 1.6rem;
+			}
+			.group .item .itemright{
+				display: flex;
+			    width: 15vw;
+			    vertical-align: middle;
+			    text-align: right;
+			    align-items: end;
+			    justify-content: flex-end;
+			}
+			.item .itemright .saoyisao{
+				display: inline-block;
+				width: 2rem;
+				height: 2rem;
+			}
+			.item .itemright .xuanze{
+				margin-right: 0.5rem;
+				display: inline-block;
+				width: 1.5rem;
+				height: 2.2rem;
+			}
+			.group .item .itemcenter select {
+				display: block;
+				height: 3rem;
+				width: 16rem;
+				text-align: center;
+				background: none;
+				margin-right: 5px;
+			}
+			.checkbox-item{
+				margin-right: 20px;
+				display: inline-block;	
+				position: relative;
+			}
+			.checkbox-item label{
+				line-height: 34px;
+				vertical-align: middle;
+				cursor: pointer;
+			}
+			.checkbox-item input[type="checkbox"] {
+				margin-right: 5px;
+				width: 20px;
+				height: 20px;
+				visibility: hidden;
+			}
+			/* 设计新的checkbox，位置 */
+			.checkbox-item label:BEFORE {
+				content: '';
+				position: absolute;
+				top: 5px;
+				left: 0px;
+				width: 20px;
+				height: 20px;
+				border-radius: 11px;
+				border: 1px solid #bbb;
+				background: #fff;
+				cursor: pointer;
+			}
+			/* 点击初始的checkbox，将新的checkbox关联起来 */
+			.checkbox-item input[type="checkbox"]:checked +label:BEFORE {
+				content: '\2713';
+				display: block;
+				line-height: 20px;
+				vertical-align: middle;
+				text-align: center;
+				background-color: #1890FF;
+			    color: #ffffff;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="header">
+			<img class="back_list" src="../../img/back.png" /> 
+			<span>选择设备 </span>
+		</div>
+		<div class="content">
+			<div class="group">
+			    <!--<div class="item checkbox-item">
+					<input name="checkbox" id="item1" type="checkbox" value="500801"/>
+					<label class="checkbox-label" for="item1">500801</label>
+			    </div>-->
+			</div>
+			
+			<div class="btnok">
+				<button>确定</button>
+			</div>
+
+		</div>
+		<script src="../../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/iostime.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			var userinfo = JSON.parse(localStorage.getItem('isonline'));
+			var _userName = userinfo.user;
+			var _userPass = userinfo.pwd;
+			let _url="https://www.zjcoldcloud.com/xiandun/public/index.php/index/device/device_list"
+			$.ajax({
+					url: "http://ccsc58.com/json/00_01_tb_shebeidongtai.php",
+					type: "post",
+					data: {
+						admin_permit: "zjly8888",
+						UserP: "x",
+						admin_user: _userName,
+						admin_pass: _userPass,
+						StartNo: 0,
+						Length: 500,
+						hour: 1
+					},
+				    dataType:'json',
+				success:function(res){
+					 let html=''
+					if(res.code==10000){
+						  $.each(res.resultCode, function(index,val) {
+						  	console.log(index,val)
+						  	html=`<div class="item checkbox-item">
+									<input name="checkbox" id='item-${val.shebeibianhao}' type="checkbox" value='${val.shebeibianhao}'/>
+									<label class="checkbox-label" for='item-${val.shebeibianhao}'>${val.shebeibianhao}</label>
+							    </div>`;
+							    $('.content .group').append(html)
+						  });
+					}else{
+						$('.content .group').html('')
+					}
+			
+				},
+				error:function(err){
+					console.log(err)
+				}
+				
+			});
+			//将时间函数转换成所需样式的并加载到页面中去；
+			window.alert = function(name) {
+				var iframe = document.createElement("IFRAME");
+				iframe.style.display = "none";
+				iframe.setAttribute("src", 'data:text/plain,');
+				document.documentElement.appendChild(iframe);
+				window.frames[0].window.alert(name);
+				iframe.parentNode.removeChild(iframe);
+			}
+			$('.btnok button').on('click',function(){
+				let read=JSON.parse(sessionStorage.getItem('waybill'));
+//				console.log(read)
+//				let arr=[]
+				let str=''
+				 $("input[type=checkbox]:checked").each(function(){
+				     // arr.push($(this).val())
+				      str=str+$(this).val()+','
+				     
+				});
+				if(str==''){
+					alert('请选择设备');
+					return false;
+				}
+				 read[2]=str
+				 sessionStorage.setItem('waybill',JSON.stringify(read));
+				 location.href='Initiate.php'
+			})
+			$('.back_list').click(function(){
+				window.history.go(-1)
+			})
+		</script>
+		
+	</body>
+
+</html>

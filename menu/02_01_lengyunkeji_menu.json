@@ -1,0 +1,50 @@
+{
+	"button": [
+		{
+			"type": "view",
+			"name": "温控平台",
+			"url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_templatform.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect",
+			"sub_button": []
+		}, {
+			"type": "miniprogram",
+			"name": "智冷商城",
+			"url": "http://mp.weixin.qq.com",
+			"appid": "wx2f42e1cbacc765d8",
+			"pagepath": "pages/common/blank-page/index?weappSharePath=pages%2Fhome%2Fdashboard%2Findex%3Fkdt_id%3D91813120"
+		},{
+			"name": "智冷服务",
+			"sub_button": [
+				{
+					"type": "view",
+					"name": "产品资料",
+					"url": "http://www.ccsc58.cc/weixinnew/menuSwiper/product.html",
+					"sub_button": []
+				},
+				{
+					"type": "view",
+					"name": "发票申请",
+					"url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/mobileinvoice/oauth2.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect",
+					"sub_button": []
+				},
+				{
+					"type": "view",
+					"name": "设备报修",
+					"url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_repair.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect",
+					"sub_button": []
+				},
+				{
+					"type": "view",
+					"name": "充值缴费",
+					"url": "http://www.ccsc58.cc/leng/mypay/index.html",
+					"sub_button": []
+				},
+				{
+					"type": "click",
+					"name": "联系我们",
+					"key": "http://www.ccsc58.cc/weixinnew/menuSwiper/contact.html",
+					"sub_button": []
+				}
+			]
+		}
+	]
+}

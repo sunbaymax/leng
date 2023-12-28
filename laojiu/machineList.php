@@ -125,7 +125,7 @@
 		</div>
 
 		<script src="../js/iscroll.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=XP1alssWsEscC3NfYAhj6YfqKvgQgUXF" charset="utf-8"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=jmgKloGf3cOvRl3Y9pUAfvKZCTtCNGwj" charset="utf-8"></script>
 		<script type="text/javascript" src="../js/jquery-1.11.0.js"></script>
 		<script type="text/javascript" src="../js/index.js"></script>
 		<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" charset="utf-8"></script>
@@ -371,7 +371,7 @@
 			function my_machine_list(_jingDu, _weiDu, _dem) {
 				//console.log(_jingDu+","+_weiDu)
 				$.ajax({
-					url: "http://api.map.baidu.com/geoconv/v1/?ak=XP1alssWsEscC3NfYAhj6YfqKvgQgUXF&from=1&to=5",
+					url: "http://api.map.baidu.com/geoconv/v1/?ak=jmgKloGf3cOvRl3Y9pUAfvKZCTtCNGwj&from=1&to=5",
 					type: "post",
 					dataType: "JSONP",
 					data: {

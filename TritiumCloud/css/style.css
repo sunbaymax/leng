@@ -1,0 +1,448 @@
+#wrapper {
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 4rem;
+	bottom: 5rem;
+	overflow: hidden;
+	z-index: 1;
+	background-color: #ccc;
+}
+
+#wrapper li {
+	width: 42.5%;
+	height: 20rem;
+	border: 1px solid #ccc;
+	float: left;
+	box-sizing: border-box;
+	margin-left:5%;
+	margin-top:5%;
+}
+
+#wrapper li .li_top {
+	width: 100%;
+	height: 75%;
+	box-sizing: border-box;
+}
+
+#wrapper li .li_top img {
+	width: 50%;
+	height: 80%;
+	margin:10% 0 0 25%;
+}
+
+#wrapper li .li_bottom {
+	width: 100%;
+	height: 25%;
+	font-size: 1rem;
+	line-height:2.5rem;
+}
+#wrapper li .li_bottom span:nth-of-type(2){
+	font-size:1.5rem;
+	color:#FF8603;
+}
+.more {
+	height: 4rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: blue;
+}
+
+.pull_icon {
+	width: 25px;
+	height: 25px;
+	background-image: url('../images/pull.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 25px;
+	transition: all .5s;
+}
+
+.more span {
+	padding-left: .5rem;
+}
+
+.scroller {
+	background-color: #fff;
+}
+
+.more .flip {
+	transform: rotate(180deg);
+}
+
+.loading {
+	background-image: url('../images/loading.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 25px;
+}
+
+.more .loading {
+	-webkit-transform: rotate(0deg) translateZ(0);
+	-webkit-transition-duration: 0;
+	-webkit-animation-name: loading;
+	-webkit-animation-duration: 2s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes loading {
+	from {
+		-webkit-transform: rotate(0deg) translateZ(0);
+	}
+	to {
+		-webkit-transform: rotate(360deg) translateZ(0);
+	}
+}
+
+.clear {
+	content: ”.”;
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+.header input{
+	width:80%;
+	height:2rem;
+	border:none;
+	outline:none;
+	border-radius: 5px;
+	text-align: center;
+	float:left;
+	margin:1rem 0 0 6%;
+}
+.header .search_shop{
+	display:inline-block;
+	width:1.5rem;
+	height:1.5rem;
+	margin:1.25rem 0 0 5px;
+	float:left;
+}
+.content{
+	margin-bottom:5rem;
+	margin-top:4rem;
+}
+.swiper-container{
+	width:100vw;
+	height:60vw;
+	border-bottom: 1px solid rgba(0,0,0,0.3);
+}
+.swiper-wrapper{
+	width:100%;
+	height:100%;
+	text-align: center;
+}
+.swiper-wrapper img{
+	height:90%;
+	margin-top:2.5%;
+}
+.swiper-pagination{
+	width:3rem;
+	height:3rem;
+	background:rgba(140,140,140,1);
+	border-radius: 50%;
+	text-align: center;
+	line-height: 3rem;
+	bottom:1rem;
+	left:1rem;
+	color:#f7f7f7;
+}
+.swiper-pagination-current{
+	font-size:1.5rem;
+}
+.swiper-pagination-total{
+	font-size:1rem;
+}
+/*购物车底部布局*/
+.shop_car{
+	width:100%;
+	height: 5rem;
+	position:fixed;
+	left:0;
+	bottom:0;
+	font-size:1rem;
+	z-index: 5;
+}
+.shop_car .guanZhu{
+	width:30%;
+	height:100%;
+	text-align: center;
+	background:#333333;
+	overflow: hidden;
+} 
+.shop_car .guanZhu img{
+	width:2rem;
+	height:2rem;
+	margin-top:0.5rem;
+}
+.shop_car .guanZhu div{
+	width:100%;
+	height:2.5rem;
+	color:#F9F9F9;
+}
+.shop_car_button{
+	width:40%;
+	height:100%;
+	line-height: 5rem;
+	text-align: center;
+	background:#FF8503;
+	color:#f9f9f9;
+	font-size:2rem;
+}
+.car_shu{
+	position:absolute;
+	background:#000;
+	width:1rem;
+	height:1rem;
+	left:46%;
+	top:1px;
+	border-radius: 50%;
+	border:2px solid #f9f9f9;
+	background:#FF8603;
+	color:#f9f9f9;
+	font-size:1rem;
+	text-align: center;
+	line-height: 1rem;
+	overflow: hidden;
+}
+/*内容部分布局*/
+.shop_name{
+	width:95%;
+	margin-left:2.5%;
+	height:6rem;
+	line-height:3rem;
+	font-size:1.75rem;
+	overflow: hidden;
+}
+.shop_jiage{
+	width:95%;
+	margin-left:2.5%;
+	height:3rem;
+	line-height:3rem;
+	font-size:2rem;
+	color:#FF8603;
+	border-bottom:1px solid rgba(0,0,0,0.3)
+}
+.shop_guige{
+	width:95%;
+	margin-left:2.5%;
+	height:3rem;
+	line-height:3rem;
+	font-size:1.5rem;
+	color:#818181;
+	border-bottom:1px solid rgba(0,0,0,0.3)
+}
+.shop_guige img{
+	width:1rem;
+	height:1rem;
+	float:right;
+	margin-right:1rem;
+	margin-top:1rem;
+}
+.sheBeiCanShu{
+	width:100%;
+}
+.sheBeiCanShu div{
+	width:100%;
+	height:5rem;
+	text-align: center;
+	line-height:5rem;
+	font-size:1.5rem;
+}
+.sheBeiCanShu img{
+	width:100%;
+}
+.dingdan_guige{
+	position:fixed;
+	width:100%;
+	height:0;
+	top:0;
+	left:0;
+	background:rgba(0,0,0,.5);
+	z-index: 6;
+	overflow: hidden;
+}
+.dingdan_tanchuang{
+	width:100%;
+	height:80vh;
+	position:absolute;
+	bottom:0;
+	left:0;
+	background:#fefefe;
+}
+.dingdan_tanchuang_top{
+	width:80%;
+	height:10rem;
+	margin-left:10%;
+}
+.dingdan_tanchuang_top div:nth-of-type(1){
+	width:30%;
+	height:100%;
+	box-sizing: border-box;
+}
+.dingdan_tanchuang_top div:nth-of-type(1) img{
+	width:50%;
+	margin:10% 0 0 25%;
+}
+.dingdan_tanchuang_top div:nth-of-type(2){
+	width:60%;
+	height:100%;
+}
+.dingdan_tanchuang_top div:nth-of-type(2) p:nth-of-type(1){
+	color:#FF8603;
+	height:5rem;
+	font-size:2rem;
+	line-height:5rem;
+}
+.dingdan_tanchuang_top div:nth-of-type(2) p{
+	width:100%;
+	height:2rem;
+	color:#999999;
+	line-height:2rem;
+}
+.dingdan_tanchuang_top div:nth-of-type(2) p:nth-of-type(2){
+	margin-top:1rem;
+}
+.dingdan_tanchuang_top div:nth-of-type(2) p:nth-of-type(3) span{
+	color:#FF8603;
+}
+.dingdan_tanchuang_middle,
+.dingdan_tanchuang_bottom{
+	width:90%;
+	height:5rem;
+	margin-left:10%;
+	margin-top:2rem;
+}
+.dingdan_tanchuang_middle p,
+.dingdan_tanchuang_bottom p{
+	width:100%;
+	height:2.5rem;
+	line-height:2.5rem;
+	font-size:1.5rem;
+}
+.dingdan_tanchuang_middle p span{
+	display:block;
+	float:left;
+	height:2rem;
+	margin-right:5px;
+	margin-top:0.25rem;
+	border:1px solid rgba(0,0,0,.3);
+	line-height: 2rem;
+	text-align: center;
+	box-sizing: border-box;
+}
+.dingdan_tanchuang_middle p .choose_color{
+	background:#FF8603;
+	color:#fefefe;
+}
+.dingdan_tanchuang_bottom{
+	width:90%;
+	height:5rem;
+	margin-left:10%;
+}
+.dingdan_tanchuang_bottom p span{
+	width:10%;
+	height:2rem;
+	font-size:2rem;
+	display: inline-block;
+	line-height: 2rem;
+	text-align: center;
+	color:#FF8603;
+	font-weight: bold;
+}
+.dingdan_tanchuang_bottom p span:nth-of-type(2){
+	font-size:1rem;
+	color:#000;
+	font-weight: normal;
+}
+.dingdan_tanchuang_bottom p .color{
+	color:#ccc;
+}
+.dingdan_tanchuang input{
+	width:80%;
+	height:3rem;
+	margin-top:2rem;
+	margin-left:10%;
+	line-height: 3rem;
+	background:#FF8603;
+	color:#f9f9f9;
+	font-size:1.5rem;
+	font-weight:bold;
+}
+.dingdan_tanchuang .chacha_shop{
+	width:1rem;
+	height:1rem;
+	position:absolute;
+	right:1rem;
+	top:1rem;
+}
+/*加入购物车的动画效果*/
+.shopCar_play{
+	width:50%;
+	height:30vh;
+	position:fixed;
+	bottom:100vh;
+	left:0px;
+	transform: rotate(0deg);
+	border-radius: 50%;
+	opacity:0;
+}
+@keyframes Playfire{
+	0%{
+		width:50%;
+		height:30vh;
+		left:0px;
+		bottom:100vh;
+		transform: rotate(0deg);
+	}/*
+	50%{
+		width:25%;
+		height:15vh;
+		top:50vh;
+		left:0px;
+	}*/
+	100%{
+		width:0%;
+		height:0vh;
+		bottom:0;
+		left:50vw;
+		transform: rotate(1080deg);
+	}
+}
+.add_car_success{
+	width:40%;
+	height:5rem;
+	position:fixed;
+	top:40vh;
+	left:30vw;
+	z-index: 15;
+	background:rgba(0,0,0,0.8);
+	border-radius: 5px;
+	text-align: center;
+	line-height: 2.5rem;
+	color:#f9f9f9;
+	font-size:1.5rem;
+	opacity: 0;
+	display:none;
+}
+.add_car_success span{
+	color:red;
+	font-weight:bold;
+	font-size: 2rem;
+}
+@keyframes success_form{
+	0%{
+		opacity: 0;
+	}
+	25%{
+		opacity: 1;
+	}
+	50%{
+		opacity: 0.5;
+	}
+	100%{
+		opacity: 0;
+	}
+}

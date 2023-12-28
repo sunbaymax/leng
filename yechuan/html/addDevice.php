@@ -158,7 +158,7 @@
 				}else{
 					$.ajax({
 						type: "post",
-						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/Device/bind_device",
+						url: "http://erpapi.ccsc58.com/xiandun/public/index.php/index/Device/bind_device",
 						data: {
 							mainname: _userName,
 							devicenumber: _num

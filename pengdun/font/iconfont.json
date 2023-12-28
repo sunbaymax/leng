@@ -1,0 +1,23 @@
+{
+  "id": "2317102",
+  "name": "棚盾公众号",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "869329",
+      "name": "位置",
+      "font_class": "weizhi",
+      "unicode": "e6da",
+      "unicode_decimal": 59098
+    },
+    {
+      "icon_id": "1157313",
+      "name": "时间 00",
+      "font_class": "shijian00",
+      "unicode": "e6ce",
+      "unicode_decimal": 59086
+    }
+  ]
+}

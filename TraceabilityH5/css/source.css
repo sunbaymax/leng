@@ -1,0 +1,217 @@
+html,
+body {
+	background: url(../img/bg.png) no-repeat;
+	width: 100%;
+	min-height: 100%;
+	background-size: 100% 100%;
+}
+
+.title {
+	height: 46px;
+	position: relative;
+	/*background: url(../img/titlebg.png) no-repeat;
+	background-size: 100% 100%;*/
+	background: rgb(3, 155, 67);
+	box-shadow: 0px 6px 30px rgba(3, 155, 67, 0.5);
+	/*box-shadow: 0px 12px 30px rgba(3, 155, 67, 0.3);*/
+	text-align: center;
+	color: #FFFFFF;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.title h4 {
+	color: rgb(255, 255, 255);
+	font-family: Noto Sans SC;
+	font-size: 21px;
+	font-weight: 500;
+	line-height: 32px;
+	letter-spacing: 0px;
+	text-align: center;
+}
+
+.title .closeIcon {
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	left: 20px;
+	top: 70px;
+	/*background: rgb(255, 255, 255);*/
+}
+
+.flex-align-center {
+	display: flex;
+	align-items: center;
+}
+
+.content {
+	padding: 15px 20px;
+	box-sizing: border-box;
+	position: relative;
+}
+
+.topImg {
+	position: absolute;
+	right: 10px;
+	bottom: 15px;
+	width: 36px;
+	height: 36px;
+	z-index: 99;
+}
+
+.greentxt {
+	color: #039B43;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.picihao {
+	background: rgb(255, 255, 255);
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+	border-radius: 14px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 16px;
+}
+
+.picihao label {
+	color: #313131;
+	font-weight: 600;
+}
+
+.imgbox {
+	margin: 20px auto 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.imgbox img {
+	width: 160px;
+	height: 160px;
+	border-radius: 50%;
+}
+
+.parkName {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.parkName h4 {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: rgb(49, 49, 49);
+	font-family: Noto Sans SC;
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 18px;
+	letter-spacing: 0px;
+	text-align: center;
+	font-weight: 600;
+}
+
+.time {
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(3, 155, 67, 0.05);
+	border-radius: 14px;
+}
+
+.time span {
+	color: rgb(3, 155, 67);
+	font-family: Noto Sans SC;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 18px;
+	letter-spacing: 0px;
+	text-align: center;
+}
+
+.listbox {
+	margin: 10px auto;
+}
+
+.listbox .l-title {
+	height: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.listbox .l-title .name {
+	color: rgb(49, 49, 49);
+	font-family: Noto Sans SC;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 18px;
+	letter-spacing: 0px;
+	text-align: center;
+	border-left: 3px solid #039B43;
+	padding-left: 5px;
+}
+
+.listbox .l-title .symbol {
+	border: 1px dashed rgb(3, 155, 67);
+	flex: 1;
+	margin: 0 5px;
+}
+
+.item {
+	background: rgb(255, 255, 255);
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 10px;
+	margin: 15px 0 15px 15px;
+	padding: 10px 15px;
+	box-sizing: border-box;
+	position: relative;
+	display: flex;
+	align-items: flex-start;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.item:not(:last-child)::before {
+	content: '';
+	width: 1px;
+	height: 75px;
+	position: absolute;
+	left: -18px;
+	top: 88px;
+	/*background-color: #999999;*/
+	border-left: 1px dashed #CCCCCC;
+}
+
+.container-fluid .item .timebg {
+	/*background: linear-gradient(90.00deg, rgba(30, 194, 125, 1.00), rgba(83, 218, 136, 1.00) 99.456%);
+	border-radius: 6px;*/
+	background: url(../img/titlebg.png) no-repeat;
+	background-size: 100% 100%;
+	font-size: 13px;
+	height: 34px;
+	line-height: 34px;
+	color: #FFFFFF;
+	width: 100%;
+	padding-left: 5px;
+	box-sizing: border-box;
+}
+
+.item .symbolIcon {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	background: rgb(80, 205, 123);
+	border-radius: 8px;
+	position: absolute;
+	left: -25px;
+}

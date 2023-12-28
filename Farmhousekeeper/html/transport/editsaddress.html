@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>农管家</title>
+		<link rel="stylesheet" type="text/css" href="../../css/index.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/set.css" />
+		<link rel="stylesheet" href="../../css/ydui.css" type="text/css">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=8">
+		<meta http-equiv="Expires" content="0">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-control" content="no-cache">
+		<meta http-equiv="Cache" content="no-cache">
+		<style type="text/css">
+			.content {
+			    width: 100%;
+			    height: auto;
+			    margin-top: 5.6rem;
+			    font-size: 1.4rem;
+			    padding: 0;
+			}
+          .paylist {
+				width: 1.8rem;
+				height: 2.2rem;
+				position: absolute;
+				top: 1rem;
+				right: 1rem;
+			}
+			.content .group{
+				background:#FFFFFF;
+				height: auto;
+				 padding: 0 2vw;
+				 box-sizing: border-box;
+				 margin: 15px 0 0;
+			}
+			.content .group .item{
+				display: flex;
+				height: 4rem;
+				align-items: center;
+				border-bottom: 1px solid #CCCC;
+			}
+			.content .group .item:last-child{
+				border:none
+			}
+			.group .item .itemleft{
+				display: inline-block;
+				width: 25vw;
+			}
+			.group .item .itemcenter{
+				display: flex;
+			    align-items: end;
+			    justify-content: space-between;
+				width: 60vw;
+			}
+			.item .itemcenter .address{
+				display: inline-block;
+				height: 7.4rem;
+			}
+			.backup .danhao{
+				display: inline-block;
+				height: 6rem;
+			}
+			.content .group .itemaddress {
+			    display: flex;
+			    height: auto;
+			    align-items: center;
+			    border-bottom: 1px solid #CCCC;
+			}
+			.content .group .backup {
+			    display: flex;
+			    height: auto;
+			    align-items: center;
+			    border-bottom: 1px solid #CCCC;
+			}
+			.group .item .wendu{
+				display: flex;
+			    align-items: end;
+			    justify-content: flex-start;
+				width: 60vw;
+			}
+			.group .item .itemcenter .delicon{
+				display: inline-block;
+				width: 1.6rem;
+				height: 1.6rem;
+			}
+			.group .item .itemright{
+				display: flex;
+			    width: 15vw;
+			    vertical-align: middle;
+			    text-align: right;
+			    align-items: end;
+			    justify-content: flex-end;
+			}
+			.item .itemright .saoyisao{
+				display: inline-block;
+				width: 2rem;
+				height: 2rem;
+			}
+			.item .itemright .xuanze{
+				margin-right: 0.5rem;
+				display: inline-block;
+				width: 1.5rem;
+				height: 2.2rem;
+			}
+			.group .item .itemcenter select {
+				display: block;
+				height: 3rem;
+				width: 16rem;
+				text-align: center;
+				background: none;
+				margin-right: 5px;
+			}
+			* {
+			    box-sizing: border-box;
+			}
+			.content .group .item input{
+				display: inline-block;
+				width: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="header">
+			<img class="back_list" src="../../img/back.png" /> 
+			<span>修改收货地址 </span>
+		</div>
+		<div class="content">
+			<div class="group">
+			    <div class="item">
+			       <div class="itemleft">
+			        	收货人
+			       </div>	
+			       <div class="itemcenter">
+			        	<input class="name" placeholder="请输入收货人"/>
+			       </div>	
+			    </div>
+			    <div class="item">
+			       <div class="itemleft">
+			        	联系电话
+			       </div>	
+			       <div class="itemcenter">
+			        	<input class="tel" placeholder="请输入联系电话"/>
+			       </div>	
+			    </div>
+			    <div class="item">
+			       <div class="itemleft">
+			        	收货单位
+			       </div>	
+			       <div class="itemcenter">
+			        	<input class="company" placeholder="请输入收货单位"/>
+			       </div>	
+			    </div>
+			    <div class="item">
+			       <div class="itemleft">
+			        	收货地址
+			       </div>	
+			       <div class="itemcenter">
+			        	<input class="area" id="J_Address" placeholder="请输入收货地址" readonly="readonly"/>
+			       </div>	
+			       <div class="itemright">
+			    		<img src="../../img/right_shop_car.png" class="xuanze"/>
+			    	</div>
+			    </div>
+			    <div class="item itemaddress">
+			       <div class="itemleft">
+			        	详细地址
+			       </div>	
+			       <div class="itemcenter">
+			        	<input class="danhao address" placeholder="如街道、门牌号、小区等"/>
+			       </div>	
+			    </div>
+			    <div class="item backup">
+			       <div class="itemleft">
+			        	备注
+			       </div>	
+			       <div class="itemcenter">
+			        	<input class="danhao" placeholder="请输入备注信息"/>
+			       </div>	
+			    </div>
+	
+		
+			</div>
+
+
+			<div class="btnok">
+				<button>保存</button>
+			</div>
+
+		</div>
+		<script src="../../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="../../js/ydui.citys.js"></script>
+	    <script type="text/javascript" src="../../js/ydui.js"></script>
+		<script src="../../js/iostime.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			function getQueryVariable(variable)
+			{
+			       var query = window.location.search.substring(1);
+			       var vars = query.split("&");
+			       for (var i=0;i<vars.length;i++) {
+			               var pair = vars[i].split("=");
+			               if(pair[0] == variable){return pair[1];}
+			       }
+			       return(false);
+			}
+			let _id=getQueryVariable("id");
+			$.ajax({
+				type:"post",
+				url:"http://www.zjcoldcloud.com/xiandun/public/index.php/index/transport/get_shouhuodizhi",
+				async:true,
+				data:{
+					id:_id,
+				},
+				dataType:'json',
+				success:function(res){
+					console.log(res)
+					if(res.code==0){
+						$('.name').val(res.data.shouhuoren)
+				        $('.company').val(res.data.shouhuodanwei)
+				        $('#J_Address').val(res.data.province+' '+res.data.city+' '+res.data.district)
+				        $('.address').val(res.data.shouhuodizhi)
+			            $('.tel').val(res.data.shouhuorentel)
+				        $('.backup .danhao').val(res.data.beizhu)
+					}
+				},
+				error:function(err){
+					console.log(err)
+				}
+			});
+				! function() {
+				var $target = $('#J_Address');
+
+				$target.citySelect();
+
+				$target.on('click', function(event) {
+					event.stopPropagation();
+					$target.citySelect('open');
+				});
+				$('html , body').animate({
+					scrollTop: 0
+				}, 'slow');
+
+				$target.on('done.ydui.cityselect', function(ret) {
+					$(this).val(ret.provance + ' ' + ret.city + ' ' + ret.area);
+				});
+			}();
+			$(".back_list").on("click", function() {
+				//window.location.href = "../machineList.php";
+				window.history.go(-1);
+			});
+			var userinfo = JSON.parse(localStorage.getItem('isonline'));
+			var _userName = userinfo.user;
+			var _userPass = userinfo.pwd;
+			var _openid = userinfo.copenid;
+			var _suoshujigou = userinfo.suoshujigou;
+			$(".btnok button").on("click", function() {
+				let name=$('.name').val()
+				let tel=$('.tel').val()
+				let company=$('.company').val()
+				let inputAddress=$('#J_Address').val()
+				let address=$('.address').val()
+				let backup=$('.backup .danhao').val()
+				let arraddress = inputAddress.split(' ');
+				let _depart = arraddress[0];
+				let _city = arraddress[1];
+				let _qu = arraddress[2];
+				$.ajax({
+					type:"post",
+					url:"http://www.zjcoldcloud.com/xiandun/public/index.php/index/transport/save_shouhuodizhi",
+					async:true,
+					data:{
+						id:_id,
+						yonghuming:_userName,
+						suoshujigou:_suoshujigou,
+						shouhuodanwei:company,
+						shouhuoren:name,
+						shouhuorentel:tel,
+						danweibianhao:'',
+						shouhuodizhi:address,
+						province:_depart,
+						city:_city,
+						district:_qu,
+						beizhu:backup,
+					},
+					dataType:'json',
+					success:function(res){
+						if(res.code==0){
+							alert("修改成功");
+							setTimeout(function(){
+								location.href='shouhuolist.html'
+							},1500)
+						}else{
+							alert(res.message)
+						}
+					},
+					error:function(err){
+						
+					}
+				});
+			});
+		</script>
+		
+	</body>
+
+</html>

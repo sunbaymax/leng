@@ -1,369 +1,370 @@
 <!doctype html>
 <html class="no-js">
 
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="description" content="">
-		<meta name="keywords" content="">
-		<meta name="format-detection" content="telephone=no">
-		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>页川云平台</title>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title>页川云平台</title>
 
-		<!-- Set render engine for 360 browser -->
-		<meta name="renderer" content="webkit">
+	<!-- Set render engine for 360 browser -->
+	<meta name="renderer" content="webkit">
 
-		<!-- No Baidu Siteapp-->
-		<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<!-- No Baidu Siteapp-->
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-		<!-- <link rel="icon" type="image/png" href="assets/i/favicon.png"> -->
+	<!-- <link rel="icon" type="image/png" href="assets/i/favicon.png"> -->
 
-		<!-- Add to homescreen for Chrome on Android -->
-		<meta name="mobile-web-app-capable" content="yes">
-		<!-- <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png"> -->
+	<!-- Add to homescreen for Chrome on Android -->
+	<meta name="mobile-web-app-capable" content="yes">
+	<!-- <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png"> -->
 
-		<!-- Add to homescreen for Safari on iOS -->
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<meta name="apple-mobile-web-app-title" content="Amaze UI" />
-		<!--  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png"> -->
+	<!-- Add to homescreen for Safari on iOS -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-title" content="Amaze UI" />
+	<!--  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png"> -->
 
-		<!-- Tile icon for Win8 (144x144 + tile color) -->
-		<!-- <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png"> -->
-		<meta name="msapplication-TileColor" content="#0e90d2">
+	<!-- Tile icon for Win8 (144x144 + tile color) -->
+	<!-- <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png"> -->
+	<meta name="msapplication-TileColor" content="#0e90d2">
 
-		<!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
-		<!--
+	<!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+	<!--
     <link rel="canonical" href="http://www.example.com/">
     -->
 
-		<link rel="stylesheet" href="../css/index.css">
+	<link rel="stylesheet" href="../css/index.css">
 
-		<style>
-			* {
-				padding: 0;
-				margin: 0;
-				/*box-sizing: border-box;*/
-			}
-			
-			header {
-				position: fixed;
-				top: 0;
-				left: 0;
-				z-index: 999;
-				width: 100%;
-				height: 49px;
-				background-color: #333;
-				color: #fff;
-			}
-			
-			header .back {
-				position: absolute;
-				top: 0;
-				left: 0;
-				display: inline-block;
-				padding-left: 5px;
-				font-size: 30px;
-			}
-			
-			header p {
-				margin: 0;
-				line-height: 49px;
-				font-size: 16px;
-				text-align: center;
-			}
-			
-			.register {
-				margin-top: 5rem;
-				/*padding: 8px 6px;*/
-				font-size: 1.4rem;
-				padding: 0 2vw;
-				box-sizing: border-box;
-			}
-			
-			.res-item {
-				position: relative;
-				width: 100%;
-				border-radius: 4px;
-				/*margin-bottom: 8px;*/
-				height: 4rem;
-				background-color: #fff;
-				margin-top: 1rem;
-			}
-			
-			.res-icon {
-				position: absolute;
-				left: 8px;
-				top: 5px;
-				z-index: 100;
-				display: inline-block;
-				font-size: 18px;
-				color: #9c9c9c;
-			}
-			
-			.res-item .input-item {
-				display: inline-block;
-				width: 100%;
-				padding-left: 1rem;
-				box-sizing: border-box;
-				height: 4rem;
-				border: none;
-				font-size: inherit;
-				border-radius: 0.5rem;
-			}
-			
-			.res-item .input-item:focus {
-				outline-offset: 0;
-				outline: -webkit-focus-ring-color auto -2px;
-				background-color: #fefffe;
-				border: 1px solid #55CAC4;
-				outline: 0;
-				-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 5px rgba(226, 25, 69, .3);
-				box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 5px rgba(226, 25, 69, 0.3);
-			}
-			
-			.res-item .input-item:focus+.res-icon {
-				color: #e21945;
-			}
-			
-			.yanzhengma {
-				display: inline-block;
-				height: 3rem;
-				width: 8rem;
-				line-height: 3rem;
-				/* padding: 0.5rem 0.8rem; */
-				position: absolute;
-				right: 10px;
-				top: 0.5rem;
-				z-index: 100;
-				font-size: 1.3rem;
-				border: none;
-				background-color: #55CAC4;
-				color: #fff;
-				border-radius: 0.5rem;
-			}
-			
-			.yanzhengma:disabled {
-				background-color: #ddd;
-			}
-			
-			.res-btn {
-				margin-top: 20rem;
-				text-align: center;
-			}
-			
-			.res-btn button {
-				width: 16rem;
-				height: 4rem;
-				background: #40C0C3;
-				border-radius: 5rem;
-				border: none;
-				color: #ffffff;
-				font-size: 1.5rem;
-			}
-			
-			.res-btn button:focus {
-				color: #fff;
-			}
-			
-			.jiediv {
-				height: 4rem;
-				line-height: 4rem;
-				text-align: end;
-				margin-right: 1rem;
-			}
-			
-			.jiediv a {
-				text-decoration: none;
-				color: #3299fe;
-			}
-		</style>
-	</head>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+			/*box-sizing: border-box;*/
+		}
 
-	<body>
-		<!--[if lte IE 9]>
+		header {
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 999;
+			width: 100%;
+			height: 49px;
+			background-color: #333;
+			color: #fff;
+		}
+
+		header .back {
+			position: absolute;
+			top: 0;
+			left: 0;
+			display: inline-block;
+			padding-left: 5px;
+			font-size: 30px;
+		}
+
+		header p {
+			margin: 0;
+			line-height: 49px;
+			font-size: 16px;
+			text-align: center;
+		}
+
+		.register {
+			margin-top: 5rem;
+			/*padding: 8px 6px;*/
+			font-size: 1.4rem;
+			padding: 0 2vw;
+			box-sizing: border-box;
+		}
+
+		.res-item {
+			position: relative;
+			width: 100%;
+			border-radius: 4px;
+			/*margin-bottom: 8px;*/
+			height: 4rem;
+			background-color: #fff;
+			margin-top: 1rem;
+		}
+
+		.res-icon {
+			position: absolute;
+			left: 8px;
+			top: 5px;
+			z-index: 100;
+			display: inline-block;
+			font-size: 18px;
+			color: #9c9c9c;
+		}
+
+		.res-item .input-item {
+			display: inline-block;
+			width: 100%;
+			padding-left: 1rem;
+			box-sizing: border-box;
+			height: 4rem;
+			border: none;
+			font-size: inherit;
+			border-radius: 0.5rem;
+		}
+
+		.res-item .input-item:focus {
+			outline-offset: 0;
+			outline: -webkit-focus-ring-color auto -2px;
+			background-color: #fefffe;
+			border: 1px solid #55CAC4;
+			outline: 0;
+			-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 5px rgba(226, 25, 69, .3);
+			box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 5px rgba(226, 25, 69, 0.3);
+		}
+
+		.res-item .input-item:focus+.res-icon {
+			color: #e21945;
+		}
+
+		.yanzhengma {
+			display: inline-block;
+			height: 3rem;
+			width: 8rem;
+			line-height: 3rem;
+			/* padding: 0.5rem 0.8rem; */
+			position: absolute;
+			right: 10px;
+			top: 0.5rem;
+			z-index: 100;
+			font-size: 1.3rem;
+			border: none;
+			background-color: #55CAC4;
+			color: #fff;
+			border-radius: 0.5rem;
+		}
+
+		.yanzhengma:disabled {
+			background-color: #ddd;
+		}
+
+		.res-btn {
+			margin-top: 20rem;
+			text-align: center;
+		}
+
+		.res-btn button {
+			width: 16rem;
+			height: 4rem;
+			background: #40C0C3;
+			border-radius: 5rem;
+			border: none;
+			color: #ffffff;
+			font-size: 1.5rem;
+		}
+
+		.res-btn button:focus {
+			color: #fff;
+		}
+
+		.jiediv {
+			height: 4rem;
+			line-height: 4rem;
+			text-align: end;
+			margin-right: 1rem;
+		}
+
+		.jiediv a {
+			text-decoration: none;
+			color: #3299fe;
+		}
+	</style>
+</head>
+
+<body>
+	<!--[if lte IE 9]>
     <p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a
       href="http://browsehappy.com/" target="_blank">升级浏览器</a>
       以获得更好的体验！</p>
     <![endif]-->
-		<div class="header"><img class="back_list" src="../img/back.png" />微信解绑</div>
-		<!--<header>
+	<div class="header"><img class="back_list" src="../img/back.png" />微信解绑</div>
+	<!--<header>
         <i class="am-icon-angle-left back"></i>
         <p>账号注册</p>
     </header>-->
-		<div class="register">
-			<div class="res-item">
+	<div class="register">
+		<div class="res-item">
 
-				<input type="tel" placeholder="手机号" class="input-item mobile" readonly="readonly" id="telphone">
-				<i class="res-icon am-icon-phone"></i>
-			</div>
-			<div class="res-item">
+			<input type="tel" placeholder="手机号" class="input-item mobile" readonly="readonly" id="telphone">
+			<i class="res-icon am-icon-phone"></i>
+		</div>
+		<div class="res-item">
 
-				<input type="text" placeholder="验证码" class="input-item yanzheng">
-				<i class="res-icon am-icon-mobile"></i>
-				<button type="button" class="yanzhengma">发送验证码</button>
-			</div>
-
-			<div class="res-btn">
-				<button type="button" id="res-btn" class="am-btn am-btn-block">提交</button>
-			</div>
-			<!--<div class="jiediv">
-				<a href="javascript:void(0)" class="cancel">绑定</a>
-			</div>-->
+			<input type="text" placeholder="验证码" class="input-item yanzheng">
+			<i class="res-icon am-icon-mobile"></i>
+			<button type="button" class="yanzhengma">发送验证码</button>
 		</div>
 
-		<!--[if (gte IE 9)|!(IE)]><!-->
-		<script src="../js/jquery-1.11.0.js"></script>
-		<script src="../js/index.js"></script>
+		<div class="res-btn">
+			<button type="button" id="res-btn" class="am-btn am-btn-block">提交</button>
+		</div>
+		<!--<div class="jiediv">
+				<a href="javascript:void(0)" class="cancel">绑定</a>
+			</div>-->
+	</div>
 
-		<script>
-			function UrlSearch() {
-				var name, value;
-				var str = location.href; //取得整个地址栏
-				var num = str.indexOf("?")
-				str = str.substr(num + 1); //取得所有参数 stringvar.substr(start [, length ]
+	<!--[if (gte IE 9)|!(IE)]><!-->
+	<script src="../js/jquery-1.11.0.js"></script>
+	<script src="../js/index.js"></script>
 
-				var arr = str.split("&"); //各个参数放到数组里
-				for(var i = 0; i < arr.length; i++) {
-					num = arr[i].indexOf("=");
-					if(num > 0) {
-						name = arr[i].substring(0, num);
-						value = arr[i].substr(num + 1);
-						this[name] = value;
-					}
+	<script>
+		function UrlSearch() {
+			var name, value;
+			var str = location.href; //取得整个地址栏
+			var num = str.indexOf("?")
+			str = str.substr(num + 1); //取得所有参数 stringvar.substr(start [, length ]
+
+			var arr = str.split("&"); //各个参数放到数组里
+			for (var i = 0; i < arr.length; i++) {
+				num = arr[i].indexOf("=");
+				if (num > 0) {
+					name = arr[i].substring(0, num);
+					value = arr[i].substr(num + 1);
+					this[name] = value;
 				}
 			}
-			var Request = new UrlSearch(); //实例化
-			var _openId = Request.openId;
-			var _tel = Request.tel;
+		}
+		var Request = new UrlSearch(); //实例化
+		var _openId = Request.openId;
+		var _tel = Request.tel;
 
-			if(_openId == '' || _openId == undefined) {
-				setTimeout('WeixinJSBridge.call("closeWindow")', 1500);
-			} else {
-				_openId = Request.openId;
-			}
-			if(_tel != '') {
-				$('.mobile').val(_tel);
-			}
-			$(".back_list").on("click", function() {
-				window.history.go(-1);
-			});
-			var times = 60;
+		if (_openId == '' || _openId == undefined) {
+			setTimeout('WeixinJSBridge.call("closeWindow")', 1500);
+		} else {
+			_openId = Request.openId;
+		}
+		if (_tel != '') {
+			$('.mobile').val(_tel);
+		}
+		$(".back_list").on("click", function () {
+			window.history.go(-1);
+		});
+		var times = 60;
 
-			function roof() {
+		function roof() {
 
-				if(times == 0) {
-					$('.yanzhengma').text('发送验证码(' + times + 's)');
-					$('.yanzhengma').prop('disabled', false);
-					$('.yanzhengma').text('发送验证码');
-					times = 60;
-					return
-				}
-				if(times == 59) {
-					var mobile = $('.mobile').val();
-					$.ajax({
-						type: "post",
-						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/yechuan/register/sendCode",
-						async: true,
-						data: {
-							phone: mobile
-						},
-						dataType: "json",
-						success: function(res) {
-							console.log(res);
-							if(res.code == 200) {
-								console.log("发送成功")
-							}
-						},
-						error: function(err) {
-							console.log(err);
-						}
-					});
-				}
+			if (times == 0) {
 				$('.yanzhengma').text('发送验证码(' + times + 's)');
-				times--;
-				setTimeout(roof, 1000);
-
+				$('.yanzhengma').prop('disabled', false);
+				$('.yanzhengma').text('发送验证码');
+				times = 60;
+				return
 			}
-
-			$('.yanzhengma').on('click', function() {
+			if (times == 59) {
 				var mobile = $('.mobile').val();
-				if(!mobile) {
-					$('.mobile').focus();
-					document.querySelector('.mobile').placeholder = '请填写手机号码';
-					return
-				} else if(!isPoneAvailable($("#telphone"))) {
-
-					alert("手机格式错误");
-					document.querySelector('.mobile').placeholder = '手机号格式错误';
-					return
-				} else {
-					$(this).prop('disabled', true);
-					roof();
-				}
-
-			});
-
-			function isPoneAvailable($poneInput) {
-				var myreg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
-				if(!myreg.test($poneInput.val())) {
-					return false;
-				} else {
-					return true;
-				}
-			}
-			var bang = 1;
-			$(".cancel").on("click", function() {
-				location.href = 'banding.html?openId=' + _openId
-			})
-			$('#res-btn').on('click', function() {
-				var mobile = $('.mobile').val();
-				var yanzheng = $('.yanzheng').val();
-
-				if(mobile == '') {
-					$('.mobile').focus();
-					document.querySelector('.mobile').placeholder = '请填写手机号码';
-					return
-				} else if(!isPoneAvailable($("#telphone"))) {
-					$('.mobile').focus();
-					document.querySelector('.mobile').placeholder = '手机号格式错误';
-					return
-				} else if(yanzheng == '') {
-					$('.yanzheng').focus();
-					document.querySelector('.yanzheng').placeholder = '请填写验证码';
-					return
-				} else {
-					var _url = "http://www.zjcoldcloud.com/xiandun/public/index.php/index/register/unbundle";
-
-					$.ajax({
-						type: "post",
-						url: _url,
-						async: true,
-						data: {
-							openid: _openId,
-							phone: mobile,
-							code: yanzheng
-						},
-						dataType: "JSON",
-						success: function(res) {
-							if(res.code == 0 && res.message == "success") {
-								alert("解绑成功");
-								window.localStorage.removeItem('isonline');
-								location.href = 'register.html?openId=' + _openId;
-							} else {
-								alert(res.message);
-							}
-						},
-						error: function(err) {
-							console.log(err)
+				$.ajax({
+					type: "post",
+					url: "http://erpapi.ccsc58.com/xiandun/public/index.php/yechuan/register/sendCode",
+					async: true,
+					data: {
+						phone: mobile
+					},
+					dataType: "json",
+					success: function (res) {
+						console.log(res);
+						if (res.code == 200) {
+							console.log("发送成功")
 						}
-					});
+					},
+					error: function (err) {
+						console.log(err);
+					}
+				});
+			}
+			$('.yanzhengma').text('发送验证码(' + times + 's)');
+			times--;
+			setTimeout(roof, 1000);
 
-				}
+		}
 
-			})
-		</script>
+		$('.yanzhengma').on('click', function () {
+			var mobile = $('.mobile').val();
+			if (!mobile) {
+				$('.mobile').focus();
+				document.querySelector('.mobile').placeholder = '请填写手机号码';
+				return
+			} else if (!isPoneAvailable($("#telphone"))) {
 
-	</body>
+				alert("手机格式错误");
+				document.querySelector('.mobile').placeholder = '手机号格式错误';
+				return
+			} else {
+				$(this).prop('disabled', true);
+				roof();
+			}
+
+		});
+
+		function isPoneAvailable($poneInput) {
+			var myreg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
+			if (!myreg.test($poneInput.val())) {
+				return false;
+			} else {
+				return true;
+			}
+		}
+		var bang = 1;
+		$(".cancel").on("click", function () {
+			location.href = 'banding.html?openId=' + _openId
+		})
+		$('#res-btn').on('click', function () {
+			var mobile = $('.mobile').val();
+			var yanzheng = $('.yanzheng').val();
+
+			if (mobile == '') {
+				$('.mobile').focus();
+				document.querySelector('.mobile').placeholder = '请填写手机号码';
+				return
+			} else if (!isPoneAvailable($("#telphone"))) {
+				$('.mobile').focus();
+				document.querySelector('.mobile').placeholder = '手机号格式错误';
+				return
+			} else if (yanzheng == '') {
+				$('.yanzheng').focus();
+				document.querySelector('.yanzheng').placeholder = '请填写验证码';
+				return
+			} else {
+				var _url = "http://erpapi.ccsc58.com/xiandun/public/index.php/index/register/unbundle";
+
+				$.ajax({
+					type: "post",
+					url: _url,
+					async: true,
+					data: {
+						openid: _openId,
+						phone: mobile,
+						code: yanzheng
+					},
+					dataType: "JSON",
+					success: function (res) {
+						if (res.code == 0 && res.message == "success") {
+							alert("解绑成功");
+							window.localStorage.removeItem('isonline');
+							location.href = 'register.html?openId=' + _openId;
+						} else {
+							alert(res.message);
+						}
+					},
+					error: function (err) {
+						console.log(err)
+					}
+				});
+
+			}
+
+		})
+	</script>
+
+</body>
 
 </html>

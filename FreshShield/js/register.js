@@ -188,11 +188,10 @@
 		var _password = $("#signin-password").val();
 		let _type=$('input:radio:checked').val();
 		if(_userName == '') {
-			myPlay("用户名不能为空！");
+			alert("用户名不能为空！");
 		} else if(_password == '') {
-			myPlay("密码不能为空！");
+			alert("密码不能为空！");
 		} else {
-			myPlay("");
 			$.ajax({
 				url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/login/xiandunLogin",
 				type: "post",
@@ -209,7 +208,7 @@
                    console.log(data)
 //                   return false;
 					if(_json.code == 1) {
-						myPlay("登录失败，请检查用户名及密码");
+						alert("登录失败，请检查用户名及密码");
 					} else {
 						
 						if(_json.data.content.admin_user != '') {
@@ -237,7 +236,7 @@
 					};
 				},
 				error: function() {
-					myPlay("请检查您是否连接网络")
+					alert("请检查您是否连接网络")
 				}
 			});
 		}

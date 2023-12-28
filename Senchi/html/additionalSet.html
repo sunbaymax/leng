@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title>温湿度监控宝</title>
+	<link rel="stylesheet" type="text/css" href="../css/index.css" />
+	<link rel="stylesheet" type="text/css" href="../css/set.css" />
+	<style type="text/css">
+		.form .moban .tubiao {
+			width: 2rem;
+			height: 2rem;
+			margin-left: 1rem;
+			margin-right: 0.5rem;
+			cursor: pointer;
+		}
+
+		.form .cmoban .tubiao {
+			width: 2rem;
+			height: 2rem;
+			margin-left: 1rem;
+			margin-right: 0.5rem;
+			cursor: pointer;
+		}
+
+		.form div input {
+			display: block;
+			height: 3rem;
+			width: 16rem;
+			text-align: right;
+			border: 1px solid #ccc;
+			border-radius: 1rem;
+			text-align: center;
+		}
+
+		.noclick {
+			pointer-events: none;
+		}
+
+		.hide {
+			display: none;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="header">
+		<img class="back_list" src="../img/back.png" /> 消息提醒设置
+	</div>
+	<div class="content">
+		<div class="form">
+			<!--<div>
+					<span>解除绑定：</span>
+					<div class='switch-wrap'>
+						<input type='checkbox' id='switch1'>
+						<label for='switch1'></label>
+					</div>
+				</div>-->
+			<!--<div>
+					<span>夜间数据：</span>
+					<div class='switch-wrap'>
+						<input type='checkbox' id='switch'>
+						<label for='switch'></label>
+					</div>
+				</div>-->
+			<div class="moban father">
+				<span>定时推送时间1：</span><input type="text" id="demo1" placeholder="请选择定时时间" readonly="readonly"
+					class="Time1" /><img src="../images/addtime.png" class="tubiao addtime noclick" />
+			</div>
+			<div class="yuyinbaojing">
+				<span>语音报警：</span>
+				<div class='switch-wrap'>
+					<input type='checkbox' id='switch2'>
+					<label for='switch2'></label>
+				</div>
+			</div>
+			<div class="yuyinbaojing cmoban" style="display: none;">
+				<span>开启时间：</span><input type="text" id="voicetime" placeholder="请选择语音时间" readonly="readonly"
+					class="Time1" /><img src="../images/addtime.png" style="visibility: hidden;"
+					class="tubiao addtime noclick" />
+			</div>
+		</div>
+		<div class="btnok">
+			<button>保存</button>
+		</div>
+
+	</div>
+
+	<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/index.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/iostime.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(".invitebtn").on("click", function () {
+			window.location.href = 'banding.html?openId=' + _openid;
+		});
+		var _ismaster = sessionStorage.getItem('ismaster');
+		if (_ismaster == 0) {
+			$(".btnok button").css("background", "#ccc");
+			$(".btnok button").attr('disabled', true);
+			//				$("#switch").attr("disabled", true);
+			//	$("input[type='checkbox']").attr("disabled", true);
+			$("input").attr("disabled", true);
+			$(".addtime").addClass('noclick');
+			$("#switch1").attr("disabled", false);
+		} else {
+			$(".btnok button").attr('disabled', false);
+			$(".addtime").removeClass('noclick');
+		}
+
+		var _url = window.location.href;
+		var userinfo = JSON.parse(localStorage.getItem('isonline'));
+		var _userName = userinfo.user;
+		var _userPass = userinfo.pwd;
+		var _copenid = userinfo.copenid;
+
+		var _num_m = "";
+		if (_url.indexOf("&") != -1) {
+			_num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "").replace("&", "");
+		} else {
+			_num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "");
+		}
+		$(".back_list").on("click", function () {
+			sessionStorage.setItem('paraset', 1);
+			window.location.href = 'details_lists.html?num_m=' + _num_m + '&'
+		});
+
+		$("#switch2").change(function () {
+			if ($(this).is(':checked')) {
+				$(".cmoban").hide();
+				$("#voicetime").val('');
+			} else {
+				$(".cmoban").hide();
+				$("#voicetime").val('')
+			}
+
+		});
+
+		var voicecalendar = new datePicker();
+		voicecalendar.init({
+			'trigger': '#voicetime',
+			/*按钮选择器，用于触发弹出插件*/
+			'type': 'time',
+			/*模式：date日期；datetime日期时间；time时间；ym年月；*/
+
+			/*最大日期*/
+			'onSubmit': function () { /*确认时触发事件*/
+				var theSelectData = voicecalendar.value;
+			},
+			'onClose': function () { /*取消时触发事件*/ }
+		});
+
+		var mobans = 1;
+		$.ajax({
+			type: "post",
+			url: "http://erpapi.ccsc58.com/xiandun/public/index.php/index/device/xiandun_get_device_param",
+			data: {
+				admin_permit: "zjly8888",
+				UserP: "w",
+				controller: "update",
+				admin_user: _userName,
+				admin_pass: _userPass,
+				SheBeiBianHao: _num_m,
+				openid: _copenid
+			},
+			async: false,
+			success: function (data) {
+				var _json = JSON.parse(data);
+				if (_json.code == 1) {
+					alert(_json.message);
+					window.location.href = "../machineList.php";
+					return false;
+				} else if (_json.code == 30000) {
+					alert("没有查询到该设备");
+					window.location.href = "../machineList.php";
+					return false;
+				}
+
+				$(".btnok button").attr('biao', _json.resultCode.GPS_Start);
+				<!-- 附加报警设置  -->
+				//					if(_json.resultCode.yejianshangchuankaiguan == 0) {
+				//						$("#switch").attr("checked", false);
+				//					} else {
+				//						$("#switch").attr("checked", true);
+				//					}
+
+				var times = _json.resultCode.dingshifasong;
+
+				mobans = _json.resultCode.dingshifasong.length == 0 ? "1" : _json.resultCode.dingshifasong.length;
+				$.each(_json.resultCode.dingshifasong, function (index, val) {
+
+					if (index != 0) {
+						let str = `<div class="moban">
+					<span>定时推送时间${index + 1}：</span><input type="text" readonly="readonly" id='demo${index + 1}' value='${val}' class="Time2" /><img src="../images/jiantime.png" class="jian tubiao" />
+				</div>`;
+						$('.form .moban').last().after(str);
+
+					} else {
+						$(".Time1").val(times[0]);
+					}
+
+				});
+				tinit()
+				if (_json.resultCode.is_warn_show == 0) {
+					$(".yuyinbaojing").hide()
+				} else {
+					$(".yuyinbaojing").hide()
+					if (_json.resultCode.is_open == 0) {
+						$("#switch2").attr("checked", false);
+					} else {
+						$("#switch2").attr("checked", true);
+						//						$(".cmoban").show();
+						//						$("#voicetime").val(_json.resultCode.warn_time==''?'':_json.resultCode.warn_time);
+					}
+				}
+
+
+			},
+			error: function () {
+				console.log("网络错误！！！")
+			}
+		});
+
+		function tinit() {
+			for (i = 0; i < mobans; i++) {
+				let dn = "#demo" + (i + 1);
+				var calendar = new datePicker();
+				var now = new Date();
+				var year = now.getFullYear(); //得到年份
+				var month = now.getMonth() + 1; //得到月份
+				var date = now.getDate(); //得到日期
+				var hour = now.getHours(); //得到小时
+				var minu = now.getMinutes(); //得到分钟
+				var cdate = year + "-" + month + '-' + date;
+				calendar.init({
+					'trigger': dn,
+					/*按钮选择器，用于触发弹出插件*/
+					'type': 'datetime',
+					/*模式：date日期；datetime日期时间；time时间；ym年月；*/
+					'minDate': cdate,
+					/*最小日期*/
+					'maxDate': '2050-12-31 ',
+					/*最大日期*/
+					'onSubmit': function () { /*确认时触发事件*/
+						var theSelectData = calendar.value;
+					},
+					'onClose': function () { /*取消时触发事件*/ }
+				});
+			}
+		}
+
+		$('body').on("click", ".father .addtime", function () {
+
+			mobans++;
+			let dn = 'demo' + mobans;
+			let sunman = `<div class="moban">
+					<span>定时推送时间${mobans}：</span><input readonly="readonly" placeholder="请选择定时时间" type="text" id='${dn}' class="Time2" /><img src="../images/jiantime.png" class="jian tubiao" />
+				</div>`;
+			$(this).parents('.form').find('.moban').last().after(sunman);
+			$(".moban span").each(function (index, val) {
+				$(this).text('定时推送时间' + (index + 1) + "：")
+			});
+			times(dn);
+		});
+		$('body').on("click", ".moban .jian", function () {
+
+			$(this).parents('.moban').remove()
+			$(".moban span").each(function (index, val) {
+				$(this).text('定时推送时间' + (index + 1) + "：")
+			});
+		});
+
+		function times(_dn) {
+			var dnnow = "#" + _dn;
+			console.log(dnnow, 11)
+			var calendar = new datePicker();
+			calendar.init({
+				'trigger': dnnow,
+				/*按钮选择器，用于触发弹出插件*/
+				'type': 'datetime',
+				/*模式：date日期；datetime日期时间；time时间；ym年月；*/
+				'minDate': '1900-1-1',
+				/*最小日期*/
+				'maxDate': '2100-12-31',
+				/*最大日期*/
+				'onSubmit': function () { /*确认时触发事件*/
+					var theSelectData = calendar.value;
+				},
+				'onClose': function () { /*取消时触发事件*/ }
+			});
+		}
+		//			$("#switch1").on("click", function() {
+		//				if($(this).is(":checked")) {
+		//					$(".btnok button").attr('disabled', false);
+		//					$(".btnok button").css("background", "#40C0C3");
+		//				} else {
+		//					$(".btnok button").attr('disabled', true);
+		//					$(".btnok button").css("background", "#ccc");
+		//				}
+		//
+		//			});
+		var userType = userinfo.userType;
+		$(".btnok button").on("click", function () {
+			var _GPS_Start = $(this).attr('biao');
+			let arr = [];
+			$(".moban input").each(function () {
+				if ($(this).val() != '') {
+					arr.push($(this).val());
+				}
+
+			});
+
+			var _is_warn;
+			var _data;
+			var _warntime = $("#voicetime").val();
+			if ($("#switch2").is(":checked")) {
+				_is_warn = 1;
+				_data = {
+					devid: _num_m,
+					GPS_Start: _GPS_Start,
+					UserP: "w",
+					yejianshangchuankaiguan: "1",
+					dingshifasong: arr,
+					openid: _copenid,
+					userType,
+					is_open: _is_warn,
+					warn_time: ""
+				}
+			} else {
+				_is_warn = 0;
+				_data = {
+					devid: _num_m,
+					GPS_Start: _GPS_Start,
+					UserP: "w",
+					yejianshangchuankaiguan: "1",
+					dingshifasong: arr,
+					openid: _copenid,
+					userType,
+					is_open: _is_warn,
+					warn_time: ""
+				}
+			} //开启夜间上传；
+			//				if(_warntime==''&&_is_warn==1){
+			//					alert("请选择语音时间");
+			//					$("#voicetime").focus()
+			//					return false;
+			//				}
+			console.log(_data);
+			$.ajax({
+				type: "post",
+				url: "http://erpapi.ccsc58.com/xiandun/public/index.php/index/device/xiandun_update_device",
+				data: _data,
+				dataType: "json",
+				success: function (res) {
+					if (res.code == 0 && res.message == "success") {
+						if ($("#switch1").is(":checked")) {
+							var _ismaster = sessionStorage.getItem('ismaster');
+							var _jiebangurl = '';
+							if (_ismaster == 0) {
+								_jiebangurl = "http://erpapi.ccsc58.com/xiandun/public/index.php/index/device/remove_scend_device";
+
+							} else {
+								_jiebangurl = "http://erpapi.ccsc58.com/xiandun/public/index.php/index/Device/remove_bind";
+
+							}
+							$.ajax({
+								type: "post",
+								url: _jiebangurl,
+								data: {
+									mainname: _userName,
+									devicenumber: _num_m
+
+								},
+								success: function (data) {
+									var _json = JSON.parse(data);
+
+									if (_json.code == 0) {
+										alert("解除设备绑定成功");
+										location.href = '../machineList.php';
+									} else {
+										alert("解除设备绑定失败，请重新进入再操作")
+									}
+								}
+							});
+
+						} else {
+							alert("参数同步成功");
+							location.reload();
+						}
+					}
+
+				},
+				error: function () {
+					console.log("网络错误")
+				}
+			});
+
+			//点击加
+
+		});
+	</script>
+</body>
+
+</html>

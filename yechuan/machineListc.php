@@ -153,7 +153,7 @@
 		数据加载中<span style="">……</span>
 	</div>-->
 	<script src="js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=XP1alssWsEscC3NfYAhj6YfqKvgQgUXF" charset="utf-8"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=jmgKloGf3cOvRl3Y9pUAfvKZCTtCNGwj" charset="utf-8"></script>
 	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" charset="utf-8"></script>
 	<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/machineList.js" charset="utf-8"></script>

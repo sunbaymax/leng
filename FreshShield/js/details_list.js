@@ -57,27 +57,53 @@
 	 *
 	 * 获取用户查找的设备号及设备名称；
 	 * */
-	var _url = window.location.href;
-	var _num_m = "";
-	if(_url.indexOf("&") != -1) {
-		var pa = sessionStorage.getItem('paraset');
-		if(pa == 1) {
-			_num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "").replace("&", "");
-			$("form input").removeClass("white_input");
-			$("form input:nth-of-type(3)").addClass("white_input");
-			$("._display").addClass("hidden");
-			$(".details_parameter").removeClass("hidden");
-			sessionStorage.setItem('paraset', 0);
-		} else {
-			_num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "").replace("&", "");
-			$("form input").removeClass("white_input");
-			$("form input:nth-of-type(4)").addClass("white_input");
-			$("._display").addClass("hidden");
-			$(".details_warning").removeClass("hidden");
-		}
-
-	} else {
-		_num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "");
+//	var _url = window.location.href;
+//	var _num_m = "";
+//	if(_url.indexOf("&") != -1) {
+//		var pa = sessionStorage.getItem('paraset');
+//		if(pa == 1) {
+//			_num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "").replace("&", "");
+//			$("form input").removeClass("white_input");
+//			$("form input:nth-of-type(3)").addClass("white_input");
+//			$("._display").addClass("hidden");
+//			$(".details_parameter").removeClass("hidden");
+//			sessionStorage.setItem('paraset', 0);
+//		} else {
+//			_num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "").replace("&", "");
+//			$("form input").removeClass("white_input");
+//			$("form input:nth-of-type(4)").addClass("white_input");
+//			$("._display").addClass("hidden");
+//			$(".details_warning").removeClass("hidden");
+//		}
+//
+//	} else {
+//		_num_m = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "");
+//	}
+    var _num_m=getQueryVariable('num_m')
+	function getQueryVariable(variable)
+	{
+	       var query = window.location.search.substring(1);
+	       var vars = query.split("&");
+	       for (var i=0;i<vars.length;i++) {
+	               var pair = vars[i].split("=");
+	               if(pair[0] == variable){return pair[1];}
+	       }
+	       return(false);
+	}
+	console.log(_num_m,333)
+	let _type=sessionStorage.getItem('ismaster')
+	console.log(_type,666)
+	if(_type=='3'){
+//		$('form .white_input').hide()
+		$('#tabar #latestbtn,.details_now').hide()
+		$('#tabar #historybtn,.details_history').hide()
+		$('.details_parameter').removeClass('hidden')
+		$('#tabar #parameterbtn').addClass('white_input')
+		$('.content_basic .basic_label a:nth-child(0)').hide()
+		$('.content_basic .basic_label a:nth-child(1)').hide()
+//		$('.content_basic #bindBasicsbtn').hide()
+		$('.content_basic .basic_label a:nth-child(3)').remove()
+	
 	}
 	window.alert = function(name) {
 		var iframe = document.createElement("IFRAME");
@@ -88,7 +114,8 @@
 		iframe.parentNode.removeChild(iframe);
 	}
 	$(".work_line").on("click", function() {
-		var _num_ms = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "");
+//		var _num_ms = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "");
+		var _num_ms = getQueryVariable('num_m');
 		var spanval = $(this).find('span').text();
 		if(spanval == '基础信息设置') {
 			location.href = '../html/basicSet.html?num_m=' + _num_ms
@@ -238,7 +265,7 @@
 	 */
 	function my_machine_list(_jingDu, _weiDu, _dem) {
 		$.ajax({
-			url: "http://api.map.baidu.com/geoconv/v1/?ak=XP1alssWsEscC3NfYAhj6YfqKvgQgUXF&from=1&to=5",
+			url: "http://api.map.baidu.com/geoconv/v1/?ak=jmgKloGf3cOvRl3Y9pUAfvKZCTtCNGwj&from=1&to=5",
 			type: "post",
 			dataType: "JSONP",
 			data: {
@@ -276,6 +303,41 @@
 			})
 		}
 	}
+	function getNowFormatDate(day) {
+		var date = new Date();
+		var year = date.getFullYear();
+		var month = date.getMonth() + 1;
+		var d =''
+		if(day==-1){
+			d = date.getDate()-1;
+			month = date.getMonth() + 1;
+		}else if(day==-30){
+			d = date.getDate();
+			month = date.getMonth();
+		}else{
+			d = date.getDate();
+			month = date.getMonth() + 1;
+		}					
+		var hour = date.getHours();
+		var minute = date.getMinutes();
+		var second = date.getSeconds();
+		if(month < 10) {
+			month = "0" + month;
+		}
+		if(d < 10) {
+			d = "0" + d;
+		}
+		if(hour < 10) {
+			hour = "0" + hour;
+		}
+		if(minute < 10) {
+			minute = "0" + hour;
+		}
+		if(second < 10) {
+			second = "0" + second;
+		}
+		return year + "-" + month + "-" + d + " " + hour + ":" + minute + ":" + second;
+	}
 	//获取页面当前时间；
 	//http://www.ccsc58.com/json/xiandun_history_data.php http://www.ccsc58.com/json/01_00_tb_history_data.php
 	$.ajax({
@@ -285,7 +347,7 @@
 			UserP:"w",
 			admin_permit:"zjly8888",
 			SheBeiBianHao:_num_m,
-			StartTime:"2000-08-26 00:00:00",
+			StartTime:getNowFormatDate(-30),
 			EndTime:history_time(_endTime),
 			StartNo:0,
 			Length:20,
@@ -295,7 +357,7 @@
 			userType
 		},
 		success: function(data) {
-			var _json = JSON.parse(data);
+			var _json = JSON.parse(data);		
 			if(_json.code == 10000) {
 				if(_json.resultCode == "null") {
 					var _s = "<a href=\"../machineList.php\">您查看的设备未开启，请开启后重新查看</a>";
@@ -345,7 +407,8 @@
 						_demN.find(".list-content .boxstate").html(_list[i].xiangzistate == "close" ? '关闭' : "开启");
 						_demN.find(".list-content .lng").html(_list[i].jingdu);
 						_demN.find(".list-content .lat").html(_list[i].weidu);
-						my_machine_list(_list[i].jingdu, _list[i].weidu, _demN)
+						_demN.find(".list-content .address").html('地理位置：'+_list[i].address);
+						//my_machine_list(_list[i].jingdu, _list[i].weidu, _demN)
 					};
 					details_now_map();
 				};
@@ -484,9 +547,10 @@
 				        }
 						_dem.find("li:nth-of-type(2)").html(_json.resultCode[i].time.replace(_json.resultCode[i].time.match(/^2[0-9]{3}/)[0] + "-", "").replace(_json.resultCode[i].time.match(/\s/)[0], "<br>"));
 						_dem.find("li:nth-of-type(4)").html(_json.resultCode[i].temperature01+ "℃");
+						_dem.find("li:nth-of-type(3)").html(_json.resultCode[i].address);
 						
 						$(".more").html("<i class='pull_icon'></i><span>上拉加载...</span>")
-						address_test(_json.resultCode[i].jingdu, _json.resultCode[i].weidu, _dem, _start + i, (_json.resultCode.length - 1));
+//						//address_test(_json.resultCode[i].jingdu, _json.resultCode[i].weidu, _dem, _start + i, (_json.resultCode.length - 1));
 						//$(".look_more").before(_dem);
 					};
 					_zhe_length += _json.resultCode.length;
@@ -504,7 +568,7 @@
 
 	function address_test(_jingdu, _weidu, _dem, i, _length) {
 		$.ajax({
-			url: "http://api.map.baidu.com/geoconv/v1/?ak=XP1alssWsEscC3NfYAhj6YfqKvgQgUXF&from=1&to=5",
+			url: "http://api.map.baidu.com/geoconv/v1/?ak=jmgKloGf3cOvRl3Y9pUAfvKZCTtCNGwj&from=1&to=5",
 			type: "post",
 			dataType: "JSONP",
 			data: {
@@ -529,7 +593,7 @@
 		$.ajax({
 			type: "post",
 			dataType: "jsonp",
-			url: "http://api.map.baidu.com/geocoder/v2/?ak=XP1alssWsEscC3NfYAhj6YfqKvgQgUXF&output=json&pois=0&coordtype=bd09ll",
+			url: "http://api.map.baidu.com/reverse_geocoding/v3/?ak=jmgKloGf3cOvRl3Y9pUAfvKZCTtCNGwj&output=json&pois=0&coordtype=bd09ll",
 			data: {
 				location: _weidu + "," + _jingdu,
 			},
@@ -662,7 +726,7 @@
 				if(_jing_d != 0 && _wei_d != 0) {
 
 					$.ajax({
-						url: "http://api.map.baidu.com/geoconv/v1/?ak=XP1alssWsEscC3NfYAhj6YfqKvgQgUXF&from=1&to=5",
+						url: "http://api.map.baidu.com/geoconv/v1/?ak=jmgKloGf3cOvRl3Y9pUAfvKZCTtCNGwj&from=1&to=5",
 						type: "post",
 						dataType: "JSONP",
 						data: {
@@ -683,7 +747,7 @@
 					$.ajax({
 						type: "post",
 						dataType: "jsonp",
-						url: "http://api.map.baidu.com/geocoder/v2/?ak=XP1alssWsEscC3NfYAhj6YfqKvgQgUXF&output=json&pois=0&coordtype=bd09ll",
+						url: "http://api.map.baidu.com/reverse_geocoding/v3/?ak=jmgKloGf3cOvRl3Y9pUAfvKZCTtCNGwj&output=json&pois=0&coordtype=bd09ll",
 						data: {
 							location: _w + "," + _j,
 						},
@@ -824,14 +888,13 @@
 					admin_user: _userName,
 					admin_pass: _userPass,
 					StartNo: _warning_more,
-					Length: 5
+					Length: 20
 				},
 				dataType:'json',
 				success: function(data) {
-					
 					var _json = data;
 					var warning_data = _json.resultCode;
-					console.log(_json.model_type)
+					console.log(_json.model_type,66)
 					if(_json.message == "nodata") {
 						if(_flag == 0) {
 							$(".details_warning").css({
@@ -850,8 +913,18 @@
 						}
 					} else {
 						for(var i = 0; i < warning_data.length; i++) {
+							
 							//湿度阀值数据暂无；
 							var _dem = $(".warning_list").eq(0).clone().removeClass("hidden").appendTo(".scroll_box_warning");
+							if(warning_data[i].shebeibianhao.substr(0, 1)=='2'&&warning_data[i].shebeibianhao.length==7){
+								_dem.find(".list_tittle .shebeihao").html(warning_data[i].shebeibianhao);
+							    _dem.find(".list_tittle .worktime").html(warning_data[i].time);
+							    console.log()
+							    _dem.find(".list-content").html('&nbsp;&nbsp;'+warning_data[i].alarm);
+							    _dem.find(".list_tittle").parent().css('height',"8rem");
+//							    _dem.find(".list_tittle").css('background',"#fff");
+							}
+							else{
 							_dem.find(".list_tittle .shebeihao").html(warning_data[i].shebeibianhao);
 							_dem.find(".list_tittle .worktime").html(warning_data[i].time);
 							if(_json.model_type=="TH"){
@@ -875,6 +948,7 @@
 							
 
 							_dem.find(".list-content .armType").html(warning_data[i].baojingleixing == false ? '温度报警' : "");
+							}
 
 						}
 						$(".wait").addClass("hidden");

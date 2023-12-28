@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>33</title>
+	</head>
+
+	<body>
+	</body>
+	<script type="text/javascript" src="../js/jquery-1.11.0.js"></script>
+	<script src="../js/index.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		$(function() {
+
+			var userinfo = JSON.parse(localStorage.getItem('isonline'));
+			var _userName = userinfo.user;
+			var _userPass = userinfo.pwd;
+			var _openid = userinfo.copenid;
+			var _id = userinfo.uid;
+			var _goingvociepay = JSON.parse(sessionStorage.getItem('goingvociepay'));
+						console.log(_goingvociepay)
+
+			$.ajax({
+				type: "post",
+				url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/voice_package/package_buy_record",
+				data: _goingvociepay,
+				dataType: "JSON",
+				success: function(res) {
+					console.log(res)
+					alert("付款成功");
+//					window.sessionStorage.removeItem('goingvociepay');
+					
+				},
+				error: function(err) {
+					alert("付款成功！");
+					console.log(err)
+				}
+			});
+		});
+	</script>
+
+</html>

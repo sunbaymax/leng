@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<meta name="format-detection" content="telephone=no">
+	<title>温湿度监控宝</title>
+	<link rel="stylesheet" type="text/css" href="../css/index.css" />
+	<link rel="stylesheet" type="text/css" href="../css/Machines.css" />
+	<link rel="stylesheet" type="text/css" href="../css/set.css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=8">
+	<meta http-equiv="Expires" content="0">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-control" content="no-cache">
+	<meta http-equiv="Cache" content="no-cache">
+</head>
+
+<body>
+	<style>
+		body {
+			background-color: #F2F2F2 !important;
+		}
+
+		.header {
+
+			display: flex;
+			justify-content: center !important;
+			align-items: center;
+
+		}
+
+		.search_div {
+			/*padding: 0.5rem 15px 0px;*/
+			box-sizing: border-box;
+			z-index: 99;
+			position: fixed;
+			width: 100%;
+			top: 4.6rem;
+			background: #fff;
+		}
+
+		.search_div .searchdiv {
+			border: 1px solid #D9D9D9 !important;
+			margin-top: 0 !important;
+		}
+
+		.search_div .tabar {
+			height: 5rem;
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+
+		}
+
+		#wrapper {
+			width: 100%;
+			position: absolute;
+			left: 0;
+			top: 9.2rem;
+			overflow: hidden;
+			z-index: 1;
+			bottom: 0rem;
+		}
+
+		.more {
+			height: 4rem;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: #8a8a8a;
+		}
+
+		.pull_icon {
+			width: 25px;
+			height: 25px;
+			background-image: url('../images/pull.png');
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: 25px;
+			transition: all .5s;
+		}
+
+		.more span {
+			padding-left: .5rem;
+		}
+
+		.more .flip {
+			transform: rotate(180deg);
+		}
+
+		.loading {
+			background-image: url('../images/loading.png');
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: 25px;
+		}
+
+		.rechargelistitem {
+			margin-bottom: 10px;
+			background: #fff;
+			padding: 5px 15px;
+			/*border-radius: 5px;*/
+			border-radius: 15px;
+		}
+
+		.more .loading {
+			-webkit-transform: rotate(0deg) translateZ(0);
+			-webkit-transition-duration: 0;
+			-webkit-animation-name: loading;
+			-webkit-animation-duration: 2s;
+			-webkit-animation-iteration-count: infinite;
+			-webkit-animation-timing-function: linear;
+		}
+
+		@-webkit-keyframes loading {
+			from {
+				-webkit-transform: rotate(0deg) translateZ(0);
+			}
+
+			to {
+				-webkit-transform: rotate(360deg) translateZ(0);
+			}
+		}
+
+		.scroll_box {
+			padding: 0 2vw;
+			box-sizing: border-box;
+			border-radius: 0.5rem;
+		}
+
+		.list {
+			margin: 1rem 0;
+			padding: 0 1rem;
+			box-sizing: border-box;
+			height: 12rem;
+			background: #FFFFFF;
+			border-radius: 0.5rem;
+		}
+
+		.list .list_tittle {
+			display: flex;
+			align-items: center;
+			height: 4rem;
+			width: 100%;
+			box-sizing: border-box;
+			justify-content: space-between;
+			border-bottom: 1px solid #ccc;
+		}
+
+		.list .list_tittle .tittlewen {
+			font-size: 1.4rem;
+			font-weight: bold;
+		}
+
+		.list_tittle .device_img {
+			width: 1rem;
+			height: auto;
+			margin-right: 1rem;
+		}
+
+		.list_tittle .ispay {
+			color: #999999;
+		}
+
+		.list-content .nickname {
+			color: #999999;
+		}
+
+		.list-content .paytimer {
+			color: #999999;
+		}
+
+		.list-content .cssmoney {
+			color: #FA7183;
+		}
+
+		.list_tittle p {
+			display: flex;
+			align-items: center;
+		}
+
+		.list-content div {
+			float: none;
+			display: flex;
+			align-items: center;
+			height: 2rem;
+		}
+
+		.list-content div p {
+			width: 50%;
+			text-align: left;
+		}
+
+		.list-content div p:last-child {
+			width: 50%;
+			text-align: right;
+		}
+
+		/*.btnpay {
+				height: 2rem;
+				width: 6rem;
+				border-radius: 1rem;
+				background: #FFFFFF;
+				border: 1px solid #40C0C3;
+				color: #40C0C3;
+			}
+			*/
+		.paylist {
+			width: 1.8rem;
+			height: 2.2rem;
+			position: absolute;
+			top: 1rem;
+			right: 1rem;
+		}
+
+		.content {
+			padding: 0 10px;
+			box-sizing: border-box;
+			margin-top: 9.6rem;
+		}
+
+		.content ul {
+			height: auto;
+			/*padding: 5px 15px;
+				background: #FFFFFF;*/
+
+			margin-top: 5px;
+		}
+
+		.content ul li {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			height: 4rem;
+			line-height: 4rem;
+		}
+
+		.top {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.top img {
+			margin: 15px 0;
+			width: 100px;
+			height: 100px;
+		}
+
+		.top span {
+			font-weight: 800;
+			font-size: 16px;
+		}
+
+		.msg {
+			text-align: center;
+			font-size: 12px;
+			color: #FF0000;
+			margin-top: 15px;
+		}
+
+		.nomsg {
+			text-align: center;
+			margin-top: 30px;
+			padding: 5px;
+		}
+
+		.btnpay {
+			/*height: 3.6rem;
+			    line-height: 3.6rem;
+			    text-decoration: none;
+			    text-align: center;
+			    width: 9rem;
+			    border-radius: 2rem;
+			    background: #FFFFFF;
+			    border: 1px solid #40C0C3;
+			    color: #40C0C3;
+			    font-size: 14px;*/
+			text-decoration: none;
+			text-align: center;
+			width: 25vw;
+			height: 4rem;
+			line-height: 4rem;
+			box-sizing: border-box;
+			outline: none;
+			/* font-weight: bold; */
+			background: #F0F5FB;
+			color: #000000;
+			/* margin-left: 4vw; */
+			border: none;
+			font-size: 1.4rem;
+		}
+
+		.content ul li:first-child {
+			border-bottom: 1px solid #ccc;
+			margin-bottom: 1rem;
+		}
+
+		.btnpay:hover {
+			background: #40C0C3;
+			color: #fff;
+		}
+
+		.hover {
+			background: #40C0C3;
+			color: #fff;
+		}
+
+		.messfooter {
+			border-top: 1px solid #CCCCCC;
+			width: 100%;
+			text-align: center;
+			height: 5rem;
+			line-height: 5rem;
+		}
+
+		.content ul .messfooterdiv {
+			height: 5rem;
+			line-height: 5rem;
+		}
+
+		.total {
+			margin-bottom: 0;
+			margin-left: 10px;
+			padding: 0px;
+
+		}
+
+		.hidden {
+			display: none;
+		}
+
+		.over {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+	</style>
+	<div class="header">
+		<img class="back_list" src="../img/back.png" ids='0' />
+		<span>历史账单</span>
+		<!--<img src="../img/paylists.png" class="paylist"/>-->
+	</div>
+	<div class="search_div">
+		<div class="tabar">
+			<a class="btnpay hover" href="javascript:void(0)">充值记录</a>
+			<a class="btnpay" href="javascript:void(0)">消费记录</a>
+		</div>
+	</div>
+	<div class="content">
+		<div class="refreshmsg" style="display: none;">
+			<i class="pull_icon"></i><span>正在刷新...</span>
+
+		</div>
+		<div id="wrapper">
+
+			<div class="scroller">
+				<h4 class="total">短信剩余条数：<span></span></h4>
+				<div class="scroll_box">
+
+					<ul class="rechargelist">
+						<!--<div class="rechargelistitem">
+                          		<li>
+									<h3>一级机构</h3>
+									<div>2020-11-02  09:00:00</div>
+								</li>
+								<li>
+									<div>购买条数：66</div>
+									<div>支付金额：100</div>
+								</li>
+								<li class="messfooterdiv">
+									<div>支付人：一级机构111</div>
+								</li>
+                          	</div>-->
+
+					</ul>
+					<ul class="consumelist hidden">
+						<!--<div class="rechargelistitem">
+								<li>
+									<h3>设备号：465465</h3>
+									<div>2020-11-02  09:00:00</div>
+								</li>
+								<li>
+									<div>接收人：15556666776</div>
+								</li>
+								<li class="messfooterdiv">
+									<div>所属机构：一级机构111</div>
+									<div>消耗机构：一级机构111</div>
+								</li>
+							</div>	-->
+					</ul>
+				</div>
+				<div class="more">
+					<i class="pull_icon"></i><span>上拉加载...</span>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<script src="../js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="../js/jquery-1.11.0.js"></script>
+	<script src="../js/index.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		/*iscroll代码；
+		 */
+		var userinfo = JSON.parse(localStorage.getItem('isonline'));
+		var _userName = userinfo.user;
+		var _userPass = userinfo.pwd;
+		var _openid = userinfo.copenid;
+		var _suoshujigou = userinfo.suoshujigou;
+		var _uid = userinfo.uid == undefined ? 'no' : userinfo.uid;
+
+		var myscroll_x = new iScroll("wrapper", {
+			onScrollMove: function () {
+				if (this.y < (this.maxScrollY)) {
+					$('.pull_icon').addClass('flip');
+					$('.pull_icon').removeClass('loading');
+					$('.more span').text('释放加载...');
+				} else {
+					$('.pull_icon').removeClass('flip loading');
+					$('.more span').text('上拉加载...')
+					if (myscroll_x.y > 50) {
+						$(".refreshmsg").show();
+						$('.pull_icon').addClass('loading');
+						$('.refreshmsg span').text('正在刷新...');
+						let curtabar = $('.tabar .hover').text()
+						_start = 1
+						console.log(curtabar)
+						//return false;
+						if (curtabar == '充值记录') {
+							setTimeout(function () {
+								window.location.reload()
+							}, 1500);
+						} else {
+							setTimeout(function () {
+								xiaofei_list(_start);
+								$('.refreshmsg').hide()
+							}, 1500);
+
+						}
+
+					}
+				}
+			},
+			onScrollEnd: function () {
+				if ($('.pull_icon').hasClass('flip')) {
+					$('.pull_icon').addClass('loading');
+					$('.more span').text('加载中...');
+					pullUpActions();
+				}
+			},
+			onRefresh: function () {
+				$('.more').removeClass('flip');
+				$('.more span').text('上拉加载...');
+			}
+		});
+
+		var _start = 1; //控制一次加载到页面条数的开头；
+		chongzhi_list(_start)
+		function pullUpActions() {
+			_start += 1;
+			//				$(".wait").removeClass("hidden");
+			let curtabar = $('.tabar .hover').text()
+			if (curtabar == '充值记录') {
+				chongzhi_list(_start)
+			} else {
+				xiaofei_list(_start);
+			}
+
+		}
+
+		function chongzhi_list(_start) {
+			if (_start == 1) {
+				$(".scroll_box .rechargelist").html('')
+			}
+			$.ajax({
+				url: "http://erpapi.ccsc58.com/xiandun/public/index.php/index/department/chongzhiRecord",
+				type: "post",
+				data: {
+					suoshujigou: _suoshujigou,
+					dengluming: _userName,
+					p: _start
+				},
+				dataType: 'json',
+				success: function (res) {
+					$('.total span').text(res.data.page.duanxintiaoshu)
+					if (res.code == 0 && res.data.records.length > 0) {
+						var str = '';
+						$.each(res.data.records, function (index, val) {
+							str = `<div class="rechargelistitem">
+                          		<li>
+									<h3>${val.gongsimingcheng}</h3>
+									<div>${val.createtime}</div>
+								</li>
+								<li>
+									<div>购买条数：${val.num}</div>
+									<div>支付金额：${val.money}</div>
+								</li>
+								<li class="messfooterdiv">
+									<div>支付人：${val.admin_user}</div>
+								</li>
+                          	</div>`;
+							$(".scroll_box .rechargelist").append(str);
+
+						});
+						if (res.data.records.length < 20) {
+							$(".more").html("没有更多记录");
+						} else {
+							$(".more").html('<i class="pull_icon"></i><span>上拉加载...</span>');
+							myscroll_x.refresh();
+						}
+					}
+
+					else {
+
+						$(".more").html("没有更多记录");
+					}
+					myscroll_x.refresh();
+
+				},
+				error: function () {
+					alert("网络错误，请重新进入页面");
+
+					$(".wait").addClass("hidden");
+					myscroll_x.refresh();
+				}
+			})
+
+		}
+		function xiaofei_list(_start) {
+
+			if (_start == 1) {
+				$(".scroll_box .consumelist").html('')
+			}
+			$.ajax({
+				url: "http://erpapi.ccsc58.com/xiandun/public/index.php/index/department/xiaofeiRecord",
+				type: "post",
+				data: {
+					suoshujigou: _suoshujigou,
+					p: _start
+				},
+				dataType: 'json',
+				success: function (res) {
+					$('.total span').text(res.data.page.duanxintiaoshu)
+					if (res.code == 0 && res.data.records.length > 0) {
+						var str = '';
+						$.each(res.data.records, function (index, val) {
+							str = `<div class="rechargelistitem">
+								<li>
+									<h3>设备号：${val.shebeibianhao}</h3>
+									<div>${val.send_time}</div>
+								</li>
+								<li>
+									<div>接收人：${val.mobile}</div>
+								</li>
+								<li class="messfooterdiv">
+									<div class='over'>所属机构：${val.department_name}</div>
+									<div class='over'>消耗机构：${val.send_department_name}</div>
+								</li>
+							</div>	`;
+							$(".scroll_box .consumelist").append(str);
+
+						});
+						if (res.data.records.length < 20) {
+							$(".more").html("没有更多记录");
+						} else {
+							$(".more").html('<i class="pull_icon"></i><span>上拉加载...</span>');
+							myscroll_x.refresh();
+						}
+
+					}
+
+					else {
+
+						$(".more").html("没有更多记录");
+					}
+					myscroll_x.refresh();
+
+				},
+				error: function () {
+					alert("网络错误，请重新进入页面");
+
+					$(".wait").addClass("hidden");
+					myscroll_x.refresh();
+				}
+			})
+
+		}
+
+		$(".back_list").on("click", function () {
+			//				window.location.href = "user_sheZhi.html"
+			history.go(-1)
+		})
+		$("body").on("click", ".btnpay", function () {
+			$(this).addClass('hover').siblings().removeClass('hover');
+			_start = 1;
+			if ($(this).text() == '充值记录') {
+				$('.consumelist').addClass('hidden')
+				$('.rechargelist').removeClass('hidden')
+				chongzhi_list(_start)
+			} else {
+				$('.consumelist').removeClass('hidden')
+				$('.rechargelist').addClass('hidden')
+				xiaofei_list(_start)
+			}
+		})
+	</script>
+</body>
+
+</html>

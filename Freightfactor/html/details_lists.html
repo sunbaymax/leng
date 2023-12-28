@@ -25,11 +25,11 @@
 		<div class="header">
 
 		</div>
-		<form class="form" action="">
-			<input class="white_input" type="button" value="最新数据" />
-			<input type="button" value="历史数据" />
-			<input type="button" value="设备参数" />
-			<input type="button" value="报警信息" />
+		<form class="form" action="" id="tabar">
+			<input id='latestbtn' class="white_input" type="button" value="最新数据" />
+			<input id="historybtn" type="button" value="历史数据" />
+			<input id="parameterbtn" type="button" value="设备参数" />
+			<input id="warnbtn" type="button" value="报警信息" />
 		</form>
 		<div class="content_details">
 			<div id="content_details">
@@ -54,7 +54,7 @@
 						</div>
 					</div>
 				</div>-->
-				<div class="details_now hidden">
+				<div class="details_now hidden" style="height: auto;">
 					<div class="list_tittle">
 						<p>
 							<span class="shebeihao">-</span>
@@ -80,9 +80,10 @@
 							<p>信号强度：<span class="signal">无</span></p>
 							<p>电量：<span class="power">-</span>%</p>
 						</div>
-						<div>
-							地理位置：<span class="address"></span><span class="lng  hidden"></span><span class="lat hidden"></span>
+						<div class="address" style="height: auto;line-height: inherit;padding: 0 1.5rem;">
+							<!-- 地理位置：<span class="address"></span> -->
 						</div>
+						<div class="hidden"><span class="lng"></span><span class="lat"></span></div>
 						<!--<div>
 							箱体状态：<span class="boxstate"></span>
 						</div>-->
@@ -167,29 +168,32 @@
 				<div class="content_basic">
 					<div class="basic_label" style="width: 100%;">
 						<a class="work_line" href="javascript:void(0)">
-							<span>基础信息设置</span>
-							<img src="../img/right_shop_car.png" />
-						</a>
-						<a class="work_line" href="javascript:void(0)">
 							<span>参数信息设置</span>
-							<img src="../img/right_shop_car.png" />
-						</a>
-						<a class="work_line" href="javascript:void(0)" style="display: none;">
-							<span>设备打印设置</span>
 							<img src="../img/right_shop_car.png" />
 						</a>
 						<a class="work_line" href="javascript:void(0)">
 							<span>设备报警设置</span>
 							<img src="../img/right_shop_car.png" />
 						</a>
+						<a class="work_line" id="fujiaset" href="javascript:void(0)">
+							<span>消息提醒设置</span>
+							<img src="../img/right_shop_car.png" />
+						</a>
+						<a class="work_line" href="javascript:void(0)" id="bindBasicsbtn">
+							<span>基础信息设置</span>
+							<img src="../img/right_shop_car.png" />
+						</a>
+						
+						<a class="work_line" href="javascript:void(0)" style="display: none;">
+							<span>设备打印设置</span>
+							<img src="../img/right_shop_car.png" />
+						</a>
+						
 						<!--<a class="work_line" href="javascript:void(0)">
 							<span>系统报警设置</span>
 							<img src="../img/right_shop_car.png" />
 						</a>-->
-						<a class="work_line" id="fujiaset" href="javascript:void(0)">
-							<span>附加参数设置</span>
-							<img src="../img/right_shop_car.png" />
-						</a>
+						
 
 					</div>
 
@@ -303,11 +307,11 @@
 		<script src="../js/changeMs.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/index.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/iostime.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=XP1alssWsEscC3NfYAhj6YfqKvgQgUXF"></script>
+		<!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=jmgKloGf3cOvRl3Y9pUAfvKZCTtCNGwj"></script>-->
 		<script>
-			if(window.localStorage.getItem("wyblisonline") == null || window.localStorage.getItem("wyblisonline") == undefined) {
-		window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_templatform.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
-	}
+			// if(window.localStorage.getItem("isonline") == null || window.localStorage.getItem("isonline") == undefined) {
+			// 	window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf5dd70cda68f1a7d&redirect_uri=http://www.ccsc58.cc/leng/Bryture/oauth2_templatform.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
+	        //  }
 		</script>
 	</body>
 

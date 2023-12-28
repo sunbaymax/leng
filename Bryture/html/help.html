@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="format-detection" content="telephone=no">
+		<title>光点智云</title>
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/index01.css" />
+	</head>
+	<style>
+		.content {
+			margin-top: 4rem;
+		}
+		
+		.center {
+			margin-top: 10rem;
+			width: 90vw;
+			margin-left: 5vw;
+			height: 40rem;
+			background: #CCCCCC;
+			text-align: center;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 1.4rem;
+		}
+	</style>
+	<div style="display:none">
+		<?php
+		require_once "../jssdk.php";
+		$jssdk = new JSSDK("wx029d1989acb9f44c", "b7a482220530d3be2278429bdf2a7a63");
+		$signPackage = $jssdk->GetSignPackage();
+	?>
+	</div>
+
+	<body>
+		<div class="header">
+			<img class="back_list_user" src="../img/back.png" /> 帮助
+		</div>
+		<div class="content">
+			<div class="center">
+				选取或拍照进行上传
+			</div>
+		</div>
+		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="https://res.wx.qq.com/open/js/jweixin-1.4.0.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			$(function() {
+				wx.config({
+					debug: false,
+					appId: '<?php echo $signPackage["appId"];?>',
+					timestamp: '<?php echo $signPackage["timestamp"];?>',
+					nonceStr: '<?php echo $signPackage["nonceStr"];?>',
+					signature: '<?php echo $signPackage["signature"];?>',
+					jsApiList: [
+						'chooseImage',
+						'scanQRCode'
+					]
+				});
+				$(".center").on("click", function() {
+					wx.chooseImage({
+						count: 1, // 默认9
+						sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+						sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+						success: function(res) {
+							var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+						}
+					});
+				})
+			})
+		</script>
+	</body>
+
+</html>

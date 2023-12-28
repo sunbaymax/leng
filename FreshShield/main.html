@@ -12,8 +12,9 @@
 		<title>监控首页</title>
 		<script src="js/jquery-1.11.0.js"></script>
 		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="css/index.css">
 		<link rel="stylesheet" href="css/swiper-3.4.2.min.css">
-        <script src="js/swiper-3.4.2.min.js"></script>
+		<script src="js/swiper-3.4.2.min.js"></script>
 	</head>
 
 	<body>
@@ -37,9 +38,9 @@
 							</select>
 							<s class="triangle"></s>
 						</div>
-						
+
 						<div class="searchitem">
-							<input type="text" placeholder="按设备名称、设备号搜索" class="vagueval"/>
+							<input type="text" placeholder="按设备名称、设备号搜索" class="vagueval" />
 							<img src="images/searchicon@2x.png" class="searchbtn" />
 						</div>
 					</div>
@@ -48,18 +49,17 @@
 			<div class="container">
 				<div class="contentbox">
 					<div class="contentscroll">
-						<div class="partleft swiper-container" id="div1" >
+						<div class="partleft swiper-container" id="div1">
 							<div class="swiper-wrapper">
-								 <!-- <li><p><a>中集集团</a></p></li>-->
-								  
-								  
+								<!-- <li><p><a>中集集团</a></p></li>-->
+
 							</div>
-							 
+
 						</div>
 						<div class="dataright" id="wrapper">
-				            <div class="scroller">
-				            </div> 
-				            <div class="more">
+							<div class="scroller">
+							</div>
+							<div class="more">
 								<i class="pull_icon"></i><span>上拉加载...</span>
 							</div>
 							<div class="nodata hidden">
@@ -76,55 +76,54 @@
 		<aside class="slide-wrapper" id="div2">
 			<div>
 				<div>
-					<img src="" class="touxiang aui-mine-img"/>
+					<img src="" class="touxiang aui-mine-img" />
 					<strong class="nickname"></strong>
 				</div>
 				<ul class="slide-menu">
 					<li>
-						<a href="html/user.html"><img src="images/myinfo.png" class="myinfo"/> 我的信息</a>
+						<a href="html/user.html"><img src="images/myinfo.png" class="myinfo" /> 我的信息</a>
 					</li>
 					<li>
-						<a href="html/daoqi.html"><img src="images/mytixing.png" class="myinfo"/> 设备到期提醒</a>
+						<a href="html/daoqi.html"><img src="images/mytixing.png" class="myinfo" /> 设备到期提醒</a>
 					</li>
 					<li>
-						<a href="html/paylistB.html"><img src="images/mypaylist.png" class="myinfo" style="margin-right: 18px;"/> 缴费记录</a>
+						<a href="html/paylistB.html"><img src="images/mypaylist.png" class="myinfo" style="margin-right: 18px;" /> 缴费记录</a>
 					</li>
 					<li>
 						<a href="html/shortmessage.html"><img src="images/mymessage.png" class="myinfo" style="margin-right: 20px;" /> 短信套餐</a>
 					</li>
 					<li>
-						<a href="html/transport/waybillmanager.html"><img src="images/mydanmanager.png" class="yandan"/> 运单管理</a>
+						<a href="html/transport/waybillmanager.html"><img src="images/mydanmanager.png" class="yandan" /> 运单管理</a>
 					</li>
 					<li>
-						<a href="html/transport/yundanset.html"><img src="images/mydanset.png" class="yandanset"/> 运单设置</a>
+						<a href="html/transport/yundanset.html"><img src="images/mydanset.png" class="yandanset" /> 运单设置</a>
 					</li>
-					
+
 					<li>
 						<a href="html/guide.html"><img src="images/myquestions.png" /> 常见问题</a>
 					</li>
-					
-					
+
 				</ul>
 				<div class="slide-footer">
 					<a href="javascript:void(0)" class="exit"><img src="images/exit_b.png" class="quiticon" />退出账户</a>
 				</div>
 			</div>
-			
+
 		</aside>
-		<div class="window_post hidden" >
-		     <div>
-		     	<p class="remarkinput">
-		     		<label for="post_add">昵称：</label>
-				    <input type="text" id="post_add" placeholder="请输入">
-		     	</p>
-				
+		<div class="window_post hidden">
+			<div>
+				<p class="remarkinput">
+					<label for="post_add">昵称：</label>
+					<input type="text" id="post_add" placeholder="请输入">
+				</p>
+
 				<p>
 					<input type="button" id="post_add_post" value="确定">
-				    <input type="button" id="post_add_esc" value="取消">
+					<input type="button" id="post_add_esc" value="取消">
 				</p>
-				
-		     </div>
-		     	
+
+			</div>
+
 		</div>
 		<div class="JieChuBang_box hidden">
 			<div class="JieChuBang">
@@ -141,197 +140,207 @@
 				</div>
 			</div>
 		</div>
+		<div id="success_mao hidden" style="display: none;">
+			<div class="success_box_info">
+				<div class="register_right">
+					<img src="img/ku.png" />
+				</div>
+				<div class="success_information_info ">
+					<p>用户您好，新版移动端平台已经上线，此网页将于2022年5月16日停止运行。请在公众号左下角选择小程序版登录或微信小程序搜索“盾管家”进入。</p>
+					<p>如果您对新平台有任何建议也可以通过在“中集智冷科技”公众号内找到“投诉/建议”告诉我们。</p>
+				</div>
+				<form action="">
+					<input type="button" value="我知道" class="remindbtn"/>
+				</form>
+			</div>
+		</div>
+
 		<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
-        <script>
-//	        var swiper = new Swiper('.swiper-container', {
-//	            slidesPerView: 5,
-//	            spaceBetween: 10,
-//	            pagination: {
-//	                el: '.swiper-pagination',
-//	                clickable: true,
-//	                
-//	            },
-//	        });
-        </script>
- 
+		<script>
+			//	        var swiper = new Swiper('.swiper-container', {
+			//	            slidesPerView: 5,
+			//	            spaceBetween: 10,
+			//	            pagination: {
+			//	                el: '.swiper-pagination',
+			//	                clickable: true,
+			//	                
+			//	            },
+			//	        });
+		</script>
+
 		<script type="text/javascript">
 			$(function() {
-				
+                $('.remindbtn').on('click',function(){
+                	$(this).parents('#success_mao').hide()
+                })
 				var _start = 0;
-			    var ismore=true;
-			    var myscroll_x = new iScroll("wrapper", {
-				onScrollMove: function() {
-					if(this.y < (this.maxScrollY)) {
-						$('.pull_icon').addClass('flip');
-						$('.pull_icon').removeClass('loading');
-						$('.more span').text('释放加载...').show();
-					} else {
-						$('.pull_icon').removeClass('flip loading');
-						$('.more span').text('上拉加载...').show()
-						if(myscroll_x.y > 50) {
-							$(".refreshmsg").show();
-							$('.pull_icon').addClass('loading');
-						    $('.refreshmsg span').text('正在刷新...');
-						    setTimeout(function () {
-				                //window.location.reload()
-                                //console.log("下拉加载")
-                                _start=0
-                                pullUpActions();
-				              }, 1500);
-							
+				var ismore = true;
+				var myscroll_x = new iScroll("wrapper", {
+					onScrollMove: function() {
+						if(this.y < (this.maxScrollY)) {
+							$('.pull_icon').addClass('flip');
+							$('.pull_icon').removeClass('loading');
+							$('.more span').text('释放加载...').show();
+						} else {
+							$('.pull_icon').removeClass('flip loading');
+							$('.more span').text('上拉加载...').show()
+							if(myscroll_x.y > 50) {
+								$(".refreshmsg").show();
+								$('.pull_icon').addClass('loading');
+								$('.refreshmsg span').text('正在刷新...');
+								setTimeout(function() {
+									//window.location.reload()
+									//console.log("下拉加载")
+									_start = 0
+									pullUpActions();
+								}, 1500);
+
+							}
 						}
+					},
+					onScrollEnd: function() {
+						if($('.pull_icon').hasClass('flip')) {
+							$('.pull_icon').addClass('loading');
+							$(".more .pull_icon").show();
+							$('.more span').text('加载中...').show();
+							pullUpActions();
+
+						}
+					},
+					onRefresh: function() {
+						console.log("上拉加载")
+						$('.more').removeClass('flip');
+						$('.more span').text('上拉加载...').show();
 					}
-				},
-				onScrollEnd: function() {
-					if($('.pull_icon').hasClass('flip')) {
-						$('.pull_icon').addClass('loading');
-						$(".more .pull_icon").show();
-						$('.more span').text('加载中...').show();
-						pullUpActions();
-						
-					}
-				},
-				onRefresh: function() {
+				});
+				//			 $(".partleft").on('touchstart', function (e) {
+				//			   e.preventDefault();
+				//			 });
+				//document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+
+				machine_ajax_list(_start)
+
+				function pullUpActions() {
 					console.log("上拉加载")
-					$('.more').removeClass('flip');
-					$('.more span').text('上拉加载...').show();
-				}
-			});
-//			 $(".partleft").on('touchstart', function (e) {
-//			   e.preventDefault();
-//			 });
-			 //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-			  
-			   machine_ajax_list(_start)
-				function pullUpActions(){
-					console.log("上拉加载")
-					if(ismore){
+					if(ismore) {
 						_start += 5;
 						$(".wait").removeClass("hidden");
 						machine_ajax_list(_start);
 					}
-					
+
 				};
 				if(!window.localStorage.getItem("isonline")) {
 					window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx029d1989acb9f44c&redirect_uri=http://www.ccsc58.cc/leng/oauth2_templatform.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
 				}
 				let userinfo = JSON.parse(localStorage.getItem('isonline'));
-				let openid=localStorage.getItem('openId');
-				let copenid=userinfo.copenid;
-				let uid=userinfo.uid;
-				let userType=userinfo.userType;
+				let openid = localStorage.getItem('openId');
+				let copenid = userinfo.copenid;
+				let uid = userinfo.uid;
+				let userType = userinfo.userType;
 				let _userName = userinfo.user;
-			    let _userPass = userinfo.pwd;
-			    function machine_ajax_list(_offset){
-			    	ismore=false;
-			    	let userinfo = JSON.parse(localStorage.getItem('isonline'));
+				let _userPass = userinfo.pwd;
+
+				function machine_ajax_list(_offset) {
+					ismore = false;
+					let userinfo = JSON.parse(localStorage.getItem('isonline'));
 					let _userName = userinfo.user;
-			    	let _status=$('.statusval').val();
-			    	let _vague=$('.vagueval').val();
-			    	let _suoshujigou=$('.swiper-wrapper .active a').attr('number')==undefined ?'':$('.swiper-wrapper .active a').attr('number')
-			    	console.log(userinfo.user,_suoshujigou,_start)
-			    	if(_start==0){
+					let _status = $('.statusval').val();
+					let _vague = $('.vagueval').val();
+					let _suoshujigou = $('.swiper-wrapper .active a').attr('number') == undefined ? '' : $('.swiper-wrapper .active a').attr('number')
+					console.log(userinfo.user, _suoshujigou, _start)
+					if(_start == 0) {
 						$('#wrapper .scroller').html('')
 						myscroll_x.refresh();
 					}
-				    $.ajax({
-						type:"post",
-						url:"https://www.zjcoldcloud.com/xiandun/public/index.php/index/device/device_list_v1",
-						async:true,
-						data:{
-							userName:_userName,
-							offset:_offset,
-							pagesize:5,
-							suoshujigou:_suoshujigou,
-							status:_status,
-							vague:_vague,
+					$.ajax({
+						type: "post",
+						url: "https://www.zjcoldcloud.com/xiandun_back/public/index.php/index/device/device_list_v1",
+						async: true,
+						data: {
+							userName: _userName,
+							offset: _offset,
+							pagesize: 5,
+							suoshujigou: _suoshujigou,
+							status: _status,
+							vague: _vague,
 						},
-						dataType:'json',
-						success:function(res){
-							let str=''
-							if(res.code==0){
-								 setTimeout(function () {
-					               ismore=true;
-					              }, 1500);
-								$.each(res.data.data, function(index,item) {
-								    let daoqi=''
-								    if(item.is_guoqi){
-								    	daoqi=`<div class="daoqi">
-								<h4>设备已到期</h4>
-								<div class="daoqicontent">
-									您的设备服务已到期，请于<span class="daoqiTime">${item.daoqishijian}</span>前进行缴费，逾期该设备SIM卡将被注销。
-								</div>
-								<div>
-									<button>联系缴费</button>
-								</div>
-							</div>`
-								    }
-									let isline='';
-									let type='';
-									if(item.is_line){
-										//在线
-										let power=''
-										if(item.dianliang_xiaxian_baojing === 1&&item.last_power <=item.dianliang_xiaxian){
-											if(item.last_power>=80){
-												power=`<img src="images/power4-low@2x.png" class="powimg" />`
-											}else if(item.last_power>=60){
-												power=`<img src="images/power3-low@2x.png" class="powimg" />`
-											}else if(item.last_power>=40){
-												power=`<img src="images/power2-low@2x.png" class="powimg" />`
-											}else{
-												power=`<img src="images/power1-low@2x.png" class="powimg" />`
+						dataType: 'json',
+						success: function(res) {
+							let str = ''
+							if(res.code == 0) {
+								setTimeout(function() {
+									ismore = true;
+								}, 1500);
+								$.each(res.data.data, function(index, item) {
+
+									let isline = '';
+									let type = '';
+									if(!item.is_guoqi) {
+
+										if(item.is_line) {
+											//在线
+											let power = ''
+											if(item.dianliang_xiaxian_baojing === 1 && item.last_power <= item.dianliang_xiaxian) {
+												if(item.last_power >= 80) {
+													power = `<img src="images/power4-low@2x.png" class="powimg" />`
+												} else if(item.last_power >= 60) {
+													power = `<img src="images/power3-low@2x.png" class="powimg" />`
+												} else if(item.last_power >= 40) {
+													power = `<img src="images/power2-low@2x.png" class="powimg" />`
+												} else {
+													power = `<img src="images/power1-low@2x.png" class="powimg" />`
+												}
+
+											} else {
+												if(item.last_power >= 80) {
+													power = `<img src="images/power4@2x.png" class="powimg" />`
+												} else if(item.last_power >= 60) {
+													power = `<img src="images/power3@2x.png" class="powimg" />`
+												} else if(item.last_power >= 40) {
+													power = `<img src="images/power2@2x.png" class="powimg" />`
+												} else {
+													power = `<img src="images/power1@2x.png" class="powimg" />`
+												}
 											}
-											
-										}else{
-											if(item.last_power >=80){
-											    power=`<img src="images/power4@2x.png" class="powimg" />`
-											}else if(item.last_power >=60){
-												power=`<img src="images/power3@2x.png" class="powimg" />`
-											}else if(item.last_power >=40){
-												power=`<img src="images/power2@2x.png" class="powimg" />`
-											}else{
-												power=`<img src="images/power1@2x.png" class="powimg" />`
+											let signs = ''
+											if(item.xinhaoqiangdu >= 26) {
+												signs = `<img src="images/signal5@2x.png" class="signimg" />`
+											} else if(item.xinhaoqiangdu >= 20) {
+												signs = `<img src="images/signal4@2x.png" class="signimg" />`
+											} else if(item.xinhaoqiangdu >= 13) {
+												signs = `<img src="images/signal3@2x.png" class="signimg" />`
+											} else if(item.xinhaoqiangdu >= 5) {
+												signs = `<img src="images/signal2@2x.png" class="signimg" />`
+											} else {
+												signs = `<img src="images/signal1@2x.png" class="signimg" />`
 											}
-										} 
-										let signs=''
-										if(item.xinhaoqiangdu >= 26){
-											signs=`<img src="images/signal5@2x.png" class="signimg" />`
-										}else if(item.xinhaoqiangdu >= 20 ){
-											signs=`<img src="images/signal4@2x.png" class="signimg" />`
-										}else if(item.xinhaoqiangdu >= 13 ){
-											signs=`<img src="images/signal3@2x.png" class="signimg" />`
-										}else if(item.xinhaoqiangdu >= 5 ){
-											signs=`<img src="images/signal2@2x.png" class="signimg" />`
-										}else{
-											signs=`<img src="images/signal1@2x.png" class="signimg" />`
-										}
-										let temps=''
-										if((item.baojingwendu_shangxian_baojing === 1 && item.last_temperature01 >= item.baojingwendu_shangxian) || (item.baojingwendu_xiaxian_baojing === 1 && item.baojingwendu_xiaxian >= item.last_temperature01)){
-											temps=`<div>
+											let temps = ''
+											if((item.baojingwendu_shangxian_baojing === 1 && item.last_temperature01 >= item.baojingwendu_shangxian) || (item.baojingwendu_xiaxian_baojing === 1 && item.baojingwendu_xiaxian >= item.last_temperature01)) {
+												temps = `<div>
 					              	  			<img src="images/temp-high.png" class="tempimg" />
 					              	  			<span class='high'>${item.last_temperature01}℃</span>
 					              	  		</div>`
-										}else{
-											temps=`<div>
+											} else {
+												temps = `<div>
 					              	  			<img src="images/temp.png" class="tempimg" />
 					              	  			<span>${item.last_temperature01}℃</span>
 					              	  		</div>`
-										}
-										
-										if(item.model_type=='TT'){
-											let temp2=''
-											if((item.baojingwendu_two_shangxian_baojing === 1 && item.last_temperature02 >= item.baojingwendu_two_shangxian) || (item.baojingwendu_two_xiaxian_baojing === 1 && item.last_temperature02 <= item.baojingwendu_two_xiaxian)){
-												temp=`<div>
+											}
+
+											if(item.model_type == 'TT') {
+												let temp2 = ''
+												if((item.baojingwendu_two_shangxian_baojing === 1 && item.last_temperature02 >= item.baojingwendu_two_shangxian) || (item.baojingwendu_two_xiaxian_baojing === 1 && item.last_temperature02 <= item.baojingwendu_two_xiaxian)) {
+													temp2 = `<div>
 					              	  			<img src="images/temp-high.png" class="humidityimg" />
 					              	  			<span class='high'>${item.last_temperature02}℃</span>
 					              	  		</div>`
-											}else{
-												temp=`<div>
+												} else {
+													temp2 = `<div>
 					              	  			<img src="images/temp.png" class="humidityimg" />
 					              	  			<span>${item.last_temperature02}℃</span>
 					              	  		</div>`
-											}
-											 type=`
+												}
+												type = `
 											 ${temps}
 					              	  		 ${temp2}
 					              	  		<div>
@@ -342,20 +351,20 @@
 				              	  		    ${signs}
 				              	  			<span>${item.xinhaoqiangdu>=26?'强':item.xinhaoqiangdu>=20?"好":item.xinhaoqiangdu>=13?"良":item.xinhaoqiangdu>=5?"弱":'无'}</span>
 				              	  		</div>`
-										}else{
-											let hum=''
-											if ((item.chaodishidubaojing === 1 && item.chaodishidubaojingfazhi >= item.last_humidity) || (item.chaogaoshidubaojing === 1 && item.chaogaoshidubaojingfazhi <= item.last_humidity)){
-												hum=`<div>
+											} else {
+												let hum = ''
+												if((item.chaodishidubaojing === 1 && item.chaodishidubaojingfazhi >= item.last_humidity) || (item.chaogaoshidubaojing === 1 && item.chaogaoshidubaojingfazhi <= item.last_humidity)) {
+													hum = `<div>
 					              	  			<img src="images/humidity-heigh@2x.png" class="humidityimg" />
 					              	  			<span class='high'>${item.last_humidity}%RH</span>
 					              	  		</div>`
-											}else{
-												hum=`<div>
+												} else {
+													hum = `<div>
 					              	  			<img src="images/humidity@2x.png" class="humidityimg" />
 					              	  			<span>${item.last_humidity}%RH</span>
 					              	  		</div>`
-											}
-											 type=`${temps}
+												}
+												type = `${temps}
 					              	  		${hum}
 					              	  		<div>
 				              	  			${power}
@@ -366,11 +375,11 @@
 				              	  			${signs}
                                             <span>${item.xinhaoqiangdu>=26?'强':item.xinhaoqiangdu>=20?"好":item.xinhaoqiangdu>=13?"良":item.xinhaoqiangdu>=5?"弱":'无'}</span>
 				              	  		</div>`
-										}
-									}else{
-										//离线
-										if(item.model_type=='TT'){
-											 type=`<div>
+											}
+										} else {
+											//离线
+											if(item.model_type == 'TT') {
+												type = `<div>
 					              	  			<img src="images/temp-off.png" class="tempimg" />
 					              	  			<span>${item.last_temperature01}℃</span>
 					              	  		</div>
@@ -386,8 +395,8 @@
 				              	  			<img src="images/signal-off@2x.png" class="signimg" />
 				              	  		    <span>${item.xinhaoqiangdu<=23?'弱':'强'}</span>
 				              	  		</div>`
-										}else{
-											 type=`<div>
+											} else {
+												type = `<div>
 					              	  			<img src="images/temp-off.png" class="tempimg" />
 					              	  			<span>${item.last_temperature01}℃</span>
 					              	  		</div>
@@ -403,21 +412,21 @@
 				              	  			<img src="images/signal-off@2x.png" class="signimg" />
 				              	  			<span>${item.xinhaoqiangdu<=23?'弱':'强'}</span>
 				              	  		</div>`
+											}
 										}
-									}
-									let stus=''
-									if(item.is_line){
-										stus=`<label  class='isstatus text-green'>在线</label>`
-									}else{
-										stus=`<label  class='isstatus text-gray'>离线</label>`
-									}
-									let beizhustr=''
-									if(item.beizhu==''){
-										beizhustr=`<div class="remarks beizhu nobeizhu">未命名</div>`
-									}else{
-										beizhustr=`<div class="remarks beizhu ">${item.beizhu}</div>`
-									}
-									str=`<div class="dataitem">
+										let stus = ''
+										if(item.is_line) {
+											stus = `<label  class='isstatus text-green'>在线</label>`
+										} else {
+											stus = `<label  class='isstatus text-gray'>离线</label>`
+										}
+										let beizhustr = ''
+										if(item.beizhu == '') {
+											beizhustr = `<div class="remarks beizhu nobeizhu">未命名</div>`
+										} else {
+											beizhustr = `<div class="remarks beizhu ">${item.beizhu}</div>`
+										}
+										str = `<div class="dataitem">
 				              	  	<div class="item-top">
 				              	  		${beizhustr}
 				              	  		<div class='nextbox tright'><span class="shebeihao" id='${item.shebeibianhao}'>${item.shebeibianhao}</span>
@@ -440,105 +449,125 @@
 				              	  	</div>
 				              	  	
 				              	  </div>
-				              	  ${daoqi}
+				              	  
 				              	  </div>`;
-				              	 $('#wrapper .scroller').append(str);
-				              	 let _starts =_start+5;
-				              	 myscroll_x.refresh();
-				              	if(res.data.data.length<5){
-									$(".more span").text("已加载全部").hide();
-								    $(".more .pull_icon").hide();
-								    $('.nodata').addClass('hidden')
-								}
-				              	$('.nodata').addClass('hidden')
-							});
-								
-							}else{
+									} else {
+										let btn = ''
+										if(item.is_overdue == 3) {
+											btn = `<button>前往查看</button>`
+										} else {
+											btn = `<button>前往缴费</button>`
+										}
+										str = `<div class="dataitem"><div class="daoqi">
+								<h4>设备已到期</h4>
+								<div class="daoqicontent">
+								    设备号：${item.shebeibianhao}服务已到期，请于<span class="daoqiTime">${item.daoqishijian}</span>前及时续费，过期将注销SIM卡，如需再次使用请返厂换卡.
+						             
+								</div>
+								<div>
+									${btn}
+								</div>
+							</div></div>`
+
+									}
+
+									$('#wrapper .scroller').append(str);
+									let _starts = _start + 5;
+									myscroll_x.refresh();
+									if(res.data.data.length < 5) {
+										$(".more span").text("已加载全部").hide();
+										$(".more .pull_icon").hide();
+										$('.nodata').addClass('hidden')
+									}
+									$('.nodata').addClass('hidden')
+								});
+
+							} else {
 								//$(".more").addClass('hidden')
-							    //$(".more").removeClass("hidden");
-							     setTimeout(function () {
-					               ismore=true;
-					              }, 1500);
-								
-								if(_start==0&&res.message=='暂无设备'){
+								//$(".more").removeClass("hidden");
+								setTimeout(function() {
+									ismore = true;
+								}, 1500);
+
+								if(_start == 0 && res.message == '暂无设备') {
 									$('.nodata').removeClass('hidden')
 									$(".more span").text("已加载全部").hide();
-								    $(".more .pull_icon").hide();
-								}else{
+									$(".more .pull_icon").hide();
+								} else {
 									$('.nodata').addClass('hidden')
 									$(".more span").text("已加载全部").show();
-							    	$(".more .pull_icon").hide();
+									$(".more .pull_icon").hide();
 								}
-                                 
+
 							}
-							
+
 						},
-						error:function(err){
-							
+						error: function(err) {
+
 						}
 					});
 				}
 				$.ajax({
-					type:"post",
-					url:"http://www.zjcoldcloud.com/xiandun_back/public/index.php/index/department/my_department",
-					async:true,
-					data:{
-						user:_userName,
-						pagesize:1000
+					type: "post",
+					url: "http://www.zjcoldcloud.com/xiandun_back/public/index.php/index/department/my_department",
+					async: true,
+					data: {
+						user: _userName,
+						pagesize: 1000
 					},
-					dataType:'json',
-					success:function(res){
-						let str=''
-						if(res.code==0){
-							
-							$.each(res.data.departments, function(index,item) {
-								if(index==0){
+					dataType: 'json',
+					success: function(res) {
+						let str = ''
+						if(res.code == 0) {
+
+							$.each(res.data.departments, function(index, item) {
+								if(index == 0) {
 									$('.top01 h5').text(item.gongsimingcheng)
-									str=`<li class='active'><a number='${item.number}'>${item.gongsimingcheng}</a></li>`;
-								}else{
-									str=`<li><a number='${item.number}'>${item.gongsimingcheng}</a></li>`;
+									str = `<li class='active'><a number='${item.number}'>${item.gongsimingcheng}</a></li>`;
+								} else {
+									str = `<li><a number='${item.number}'>${item.gongsimingcheng}</a></li>`;
 								}
-								
+
 								$('.swiper-wrapper').append(str)
 							});
-							
-						}else{
-							
+
+						} else {
+
 						}
 					},
-					error:function(err){
-						
+					error: function(err) {
+
 					}
 				});
 				$.ajax({
-					type:"post",
-					url:"http://www.zjcoldcloud.com/xiandun/public/index.php/index/Tb_Wei_User/index",
-					async:true,
-					data:{
-						openid:openid
+					type: "post",
+					url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/Tb_Wei_User/index",
+					async: true,
+					data: {
+						openid: openid
 					},
-					dataType:'json',
-					success:function(res){
+					dataType: 'json',
+					success: function(res) {
 						console.log(res)
-						if(res.code==0){
-							$(".aui-mine-img").attr('src',res.data.headimgurl);
+						if(res.code == 0) {
+							$(".aui-mine-img").attr('src', res.data.headimgurl);
 							$(".nickname").text(res.data.nickname)
-						}else{
-							$(".aui-mine-img").attr('src','../images/userphoto.png');
+						} else {
+							$(".aui-mine-img").attr('src', 'images/userphoto.png');
 							$(".nickname").text(userType)
 						}
 					},
-					error:function(err){
-						
+					error: function(err) {
+
 					}
 				});
 				//修改备注
-				$('body').on('click','.dataitem .remarks',function(){
-				 	let _num = $(this).parents('.dataitem').find('.shebeihao').text();
-			        let _beizhu = $(this).parents('.dataitem').find('.beizhu').text()=='未命名'?'':$(this).parents('.dataitem').find('.beizhu').text();
-   			        $(".window_post").removeClass('hidden');
-				    $(".window_post").attr('num',_num)
-			        $(".window_post #post_add").val(_beizhu)
+				$('body').on('click', '.dataitem .remarks', function() {
+					let _num = $(this).parents('.dataitem').find('.shebeihao').text();
+					let _beizhu = $(this).parents('.dataitem').find('.beizhu').text() == '未命名' ? '' : $(this).parents('.dataitem').find('.beizhu').text();
+					$(".window_post").removeClass('hidden');
+					$(".window_post").attr('num', _num)
+					$(".window_post #post_add").val(_beizhu)
 
 				})
 				//提交备注
@@ -546,47 +575,46 @@
 					var bieming = $("#post_add").val().replace(/\s*/g, "");
 					var _num = $(this).parents('.window_post').attr('num');
 					var copenid = userinfo.copenid == undefined ? '' : userinfo.copenid;
-						$.ajax({
-							type: "post",
-							url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/xiandun_update_device",
-							data: {
-								devid: _num,
-								beizhu: bieming,
-								openid:copenid
-							},
-							dataType: "JSON",
-							success: function(res) {
-								console.log(res)
-								if(res.code == 0 && res.message == "success") {
-									alert("保存成功");
-									let id="#"+_num;
-									$(id).parent().prev().text(bieming)
-									$('.window_post').addClass("hidden")
-								} else {
-									alert("信息保存失败，请重试！")
-								}
-							},
-							error: function() {
-								console.log("网络错误")
+					$.ajax({
+						type: "post",
+						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/xiandun_update_device",
+						data: {
+							devid: _num,
+							beizhu: bieming,
+							openid: copenid
+						},
+						dataType: "JSON",
+						success: function(res) {
+							console.log(res)
+							if(res.code == 0 && res.message == "success") {
+								alert("保存成功");
+								let id = "#" + _num;
+								$(id).parent().prev().text(bieming)
+								$('.window_post').addClass("hidden")
+							} else {
+								alert("信息保存失败，请重试！")
 							}
-						});
-			
-					
+						},
+						error: function() {
+							console.log("网络错误")
+						}
+					});
+
 				});
 				//隐藏上传设备号的窗口；
 				$("#post_add_esc").on("click", function() {
 					$(this).parents('.window_post').addClass("hidden")
 				});
-//				$('aside.slide-wrapper').on('touchstart', 'li', function(e) {
-//					$(this).addClass('current').siblings('li').removeClass('current');
-//				});
-               $('.swiper-container>.swiper-wrapper>.swiper-slide').click(function(){
-	                $(this).addClass("active").siblings().removeClass("active");
-	                
-	            });
-	            $(".statusval").change(function () {
+				//				$('aside.slide-wrapper').on('touchstart', 'li', function(e) {
+				//					$(this).addClass('current').siblings('li').removeClass('current');
+				//				});
+				$('.swiper-container>.swiper-wrapper>.swiper-slide').click(function() {
+					$(this).addClass("active").siblings().removeClass("active");
+
+				});
+				$(".statusval").change(function() {
 					console.log($(this).children('option:selected').val());
-					_start=0;
+					_start = 0;
 					machine_ajax_list(0);
 				});
 				$('a.slide-menu').on('click', function(e) {
@@ -614,65 +642,65 @@
 						odl[this.index].style.display = "block";
 					}
 				}
-			
-			//部门切换
-			$("body").on("click",'.partleft li',function(){
-				$(this).addClass('active').siblings().removeClass('active');
-			    $('.vagueval').val('')
-			    _start = 0;
-			     machine_ajax_list(_start);
-			})
-			$("body").on("click",'.daoqi button',function(){
-				location.href='html/daoqi.html'
-			})
-			//跳转详情页
-			$("body").on("click",".dataitem .nextbox",function(){
-				console.log('aa')
-				var num = $(this).parents('.dataitem').find(".shebeihao").text();
-				window.location.replace("html/details_lists.html?num_m=" + num)
-			})
-			//按关键字查询
-			$("body").on("click",".searchbtn",function(){
-				_start = 0;
-				 machine_ajax_list(_start);
-			})
-			//退出账号
-			$(".exit").on("click", function() {
-				$(".JieChuBang_box").removeClass("hidden");
-			});
-			//确定退出
-			$(".JieChuBang_left").on("click", function() {
+
+				//部门切换
+				$("body").on("click", '.partleft li', function() {
+					$(this).addClass('active').siblings().removeClass('active');
+					$('.vagueval').val('')
+					_start = 0;
+					machine_ajax_list(_start);
+				})
+				$("body").on("click", '.daoqi button', function() {
+					location.href = 'html/daoqi.html'
+				})
+				//跳转详情页
+				$("body").on("click", ".dataitem .nextbox", function() {
+					console.log('aa')
+					var num = $(this).parents('.dataitem').find(".shebeihao").text();
+					window.location.replace("html/details_lists.html?num_m=" + num)
+				})
+				//按关键字查询
+				$("body").on("click", ".searchbtn", function() {
+					_start = 0;
+					machine_ajax_list(_start);
+				})
+				//退出账号
+				$(".exit").on("click", function() {
+					$(".JieChuBang_box").removeClass("hidden");
+				});
+				//确定退出
+				$(".JieChuBang_left").on("click", function() {
 					$.ajax({
 						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/login/xiandun_cancellation",
 						type: "post",
 						data: {
 							uid,
-							userType:'b'
+							userType: 'b'
 						},
-						dataType:'json',
+						dataType: 'json',
 						success: function(res) {
-							if(res.code==0){
+							if(res.code == 0) {
 								window.localStorage.removeItem("isonline");
 								window.sessionStorage.clear();
 								window.location.href = 'html/register.html?openId=' + openid;
-							}else{
+							} else {
 								window.localStorage.removeItem("isonline");
 								window.sessionStorage.clear();
 								window.location.href = 'html/register.html?openId=' + openid;
 								//alert('注销失败')
 							}
-							
+
 						},
 						error: function() {
 							alert("退出失败")
 						}
 					});
+				});
+				//取消退出
+				$(".JieChuBang_right").on("click", function() {
+					$(".JieChuBang_box").addClass("hidden");
+				})
 			});
-			//取消退出
-			$(".JieChuBang_right").on("click", function() {
-				$(".JieChuBang_box").addClass("hidden");
-			})
-	    });
 		</script>
 	</body>
 

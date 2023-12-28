@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>请稍候。。。</title>
+	</head>
+
+	<body>
+		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var _url = window.location.href;
+			function getNowFormatDate(day) {
+			    var date = new Date();
+				var year = date.getFullYear();
+				var month = date.getMonth() + 1;
+				var d =''
+				if(day==-1){
+					d = date.getDate()-1;
+				}else{
+					d = date.getDate();
+				}				
+				var hour = date.getHours();
+				var minute = date.getMinutes();
+				var second = date.getSeconds();
+				if(month < 10) {
+					month = "0" + month;
+				}
+				if(d < 10) {
+					d = "0" + d;
+				}
+				if(hour < 10) {
+					hour = "0" + hour;
+				}
+				if(minute < 10) {
+					minute = "0" + hour;
+				}
+				if(second < 10) {
+					second = "0" + second;
+				}
+				return year + "-" + month + "-" + d + " " + hour + ":" + minute + ":" + second;
+			}
+
+			if(window.localStorage.getItem("isonline")) {
+				var _num = _url.match(/\?num_m=\S+/)[0].replace("?num_m=", "");
+				let _startTime=getNowFormatDate(-1)
+				let _endTime=getNowFormatDate(0)
+				var userinfo = JSON.parse(localStorage.getItem('isonline'));
+				var _userName = userinfo.user;
+				var _userPass = userinfo.pwd;
+				$.ajax({
+					url: "http://www.ccsc58.com/json/01_00_tb_history_data.php",
+					type: "post",
+					data: {
+						UserP: "w",
+						admin_permit: "zjly8888",
+						admin_user: _userName,
+						admin_pass: _userPass,
+						shebeibianhao: _num.replace("&", ""),
+						StartTime: _startTime,
+						EndTime: _endTime,
+						StartNo: 0,
+						Length: 1
+					},
+					success: function(data) {
+						
+						var _json = JSON.parse(data);
+						if(_json.code == 1) {
+							//alert("未发现：" + _num.replace("&", "") + "设备，请确认您的设备是否绑定在 " + _userName + " 账号下！！！！");
+							  window.location.href = "details_lists.html?num_m=" + _num+"&";
+							//
+						} else {
+							sessionStorage.setItem('paraset',0);
+						    window.location.href = "details_lists.html?num_m=" + _num+"&";
+//							window.location.href = "details_list.html?num_m=" + _num;
+						}
+					},
+					error: function() {
+						$(".wait").addClass("hidden");
+						alert("未找到您搜索的设备！");
+					}
+				});
+
+
+			} else {
+				alert("请先绑定账号至您的微信号");
+				
+			}
+		</script>
+	</body>
+
+</html>

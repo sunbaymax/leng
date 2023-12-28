@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>光点智云</title>
+		<!--<link rel="stylesheet" href="../css/index.css" />-->
+		<!--<link rel="stylesheet" href="../css/changeM.css" />-->
+		<!--<link rel="stylesheet" href="../css/set.css" />-->
+		<style>
+			body,
+			div,
+			ul,
+			li,
+			label,
+			nav,
+			form,
+			p,
+			span {
+				margin: 0;
+				padding: 0;
+				list-style-type: none;
+			}
+			
+			body {
+				font: 12px/180% Arial, Helvetica, sans-serif, "宋体";
+				background-color: #f2f5f8!important;
+				font-family: "微软雅黑"!important;
+				font-size: 1.4rem;
+			}
+			
+			body,
+			header,
+			div,
+			p,
+			span,
+			ul,
+			li,
+			dl,
+			dd,
+			dt,
+			ol,
+			img {
+				margin: 0px;
+				padding: 0px;
+			}
+			
+			a,
+			img {
+				border: 0;
+			}
+			
+			.hidden {
+				display: none!important;
+			}
+			
+			.header {
+				background: #37C0C4;
+				height: 4.6rem;
+				width: 100vw;
+				text-align: center;
+				line-height: 4.6rem;
+				color: #fefefe;
+				/*font-weight: bold;*/
+				font-size: 1.6rem;
+				position: fixed;
+				top: 0px;
+				left: 0px;
+				z-index: 9999;
+			}
+			
+			.header .back_list,
+			.back_list_user {
+				width: 1.8rem;
+				height: 2rem;
+				position: absolute;
+				top: 1rem;
+				left: 1rem;
+			}
+			
+			html {
+				font-size: 62.5%;
+				/* 10÷16=62.5% */
+			}
+			
+			@media only screen and (min-width: 481px) {
+				html {
+					font-size: 94%!important;
+					/* 15.04÷16=94% */
+				}
+			}
+			
+			@media only screen and (min-width: 561px) {
+				html {
+					font-size: 109%!important;
+					/* 17.44÷16=109% */
+				}
+			}
+			
+			@media only screen and (min-width: 641px) {
+				html {
+					font-size: 125%!important;
+					/* 20÷16=125% */
+				}
+			}
+			
+			.form {
+				width: 100%;
+				margin-top: 5rem;
+			}
+			
+			.form p {
+				width: 90%;
+				margin-left: 5%;
+				text-align: center;
+				margin-top: 0rem;
+				height: 4.6rem;
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+			}
+			
+			.form p:last-child {
+				justify-content: center;
+			}
+			
+			.form p select {
+				width: 174px;
+				height: 3rem;
+			}
+			
+			.form p span:first-child {
+				display: inline-block;
+				width: 120px;
+			}
+			
+			.form p input[type="text"] {
+				height: 3rem;
+				box-sizing: border-box;
+				text-align: center;
+			}
+			
+			.btnok {
+				width: 16rem;
+				height: 3rem;
+				background: #40C0C3;
+				border-radius: 20px;
+				border: none;
+				color: #ffffff;
+				font-size: 1.5rem;
+			}
+			
+			.down_weixin {
+				width: 100vw;
+				height: 100vh;
+				position: fixed;
+				top: 0px;
+				left: 0px;
+				background: rgba(0, 0, 0, .5);
+				z-index: 99999;
+			}
+			
+			.down_weixin img {
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="header"><img class="back_list_user" src="../img/back.png" />数据下载</div>
+		<div class="form" >
+			<p><span>设备编号：</span><input type="text" /></p>
+			<p><span>开始时间：</span><input style="text-align: center;" type="text" id="history_start_time" readonly/></p>
+			<p><span>结束时间：</span><input style="text-align: center;" type="text" id="history_end_time" readonly /></p>
+			<p><span>选择格式：</span>
+				<select name="">
+					<option value="1">PDF格式</option>
+					<option value="2">EXCEL格式</option>
+				</select>
+				<!--是否湿度<input type="checkbox" name="sex" value="male">-->
+			</p>
+
+			<p>
+				<span>显示第二路数据:</span><input type="checkbox" style="height:20px;width:20px;border: 1px solid #ccc;" name="humbity" value="1" checked="checked">
+			</p>
+			<p>
+				<span>请选择版本：</span>
+				<input type="radio" name="banben" value="base" style="height:20px;width:20px;border: 1px solid #ccc;" checked="checked" id="jichu"> <label for="jichu">基础数据版</label>
+				<input type="radio" name="banben" value="address" style="height:20px;width:20px;border: 1px solid #ccc;" id="address"><label for="address">地理位置版</label>
+			</p>
+			<p><button class="btnok" />下载</button>
+			</p>
+		</div>
+		<div class="down_weixin hidden">
+			<img src="../img/down_weixin.png" />
+		</div>
+		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/jquer_shijian.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/iostime.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script src="../My97DatePicker/WdatePicker.js" type="text/javascript" charset="utf-8"></script>-->
+		<script type="text/javascript">
+			var _url = window.location.href;
+			var _num_m = _url.match(/\?num_m=\S+&s/)[0].replace("?num_m=", "").replace("&s", "");
+			$(".back_list_user").on("click", function() {
+				//				var ab = navigator.userAgent;
+				//				var isWei = !!/MicroMessenger/i.test(ab);
+				//				if(isWei) {
+				//					window.location.href = "details_lists.html?num_m=" + _num_m;
+				//				} else {
+				//					alert("请返回微信！")
+				//				}
+				history.go(-1);
+			});
+
+			var _endTime = new Date();
+			var _startTime = new Date(_endTime.getTime() - 24 * 60 * 60 * 1000);
+			$("#history_start_time").val(history_time(_startTime));
+			$("#history_end_time").val(history_time(_endTime));
+			var calendar = new datePicker();
+			calendar.init({
+				'trigger': '#history_start_time',
+				/*按钮选择器，用于触发弹出插件*/
+				'type': 'datetime',
+				/*模式：date日期；datetime日期时间；time时间；ym年月；*/
+				'minDate': '1900-1-1',
+				/*最小日期*/
+				'maxDate': '2100-12-31',
+				/*最大日期*/
+				'onSubmit': function() { /*确认时触发事件*/
+					var theSelectData = calendar.value;
+				},
+				'onClose': function() { /*取消时触发事件*/ }
+			});
+
+			var calendar = new datePicker();
+			calendar.init({
+				'trigger': '#history_end_time',
+				/*按钮选择器，用于触发弹出插件*/
+				'type': 'datetime',
+				/*模式：date日期；datetime日期时间；time时间；ym年月；*/
+				'minDate': '1900-1-1',
+				/*最小日期*/
+				'maxDate': '2100-12-31',
+				/*最大日期*/
+				'onSubmit': function() { /*确认时触发事件*/
+					var theSelectData = calendar.value;
+				},
+				'onClose': function() { /*取消时触发事件*/ }
+			});
+
+			function history_time(_a) {
+				var _start_year = _a.getFullYear();
+				var _start_month = _a.getMonth() + 1 < 10 ? "0" + (_a.getMonth() + 1) : _a.getMonth() + 1;
+				var _start_date = _a.getDate() < 10 ? "0" + (_a.getDate()) : _a.getDate();
+				var _start_hour = _a.getHours() < 10 ? "0" + (_a.getHours()) : _a.getHours();
+				var _start_minutes = _a.getMinutes() < 10 ? "0" + (_a.getMinutes()) : _a.getMinutes();
+				var _start_seconds = _a.getSeconds() < 10 ? "0" + (_a.getSeconds()) : _a.getSeconds();
+				return _start_year + "-" + _start_month + "-" + _start_date + " " + _start_hour + ":" + _start_minutes + ":" + _start_seconds;
+			}
+
+			function history_time(_a) {
+				var _start_year = _a.getFullYear();
+				var _start_month = _a.getMonth() + 1 < 10 ? "0" + (_a.getMonth() + 1) : _a.getMonth() + 1;
+				var _start_date = _a.getDate() < 10 ? "0" + (_a.getDate()) : _a.getDate();
+				var _start_hour = _a.getHours() < 10 ? "0" + (_a.getHours()) : _a.getHours();
+				var _start_minutes = _a.getMinutes() < 10 ? "0" + (_a.getMinutes()) : _a.getMinutes();
+				var _start_seconds = _a.getSeconds() < 10 ? "0" + (_a.getSeconds()) : _a.getSeconds();
+				return _start_year + "-" + _start_month + "-" + _start_date + " " + _start_hour + ":" + _start_minutes + ":" + _start_seconds;
+			}
+			var _start_time = _url.match(/\&start=\S+&e/)[0].replace("&start=", "").replace("&e", "").replace("%20", " ");
+			var _end_time = _url.match(/\&end=\S+/)[0].replace("&end=", "").replace("%20", " ");
+			$(".form p:nth-of-type(1) input").val(_num_m);
+			$("#history_start_time").val(_start_time);
+			$("#history_end_time").val(_end_time);
+			$(".down_weixin img").on("click", function() {
+				$(".down_weixin").addClass("hidden");
+			})
+			$(".btnok").on("click", function() {
+				var ua = navigator.userAgent;
+				var isWeixin = !!/MicroMessenger/i.test(ua);
+				if(isWeixin) {
+					$(".down_weixin").removeClass("hidden");
+				} else {
+					var _machine_number = $(".form p:nth-of-type(1) input").val();
+					var _start_time = $("#history_start_time").val();
+					var _end_time = $("#history_end_time").val();
+					var _geshi = $("p:nth-of-type(4) select").val();
+//					console.log(_machine_number,_geshi);
+//					return false;
+					if(_geshi == 1) {
+						let ischoose = $("input[type='checkbox']").is(':checked') == true ? '1' : '0';
+						let isbanben = $('input[name="banben"]:checked').val();
+						let surl = ''
+						if(isbanben == 'base') {
+							
+							surl = 'http://www.ccsc58.cc/wlgl/Admin/Humiture/downloadPDF/s/' + _machine_number + '/t1/' + _start_time + '/t2/' + _end_time + '/hanzi/1/total/2000/showShidu/' + ischoose
+						} else {
+							surl = "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/import_pdf?shebeibianma=" + _machine_number + "&t1=" + _start_time + "&t2=" + _end_time + "&showShidu="+ischoose+"&hanzi=1";
+							//surl="http://www.ccsc58.com/tcpdf/pdf/pdf_out.php?s=" + _machine_number + "&t1=" + _start_time + "&t2=" + _end_time+ "&t2=" + _end_time;
+							
+						}
+                        console.log(surl)
+						window.location.href = surl
+					} else if(_geshi == 2) {
+						let excelurl="http://www.ccsc58.com/PHPExcel/PHPExcel/xls_out210811.php?s=" + _machine_number + "&t1=" + _start_time + "&t2=" + _end_time;
+						console.log(excelurl)
+						window.location.href = "http://www.ccsc58.com/PHPExcel/PHPExcel/xls_out210811.php?s=" + _machine_number + "&t1=" + _start_time + "&t2=" + _end_time;
+					}
+				}
+
+			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,457 @@
+﻿<!doctype html>
+<html class="no-js">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>农管家</title>
+
+		<!-- Set render engine for 360 browser -->
+		<meta name="renderer" content="webkit">
+
+		<!-- No Baidu Siteapp-->
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+		<!-- <link rel="icon" type="image/png" href="assets/i/favicon.png"> -->
+
+		<!-- Add to homescreen for Chrome on Android -->
+		<meta name="mobile-web-app-capable" content="yes">
+		<!-- <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png"> -->
+
+		<!-- Add to homescreen for Safari on iOS -->
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-title" content="Amaze UI" />
+		<!--  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png"> -->
+
+		<!-- Tile icon for Win8 (144x144 + tile color) -->
+		<!-- <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png"> -->
+		<meta name="msapplication-TileColor" content="#0e90d2">
+
+		<!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+		<!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+		<link rel="stylesheet" href="../css/index.css">
+		<link rel="stylesheet" href="../css/jquery.idcode.css">
+
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+				/*box-sizing: border-box;*/
+			}
+
+			header {
+				position: fixed;
+				top: 0;
+				left: 0;
+				z-index: 999;
+				width: 100%;
+				height: 49px;
+				background-color: #333;
+				color: #fff;
+			}
+
+			header .back {
+				position: absolute;
+				top: 0;
+				left: 0;
+				display: inline-block;
+				padding-left: 5px;
+				font-size: 30px;
+			}
+
+			header p {
+				margin: 0;
+				line-height: 49px;
+				font-size: 16px;
+				text-align: center;
+			}
+
+			.register {
+				margin-top: 5rem;
+				/*padding: 8px 6px;*/
+				font-size: 1.4rem;
+				padding: 0 2vw;
+				box-sizing: border-box;
+			}
+
+			.res-item {
+				position: relative;
+				width: 100%;
+				border-radius: 4px;
+				/*margin-bottom: 8px;*/
+				height: 4rem;
+				background-color: #fff;
+				margin-top: 1rem;
+			}
+
+			.res-icon {
+				position: absolute;
+				left: 8px;
+				top: 5px;
+				z-index: 100;
+				display: inline-block;
+				font-size: 18px;
+				color: #9c9c9c;
+			}
+
+			.res-item .input-item {
+				display: inline-block;
+				width: 100%;
+				padding-left: 1rem;
+				box-sizing: border-box;
+				height: 4rem;
+				border: none;
+				font-size: inherit;
+				border-radius: 0.5rem;
+			}
+
+			.res-item .input-item:focus {
+				outline-offset: 0;
+				outline: -webkit-focus-ring-color auto -2px;
+				background-color: #fefffe;
+				border: 1px solid #55CAC4;
+				outline: 0;
+				-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 5px rgba(226, 25, 69, .3);
+				box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 5px rgba(226, 25, 69, 0.3);
+			}
+
+			.res-item .input-item:focus+.res-icon {
+				color: #e21945;
+			}
+
+			.yanzhengma {
+				display: inline-block;
+				height: 3rem;
+				width: 10rem;
+				line-height: 3rem;
+				/* padding: 0.5rem 0.8rem; */
+				position: absolute;
+				right: 15px;
+				top: 0.5rem;
+				z-index: 100;
+				font-size: 1.3rem;
+				border: none;
+				background-color: #55CAC4;
+				color: #fff;
+				border-radius: 0.5rem;
+			}
+
+			.yanzhengma:disabled {
+				background-color: #ddd;
+			}
+
+			.res-btn {
+				margin-top: 20rem;
+				text-align: center;
+			}
+
+			.res-btn button {
+				width: 16rem;
+				height: 4rem;
+				background: #40C0C3;
+				border-radius: 5rem;
+				border: none;
+				color: #ffffff;
+				font-size: 1.5rem;
+			}
+
+			.res-btn button:focus {
+				color: #fff;
+			}
+
+			.jiediv {
+				height: 4rem;
+				line-height: 4rem;
+				text-align: end;
+				margin-right: 1rem;
+			}
+
+			.jiediv a {
+				text-decoration: none;
+				color: #3299fe;
+			}
+
+			.register .last-item {
+				display: flex;
+			}
+
+			.register .last-item input {
+				padding-left: 1rem;
+				width: 60%;
+			}
+
+			.register .last-item p {
+				display: flex;
+				align-items: center;
+			}
+
+			.last-item p {
+				height: 3rem;
+				position: absolute;
+				right: 15px;
+				top: 0.5rem;
+				z-index: 100;
+				font-size: 1.3rem;
+				border: none;
+			}
+
+			.last-item #accass {
+				width: 1.2rem;
+				height: 1.2rem;
+				position: absolute;
+				right: -15px;
+			}
+
+			.hide {
+				display: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--[if lte IE 9]>
+    <p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a
+      href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+      以获得更好的体验！</p>
+    <![endif]-->
+		<div class="header"><img class="back_list" src="../img/back.png" />
+			<span>忘记密码</span>
+		</div>
+		<!--<header>
+        <i class="am-icon-angle-left back"></i>
+        <p>账号注册</p>
+    </header>-->
+		<div class="register">
+			<div class="formyanzheng ">
+				<div class="res-item">
+
+					<input type="tel" placeholder="请输入手机号" class="input-item mobile" id="telphone">
+					<i class="res-icon am-icon-phone"></i>
+				</div>
+				<div class="res-item">
+
+					<input type="text" placeholder="请输入短信验证码" class="input-item yanzheng">
+					<i class="res-icon am-icon-mobile"></i>
+					<button type="button" class="yanzhengma">发送验证码</button>
+				</div>
+				<div class="res-item last-item">
+					<input type="text" class="inputval" placeholder="请输入动态验证码" id="Txtidcode" class="txtVerification" />
+					<p class="inner">
+						<span id="idcode"></span>
+						<img src="../images/success.png" class="hide" id="accass" />
+					</p>
+
+				</div>
+			</div>
+			<div id="editpsd" class="hide">
+				<div class="res-item">
+					<input type="password" placeholder="请输入新密码，数字或字母20位以内" class="input-item newpsd">
+				</div>
+				<div class="res-item">
+					<input type="password" placeholder="请确认新密码" class="input-item newpsd2">
+				</div>
+			</div>
+			<div class="res-btn">
+				<button type="button" id="res-btn" class="am-btn am-btn-block">验证</button>
+			</div>
+		</div>
+
+		<!--[if (gte IE 9)|!(IE)]><!-->
+		<script src="../js/jquery-1.11.0.js"></script>
+		<script src="../js/jquery.idcode.js"></script>
+		<script src="../js/index.js"></script>
+
+		<script>
+			$.idcode.setCode();
+			var yanzheng = '';
+			$('#Txtidcode').bind('input propertychange', function() {
+				if($(this).val().replace(/\s/g, "").length == 5) {
+					var IsBy = $.idcode.validateCode();
+					if(IsBy) {
+						$("#accass").show();
+						yanzheng = true;
+					} else {
+						alert('验证码输入错误!');
+						$("#accass").hide();
+						yanzheng = false;
+					}
+				} else {
+					$("#accass").hide();
+					yanzheng = false;
+				}
+
+			})
+			$(".back_list").on("click", function() {
+				window.history.go(-1);
+			});
+			var times = 60;
+
+			function roof() {
+
+				if(times == 0) {
+					$('.yanzhengma').text('发送验证码(' + times + 's)');
+					$('.yanzhengma').prop('disabled', false);
+					$('.yanzhengma').text('发送验证码');
+					times = 60;
+					return
+				}
+				$('.yanzhengma').prop('disabled', true);
+				$('.yanzhengma').text('发送验证码(' + times + 's)');
+				times--;
+				setTimeout(roof, 1000);
+			}
+
+			$('.yanzhengma').on('click', function() {
+				var mobile = $('.mobile').val();
+				if(!mobile) {
+					$('.mobile').focus();
+					document.querySelector('.mobile').placeholder = '请填写手机号码';
+					return
+				} else if(!isPoneAvailable($("#telphone"))) {
+
+					alert("手机格式错误");
+					document.querySelector('.mobile').placeholder = '手机号格式错误';
+					return
+				} else {
+					var mobile = $('.mobile').val();
+					$.ajax({
+						type: "post",
+						url: "http://www.zjcoldcloud.com/xiandun_back/public/index.php/index/register/sendCode",
+						async: true,
+						data: {
+							phone: mobile
+						},
+						dataType: "json",
+						success: function(res) {
+							if(res.code == 0) {
+								$(this).prop('disabled', true);
+								roof();
+								console.log("发送成功")
+							} else {
+								alert(res.message);
+							}
+						},
+						error: function(err) {
+							console.log(err);
+						}
+					});
+				}
+
+			});
+			function istrue(str){
+				var reg=/^(([a-z]+[0-9]+)|([0-9]+[a-z]+))[a-z0-9]*$/i;
+				return reg.test(str);
+			}
+
+			function isPoneAvailable($poneInput) {
+				var myreg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
+				if(!myreg.test($poneInput.val())) {
+					return false;
+				} else {
+					return true;
+				}
+			}
+			var bang = 1;
+
+			$('#res-btn').on('click', function() {
+				var _openid = window.localStorage.getItem("openId");
+				var mobile = $('.mobile').val();
+				var yanzhengma = $('.yanzheng').val();
+				if($(this).text() == '验证') {
+					if(mobile == '') {
+						$('.mobile').focus();
+						document.querySelector('.mobile').placeholder = '请填写手机号码';
+						return
+					} else if(!isPoneAvailable($("#telphone"))) {
+						$('.mobile').focus();
+						document.querySelector('.mobile').placeholder = '手机号格式错误';
+						return
+					} else if(yanzhengma == '') {
+						$('.yanzheng').focus();
+						document.querySelector('.yanzheng').placeholder = '验证码不能为空';
+						return
+					} else if(yanzheng==false) {
+						alert("验证码输入错误");
+						return
+					} else {
+						$.ajax({
+							type: "post",
+							url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/register/xiandun_yanzheng_code",
+							data: {
+								phone: mobile,
+								code: yanzhengma
+							},
+							dataType: "json",
+							success: function(res) {
+								console.log(res);
+								if(res.code == 0) {
+									$('.formyanzheng').hide();
+									$('#editpsd').show();
+									$('.header span').text('重置密码');
+									$('button').text('提交')
+								} else {
+									alert(res.message);
+									return false;
+								}
+							},
+							error: function(err) {
+
+							}
+						})
+
+					}
+				} else {
+					var newpsw = $('.newpsd').val();
+					var newpsw2 = $('.newpsd2').val();
+					if(newpsw == '') {
+						$('.newpsd').focus();
+						alert('新密码不能为空');
+						return
+					} else if(newpsw2 == '') {
+						$('.newpsd2').focus();
+						alert('再次新密码不能为空');
+						return
+					} else if(newpsw2 != newpsw) {
+						alert('两次密码不一致');
+						return
+					} else {
+						$.ajax({
+							type: "post",
+							url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/register/forget_pwd",
+							data: {
+								phone: mobile,
+								code: yanzhengma,
+								new_pwd:newpsw
+							},
+							dataType: "json",
+							success: function(res) {
+								console.log(res);
+								if(res.code == 0) {
+									alert("重置成功！");
+									location.href='register.html?openId='+_openid;
+								} else {
+									alert(res.message);
+									return false;
+								}
+							},
+							error: function(err) {
+
+							}
+						})
+					}
+				}
+
+			})
+		</script>
+
+	</body>
+
+</html>

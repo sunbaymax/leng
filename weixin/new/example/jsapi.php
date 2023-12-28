@@ -1,7 +1,8 @@
-<div class="hidden">
+<div class="hidden" style="display: none;">
 	<?php 
 ini_set('date.timezone','Asia/Shanghai');
 //error_reporting(E_ERROR);
+libxml_disable_entity_loader(true);
 require_once "../lib/WxPay.Api.php";
 require_once "WxPay.JsApiPay.php";
 require_once 'log.php';
@@ -21,7 +22,7 @@ $total = array_pop(explode('=',$_GET['total']));
 die();*/
 //②、统一下单
 $input = new WxPayUnifiedOrder();
-$input->SetBody("中集冷云");
+$input->SetBody("智冷科技");
 $input->SetAttach("test");
 $input->SetOut_trade_no(WxPayConfig::MCHID.date("YmdHis"));
 $input->SetTotal_fee($total);
@@ -53,21 +54,24 @@ $editAddress = $tools->GetEditAddressParameters();
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-	<title>中集冷云--支付平台</title>
+	<title>智冷科技--支付平台</title>
 </head>
 
 <body>
-	<form class="abc" action="../../../weixinnew/last.php" method="post" style="display:none;">
-		收款成功：<input class="abcd" type="text" name="username"  value="收款成功"/><br /> 
-		订单号：<input type="text" name="password" value="暂无" /><br />
-		金额：<input class="money" type="text" name="nickname" /><br /> 
-		付款人：<input type="text" name="email" value="暂无" /><br /> 
-		付款单位：<input class="pay_danWei" type="text" name="abc" value="" /><br /> 
-		时间：<input class="time" type="text" name="cb"/><br /> 
-		openID：<input type="text" name="123" value="oTarnvxZ-objNsHTLNVIYBV5rOdA" /><br /> 
-		appkey：<input type="text" name="app_key" value="261AFF68C0E9F076420D083D66222824" /><br />
+	<form method="post" style="display:none;">
+		收款成功：<input class="success" type="text" value="收款成功"/><br /> 
+		订单号：<input type="text" class="danhao"  value="暂无" /><br />
+		金额：<input class="money" type="text"/><br /> 
+		付款人：<input class="username" type="text" value="暂无" /><br /> 
+		手机号：<input type="text" class="tel" value="暂无" /><br /> 
+		付款单位：<input class="pay_danWei" type="text"  value="" /><br /> 
+		服务城市：<input class="city" type="text" value="" /><br /> 
+		时间：<input class="time" type="text"/><br /> 
+		openID：<input class="_openID" type="text"/><br /> 
+		appkey：<input type="text" class="app_key" value="261AFF68C0E9F076420D083D66222824" /><br />
 	</form>
 	<script src="../../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/ajaxForm.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		callpay();
 
@@ -101,79 +105,80 @@ $editAddress = $tools->GetEditAddressParameters();
 				function(res) {
 					WeixinJSBridge.log(res.err_msg);
 					if(res.err_msg == "get_brand_wcpay_request:ok") {
+					    var _x = new Date();
+						var _username = window.sessionStorage.getItem("username");
+						var _tel = window.sessionStorage.getItem("tel");
 						var _money = window.sessionStorage.getItem("pay_money");
 						var _daWei = window.sessionStorage.getItem("pay_daWei");
 						var _payCity=window.sessionStorage.getItem("_pay_name");
-						//alert(_daWei);decodeURI(window.location.href.match(/\&mao=\S+\+total=/)[0].replace("&mao=","").replace("+total=",""))
-						var _x = new Date();
-						$(".money").val("￥" + Number(_money).toFixed(2));
-						$(".pay_danwei").val(_daWei);
-						$(".time").val("服务城市："+_payCity);					
+					    var now = new Date();
+				        var year = now.getFullYear(); //得到年份
+				        var month = now.getMonth();//得到月份
+				        var date = now.getDate();//得到日期
+				        var day = now.getDay();//得到周几
+				        var hour = now.getHours();//得到小时
+				        var minu = now.getMinutes();//得到分钟
+				        var sec = now.getSeconds();//得到秒
+				　　            var MS = now.getMilliseconds();//获取毫秒
+				        var week;
+				        month = month + 1;
+				        if (month < 10) month = "0" + month;
+				        if (date < 10) date = "0" + date;
+				        if (hour < 10) hour = "0" + hour;
+				        if (minu < 10) minu = "0" + minu;
+				        if (sec < 10) sec = "0" + sec;
+				        if (MS < 100)MS = "0" + MS;
+				        var times = "";
+				        times = year +"-"+ month +"-"+ date + " " + hour + ":" + minu + ":" + sec;
+				        $(".danhao").val(times);
+						$(".money").val(_money);
+						$(".username").val(_username);
+						$(".tel").val(_tel);
+						$(".pay_danWei").val(_daWei);
+						$(".city").val(_payCity);
+						
 						$.ajax({
-							url: "http://www.ccsc58.com/json/weixin/01_00_weixin_zhifu_post.php",
+							url: "http://www.ccsc58.com/json/weixin/02_02_lykj_weixin_zhifu_post.php",
+//							url: "http://www.ccsc58.com/json/weixin/02_00_lykj_weixin_zhifu_post.php",
 							type:"post",
 							data: {
 								controller: "register",
 								admin_permit: "zjly8888",
 								openid: _payCity,
 								fukuandanwei: _daWei,
-								money: _money
+								money: _money,
+								tel:_tel,
+								username:_username,
+								danhao:times
 							},
 							success: function(data) {
+								console.log(data)
 								var _json = JSON.parse(data);
 								if(_json.code == 10000 && _json.message == "success" && _json.resultCode == "success") {
-									alert("中集冷云提醒您：付款￥"+_money+"成功");
-									$(".abc").submit();
-								} else {
-									alert("网络错误，请立即联系'中集冷云'客服人员确认是否已收到付款！");
+			
+									alert("智冷科技提醒您：付款￥"+_money+"成功");
+									window.location.href="http://www.ccsc58.cc/leng/weixin/index.html";
+								}
+								 else {
+									console.log("网络错误！");
+									return false;
 								}
 							},
 							error:function(){
-								alert("网络错误,请立即联系'中集冷云'客服人员确认是否已收到付款！");
+								console.log("网络错误！");
+								return false;
 							}
 						});
 					} else if(res.err_msg == "get_brand_wcpay_request:cancel") {
-						alert("取消付款");
-						window.location.href="../../image_test.html";
+						alert("您已取消付款！！！");
+						window.location.href="../../index.html";
 					} else {
-						alert("暂时无法付款，请联系客服人员");
+						alert("网络错误！");
 					};
 				}
 			);
 		}
 	</script>
-	<!--
-	<script type="text/javascript">
-		//获取共享地址
-		function editAddress() {
-			WeixinJSBridge.invoke(
-				'editAddress',
-				<?php echo $editAddress; ?>,
-				function(res) {
-					var value1 = res.proviceFirstStageName;
-					var value2 = res.addressCitySecondStageName;
-					var value3 = res.addressCountiesThirdStageName;
-					var value4 = res.addressDetailInfo;
-					var tel = res.telNumber;
-
-					alert(value1 + value2 + value3 + value4 + ":" + tel);
-				}
-			);
-		}
-
-		window.onload = function() {
-			if(typeof WeixinJSBridge == "undefined") {
-				if(document.addEventListener) {
-					document.addEventListener('WeixinJSBridgeReady', editAddress, false);
-				} else if(document.attachEvent) {
-					document.attachEvent('WeixinJSBridgeReady', editAddress);
-					document.attachEvent('onWeixinJSBridgeReady', editAddress);
-				}
-			} else {
-				editAddress();
-			}
-		};
-	</script>-->
 </body>
 
 </html>

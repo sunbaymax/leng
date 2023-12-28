@@ -47,7 +47,7 @@ function my_index_map(_jingdu, _weidu, _time, _shebeibianhao, _humidity, _wendu0
 
 			function my_zuobiao_zhuan(_jing, _wei, _t, _shebei, _h, _wen01, _wen02, mp, g) {
 				$.ajax({
-					url: "http://api.map.baidu.com/geoconv/v1/?ak=XP1alssWsEscC3NfYAhj6YfqKvgQgUXF&from=1&to=5",
+					url: "http://api.map.baidu.com/geoconv/v1/?ak=jmgKloGf3cOvRl3Y9pUAfvKZCTtCNGwj&from=1&to=5",
 					type: "post",
 					dataType: "JSONP",
 					data: {

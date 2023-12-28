@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="format-detection" content="telephone=no">
+		<title>温湿度监控宝</title>
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+	</head>
+	<style>
+		body{
+			background: #FFFFFF!important;
+		}
+		ul{
+			padding: 0 10px;
+			box-sizing: border-box;
+		}
+		ul li{
+			padding: 10px 0px;
+			box-sizing: border-box;
+			border-bottom: 1px solid rgba(229,229,229,1);
+		}
+         .content{
+         	margin-top:4.6rem;
+         }
+         .title{
+         	color: rgba(34,34,34,1);
+         }
+         .detail{
+         	color: rgba(153,153,153,1);
+         	font-size: 13px;
+         }
+	</style>
+
+	<body>
+
+		<div class="header">
+			<img class="back_list_user" src="../img/back.png" /> 常见问题
+		</div>
+		<div class="content">
+			<ul>
+				<li>
+					<p class="title">1、设备刚拿到该怎么用？</p>
+					<p class="detail">a、通过微信扫描设备正面二维码，可打开“鲜盾管家”微信小程序，满足您日常查看温湿度实时数据、参数修改的需求；<br> b、通过小程序“账户设备”功能注册您的手机号，可通过“中集智冷”公众号登录“云平台”享受更多功能，如：历史数据下载（PDF、EXCEL），设备运动轨迹查询等。</p>
+				</li>
+				<li>
+					<p class="title">2、如何更改设备昵称？</p>
+					<p class="detail">点击“我的”进入“我的设备”列表栏，点击需要备注的设备号，在“参数”栏下的“设备昵称”后填写您想要备注的昵称。</p>
+				</li>
+				<li>
+					<p class="title">3、第一次开机屏幕显示“go”是什么意思？</p>
+					<p class="detail">'设备开机后开始自检并进行时间同步，同步成功后设备会显示“go”字样，稍等2分钟设备即可正常使用。</p>
+				</li>
+				<li>
+					<p class="title">4、一个手机账号如何同时查看多个设备？</p>
+					<p class="detail">在“我的设备”列表栏内点击屏幕右下角的“+”号，输入您想要绑定的设备号，设备号是设备背面的6位数字。</p>
+				</li>
+				<li>
+					<p class="title">5、设备连续充电几个小时电量图标为什么还是空格？</p>
+					<p class="detail">如果设备直充时出现此类情况，请充完电后拔掉连接线，并拔出电池10秒后重新插入。</p>
+				</li>
+				<li>
+					<p class="title">6、设备夜间怎么没有上传数据？</p>
+					<p class="detail">您的设备可能关闭了夜间上传（24:00-7:00）功能，在“我的设备”里点击您需要修改的设备号，在“参数”列表下的“参数信息”里将“夜间上传功能”开关打开即可。</p>
+				</li>
+			</ul>
+		</div>
+		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			
+			$(".back_list_user").on("click", function() {
+				//window.location.href="../index.html";
+				window.history.go(-1);
+			});
+
+
+		</script>
+		<!--<script src="../js/change_user.js" type="text/javascript" charset="utf-8"></script>-->
+	</body>
+
+</html>

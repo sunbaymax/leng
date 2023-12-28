@@ -128,7 +128,7 @@ class wechatCallbackapiTest
             case "LOCATION":
 //              $content = "上传位置：纬度 ".$object->Latitude.";经度 ".$object->Longitude;
 //              break;
-                $url="http://api.map.baidu.com/geocoder/v2/?ak=XP1alssWsEscC3NfYAhj6YfqKvgQgUXF&location=$object->Latitude,$object->Longitude&output=json&coordtype=gcj0211";
+                $url="http://api.map.baidu.com/reverse_geocoding/v3/?ak=jmgKloGf3cOvRl3Y9pUAfvKZCTtCNGwj&location=$object->Latitude,$object->Longitude&output=json&coordtype=gcj0211";
                 $output=file_get_contents(url);
                 $address=json_decode($output,true);
                 $content="位置".$address["result"]["addressComponent"]["province"]." ".$address["result"]["addressComponent"]["city"]." ".$address["result"]["addressComponent"]["district"]." ".$address["result"]["addressComponent"]["street"];

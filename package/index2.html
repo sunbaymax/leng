@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>-产品说明书</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      #container {
+        background-color: #f9f9f9;
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        height: calc(100vh - 50px);
+        overflow-y: auto;
+      }
+      .list {
+        list-style: none;
+        padding: 20px;
+        font-size: 14px;
+        background-color: #fff;
+        border-radius: 4px;
+        margin-bottom: 10px;
+      }
+      .list .title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      .list img {
+        width: 120px;
+        height: 120px;
+      }
+      #btn-group {
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+      }
+      #btn-group button {
+        width: 80px;
+        height: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <div id="btn-group"></div>
+    <script type="text/javascript">
+      var data = [
+        {
+          name: "二氧化碳三合一ZL-CO2-RS485",
+          desc: "二氧化碳+温湿度三合一传感器ZL-CO2-RS485 ，是我司自研的双通道二氧化碳检测传感器。 CO2 本身是没有毒性的，对于哺乳动物来说，体质很重要，体质下降会容易感染各种慢性的传染病。而对于养殖场来说，CO2的浓度过高，势必会使得氧气含量降低，所以CO2浓度的监测对于养殖场景来说至关重要。若检测到CO2浓度超出限值，就要对场所进行通风处理。  产品分为单通道ZL-CO2-RS485-S （单Single）；双通道ZL-CO2-RS485-D （双Double）",
+          pdf: "ZL-CO2-RS485二氧化碳三合一传感器-产品说明书.pdf",
+          pic: "http://www.zjcoldcloud.com/managesystem/public/uploads/website/d/4/4/d44673d389074e5447f1e348d0006275.jpg",
+        },
+        {
+          name: "综合智能监测主机ZL-TH360V2.0",
+          desc: "综合智能监测主机ZL-TH360V2.0是一款集数据采集、上传、记录、报警为一体的环境监控主机，设备支持接入16路RS485传感器，2路开关量检测。可应用于包括冷链运输、农业、养殖在内的多个复杂场景。本产品为全方位环境监控产品，扩展能力极强，可外接485信号LED大屏，支持AC220V或24V太阳能供电。综合智能监测主机ZL-TH360V2.0是一款集数据采集、上传、记录、报警为一体的环境监控主机，设备支持接入16路RS485传感器，2路开关量检测。可应用于包括冷链运输、农业、养殖在内的多个复杂场景。本产品为全方位环境监控产品，扩展能力极强，可外接485信号LED大屏，支持AC220V或24V太阳能供电。",
+          pdf: "ZL-TH360V2.0-产品说明书.pdf",
+          pic: "http://www.zjcoldcloud.com/managesystem/public/uploads/website/9/c/5/9c51e564f28f73047d8355d9ec8ac551.png",
+        },
+        {
+          name: "气象监测站",
+          desc: "气象环境监测站是一款高度集成、低功耗、可快速安装、便于田间野外监测使用的高精度气象观测设备。自主研发生产，同时支持个性化定制方案。",
+          pdf: "小型气象监测站-产品说明书.pdf",
+          pic: "http://www.zjcoldcloud.com/managesystem/public/uploads/website/1/1/a/11aec1f2d7ce774b5050e05adeaaf3c5.png",
+        },
+        {
+          name: "大屏长续航室内温湿度监控终端ZL-TH180T",
+          desc: "大屏长续航室内温湿度监控终端ZL-TH180T是一款拥有超长续航能力的远程温湿度监控终端，该产品在具备远程查看温湿度数据的同时，采用了3.8英寸LCD屏，提高可视距离，并通过低功耗设计，进一步提高本产品的续航能力。本产品推荐居家、大棚、养殖场景使用。",
+          pdf: "ZL-TH180T-产品说明书.pdf",
+          pic: "http://www.zjcoldcloud.com/managesystem/public/uploads/website/a/9/2/a92c537146f422eeb47cef3cfd29880c.png",
+        },
+        {
+          name: "无线温湿度监控系统ZL-XTH60",
+          desc: "无线温湿度监控系统ZL-XTH60由采集器、网关、云平台三部分组成。该系统在温湿度多点监测情况下成本更低，且能适用于高温、高湿等恶劣环境，稳定持久，安装便捷，功能全面，外观小巧精美，应用领域广泛。",
+          pdf: "",
+          pic: "http://www.zjcoldcloud.com/managesystem/public/uploads/website/c/d/5/cd5b4052584efe70c604624e1537511c.png",
+        },
+        {
+          name: "宽温区温度监控终端ZL-TH10TPW",
+          desc: "宽温区温度监控终端ZL-TH10TPW是一款集采集、记录、存储、显示、报警、定位、断电续传等功能为一体的远程温湿度监控终端。联网方式支持4G（全网通），可远程实时查看数据，修改工作参数，接受报警信息。可根据应用场景选择外置传感器探头。本品可广泛应用于冷藏车、大棚、养殖、冷藏箱、冷库、冷柜等场景中。",
+          pdf: "ZL-TH10TPW-产品说明书.pdf",
+          pic: "http://www.zjcoldcloud.com/managesystem/public/uploads/website/1/3/a/13af098dc9e71a5c77001490ca763ff3.png",
+        },
+        {
+          name: "温湿度智能监控终端ZL-TH10TPU",
+          desc: "温湿度智能监控终端ZL-TH10TPU是一款转为医药冷链领域研发的一款远程温度记录仪。符合GSP标准要求，支持远程查看实时数据。为了方便现场交接过程数据，本产品支持平台下载、USB本地、手机蓝牙连接打印机三种数据导出的方式。",
+          pdf: "ZL-TH10TPU+-产品说明书.pdf",
+          pic: "http://www.zjcoldcloud.com/managesystem/public/uploads/website/4/f/4/4f46bd4c7d4227cbb135928f23e88d76.png",
+        },
+        {
+          name: "U盘温湿度记录仪LY-RTH1000B",
+          desc: "U盘温湿度记录仪LY-RTH1000B是一款集数据采集、显示、数据记录和PDF导出功能为一体的温湿度记录仪，记录仪通过USB接口与电脑连接后，自动生成PDF、EXCEL格式温湿度报告，收货方不需要下载安装驱动程序。推荐医药冷链、干冰、液氮等场景使用。",
+          pdf: "LY-RTH1000B鲜盾英文-产品说明书.pdf",
+          pic: "http://www.zjcoldcloud.com/managesystem/public/uploads/website/0/c/6/0c605ab3a13b93050c336571578d614a.png",
+        },
+        {
+          name: "温湿度智能监控终端ZL-TH10TP(鲜盾)",
+          desc: "温湿度智能监控终端ZL-TH10TP是一款集采集、记录、存储、显示、报警、定位、断电续传等功能为一体的远程温湿度监控终端。联网方式支持2G、4G（全网通），可远程实时查看数据，修改工作参数，接受报警信息。可根据应用场景选择内置/外置传感器探头。本品可广泛应用于冷藏车、大棚、养殖、冷藏箱、冷库、冷柜等场景中。",
+          pdf: "ZL-TH10TP 二代（药盾）-产品说明书.pdf",
+          pic: "http://www.zjcoldcloud.com/managesystem/public/uploads/website/f/4/f/f4f76aae972dd7bc60628a6534db6979.png",
+        },
+        {
+          name: "温湿度智能监控终端ZL-TH10TP(药盾)",
+          desc: "温湿度智能监控终端ZL-TH10TP是一款集采集、记录、存储、显示、报警、定位、断电续传等功能为一体的远程温湿度监控终端。联网方式支持2G、4G（全网通），可远程实时查看数据，修改工作参数，接受报警信息。可根据应用场景选择内置/外置传感器探头。本品可广泛应用于冷藏车、大棚、养殖、冷藏箱、冷库、冷柜等场景中。",
+          pdf: "ZL-TH10TP 二代（药盾）-产品说明书.pdf",
+          pic: "./pdf/yaodun.png",
+        },
+        {
+          name: "物联网环控箱",
+          desc: "智能物联网环控箱是由北京中集智冷自主研发制造。 这是一款可以与您一起成长、一起思考的智能化环境监测控制管理系统。他能精准的感知到周边环境的各项要素并及时通知您，也能支持并帮助您更轻松的控制、管理各种机电设备，无论您在不在现场，都能按照您的要求工作。 更重要的是，我们可以赋予它智慧，通过程序设定，教它在什么环境条件下做什么事情，创造出我们立项的环境状态。 最后，它可以将您之前所有教过它的知识记录下来，吸收、成长，完全智能化的工作，成长为您最忠实、最聪慧的帮手",
+          pdf: "物联网环控箱操作指南-通用版-A41-Q.pdf",
+          pic: "http://www.zjcoldcloud.com/managesystem/public/uploads/website/f/f/f/fff3b34a67e2b054b1a7cee0d781a2bb.png",
+        },
+      ];
+      var limit = 6;
+      var page = 1;
+      var pageList = [];
+      //渲染列表
+      pageList = data.slice((page - 1) * limit, page * limit);
+      renderList(pageList, page, limit);
+
+      renderBtn(data, page);
+      function renderList(list, page, limit) {
+        var content = `<ul >`;
+        for (let index = 0; index < list.length; index++) {
+          content += `
+        <li class="list">
+          <div class="title">${list[index].name}</div>
+          <div><img src="${list[index].pic}" align="right" />${list[index].desc}</div>
+        </li>
+        `;
+        }
+        content += `</ul>`;
+        var box = document.getElementById("container");
+        box.innerHTML = content;
+        //绑定事件
+        btn(list);
+      }
+      function renderBtn(list, page) {
+        //渲染按钮组
+        var btngroup = document.getElementById("btn-group");
+        btngroup.innerHTML = `
+          <button disabled id="prev">上一页</button>
+          <button id="next">下一页</button>
+        `;
+      }
+
+      function btn(data) {
+        var btnList = document.getElementsByClassName("list");
+        for (let i = 0; i < btnList.length; i++) {
+          btnList[i].addEventListener("click", () => {
+            window.open(`./pdf/${data[i].pdf}`, "_blank");
+          });
+        }
+      }
+      const next = document.getElementById("next");
+      next.onclick = function (e) {
+        pageList = [];
+        page++;
+        pageList = data.slice((page - 1) * limit, page * limit);
+        if (page > 1) {
+          next.disabled = true;
+          prev.disabled = false;
+        }
+        renderList(pageList, page, limit);
+      };
+      const prev = document.getElementById("prev");
+      prev.onclick = function (e) {
+        pageList = [];
+        page--;
+        pageList = data.slice((page - 1) * limit, page * limit);
+        renderList(pageList, page, limit);
+        if (page == 1) {
+          prev.disabled = true;
+          next.disabled = false;
+        }
+      };
+    </script>
+  </body>
+</html>

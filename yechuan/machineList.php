@@ -137,7 +137,7 @@
 		</div>
 
 		<script src="../js/iscroll.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=XP1alssWsEscC3NfYAhj6YfqKvgQgUXF" charset="utf-8"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=jmgKloGf3cOvRl3Y9pUAfvKZCTtCNGwj" charset="utf-8"></script>
 		<script type="text/javascript" src="../js/jquery-1.11.0.js"></script>
 		<script type="text/javascript" src="../js/index.js"></script>
 		<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" charset="utf-8"></script>
@@ -276,7 +276,7 @@
 				if(_userType == 'b') {
 					$('.is_c').hide()
 					$.ajax({
-						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/device_list",
+						url: "http://erpapi.ccsc58.com/xiandun/public/index.php/index/device/device_list",
 //						url: "http://www.ccsc58.com/json/00_00_tb_shebeidongtai.php",
 						type: "post",
 						data: {
@@ -364,7 +364,7 @@
 					let copenid=userinfo.copenid;
 					console.log(copenid,33)
 					$.ajax({
-						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/device_list",
+						url: "http://erpapi.ccsc58.com/xiandun/public/index.php/index/device/device_list",
 						type: "post",
 						data: {
 							openid: copenid,
@@ -540,7 +540,7 @@
 			function my_machine_list(_jingDu, _weiDu, _dem) {
 				//console.log(_jingDu+","+_weiDu)
 				$.ajax({
-					url: "http://api.map.baidu.com/geoconv/v1/?ak=XP1alssWsEscC3NfYAhj6YfqKvgQgUXF&from=1&to=5",
+					url: "http://api.map.baidu.com/geoconv/v1/?ak=jmgKloGf3cOvRl3Y9pUAfvKZCTtCNGwj&from=1&to=5",
 					type: "post",
 					dataType: "JSONP",
 					data: {
@@ -633,9 +633,9 @@
 			    if (mymessage == true) {
        				var _jiebangurl = '';
 					if(_is_master == 0) {
-						_jiebangurl = "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/remove_scend_device";
+						_jiebangurl = "http://erpapi.ccsc58.com/xiandun/public/index.php/index/device/remove_scend_device";
 					} else {
-						_jiebangurl = "http://www.zjcoldcloud.com/xiandun/public/index.php/index/Device/remove_bind";
+						_jiebangurl = "http://erpapi.ccsc58.com/xiandun/public/index.php/index/Device/remove_bind";
 					}
 				
 					$.ajax({
@@ -698,7 +698,7 @@
 			var copenid = userinfo.copenid == undefined ? '' : userinfo.copenid;
 			$.ajax({
 				type: "post",
-				url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/update_device",
+				url: "http://erpapi.ccsc58.com/xiandun/public/index.php/index/device/update_device",
 				data: {
 					devid: _num,
 					beizhu: bieming,

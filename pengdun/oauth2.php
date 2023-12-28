@@ -5,8 +5,8 @@ if (isset($_GET['code'])){
 			$arr = json_decode($result,true);
 			$openId=$arr['openid'];
 			//echo($openId);
-			echo "<script type=\"text/javascript\">location.href=\"http://www.jfcss.com/FreshShield/html/register.html?openId=".$openId."\"</script>";
-//			header('location:nianhui/qiandao.php?openId='.$openId);
+//			echo "<script type=\"text/javascript\">location.href=\"http://www.jfcss.com/FreshShield/html/register.html?openId=".$openId."\"</script>";
+			header('location:html/register.html?openId='.$openId);
 		   
 }else{
     echo "NO CODE";

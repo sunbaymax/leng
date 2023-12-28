@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="format-detection" content="telephone=no">
+		<!-- <！ - 删除默认的苹果工具栏和菜单栏 - >   -->
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<!-- <！ - 苹果手机顶部为黑色 - >   -->
+		<meta name="apple-mobile-web-status-bar-style" content="block" />
+		<title>氚云温湿度在线监测系统</title>
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+	</head>
+
+	<body>
+		<style>
+			body {
+				background-color: #F2F2F2!important;
+			}
+			
+			.content {
+				padding: 0 10px;
+				box-sizing: border-box;
+				/*margin-top: 5rem;*/
+			}
+			
+			.content ul {
+				height: auto;
+				padding: 5px 10px;
+				background: #FFFFFF;
+				border-radius: 15px;
+				margin-top: 10px;
+			}
+			
+			.content ul li {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				height: 4.6rem;
+				line-height: 4.6rem;
+			}
+			
+			.top {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+			
+			.top img {
+				margin: 15px 0;
+				width: 100px;
+				height: 100px;
+			}
+			
+			.top span {
+				font-weight: 800;
+				font-size: 16px;
+			}
+			
+			.msg {
+				text-align: center;
+				font-size: 12px;
+				color: #FF0000;
+				margin-top: 15px;
+			}
+			
+			.nomsg {
+				text-align: center;
+				margin-top: 30px;
+				padding: 5px;
+			}
+			
+			.yuyintitle {
+				margin-top: 4.6rem;
+				background: #FFFFFF;
+				height: 56px;
+				display: flex;
+				align-items: center;
+			}
+			
+			.yuyintitle div {
+				width: 100%;
+				text-align: center;
+				padding: 5px 0;
+				box-sizing: border-box;
+			}
+			
+			.yuyintitle div .xian {
+				border-right: 1px solid #e8e8e8;
+			}
+		</style>
+		<div class="header">
+			<img class="back_list" src="../img/back.png" ids='0' /> 购买记录
+		</div>
+		<div class="yuyintitle">
+			<div class="lefttotal">
+				<p class="xian">语音套餐总次数</p>
+				<p class="xian"><span class="total"></span>&nbsp;次</p>
+			</div>
+			<div class="lrighttotal">
+				<p>语音套餐剩余次数</p>
+				<p><span class="surplus"></span>&nbsp;次</p>
+			</div>
+		</div>
+		<div class="content">
+
+			<!--<ul>
+				<li>
+					<div>套餐名：<span class="taocanname"></span></div>
+					<div>金额：￥<span class="money"></span></div>
+				</li>
+				<li>
+					<div>价格：<span class="price"></span></div>
+					<div>次数：￥<span class="number"></span></div>
+				</li>
+				<li>
+					<div>购买时间：</div>
+					<div class="addtime"></div>
+				</li>
+				<li>
+					<div>到期时间 ：</div>
+					<div class="daoqitime"></div>
+				</li>
+				
+			</ul>-->
+
+		</div>
+		<script type="text/javascript" src="../js/jquery-1.11.0.js"></script>
+		<script src="../js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			$(function() {
+
+				var userinfo = JSON.parse(localStorage.getItem('isonline'));
+				var _userName = userinfo.user;
+				var _userPass = userinfo.pwd;
+				var _openid = userinfo.copenid;
+				var _id = userinfo.uid;
+				$.ajax({
+					type: "post",
+					url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/voice_package/package_statis",
+					async: true,
+					data: {
+						u_id: _id
+					},
+					dataType: "JSON",
+					success: function(res) {
+						console.log(res);
+						if(res.code == 0) {
+							if(res.data.pk_total_num == null) {
+                                    $(".yuyintitle").hide();
+							} else {
+								$(".total").text(res.data.pk_total_num);
+								$(".surplus").text(res.data.pk_rema_num == null ? 0 : res.data.pk_rema_num);
+							}
+
+						} else {
+							$(".yuyintitle").hide()
+						}
+
+					},
+					error: function(err) {
+
+						console.log(err)
+					}
+				});
+				//打印输出
+				$.ajax({
+					type: "post",
+					url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/voice_package/user_package_list",
+					async: true,
+					data: {
+						u_id: _id
+					},
+					dataType: "JSON",
+					success: function(res) {
+						if(res.code == 0 && res.data.count != 0) {
+							var str = '';
+							$.each(res.data.content, function(index, val) {
+								str = `<ul>
+									<li>
+										<div>套餐名：<span class="taocanname">${val.names}</span></div>
+										<div>金额：￥<span class="money">${val.money}</span></div>
+									</li>
+									<li>
+										<div>价格：<span class="price">${val.price}</span></div>
+										<div>次数：￥<span class="number">${val.numbers}</span></div>
+									</li>
+									<li>
+										<div>剩余次数：</div>
+										<div>${val.remanum}</div>
+									</li>
+									<li>
+										<div>购买时间：</div>
+										<div class="addtime">${val.addtime}</div>
+									</li>
+									<li>
+										<div>到期时间 ：</div>
+										<div class="daoqitime">${val.duetime}</div>
+									</li>
+									
+								</ul>`;
+								$(".content").append(str);
+							});
+						} else {
+							$(".content").html('<div class="nomsg">没有查询记录</div>')
+						}
+
+						console.log(res)
+					},
+					error: function(err) {
+
+						console.log(err)
+					}
+				});
+
+				$(".back_list").on("click", function() {
+					window.location.href = "voicebill.html";
+
+				})
+
+			})
+
+			function writeCurrentDate() {
+				var now = new Date();
+				var year = now.getFullYear(); //得到年份
+				var month = now.getMonth(); //得到月份
+				var date = now.getDate(); //得到日期
+				var day = now.getDay(); //得到周几
+				var hour = now.getHours(); //得到小时
+				var minu = now.getMinutes(); //得到分钟
+				var sec = now.getSeconds(); //得到秒
+				　　
+				var MS = now.getMilliseconds(); //获取毫秒
+				var week;
+				month = month + 1;
+				if(month < 10) month = "0" + month;
+				if(date < 10) date = "0" + date;
+				if(hour < 10) hour = "0" + hour;
+				if(minu < 10) minu = "0" + minu;
+				if(sec < 10) sec = "0" + sec;
+
+				var arr_week = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六");
+				week = arr_week[day];
+				var time = "";
+				time = year + "年" + month + "月" + date + "日" + " " + hour + ":" + minu + ":" + sec;
+				return time;
+				//当前日期赋值给当前日期输入框中（jQuery easyUI）
+				//				$("#currentDate").html(time);
+				//				//设置得到当前日期的函数的执行间隔时间，每1000毫秒刷新一次。
+				//				var timer = setTimeout("writeCurrentDate()", 1000);
+			}
+		</script>
+	</body>
+
+</html>

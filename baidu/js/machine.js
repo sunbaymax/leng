@@ -129,7 +129,7 @@ function mao_map(_jing, _wei, _temp, _time, _shebeibianhao, _chepaihao, _timeCha
 	function my_map_new(_jing_d, _wei_d, _tem, _tim, a, b, _timeC) {
 		if(_jing_d != 0 && _wei_d != 0) {
 			$.ajax({
-				url: "http://api.map.baidu.com/geoconv/v1/?ak=XP1alssWsEscC3NfYAhj6YfqKvgQgUXF&from=1&to=5",
+				url: "http://api.map.baidu.com/geoconv/v1/?ak=jmgKloGf3cOvRl3Y9pUAfvKZCTtCNGwj&from=1&to=5",
 				type: "post",
 				dataType: "JSONP",
 				data: {
@@ -150,7 +150,7 @@ function mao_map(_jing, _wei, _temp, _time, _shebeibianhao, _chepaihao, _timeCha
 			$.ajax({
 				type: "post",
 				dataType: "jsonp",
-				url: "http://api.map.baidu.com/geocoder/v2/?ak=XP1alssWsEscC3NfYAhj6YfqKvgQgUXF&output=json&pois=0&coordtype=bd09ll",
+				url: "http://api.map.baidu.com/reverse_geocoding/v3/?ak=jmgKloGf3cOvRl3Y9pUAfvKZCTtCNGwj&output=json&pois=0&coordtype=bd09ll",
 				data: {
 					location: _w + "," + _j,
 				},

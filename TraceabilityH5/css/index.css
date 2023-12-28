@@ -1,0 +1,118 @@
+body,
+div,
+ul,
+li,
+label,
+nav,
+form,
+p,
+span {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+a,
+img {
+	border: 0;
+	text-decoration: underline;
+}
+
+input {
+	font-size: 1.4rem;
+	outline: none;
+	border: none;
+	-webkit-appearance: none;
+}
+button{
+	cursor: pointer;
+}
+input[type=button] {
+	/*border: 1px solid #d2d8d8;*/
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+	-webkit-appearance: none;
+	outline: 0px;
+	-webkit-appearance: none;
+	/*清除ios默认圆角*/
+	border-radius: 0;
+	cursor: pointer;
+}
+
+input[type=button],
+input[type=text],
+input[type=password] {
+	-webkit-appearance: none;
+	outline: none
+}
+
+body {
+	font: 12px/180% Arial, Helvetica, sans-serif, "宋体";
+	background-color: #f2f5f8!important;
+	font-family: "微软雅黑"!important;
+	font-size: 1.4rem;
+}
+
+body,
+header,
+div,
+p,
+span,
+ul,
+li,
+dl,
+dd,
+dt,
+ol,
+img {
+	margin: 0px;
+	padding: 0px;
+}
+
+a,
+img {
+	border: 0;
+}
+
+.hidden {
+	display: none!important;
+}
+
+html {
+	font-size: 62.5%;
+	/* 10÷16=62.5% */
+}
+
+@media only screen and (min-width: 481px) {
+	html {
+		font-size: 94%!important;
+		/* 15.04÷16=94% */
+	}
+}
+
+@media only screen and (min-width: 561px) {
+	html {
+		font-size: 109%!important;
+		/* 17.44÷16=109% */
+	}
+}
+
+@media only screen and (min-width: 641px) {
+	html {
+		font-size: 125%!important;
+		/* 20÷16=125% */
+	}
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+

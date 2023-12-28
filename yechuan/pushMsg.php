@@ -67,7 +67,7 @@ if (count($arr) == 10) {
 
 function getAccessToken()
 {
-    $url = "http://www.zjcoldcloud.com/weixin/get_token_yechuan.php";
+    $url = "http://erpapi.ccsc58.com/weixin/get_token_yechuan.php";
     $access_token = file_get_contents($url);
     return $access_token;
 }

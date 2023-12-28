@@ -1,0 +1,572 @@
+<!doctype html>
+<html class="no-js">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title>温湿度监控宝</title>
+
+	<!-- Set render engine for 360 browser -->
+	<meta name="renderer" content="webkit">
+
+	<!-- No Baidu Siteapp-->
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+	<!-- <link rel="icon" type="image/png" href="assets/i/favicon.png"> -->
+
+	<!-- Add to homescreen for Chrome on Android -->
+	<meta name="mobile-web-app-capable" content="yes">
+	<!-- <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png"> -->
+
+	<!-- Add to homescreen for Safari on iOS -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-title" content="Amaze UI" />
+	<!--  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png"> -->
+
+	<!-- Tile icon for Win8 (144x144 + tile color) -->
+	<!-- <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png"> -->
+	<meta name="msapplication-TileColor" content="#0e90d2">
+
+	<!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+	<!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+	<link rel="stylesheet" href="../css/index.css">
+
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+			/*box-sizing: border-box;*/
+		}
+
+		header {
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 999;
+			width: 100%;
+			height: 49px;
+			background-color: #333;
+			color: #fff;
+		}
+
+		header .back {
+			position: absolute;
+			top: 0;
+			left: 0;
+			display: inline-block;
+			padding-left: 5px;
+			font-size: 30px;
+		}
+
+		header p {
+			margin: 0;
+			line-height: 49px;
+			font-size: 16px;
+			text-align: center;
+		}
+
+		.register {
+			margin-top: 5rem;
+			/*padding: 8px 6px;*/
+			font-size: 1.4rem;
+			padding: 0 2vw;
+			box-sizing: border-box;
+		}
+
+		.res-item {
+			position: relative;
+			width: 100%;
+			border-radius: 4px;
+			/*margin-bottom: 8px;*/
+			height: 4rem;
+			background-color: #fff;
+			margin-top: 1rem;
+		}
+
+		.res-icon {
+			position: absolute;
+			left: 8px;
+			top: 5px;
+			z-index: 100;
+			display: inline-block;
+			font-size: 18px;
+			color: #9c9c9c;
+		}
+
+		.res-item .input-item {
+			display: inline-block;
+			width: 100%;
+			padding-left: 1rem;
+			box-sizing: border-box;
+			height: 4rem;
+			border: none;
+			font-size: inherit;
+			border-radius: 0.5rem;
+		}
+
+		.res-item .input-item:focus {
+			outline-offset: 0;
+			outline: -webkit-focus-ring-color auto -2px;
+			background-color: #fefffe;
+			border: 1px solid #55CAC4;
+			outline: 0;
+			-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 5px rgba(226, 25, 69, .3);
+			box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 5px rgba(226, 25, 69, 0.3);
+		}
+
+		.res-item .input-item:focus+.res-icon {
+			color: #e21945;
+		}
+
+		.yanzhengma {
+			display: inline-block;
+			height: 3rem;
+			width: 8rem;
+			line-height: 3rem;
+			/* padding: 0.5rem 0.8rem; */
+			position: absolute;
+			right: 10px;
+			top: 0.5rem;
+			z-index: 100;
+			font-size: 1.3rem;
+			border: none;
+			background-color: #55CAC4;
+			color: #fff;
+			border-radius: 0.5rem;
+		}
+
+		.yanzhengma:disabled {
+			background-color: #ddd;
+		}
+
+		.res-btn {
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+		}
+
+		.res-btn button {
+			width: 16rem;
+			height: 4rem;
+			background: #40C0C3;
+			border-radius: 5rem;
+			border: none;
+			color: #ffffff;
+			font-size: 1.5rem;
+			cursor: pointer;
+		}
+
+		.res-btn button:focus {
+			color: #fff;
+		}
+
+		.jiediv {
+			height: 4rem;
+			line-height: 4rem;
+			text-align: end;
+			margin-right: 1rem;
+		}
+
+		.jiediv a {
+			text-decoration: none;
+			color: #3299fe;
+		}
+
+		.choose {
+			position: relative;
+		}
+
+		.input_check {
+			position: absolute;
+			visibility: hidden;
+		}
+
+		.input_check+label {
+			display: inline-block;
+			width: 16px;
+			height: 16px;
+			border: 1px solid #1B4CEF;
+			cursor: pointer;
+		}
+
+		.input_check:checked+label:after {
+			content: "";
+			position: absolute;
+			left: 2px;
+			bottom: 24px;
+			width: 9px;
+			height: 4px;
+			border: 2px solid #1B4CEF;
+			border-top-color: transparent;
+			border-right-color: transparent;
+			-ms-transform: rotate(-60deg);
+			-moz-transform: rotate(-60deg);
+			-webkit-transform: rotate(-60deg);
+			transform: rotate(-45deg);
+		}
+
+		.tittle {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			height: 6rem;
+			/*line-height: 4rem;*/
+
+		}
+
+		.tittle .searchbox {
+			margin-left: 15px;
+			display: flex;
+			background: url('../images/searchbax.png') no-repeat;
+			width: 210px;
+			height: 3rem;
+			background-size: 100% 100%;
+			position: relative;
+			align-items: center;
+		}
+
+		.tittle .searchbox a {
+			display: flex;
+			position: absolute;
+			right: 15px;
+			align-items: center;
+			text-decoration: none;
+			z-index: 99;
+		}
+
+		.tittle .searchbox img {
+			width: 20px;
+			height: 20px;
+		}
+
+		.tittle .searchbox label {
+			font-size: 14px;
+		}
+
+		.device-content {
+			margin-bottom: 30px;
+		}
+
+		.tittle .searchbox input {
+			padding-left: 5px;
+			border: none;
+			background: none;
+		}
+
+		.choosebar {
+			width: auto;
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			margin-left: 5px;
+			height: 4rem;
+			line-height: 4rem;
+		}
+
+		.choosebar .choose {
+
+			margin-left: 5px;
+			position: relative;
+		}
+
+		#box .chooseitem {
+			border-top: 1px solid #ccc;
+			border-radius: 0;
+			height: 4rem;
+			line-height: 4rem;
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.numname {
+			display: inline-block;
+			width: 70px;
+		}
+	</style>
+</head>
+
+<body>
+	<!--[if lte IE 9]>
+    <p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a
+      href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+      以获得更好的体验！</p>
+    <![endif]-->
+	<div class="header"><img class="back_list" src="../img/back.png" />编辑成员</div>
+	<!--<header>
+        <i class="am-icon-angle-left back"></i>
+        <p>账号注册</p>
+    </header>-->
+	<div class="register">
+		<div class="res-item">
+
+			<input type="tel" placeholder="手机号" class="input-item mobile" id="telphone" readonly="readonly">
+			<i class="res-icon am-icon-phone"></i>
+		</div>
+		<div class="res-item">
+
+			<input type="text" placeholder="昵称" class="input-item mobile" id="neme">
+			<i class="res-icon am-icon-phone"></i>
+		</div>
+		<div class="tittle">
+			<span>设备列表</span>
+			<p class="searchbox">
+				<input type="text" placeholder="按设备号或昵称搜索" class="searchinput" />
+				<a class="searchbtn">
+					<img src="../images/searchicon.png" />
+					<label>搜索</label>
+				</a>
+
+			</p>
+			<p class="choosebar">
+				全选<span class="choose"><input type="checkbox" class="input_check" id='ischoose'><label
+						for='ischoose'></label></span>
+			</p>
+		</div>
+		<div class="device-content">
+			<div id="box">
+
+
+			</div>
+		</div>
+
+		<div class="res-btn">
+			<button type="button" id="res-edit" class="am-btn am-btn-block">修改</button>
+			<button type="button" id="res-del" class="am-btn am-btn-block">删除</button>
+		</div>
+		<!--<div class="jiediv">
+				<a href="javascript:void(0)" class="cancel">绑定</a>
+			</div>-->
+	</div>
+
+	<!--[if (gte IE 9)|!(IE)]><!-->
+	<script src="../js/jquery-1.11.0.js"></script>
+	<script src="../js/index.js"></script>
+
+	<script>
+		window.alert = function (name) {
+			var iframe = document.createElement("IFRAME");
+			iframe.style.display = "none";
+			iframe.setAttribute("src", 'data:text/plain,');
+			document.documentElement.appendChild(iframe);
+			window.frames[0].window.alert(name);
+			iframe.parentNode.removeChild(iframe);
+		}
+
+		//防止重复
+		function unique(arr) {
+			return Array.from(new Set(arr))
+		}
+
+		function UrlSearch() {
+			var name, value;
+			var str = location.href; //取得整个地址栏
+			var num = str.indexOf("?")
+			str = str.substr(num + 1); //取得所有参数 stringvar.substr(start [, length ]
+
+			var arr = str.split("&"); //各个参数放到数组里
+			for (var i = 0; i < arr.length; i++) {
+				num = arr[i].indexOf("=");
+				if (num > 0) {
+					name = arr[i].substring(0, num);
+					value = arr[i].substr(num + 1);
+					this[name] = value;
+				}
+			}
+		}
+		var Request = new UrlSearch(); //实例化
+		var _tel = Request.tel;
+		var _name = decodeURIComponent(Request.name);
+		var n = decodeURIComponent(_name);
+		$("#telphone").val(_tel);
+		$("#neme").val(n);
+		var userinfo = JSON.parse(localStorage.getItem('isonline'));
+		var _userName = userinfo.user;
+		var _userPass = userinfo.pwd;
+		var ischoose = [];
+		$.ajax({
+			type: "post",
+			url: "https://erpapi.ccsc58.com/xiandun/public/index.php/index/device/device_list_for_share",
+			async: true,
+			data: {
+				phone: _tel,
+				phone_main: _userName,
+				vague: "",
+			},
+			dataType: 'json',
+			success: function (res) {
+				console.log(res)
+				if (res.code == 0) {
+					let strs = ''
+					let ischecked = ''
+					$.each(res.data, function (index, val) {
+						if (val.shared) {
+							ischecked = `<input type="checkbox"  checked="checked" class="input_check" id='${val.shebeibianhao}' value='${val.shebeibianhao}'><label for='${val.shebeibianhao}'></label></span>`
+						} else {
+							ischecked = `<input type="checkbox" class="input_check" id='${val.shebeibianhao}' value='${val.shebeibianhao}'><label for='${val.shebeibianhao}'></label></span>`
+						}
+						strs = `<div class='chooseitem'>
+								   <label> <span class="numname">${val.shebeibianhao}</span><span class="marck">${val.beizhu}</span>	 </label>
+									<span class="choose">${ischecked}</div>`;
+						$(".device-content #box").append(strs);
+					});
+				}
+			},
+			error: function (err) {
+
+			}
+		});
+		$(".back_list").on("click", function () {
+			window.history.go(-1);
+		});
+		//一键控制全选、反选、全不选
+		$('#ischoose').change(function () {
+			$('#box').find(':checkbox').prop('checked', $(this).is(':checked') ? true : false);
+			//			  if($(this).is(':checked')){
+			//			     var box = $('#box').find(':checkbox');
+			//			     if(box.length==box.filter(':not(:checked)').length){    // 复选框长度和没选中的个数一样 -> 全选 , .not(':checked').length 也可以。
+			//			     $('#box').find(':checkbox').prop('checked',true);
+			//			     }else{     // 如果有选中个数，-> 反选 
+			//			        $('#box').find(':checkbox').each(function(){     
+			//			           $(this).prop('checked',$(this).is(':checked')?false:true);
+			//			        });
+			//			      }
+			//			  }else{
+			//			      $('#box').find(':checkbox').prop('checked',false);    // 如控制键取消选中，剩余的checkbox也取消选中
+			//			  }
+
+		});
+
+		$('#res-edit').on('click', function () {
+
+			var mobile = $('#telphone').val();
+			var _name = $('#neme').val();
+			$.each($('.device-content input:checkbox:checked'), function () {
+				ischoose.push($(this).val());
+			});
+
+			let device = unique(ischoose).toString()
+			if (mobile == '') {
+				alert("手机号不能为空")
+				return
+			} else if (_name == '') {
+				alert("昵称不能为空")
+				return
+			} else if (device == '') {
+				alert("请选择分享的设备")
+				return
+			} else {
+				if (confirm("您确定要修改吗?")) {
+					var _url = "http://erpapi.ccsc58.com/xiandun/public/index.php/index/share/edit";
+					$.ajax({
+						type: "post",
+						url: _url,
+						async: true,
+						data: {
+							mainname: _userName,
+							aftername: mobile,
+							nickname: _name,
+							devices: device
+						},
+						dataType: "JSON",
+						success: function (res) {
+							if (res.code == 0 && res.message == "success") {
+								alert("修改成功");
+								location.href = 'invite.html';
+
+							} else {
+								alert(res.message);
+							}
+						},
+						error: function (err) {
+							console.log(err)
+						}
+					});
+				} else {
+					console.log("点击了取消按钮");
+				}
+			}
+
+		})
+		$('.searchbtn').on('click', function () {
+			let _telphone = $(".telphone").val();
+			let _nickname = $(".nickname").val();
+			let _searchinput = $(".searchinput").val();
+			$.ajax({
+				type: "post",
+				url: "https://erpapi.ccsc58.com/xiandun/public/index.php/index/device/device_list_for_share",
+				async: true,
+				data: {
+					phone: "",
+					phone_main: _userName,
+					vague: _searchinput,
+				},
+				dataType: 'json',
+				success: function (res) {
+					console.log(res)
+					if (res.code == 0) {
+						$(".device-content #box .chooseitem").hide()
+						let strs = ''
+						$.each(res.data, function (index, val) {
+							strs = `<div class='chooseitem'>
+								   <label> <span class="numname">${val.shebeibianhao}</span><span class="marck">${val.beizhu}</span>	 </label>
+									<span class="choose"><input type="checkbox" class="input_check" id='${val.shebeibianhao}' value='${val.shebeibianhao}'><label for='${val.shebeibianhao}'></label></span>
+								   </div>`;
+							let old = '.device-content #box #' + val.shebeibianhao;
+							console.log(old)
+							//$(old).parents('.chooseitem').remove(); 
+							//$("#test").remove(".classname");
+							$(old).parents('.chooseitem').show();
+						});
+					}
+				},
+				error: function (err) {
+
+				}
+			});
+
+		})
+		$('#res-del').on('click', function () {
+			var mobile = $('#telphone').val();
+			if (confirm("您确定要删除吗?")) {
+				var _url = "http://erpapi.ccsc58.com/xiandun/public/index.php/index/share/delete";
+				$.ajax({
+					type: "post",
+					url: _url,
+					async: true,
+					data: {
+						mainname: _userName,
+						aftername: mobile
+					},
+					dataType: "JSON",
+					success: function (res) {
+						if (res.code == 0 && res.message == "success") {
+							alert("删除成功");
+							location.href = 'invite.html';
+
+						} else {
+							alert(res.message);
+						}
+					},
+					error: function (err) {
+						console.log(err)
+					}
+				});
+			} else {
+				console.log("点击了取消按钮");
+			}
+
+		})
+	</script>
+
+</body>
+
+</html>

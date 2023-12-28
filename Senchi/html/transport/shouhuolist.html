@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title>温湿度监控宝</title>
+	<link rel="stylesheet" type="text/css" href="../../css/index.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/set.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/waybill.css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=8">
+	<meta http-equiv="Expires" content="0">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-control" content="no-cache">
+	<meta http-equiv="Cache" content="no-cache">
+	<style type="text/css">
+		.content {
+			width: 100%;
+			height: auto;
+			margin-top: 5.6rem;
+			font-size: 1.4rem;
+			padding: 0;
+		}
+
+		.paylist {
+			width: 1.8rem;
+			height: 2.2rem;
+			position: absolute;
+			top: 1rem;
+			right: 1rem;
+		}
+
+		.content .group {
+			background: #FFFFFF;
+			height: auto;
+			padding: 0 2vw;
+			box-sizing: border-box;
+			margin: 10px 0 0;
+		}
+
+		.content .group .item {
+			display: flex;
+			height: 6rem;
+			align-items: center;
+			border-bottom: 1px solid #CCCC;
+			margin-bottom: 5px;
+		}
+
+		.content .group .item:last-child {
+			border: none
+		}
+
+		.group .item .itemleft {
+			display: flex;
+			width: 25vw;
+			flex-direction: column;
+		}
+
+		.group .item .itemcenter {
+			display: flex;
+			align-items: end;
+			justify-content: space-between;
+			width: 70vw;
+			border-right: 1px solid #CCCCCC;
+		}
+
+		.group .item .itemcenter .delicon {
+			display: inline-block;
+			width: 1.6rem;
+			height: 1.6rem;
+		}
+
+		.group .item .itemright {
+			display: flex;
+			width: 15vw;
+			vertical-align: middle;
+			text-align: right;
+			align-items: end;
+			justify-content: center;
+		}
+
+		.item .itemright .saoyisao {
+			display: inline-block;
+			width: 2rem;
+			height: 2rem;
+		}
+
+		.item .itemright .xuanze {
+			margin-right: 0.5rem;
+			display: inline-block;
+			width: 1.5rem;
+			height: 2.2rem;
+		}
+
+		.group .item .itemcenter select {
+			display: block;
+			height: 3rem;
+			width: 16rem;
+			text-align: center;
+			background: none;
+			margin-right: 5px;
+		}
+
+		.checkbox-item {
+			margin-right: 20px;
+			display: inline-block;
+			position: relative;
+		}
+
+		.header .addDevice {
+			position: absolute;
+			right: 1.5rem;
+			top: 1.3rem;
+			width: 2rem;
+			height: 2rem;
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="header">
+		<img class="back_list" src="../../img/back.png" />
+		<span>收货地址 </span>
+		<img src="../../images/addDevice.png" class="addDevice" />
+	</div>
+	<div class="content">
+
+	</div>
+	<script src="../../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/iostime.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/index.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		var userinfo = JSON.parse(localStorage.getItem('isonline'));
+		var _userName = userinfo.user;
+		var _userPass = userinfo.pwd;
+		var _suoshujigou = userinfo.suoshujigou;
+		//将时间函数转换成所需样式的并加载到页面中去；
+		$.ajax({
+			type: "post",
+			url: "http://erpapi.ccsc58.com/xiandun/public/index.php/index/transport/get_shouhuodizhi_list",
+			async: true,
+			data: {
+				suoshujigou: _suoshujigou,
+				firstRow: 0,
+				size: 100
+			},
+			dataType: 'json',
+			success: function (res) {
+				console.log(res)
+				let html = ''
+				if (res.code == 0) {
+					$.each(res.data.list, function (index, val) {
+						console.log(index, val)
+						html = `<div class="group">
+								   	<div class="item">
+								       <div class="itemleft">
+								       	    <span class="name">${val.shouhuoren}</span>
+								       	    <span class="company">${val.shouhuodanwei}</span>
+								        	
+								       </div>	
+								       <div class="itemcenter">
+								        	<span class="address">${val.shouhuodizhi}</span>
+								       </div>	
+								    	<div class="itemright" idi='${val.id}'>
+								    		编辑
+								    	</div>
+								    </div>
+					
+								</div>`;
+						$('.content').append(html)
+					});
+				} else {
+					$('.content').html('')
+				}
+			},
+			error: function (err) {
+				console.log(res)
+			}
+		});
+
+		$('.btnok button').on('click', function () {
+			let arr = []
+			$("input[type=checkbox]:checked").each(function () {
+				//alert($(this).val());
+				arr.push($(this).val())
+
+			});
+			console.log(arr)
+		})
+		$('.back_list').click(function () {
+			location.href = 'Initiate.php'
+		})
+		$('.addDevice').click(function () {
+			window.location.href = 'addsaddress.html'
+		})
+		$('body').on('click', '.group .item .itemleft,.group .item .itemcenter', function () {
+			let name = $(this).parents('.item').find('.name').text()
+			let company = $(this).parents('.item').find('.company').text()
+			let address = $(this).parents('.item').find('.address').text()
+			console.log(name, company, address)
+			let read = JSON.parse(sessionStorage.getItem('waybill'));
+			read[6] = name
+			read[7] = company
+			read[8] = address
+			sessionStorage.setItem('waybill', JSON.stringify(read));
+			location.href = 'Initiate.php'
+		})
+		$(document).on('click', '.itemright', function () {
+			let id = $(this).attr('idi')
+			location.href = 'editsaddress.html?id=' + id
+		})
+	</script>
+
+</body>
+
+</html>

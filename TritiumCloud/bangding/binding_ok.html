@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>绑定成功</title>
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/bangding.css" />
+	</head>
+	<style>
+		.title{
+			margin-top: 11vh;
+		    width: 100%;
+		    height: 4rem;
+		    text-align: center;
+		    line-height: 4rem;
+		    font-size: 3.3rem;
+		    color: #ffffff;
+		    font-family: "宋体";
+		    font-weight: bold;
+		}
+		.content{
+			position: relative;
+			width: 100vw;
+			height: 60vh;
+			text-align: center;
+		}
+		.ok{
+			display: block;
+		    width: 34vw;
+		    height: 22vh;
+		    position: absolute;
+		    top: 20vh;
+		    left: 33vw;
+		}
+		.wenzi{
+			font-size: 1.5rem;
+			font-weight: bold;
+		    position: absolute;
+		    top: 64vh;
+		    left: 42vw;
+		}
+		.shouji{
+			    font-size: 1.5rem;
+			    position: absolute;
+			    top: 72vh;
+			    text-align: center;
+			    width: 100vw;
+		  
+		}
+	</style>
+	<body>
+		<p class="title">手机号码绑定</p>
+		<div class="content">
+			<img class="ok" src="img/ok.png" />
+		</div>
+		<p class="wenzi">绑定成功</p>
+		<div class="shouji"></div>
+		<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+		<script>
+			var _phone = window.localStorage.getItem("phone");
+			var phone=_phone.substring(7);//18519773728
+			console.log(phone);
+			$('.shouji').html("您已成功绑定尾号为*******<span style='color:#FE824F'>"+phone+"</span>的手机号码");
+		</script>
+	</body>
+</html>

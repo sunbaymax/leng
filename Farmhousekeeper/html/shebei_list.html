@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="format-detection" content="telephone=no">
+		<title>农管家</title>
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/changeM.css" />
+		<style>
+			.content {
+				width: 100%;
+				height: auto;
+			}
+			
+			.content_top {
+				width: 100%;
+				height: 4rem;
+				border-bottom: 2px solid rgba(0, 0, 0, .3);
+				position: fixed;
+				top: 4rem;
+				left: 0px;
+				background: #40C0C3;
+				color: #FFFFFF;
+				display: flex;
+				z-index: 99;
+			}
+			
+			.content_top p {
+				width: 25vw;
+				height: 4rem;
+				line-height: 4rem;
+				float: left;
+				font-size: 1.3rem;
+				white-space: nowrap;
+				font-weight: bold;
+			}
+			
+			.content_top p:nth-of-type(1) {
+				width: 33vw;
+				padding-left: 2vw;
+			}
+			
+			.content_top p:nth-of-type(2) {
+				width: 30vw;
+				text-align: center;
+				padding-right: 3vw;
+			}
+			
+			.content_top p:nth-of-type(3) {
+				width: 30vw;
+				padding-right: 2vw;
+				text-align: center;
+			}
+			
+			ul {
+				width: 100%;
+				height: auto;
+				margin-top: 8rem;
+				/*margin-bottom: 5rem;*/
+			}
+			
+			li {
+				width: 100%;
+				height: 4rem;
+				border-bottom: 1px solid rgba(0, 0, 0, .3);
+				white-space: normal;
+			}
+			
+			li p {
+				width: 25vw;
+				height: 4rem;
+				line-height: 4rem;
+				float: left;
+				font-size: 1.3rem;
+				white-space: nowrap;
+			}
+			
+			li p:nth-of-type(1) {
+				width: 41vw;
+				padding-left: 2vw;
+			}
+			
+			li p:nth-of-type(2) {
+				width: 30vw;
+			}
+			
+			li p:nth-of-type(3) {
+				text-align: right;
+				width: 23vw;
+				padding-right: 2vw;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			
+			li p img {
+				display: block;
+				width: 4rem;
+				height: 2.8rem;
+			}
+			
+			#wrapper {
+				width: 100%;
+				position: absolute;
+				left: 0;
+				top: 0rem;
+				overflow: hidden;
+				z-index: 1;
+				bottom: 5rem;
+			}
+			
+			.more {
+				height: 4rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: #8a8a8a;
+			}
+			
+			.pull_icon {
+				width: 25px;
+				height: 25px;
+				background-image: url(../images/pull.png);
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: 25px;
+				transition: all .5s;
+			}
+			
+			.loading {
+				background-image: url('../images/loading.png');
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: 25px;
+			}
+			
+			.more .loading {
+				-webkit-transform: rotate(0deg) translateZ(0);
+				-webkit-transition-duration: 0;
+				-webkit-animation-name: loading;
+				-webkit-animation-duration: 2s;
+				-webkit-animation-iteration-count: infinite;
+				-webkit-animation-timing-function: linear;
+			}
+			
+			@-webkit-keyframes loading {
+				from {
+					-webkit-transform: rotate(0deg) translateZ(0);
+				}
+				to {
+					-webkit-transform: rotate(360deg) translateZ(0);
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="header">
+			<img class="back_list" src="../img/back.png" ids='0' /> 设备列表
+		</div>
+		<div class="content">
+			<div class="content_top">
+				<p>设备总数：<span>0</span>台</p>
+				<p>在线：<span>0</span>台</p>
+				<p>离线：<span>0</span>台</p>
+			</div>
+			<div id="wrapper">
+				<div class="scroller">
+					<div class="scroll_box">
+						<ul>
+							<li class="hidden">
+								<p>设备编号：<span>123456</span></p>
+								<p>电量：<span>80%</span></p>
+								<p><img src="../images/zaixian.png" alt="" /></p>
+							</li>
+						</ul>
+					</div>
+
+					<div class="more">
+						<i class="pull_icon"></i><span>上拉加载...</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<a href="../index.html">
+				<img src="../images/tab_weixin_normal.png" alt="" />
+				<span>首页</span>
+			</a>
+			<a href="dingdan.php">
+				<img src="../images/tab_find_frd_normal.png" alt="" />
+				<span>我的运单</span>
+			</a>
+			<a href="shebei_list.html" class="choosed">
+				<img src="../images/tab_address_pressed.png" alt="" />
+				<span>设备信息</span>
+			</a>
+			<a href="user_sheZhi.html">
+				<img src="../images/tab_settings_normal.png" alt="" />
+				<span>我的</span>
+			</a>
+		</div>
+
+		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var _start = 0;
+			var _iscroll_length = 5
+			machine_ajax_list(_start, _iscroll_length);
+
+			var myscroll_x = new iScroll("wrapper", {
+				onScrollMove: function() {
+					if(this.y < (this.maxScrollY)) {
+						$('.pull_icon').addClass('flip');
+						$('.pull_icon').removeClass('loading');
+						$('.more span').text('释放加载...');
+					} else {
+						console.log("122")
+						$('.pull_icon').removeClass('flip loading');
+						$('.more span').text('上拉加载...')
+					}
+				},
+				onScrollEnd: function() {
+					if($('.pull_icon').hasClass('flip')) {
+						$('.pull_icon').addClass('loading');
+						$('.more span').text('加载中...');
+						pullUpActions();
+					}
+				},
+				onRefresh: function() {
+					$('.more').removeClass('flip');
+					$('.more span').text('上拉加载...');
+				}
+			});
+
+			function pullUpActions() {
+				_start = _start + _iscroll_length;
+				//					_iscroll_length = _iscroll_length + 2;
+				setTimeout(function() {
+					machine_ajax_list(_start, _iscroll_length)
+					myScroll.refresh();
+				}, 1000);　　　　 //延时10秒
+
+			}
+
+			$(".back_list").on("click", function() {
+				window.location.href = "../index.html"
+			});
+
+			function machine_ajax_list(_start, _length) {
+				/*
+				 * 获取用户的名称和密码；
+				 */
+				var userinfo = JSON.parse(localStorage.getItem('isonline'));
+				var _userName = userinfo.user;
+				var _userPass = userinfo.pwd;
+				var _ids = $('.back_list').attr("ids");
+				console.log(_ids)
+				$.ajax({
+					url: "http://ccsc58.com/json/weixin_tb_shebeidongtai.php",
+					type: "post",
+					data: {
+						admin_permit: "zjly8888",
+						UserP: "x",
+						admin_user: _userName,
+						admin_pass: _userPass,
+						StartNo: 0,
+						Length: 5,
+						ids: _ids,
+						hour: 1
+					},
+					success: function(data) {
+						var _json = JSON.parse(data);
+						if(_json.resultCode != "nodata" && _json.code == 10000) {
+							for(var i = 0; i < _json.resultCode.length; i++) {
+								var _demo = $("ul li").eq(0).clone().removeClass("hidden").appendTo($("ul"));
+								_demo.find("p:nth-of-type(1) span").html(_json.resultCode[i].shebeibianhao);
+								if(_json.resultCode[i].power == "-") {
+									_demo.find("p:nth-of-type(2)").css({
+										color: "red",
+										fontWeight: "bold"
+									});
+									_demo.find("p:nth-of-type(2) span").html(_json.resultCode[i].power);
+								} else {
+									if(_json.resultCode[i].power.replace("%", "") <= 20) {
+										_demo.find("p:nth-of-type(2)").css({
+											color: "red",
+											fontWeight: "bold"
+										})
+									}
+									_demo.find("p:nth-of-type(2) span").html(_json.resultCode[i].power + "%");
+								};
+
+								if(_json.resultCode[i].state == 0) {
+									_demo.find("img").prop("src", "../images/lixian.png");
+								};
+
+							}
+
+							$('.back_list').attr("ids", _json.ids);
+							var v1 = parseInt($(".content_top p:nth-of-type(1) span").text());
+							var v2 = parseInt($(".content_top p:nth-of-type(2) span").text());
+							var v3 = parseInt($(".content_top p:nth-of-type(3) span").text());
+							$(".content_top p:nth-of-type(1) span").html(_json.zongshu + v1);
+							$(".content_top p:nth-of-type(2) span").html(_json.online + v2);
+							$(".content_top p:nth-of-type(3) span").html(_json.offline + v3);
+							$('.pull_icon').removeClass('flip loading');
+							$('.more span').text('上拉加载...')
+							myscroll_x.refresh();
+
+						} else {
+							//								$("ul").html("暂无设备").css({
+							//									color: "red",
+							//									fontSize: "2rem",
+							//									lineHeight: "4rem",
+							//									textAlign: "center",
+							//								})
+							$(".more").html("未找到更多设备");
+						}
+						myscroll_x.refresh();
+						$(".wait").addClass("hidden");
+					},
+					error: function() {
+						alert("网络错误，请重新进入页面");
+						window.location.href = _url;
+						$(".wait").addClass("hidden");
+					}
+				})
+
+			};
+			$("ul").on("click", "li", function() {
+				window.location.href = "details_lists.html?num_m=" + $(this).find("p:nth-of-type(1) span").html();
+			});
+		</script>
+	</body>
+
+</html>

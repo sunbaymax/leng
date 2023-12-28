@@ -1,7 +1,8 @@
-<div class="hidden" style="display: none;">
-<?php 
+<div class="hidden" style="display: ;">
+<?php //none
+//http://www.ccsc58.cc/leng/weixin/zhifu/example/freshdun_flow_buy_back.php?shebeihao=999300&years=1&u_id=12423&f_id=1
 ini_set('date.timezone','Asia/Shanghai');
-//error_reporting(E_ERROR);
+error_reporting(E_ERROR);
 libxml_disable_entity_loader(true);
 require_once "../lib/WxPay.Api.php";
 require_once "WxPay.JsApiPay.php";
@@ -11,31 +12,75 @@ require_once 'log.php';
 $logHandler= new CLogFileHandler("../logs/".date('Y-m-d').'.log');
 $log = Log::Init($logHandler, 15);
 
-//打印输出数组信息
+$year = intval($_GET['years']);
+if($year<1){
+	echo "参数错误";exit;
+}
+$f_id = intval($_GET['f_id']);
+$dbh = new PDO('mysql:host=rm-2ze3o57ph836pk46r.mysql.rds.aliyuncs.com;dbname=wlgl', 'test01', 'Pzg790915');
+$sql = "select * from shield_flow_package where f_id={$f_id}";
+$sth = $dbh->prepare($sql);
+$sth->execute();
+$rs1 = $sth->fetch(PDO::FETCH_ASSOC);
+if (!$rs1) {
+	die("flow not exist");
+}
+$total = $year * $rs1['price'] * 100;
+//$total = 1;
 
+if(isset($_GET['shebeihao']) && trim($_GET['shebeihao'])) {
+	$shebeibianhao = trim($_GET['shebeihao']);
+	$sql = "select count(*) c from tb_device where shebeibianhao='{$shebeibianhao}'";
+	$sth = $dbh->prepare($sql);
+	$sth->execute();
+	$rs = $sth->fetch(PDO::FETCH_ASSOC);
+	if($rs['c'] <= 0) die('设备号不存在');
+} else {
+	die('device error');
+}
+
+if(isset($_GET['u_id']) && intval($_GET['u_id']) > 0) {
+	$u_id = intval($_GET['u_id']);
+	$sql = "select count(*) c from shield_user where id={$u_id}";
+	$sth = $dbh->prepare($sql);
+	$sth->execute();
+	$rs = $sth->fetch(PDO::FETCH_ASSOC);
+	if($rs['c'] <= 0) die('user not exist');
+} else {
+	die('u_id error');
+}
+
+//打印输出数组信息
+$attach = array(
+	'shebeihao' => $shebeibianhao,
+	'years' => $year,
+	'u_id' => $u_id,
+	'f_id' => $f_id, //套餐id
+	'money' => $rs1['price'],
+);
 
 //①、获取用户openid
 $tools = new JsApiPay();
 $openId = $tools->GetOpenid();
-$total = array_pop(explode('=',$_GET['total']));
-//var_dump($total);
+//var_dump($total);exit;
 //var_dump($openId);
 //die();
 //②、统一下单
 $input = new WxPayUnifiedOrder();
 $input->SetBody("智冷科技");
-$input->SetAttach("test");
+$input->SetAttach(json_encode($attach));
 $input->SetOut_trade_no(WxPayConfig::MCHID.date("YmdHis"));
+//$input->SetTotal_fee(1);
 $input->SetTotal_fee($total);
 $input->SetTime_start(date("YmdHis"));
 $input->SetTime_expire(date("YmdHis", time() + 600));
 $input->SetGoods_tag("test");
-$input->SetNotify_url("notify.php");
+$input->SetNotify_url("http://www.ccsc58.cc/leng/weixin/zhifu/example/freshdun_flow_buy_notify.php");
 $input->SetTrade_type("JSAPI");
 $input->SetOpenid($openId);
 $order = WxPayApi::unifiedOrder($input);
-/*echo '<font color="#f00"><b>统一下单支付单信息</b></font><br/>';
-printf_info($order);*/
+//echo '<font color="#f00"><b>统一下单支付单信息</b></font><br/>';
+//printf_info($order);
 $jsApiParameters = $tools->GetJsApiParameters($order);
 
 //获取共享收货地址js函数参数
@@ -61,15 +106,15 @@ $editAddress = $tools->GetEditAddressParameters();
         <div class="shebeinum"></div>
         <div class="money"></div>
 <body>
-	
+
 	<script src="../../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
 
 	<script type="text/javascript">
-		
-		
+
+
 		callpay();
-        
-        
+
+
 		function callpay() {
 			if(typeof WeixinJSBridge == "undefined") {
 				if(document.addEventListener) {
@@ -84,32 +129,32 @@ $editAddress = $tools->GetEditAddressParameters();
 		};
 
 		function jsApiCall() {
-			
+
 			WeixinJSBridge.invoke(
 				'getBrandWCPayRequest',
 				<?php echo $jsApiParameters; ?>,
 				function(res) {
 					WeixinJSBridge.log(res.err_msg);
 					if(res.err_msg == "get_brand_wcpay_request:ok") {
-						var _sjgoingpay = JSON.parse(sessionStorage.getItem('sjgoingpay'));
-                        let _num=_sjgoingpay.shebeihao;
-		              $.ajax({
-		              	type:"post",
-		              	url:"https://www.zjcoldcloud.com/xiandun/public/index.php/index/flow_package/server_flow_buy",
-		              	data:_sjgoingpay,
-		              	dataType:"JSON",
-		              	success:function(res){
-		              		alert("付款成功");
-		              		window.sessionStorage.removeItem('sjgoingpay');
-							setTimeout(function () {
-					           window.location.href="../../../FreshShield/html/bill.html";
-					        }, 1500);
-		              	},
-		              	error:function(err){
-		              		alert("付款成功！");
-		              		console.log(err)
-		              	}
-		              });
+						// var _sjgoingpay = JSON.parse(sessionStorage.getItem('sjgoingpay'));
+      //                   let _num=_sjgoingpay.shebeihao;
+		    //           $.ajax({
+		    //           	type:"post",
+		    //           	url:"https://www.zjcoldcloud.com/xiandun/public/index.php/index/flow_package/server_flow_buy",
+		    //           	data:_sjgoingpay,
+		    //           	dataType:"JSON",
+		    //           	success:function(res){
+		    //           		alert("付款成功");
+		    //           		window.sessionStorage.removeItem('sjgoingpay');
+						 	setTimeout(function () {
+					            window.location.href="../../../FreshShield/html/bill.html";
+					         }, 1500);
+		    //           	},
+		    //           	error:function(err){
+		    //           		alert("付款成功！");
+		    //           		console.log(err)
+		    //           	}
+		    //           });
 
 					} else if(res.err_msg == "get_brand_wcpay_request:cancel") {
 						alert("您已取消付款！！！");
@@ -123,7 +168,7 @@ $editAddress = $tools->GetEditAddressParameters();
 						setTimeout(function () {
 					           window.location.href="../../../FreshShield/html/bill.html";
 					        }, 1500);
-						
+
 					};
 				}
 			);

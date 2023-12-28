@@ -163,7 +163,7 @@
 	 */
 	function my_machine_list(_jingDu, _weiDu, _dem) {
 		$.ajax({
-			url: "http://api.map.baidu.com/geoconv/v1/?ak=XP1alssWsEscC3NfYAhj6YfqKvgQgUXF&from=1&to=5",
+			url: "http://api.map.baidu.com/geoconv/v1/?ak=jmgKloGf3cOvRl3Y9pUAfvKZCTtCNGwj&from=1&to=5",
 			type: "post",
 			dataType: "JSONP",
 			data: {
@@ -316,7 +316,8 @@
 						_dem.find("li:nth-of-type(2)").html(_json.resultCode[i].time.replace(_json.resultCode[i].time.match(/^2[0-9]{3}/)[0] + "-", "").replace(_json.resultCode[i].time.match(/\s/)[0], "<br>"));
 						_dem.find("li:nth-of-type(4)").html(_json.resultCode[i].temperature01 + "℃/<br>" + _json.resultCode[i].temperature02 + "℃");
 						_dem.find("li:nth-of-type(5)").html(_json.resultCode[i].humidity + "%");
-						address_test(_json.resultCode[i].jingdu, _json.resultCode[i].weidu, _dem, _start + i, (_json.resultCode.length - 1));
+						//address_test(_json.resultCode[i].jingdu, _json.resultCode[i].weidu, _dem, _start + i, (_json.resultCode.length - 1));
+                        _dem.find("li:nth-of-type(3)").html(_json.resultCode[i].address);
 						$(".look_more").before(_dem);
 					};
 					$(".wait").addClass("hidden");
@@ -331,7 +332,7 @@
 
 	function address_test(_jingdu, _weidu, _dem, i, _length) {
 		$.ajax({
-			url: "http://api.map.baidu.com/geoconv/v1/?ak=XP1alssWsEscC3NfYAhj6YfqKvgQgUXF&from=1&to=5",
+			url: "http://api.map.baidu.com/geoconv/v1/?ak=jmgKloGf3cOvRl3Y9pUAfvKZCTtCNGwj&from=1&to=5",
 			type: "post",
 			dataType: "JSONP",
 			data: {
@@ -362,7 +363,7 @@
 		$.ajax({
 			type: "post",
 			dataType: "jsonp",
-			url: "http://api.map.baidu.com/geocoder/v2/?ak=XP1alssWsEscC3NfYAhj6YfqKvgQgUXF&output=json&pois=0&coordtype=bd09ll",
+			url: "http://api.map.baidu.com/reverse_geocoding/v3/?ak=jmgKloGf3cOvRl3Y9pUAfvKZCTtCNGwj&output=json&pois=0&coordtype=bd09ll",
 			data: {
 				location: _weidu + "," + _jingdu,
 			},
@@ -462,7 +463,7 @@
 				if(_jing_d != 0 && _wei_d != 0) {
 					
 					$.ajax({
-						url: "http://api.map.baidu.com/geoconv/v1/?ak=XP1alssWsEscC3NfYAhj6YfqKvgQgUXF&from=1&to=5",
+						url: "http://api.map.baidu.com/geoconv/v1/?ak=jmgKloGf3cOvRl3Y9pUAfvKZCTtCNGwj&from=1&to=5",
 						type: "post",
 						dataType: "JSONP",
 						data: {
@@ -483,7 +484,7 @@
 					$.ajax({
 						type: "post",
 						dataType: "jsonp",
-						url: "http://api.map.baidu.com/geocoder/v2/?ak=XP1alssWsEscC3NfYAhj6YfqKvgQgUXF&output=json&pois=0&coordtype=bd09ll",
+						url: "http://api.map.baidu.com/reverse_geocoding/v3/?ak=jmgKloGf3cOvRl3Y9pUAfvKZCTtCNGwj&output=json&pois=0&coordtype=bd09ll",
 						data: {
 							location: _w + "," + _j,
 						},
