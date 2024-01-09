@@ -285,10 +285,10 @@
 				$(".btnok button").attr('disabled', false);
 			}
 			//http://www.ccsc58.com/json/06_00_tb_device_chanshu.php
-			//http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/xiandun_get_device_param
+			//http://erpapi.ccsc58.com/xiandun/public/index.php/index/device/xiandun_get_device_param
 			$.ajax({
 				type: "post",
-				url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/xiandun_get_device_param",
+				url: "http://erpapi.ccsc58.com/xiandun/public/index.php/index/device/xiandun_get_device_param",
 				data: {
 					admin_permit: "zjly8888",
 					UserP: "w",
@@ -638,7 +638,7 @@
 
 					$.ajax({
 						type: "post",
-						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/xiandun_update_device",
+						url: "http://erpapi.ccsc58.com/xiandun/public/index.php/index/device/xiandun_update_device",
 						data: _data,
 						dataType: "json",
 						success: function(res) {

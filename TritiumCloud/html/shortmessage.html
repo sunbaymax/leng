@@ -365,7 +365,7 @@
 					$(".scroll_box").html('')
 				}
 				$.ajax({
-					url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/department/my_department",
+					url: "http://erpapi.ccsc58.com/xiandun/public/index.php/index/department/my_department",
 					type: "post",
 					data: {
 						user: _userName,
@@ -485,7 +485,7 @@
 				let ischeckbox = $(this).is(':checked')==true?'1':0;
 				$.ajax({
                 	type:"post",
-                	url:"http://www.zjcoldcloud.com/xiandun/public/index.php/index/department/change_duanxingkaitong",
+                	url:"http://erpapi.ccsc58.com/xiandun/public/index.php/index/department/change_duanxingkaitong",
                 	async:true,
                 	data:{
                 		duanxingkaitong:ischeckbox,
@@ -516,7 +516,7 @@
                 let suoshu=$(this).attr('aid');
                 $.ajax({
                 	type:"post",
-                	url:"http://www.zjcoldcloud.com/xiandun/public/index.php/index/department/change_sms_swtich",
+                	url:"http://erpapi.ccsc58.com/xiandun/public/index.php/index/department/change_sms_swtich",
                 	async:true,
                 	data:{
                 		sms_switch:ischeckbox,

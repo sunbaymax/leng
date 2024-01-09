@@ -373,9 +373,9 @@
 			var _duodian = userinfo.duodian;
 			var _url;
 			if(_duodian == 1) {
-				_url = "http://www.zjcoldcloud.com/xiandun/public/index.php/index/pay_bill/duodianlist"
+				_url = "http://erpapi.ccsc58.com/xiandun/public/index.php/index/pay_bill/duodianlist"
 			} else {
-				_url = "http://www.zjcoldcloud.com/xiandun/public/index.php/index/pay_bill"
+				_url = "http://erpapi.ccsc58.com/xiandun/public/index.php/index/pay_bill"
 			}
 			var myscroll_x = new iScroll("wrapper", {
 				onScrollMove: function() {
@@ -499,7 +499,7 @@
 					$(".scroll_box").html('')
 				}
 				$.ajax({
-					url: "https://www.zjcoldcloud.com/xiandun/public/index.php/index/device/zhuxiaoDeviceList",
+					url: "https://erpapi.ccsc58.com/xiandun/public/index.php/index/device/zhuxiaoDeviceList",
 					type: "post",
 					data: {
 						offset:_start,

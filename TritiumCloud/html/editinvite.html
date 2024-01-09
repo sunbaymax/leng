@@ -377,7 +377,7 @@
 			var ischoose= [];
 			$.ajax({
 				type:"post",
-				url:"https://www.zjcoldcloud.com/xiandun/public/index.php/index/device/device_list_for_share",
+				url:"https://erpapi.ccsc58.com/xiandun/public/index.php/index/device/device_list_for_share",
 				async:true,
 				data:{
 					phone: _tel,
@@ -448,7 +448,7 @@
 					return
 				} else {
 					if(confirm("您确定要修改吗?")) {
-						var _url = "http://www.zjcoldcloud.com/xiandun/public/index.php/index/share/edit";
+						var _url = "http://erpapi.ccsc58.com/xiandun/public/index.php/index/share/edit";
 						$.ajax({
 							type: "post",
 							url: _url,
@@ -485,7 +485,7 @@
 				let _searchinput = $(".searchinput").val();
 				$.ajax({
 				type:"post",
-				url:"https://www.zjcoldcloud.com/xiandun/public/index.php/index/device/device_list_for_share",
+				url:"https://erpapi.ccsc58.com/xiandun/public/index.php/index/device/device_list_for_share",
 				async:true,
 				data:{
 					phone: "",
@@ -520,7 +520,7 @@
 			$('#res-del').on('click', function() {
 				var mobile = $('#telphone').val();
 				if(confirm("您确定要删除吗?")) {
-					var _url = "http://www.zjcoldcloud.com/xiandun/public/index.php/index/share/delete";
+					var _url = "http://erpapi.ccsc58.com/xiandun/public/index.php/index/share/delete";
 					$.ajax({
 						type: "post",
 						url: _url,

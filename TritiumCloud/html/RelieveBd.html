@@ -263,7 +263,7 @@
 					var mobile = $('.mobile').val();
 					$.ajax({
 						type: "post",
-						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/register/sendCode",
+						url: "http://erpapi.ccsc58.com/xiandun/public/index.php/index/register/sendCode",
 						async: true,
 						data: {
 							phone: mobile
@@ -333,7 +333,7 @@
 					document.querySelector('.yanzheng').placeholder = '请填写验证码';
 					return
 				} else {
-					var _url = "http://www.zjcoldcloud.com/xiandun/public/index.php/index/register/unbundle";
+					var _url = "http://erpapi.ccsc58.com/xiandun/public/index.php/index/register/unbundle";
 
 					$.ajax({
 						type: "post",

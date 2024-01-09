@@ -403,7 +403,7 @@
 			let _danhao=getQueryVariable("danhao");
 			
 			$.ajax({
-				url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/transport/detail",
+				url: "http://erpapi.ccsc58.com/xiandun/public/index.php/index/transport/detail",
 				type: "post",
 				data: {
 					admin_permit:"zjly8888",
@@ -510,7 +510,7 @@
 		        formData.append('image', document.getElementById('photoFile').files[0]);
 		        formData.append('danhao',_danhao); //添加其他参数
 		        $.ajax({
-		            url:"http://www.zjcoldcloud.com/xiandun/public/index.php/index/transport/upload_image",
+		            url:"http://erpapi.ccsc58.com/xiandun/public/index.php/index/transport/upload_image",
 		            type:"post",
 		            data: formData,
 		            contentType: false,
@@ -544,7 +544,7 @@
 				
 				$.ajax({
 					type:"post",
-					url:"http://www.zjcoldcloud.com/xiandun/public/index.php/index/transport/save",
+					url:"http://erpapi.ccsc58.com/xiandun/public/index.php/index/transport/save",
 					async:true,
 					data:{
 						controller:"update_zhuangche",
@@ -575,7 +575,7 @@
 			$(".yunda").on("click", function() {
 				$.ajax({
 					type:"post",
-					url:"http://www.zjcoldcloud.com/xiandun/public/index.php/index/transport/save",
+					url:"http://erpapi.ccsc58.com/xiandun/public/index.php/index/transport/save",
 					async:true,
 					data:{
 						controller:"update_yunda",
@@ -606,7 +606,7 @@
 			$("body").on("click", ".download", function() {
 				const a = document.createElement('a'); // 创建a标签
 				a.setAttribute('download', '');// download属性
-				a.setAttribute('href', 'http://www.zjcoldcloud.com/xiandun/public/index.php/index/transport/download_detail_pdf?danhao='+_danhao);// href链接
+				a.setAttribute('href', 'http://erpapi.ccsc58.com/xiandun/public/index.php/index/transport/download_detail_pdf?danhao='+_danhao);// href链接
 				a.click();// 自执行点击事件
 				//window.location.href = ';
 			})

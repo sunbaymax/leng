@@ -324,7 +324,7 @@
 					var mobile = $('.mobile').val();
 					$.ajax({
 						type: "post",
-						url: "http://www.zjcoldcloud.com/xiandun_back/public/index.php/index/register/sendCode",
+						url: "http://erpapi.ccsc58.com/xiandun_back/public/index.php/index/register/sendCode",
 						async: true,
 						data: {
 							phone: mobile
@@ -384,7 +384,7 @@
 					} else {
 						$.ajax({
 							type: "post",
-							url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/register/xiandun_yanzheng_code",
+							url: "http://erpapi.ccsc58.com/xiandun/public/index.php/index/register/xiandun_yanzheng_code",
 							data: {
 								phone: mobile,
 								code: yanzhengma
@@ -425,7 +425,7 @@
 					} else {
 						$.ajax({
 							type: "post",
-							url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/register/forget_pwd",
+							url: "http://erpapi.ccsc58.com/xiandun/public/index.php/index/register/forget_pwd",
 							data: {
 								phone: mobile,
 								code: yanzhengma,

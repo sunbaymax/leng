@@ -1,471 +1,525 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<meta name="format-detection" content="telephone=no">
-		<title>农管家</title>
-		<link rel="stylesheet" type="text/css" href="../../css/index.css" />
-	</head>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<meta name="format-detection" content="telephone=no">
+	<title>农管家</title>
+	<link rel="stylesheet" type="text/css" href="../../css/index.css" />
+</head>
 
-	<body>
-		<style>
-			body {
-				background-color: #F2F2F2!important;
-			}
-			.paylist {
-				position: absolute;
-			    right: 1.5rem;
-			    top: 1.3rem;
-			    width: 2rem;
-			    height: 2rem;
-			    /*margin-right: 3rem;*/
-			    cursor: pointer;
-			}
-			
-			#wrapper {
-				width: 100%;
-				position: absolute;
-				left: 0;
-				top: 4rem;
-				overflow: hidden;
-				z-index: 1;
-				bottom: 0rem;
-			}
-			
-			.more {
-				height: 4rem;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				color: #8a8a8a;
-			}
-			
-			.pull_icon {
-				width: 25px;
-				height: 25px;
-				background-image: url('../../images/pull.png');
-				background-repeat: no-repeat;
-				background-position: center;
-				background-size: 25px;
-				transition: all .5s;
-			}
-			
-			.more span {
-				padding-left: .5rem;
-			}
-			
-			.more .flip {
-				transform: rotate(180deg);
-			}
-			
-			.loading {
-				background-image: url('../../images/loading.png');
-				background-repeat: no-repeat;
-				background-position: center;
-				background-size: 25px;
-			}
-			
-			.more .loading {
+<body>
+	<style>
+		body {
+			background-color: #F2F2F2 !important;
+		}
+
+		.paylist {
+			position: absolute;
+			right: 1.5rem;
+			top: 1.3rem;
+			width: 2rem;
+			height: 2rem;
+			/*margin-right: 3rem;*/
+			cursor: pointer;
+		}
+
+		#wrapper {
+			width: 100%;
+			position: absolute;
+			left: 0;
+			top: 4rem;
+			overflow: hidden;
+			z-index: 1;
+			bottom: 0rem;
+		}
+
+		.more {
+			height: 4rem;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: #8a8a8a;
+		}
+
+		.pull_icon {
+			width: 25px;
+			height: 25px;
+			background-image: url('../../images/pull.png');
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: 25px;
+			transition: all .5s;
+		}
+
+		.more span {
+			padding-left: .5rem;
+		}
+
+		.more .flip {
+			transform: rotate(180deg);
+		}
+
+		.loading {
+			background-image: url('../../images/loading.png');
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: 25px;
+		}
+
+		.more .loading {
+			-webkit-transform: rotate(0deg) translateZ(0);
+			-webkit-transition-duration: 0;
+			-webkit-animation-name: loading;
+			-webkit-animation-duration: 2s;
+			-webkit-animation-iteration-count: infinite;
+			-webkit-animation-timing-function: linear;
+		}
+
+		@-webkit-keyframes loading {
+			from {
 				-webkit-transform: rotate(0deg) translateZ(0);
-				-webkit-transition-duration: 0;
-				-webkit-animation-name: loading;
-				-webkit-animation-duration: 2s;
-				-webkit-animation-iteration-count: infinite;
-				-webkit-animation-timing-function: linear;
 			}
-			
-			@-webkit-keyframes loading {
-				from {
-					-webkit-transform: rotate(0deg) translateZ(0);
-				}
-				to {
-					-webkit-transform: rotate(360deg) translateZ(0);
-				}
-			}
-			
-			.scroll_box {
-				padding: 0 2vw;
-				box-sizing: border-box;
-				border-radius: 0.5rem;
-			}
-			
-			.list {
-				margin: 1rem 0;
-				padding: 0 1rem;
-				box-sizing: border-box;
-				height: 12rem;
-				background: #FFFFFF;
-				border-radius: 0.5rem;
-			}
-			
-			.list .list_tittle {
-				display: flex;
-				align-items: center;
-				height: 4rem;
-				width: 100%;
-				box-sizing: border-box;
-				justify-content: space-between;
-				border-bottom: 1px solid #ccc;
-			}
-			
-			.list .list_tittle .tittlewen {
-				font-size: 1.4rem;
-				font-weight: bold;
-			}
-			
-			.list_tittle .device_img {
-				width: 1rem;
-				height: auto;
-				margin-right: 1rem;
-			}
-			
-			.list_tittle .ispay {
-				color: #999999;
-			}
-			
-			.list-content .nickname {
-				color: #999999;
-			}
-			
-			.list-content .paytimer {
-				color: #999999;
-			}
-			
-			.list-content .cssmoney {
-				color: #FA7183;
-			}
-			
-			.list_tittle p {
-				display: flex;
-				align-items: center;
-			}
-			
-			.list-content div {
-				float: none;
-				display: flex;
-				align-items: center;
-				height: 2rem;
-			}
-			
-			.list-content div p {
-				width: 50%;
-				text-align: left;
-			}
-			
-			.list-content div p:last-child {
-				width: 50%;
-				text-align: right;
-			}
-			
-			.btnpay {
-				height: 2rem;
-				width: 6rem;
-				border-radius: 1rem;
-				background: #FFFFFF;
-				border: 1px solid #40C0C3;
-				color: #40C0C3;
-			}
-			
-			.content {
-				padding: 0 10px;
-				box-sizing: border-box;
-				margin-top: 5rem;
-			}
-			
-			.content ul {
-				height: auto;
-				padding: 5px 10px;
-				background: #FFFFFF;
-				border-radius: 15px;
-				margin-top: 15px;
-			}
-			
-			.content ul li {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				height: 4rem;
-				line-height: 4rem;
-			}
-			.content ul li:first-child{
-				border-bottom: 1px solid #CCCCCC;
-			}
-			.top {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-			}
-			
-			.top img {
-				margin: 15px 0;
-				width: 100px;
-				height: 100px;
-			}
-			
-			.top span {
-				font-weight: 800;
-				font-size: 16px;
-			}
-			
-			.msg {
-				text-align: center;
-				font-size: 12px;
-				color: #FF0000;
-				margin-top: 15px;
-			}
-			
-			.nomsg {
-				text-align: center;
-				margin-top: 30px;
-				padding: 5px;
-			}
-			.warning{
-				border: 1px solid red;
-			    height: 3rem;
-			    line-height: 3rem;
-			    padding: 0 5px;
-			    border-radius: 5px;
-			    color: red;
-			}
-			.success{
-				border: 1px solid #2BA245;
-			    height: 3rem;
-			    line-height: 3rem;
-			    padding: 0 5px;
-			    border-radius: 5px;
-			    color: #2BA245;
-			}
-			.info{
-				border: 1px solid #0297D7;
-			    height: 3rem;
-			    line-height: 3rem;
-			    padding: 0 5px;
-			    border-radius: 5px;
-			    color: #0297D7;
-			}
-			.state{
-				width: 50px;
-			}
-			.fristname{
-				height: 4rem;
-                line-height: normal;
-			}
-		.loading3{
-            width:30px;
-            height:30px;
-            margin:200px auto;
-            position:relative;
-        }
-        .circle{
-            position:absolute;
-            top:0;
-            left:0;
-            width:100%;
-            height:100%;
-        }
-        .circle span{
-            width:8px;
-            height:8px;
-            display:inline-block;
-            background:#67CF22;
-            border-radius: 100%;
-            position:absolute;
-            -webkit-animation: mycircle 1.2s infinite ease-in-out;
-            animation: mycircle 1.2s infinite ease-in-out;
-            -webkit-animation-fill-mode:both;
-            animation-fill-mode:both;
-        }
-       .circle2{
-           -webkit-transform: rotateZ(45deg);
-           transform: rotateZ(45deg);
-       }
-       .circle3{
-           -webkit-transform: rotateZ(90deg);
-           transform: rotateZ(90deg);
-       }
-       .circle>span:nth-child(1){
-            top:0;
-            left:0;
-       }
-       .circle>span:nth-child(2){
-            top:0;
-            right:0;
-       }
-       .circle>span:nth-child(3){
-            right:0;
-            bottom:0;
-       }
-       .circle>span:nth-child(4){
-            left:0;
-            bottom:0;
-       }
-       .circle2 >span:nth-child(1){
-            -webkit-animation-delay: -1.1s;
-            animation-delay: -1.1s;
-       }
-       .circle3 >span:nth-child(1){
-            -webkit-animation-delay: -1.0s;
-            animation-delay: -1.0s;
-       }
-       .circle1 >span:nth-child(2){
-            -webkit-animation-delay: -0.9s;
-            animation-delay: -0.9s;
-       }
-       .circle2 >span:nth-child(2){
-            -webkit-animation-delay: -0.8s;
-            animation-delay: -0.8s;
-       }
-       .circle3 >span:nth-child(2){
-            -webkit-animation-delay: -0.7s;
-            animation-delay: -0.7s;
-       }
-       .circle1 >span:nth-child(3){
-            -webkit-animation-delay: -0.6s;
-            animation-delay: -0.6s;
-       }
-       .circle2 >span:nth-child(3){
-            -webkit-animation-delay: -0.7s;
-            animation-delay: -0.7s;
-       }
-       .circle3 >span:nth-child(3){
-            -webkit-animation-delay: -0.4s;
-            animation-delay: -0.4s;
-       }
-       .circle1 >span:nth-child(4){
-            -webkit-animation-delay: -0.3s;
-            animation-delay: -0.3s;
-       }
-       .circle2 >span:nth-child(4){
-            -webkit-animation-delay: -0.2s;
-            animation-delay: -0.2s;
-       }
-       .circle3 >span:nth-child(4){
-            -webkit-animation-delay: -0.1s;
-            animation-delay: -0.1s;
-       }
-       @-webkit-keyframes mycircle{
-            0%{transform:scale(0.0);}
-            40%{transform:scale(1.0);}
-            80%{transform:scale(0.0);}
-            100%{transform:scale(0.0);}
-        }
-        @keyframes mycircle{
-            0%{transform:scale(0.0);}
-            40%{transform:scale(1.0);}
-            80%{transform:scale(0.0);}
-            100%{transform:scale(0.0);}
-        }
-		</style>
-		<div class="header">
-			<img class="back_list" src="../../img/back.png" ids='0' /> 运单管理
-			<img src="../../images/addDevice.png" class="paylist"/>
-		</div>
 
-		<div class="content">
-			<div id="wrapper">
-				<div class="scroller">
-					<div class="scroll_box">
-                        
+			to {
+				-webkit-transform: rotate(360deg) translateZ(0);
+			}
+		}
 
-					</div>
-					<!--<div class="more">
+		.scroll_box {
+			padding: 0 2vw;
+			box-sizing: border-box;
+			border-radius: 0.5rem;
+		}
+
+		.list {
+			margin: 1rem 0;
+			padding: 0 1rem;
+			box-sizing: border-box;
+			height: 12rem;
+			background: #FFFFFF;
+			border-radius: 0.5rem;
+		}
+
+		.list .list_tittle {
+			display: flex;
+			align-items: center;
+			height: 4rem;
+			width: 100%;
+			box-sizing: border-box;
+			justify-content: space-between;
+			border-bottom: 1px solid #ccc;
+		}
+
+		.list .list_tittle .tittlewen {
+			font-size: 1.4rem;
+			font-weight: bold;
+		}
+
+		.list_tittle .device_img {
+			width: 1rem;
+			height: auto;
+			margin-right: 1rem;
+		}
+
+		.list_tittle .ispay {
+			color: #999999;
+		}
+
+		.list-content .nickname {
+			color: #999999;
+		}
+
+		.list-content .paytimer {
+			color: #999999;
+		}
+
+		.list-content .cssmoney {
+			color: #FA7183;
+		}
+
+		.list_tittle p {
+			display: flex;
+			align-items: center;
+		}
+
+		.list-content div {
+			float: none;
+			display: flex;
+			align-items: center;
+			height: 2rem;
+		}
+
+		.list-content div p {
+			width: 50%;
+			text-align: left;
+		}
+
+		.list-content div p:last-child {
+			width: 50%;
+			text-align: right;
+		}
+
+		.btnpay {
+			height: 2rem;
+			width: 6rem;
+			border-radius: 1rem;
+			background: #FFFFFF;
+			border: 1px solid #40C0C3;
+			color: #40C0C3;
+		}
+
+		.content {
+			padding: 0 10px;
+			box-sizing: border-box;
+			margin-top: 5rem;
+		}
+
+		.content ul {
+			height: auto;
+			padding: 5px 10px;
+			background: #FFFFFF;
+			border-radius: 15px;
+			margin-top: 15px;
+		}
+
+		.content ul li {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			height: 4rem;
+			line-height: 4rem;
+		}
+
+		.content ul li:first-child {
+			border-bottom: 1px solid #CCCCCC;
+		}
+
+		.top {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.top img {
+			margin: 15px 0;
+			width: 100px;
+			height: 100px;
+		}
+
+		.top span {
+			font-weight: 800;
+			font-size: 16px;
+		}
+
+		.msg {
+			text-align: center;
+			font-size: 12px;
+			color: #FF0000;
+			margin-top: 15px;
+		}
+
+		.nomsg {
+			text-align: center;
+			margin-top: 30px;
+			padding: 5px;
+		}
+
+		.warning {
+			border: 1px solid red;
+			height: 3rem;
+			line-height: 3rem;
+			padding: 0 5px;
+			border-radius: 5px;
+			color: red;
+		}
+
+		.success {
+			border: 1px solid #2BA245;
+			height: 3rem;
+			line-height: 3rem;
+			padding: 0 5px;
+			border-radius: 5px;
+			color: #2BA245;
+		}
+
+		.info {
+			border: 1px solid #0297D7;
+			height: 3rem;
+			line-height: 3rem;
+			padding: 0 5px;
+			border-radius: 5px;
+			color: #0297D7;
+		}
+
+		.state {
+			width: 50px;
+		}
+
+		.fristname {
+			height: 4rem;
+			line-height: normal;
+		}
+
+		.loading3 {
+			width: 30px;
+			height: 30px;
+			margin: 200px auto;
+			position: relative;
+		}
+
+		.circle {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+
+		.circle span {
+			width: 8px;
+			height: 8px;
+			display: inline-block;
+			background: #67CF22;
+			border-radius: 100%;
+			position: absolute;
+			-webkit-animation: mycircle 1.2s infinite ease-in-out;
+			animation: mycircle 1.2s infinite ease-in-out;
+			-webkit-animation-fill-mode: both;
+			animation-fill-mode: both;
+		}
+
+		.circle2 {
+			-webkit-transform: rotateZ(45deg);
+			transform: rotateZ(45deg);
+		}
+
+		.circle3 {
+			-webkit-transform: rotateZ(90deg);
+			transform: rotateZ(90deg);
+		}
+
+		.circle>span:nth-child(1) {
+			top: 0;
+			left: 0;
+		}
+
+		.circle>span:nth-child(2) {
+			top: 0;
+			right: 0;
+		}
+
+		.circle>span:nth-child(3) {
+			right: 0;
+			bottom: 0;
+		}
+
+		.circle>span:nth-child(4) {
+			left: 0;
+			bottom: 0;
+		}
+
+		.circle2>span:nth-child(1) {
+			-webkit-animation-delay: -1.1s;
+			animation-delay: -1.1s;
+		}
+
+		.circle3>span:nth-child(1) {
+			-webkit-animation-delay: -1.0s;
+			animation-delay: -1.0s;
+		}
+
+		.circle1>span:nth-child(2) {
+			-webkit-animation-delay: -0.9s;
+			animation-delay: -0.9s;
+		}
+
+		.circle2>span:nth-child(2) {
+			-webkit-animation-delay: -0.8s;
+			animation-delay: -0.8s;
+		}
+
+		.circle3>span:nth-child(2) {
+			-webkit-animation-delay: -0.7s;
+			animation-delay: -0.7s;
+		}
+
+		.circle1>span:nth-child(3) {
+			-webkit-animation-delay: -0.6s;
+			animation-delay: -0.6s;
+		}
+
+		.circle2>span:nth-child(3) {
+			-webkit-animation-delay: -0.7s;
+			animation-delay: -0.7s;
+		}
+
+		.circle3>span:nth-child(3) {
+			-webkit-animation-delay: -0.4s;
+			animation-delay: -0.4s;
+		}
+
+		.circle1>span:nth-child(4) {
+			-webkit-animation-delay: -0.3s;
+			animation-delay: -0.3s;
+		}
+
+		.circle2>span:nth-child(4) {
+			-webkit-animation-delay: -0.2s;
+			animation-delay: -0.2s;
+		}
+
+		.circle3>span:nth-child(4) {
+			-webkit-animation-delay: -0.1s;
+			animation-delay: -0.1s;
+		}
+
+		@-webkit-keyframes mycircle {
+			0% {
+				transform: scale(0.0);
+			}
+
+			40% {
+				transform: scale(1.0);
+			}
+
+			80% {
+				transform: scale(0.0);
+			}
+
+			100% {
+				transform: scale(0.0);
+			}
+		}
+
+		@keyframes mycircle {
+			0% {
+				transform: scale(0.0);
+			}
+
+			40% {
+				transform: scale(1.0);
+			}
+
+			80% {
+				transform: scale(0.0);
+			}
+
+			100% {
+				transform: scale(0.0);
+			}
+		}
+	</style>
+	<div class="header">
+		<img class="back_list" src="../../img/back.png" ids='0' /> 运单管理
+		<img src="../../images/addDevice.png" class="paylist" />
+	</div>
+
+	<div class="content">
+		<div id="wrapper">
+			<div class="scroller">
+				<div class="scroll_box">
+
+
+				</div>
+				<!--<div class="more">
 						<i class="pull_icon"></i><span>上拉加载...</span>
 					</div>-->
-				</div>
 			</div>
-
 		</div>
-		 <div class="loading3" style="display: none;">
-		    <div class="circle circle1">
-		        <span></span>
-		        <span></span>
-		        <span></span>
-		        <span></span>
-		    </div>
-		    <div class="circle circle2">
-		        <span></span>
-		        <span></span>
-		        <span></span>
-		        <span></span>
-		    </div>
-		    <div class="circle circle3">
-		        <span></span>
-		        <span></span>
-		        <span></span>
-		        <span></span>
-		    </div>
-		 </div>
-		<script src="../../js/iscroll.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript" src="../../js/jquery-1.11.0.js"></script>
-		<script src="../../js/index.js" type="text/javascript" charset="utf-8"></script>
-		<script>
-			/*iscroll代码；
-			 */
-			var userinfo = JSON.parse(localStorage.getItem('isonline'));
-			var _userName = userinfo.user;
-			var _userPass = userinfo.pwd;
-			var _openid = userinfo.copenid;
-			var _suoshujigou = userinfo.suoshujigou;
-			var _uid = userinfo.uid == undefined ? 'no' : userinfo.uid;
 
-			var myscroll_x = new iScroll("wrapper", {
-				onScrollMove: function() {
-					if(this.y < (this.maxScrollY)) {
-						$('.pull_icon').addClass('flip');
-						$('.pull_icon').removeClass('loading');
-						$('.more span').text('释放加载...');
-					} else {
-						$('.pull_icon').removeClass('flip loading');
-						$('.more span').text('上拉加载...')
-					}
-				},
-				onScrollEnd: function() {
-					if($('.pull_icon').hasClass('flip')) {
-						$('.pull_icon').addClass('loading');
-						$('.more span').text('加载中...');
-						pullUpActions();
-					}
-				},
-				onRefresh: function() {
-					$('.more').removeClass('flip');
-					$('.more span').text('上拉加载...');
+	</div>
+	<div class="loading3" style="display: none;">
+		<div class="circle circle1">
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+		<div class="circle circle2">
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+		<div class="circle circle3">
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+	<script src="../../js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="../../js/jquery-1.11.0.js"></script>
+	<script src="../../js/index.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		/*iscroll代码；
+		 */
+		var userinfo = JSON.parse(localStorage.getItem('isonline'));
+		var _userName = userinfo.user;
+		var _userPass = userinfo.pwd;
+		var _openid = userinfo.copenid;
+		var _suoshujigou = userinfo.suoshujigou;
+		var _uid = userinfo.uid == undefined ? 'no' : userinfo.uid;
+
+		var myscroll_x = new iScroll("wrapper", {
+			onScrollMove: function () {
+				if (this.y < (this.maxScrollY)) {
+					$('.pull_icon').addClass('flip');
+					$('.pull_icon').removeClass('loading');
+					$('.more span').text('释放加载...');
+				} else {
+					$('.pull_icon').removeClass('flip loading');
+					$('.more span').text('上拉加载...')
 				}
-			});
-
-			var _start = 1; //控制一次加载到页面条数的开头；
-			machine_ajax_list();
-			function pullUpActions() {
-				_start += 1;
-				$(".wait").removeClass("hidden");
-				machine_ajax_list();
+			},
+			onScrollEnd: function () {
+				if ($('.pull_icon').hasClass('flip')) {
+					$('.pull_icon').addClass('loading');
+					$('.more span').text('加载中...');
+					pullUpActions();
+				}
+			},
+			onRefresh: function () {
+				$('.more').removeClass('flip');
+				$('.more span').text('上拉加载...');
 			}
-			function machine_ajax_list() {
-				$('.loading3').show()
-				$.ajax({
-					url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/transport/my_transport_list",
-					type: "post",
-					data: {
-						admin_permit:'zjly8888',
-						suoshujigou:_suoshujigou
-					},
-					dataType: 'json',
-					success: function(res) {
-						console.log(res)
-							if(res.code == 0 && res.data.data.length > 0) {
-								$('.loading3').hide(500)
-							var str = '';
-							$.each(res.data.data, function(index, val) {
-								let state=''
-								if(val.state==0){
-									state=`<div class="state warning" state='${val.state}'>未装车</div>`
-								}else if(val.state==1){
-									state=`<div class="state success" state='${val.state}'>运输中</div>`
-								}else if(val.state==2){
-									state=`<div class="state info" state='${val.state}'>已完成</div>`
-								}  
-								str = `<ul>
+		});
+
+		var _start = 1; //控制一次加载到页面条数的开头；
+		machine_ajax_list();
+		function pullUpActions() {
+			_start += 1;
+			$(".wait").removeClass("hidden");
+			machine_ajax_list();
+		}
+		function machine_ajax_list() {
+			$('.loading3').show()
+			$.ajax({
+				url: "http://erpapi.ccsc58.com/xiandun/public/index.php/index/transport/my_transport_list",
+				type: "post",
+				data: {
+					admin_permit: 'zjly8888',
+					suoshujigou: _suoshujigou
+				},
+				dataType: 'json',
+				success: function (res) {
+					console.log(res)
+					if (res.code == 0 && res.data.data.length > 0) {
+						$('.loading3').hide(500)
+						var str = '';
+						$.each(res.data.data, function (index, val) {
+							let state = ''
+							if (val.state == 0) {
+								state = `<div class="state warning" state='${val.state}'>未装车</div>`
+							} else if (val.state == 1) {
+								state = `<div class="state success" state='${val.state}'>运输中</div>`
+							} else if (val.state == 2) {
+								state = `<div class="state info" state='${val.state}'>已完成</div>`
+							}
+							str = `<ul>
 							<li>
 								<div class='fristname'>运输单号：<span class="yundanhao">${val.danhao}</span></div>
 								${state}
@@ -483,43 +537,43 @@
 								<div>下单时间：${val.createtime}</div>
 							</li>
 						</ul>`;
-								$(".scroll_box").append(str);
-							});
-						} 
-
-						 else {
-							$(".more").html("没有更多记录");
-						}
-						myscroll_x.refresh();
-
-					},
-					error: function() {
-						alert("网络错误，请重新进入页面");
-
-						$(".wait").addClass("hidden");
-						myscroll_x.refresh();
+							$(".scroll_box").append(str);
+						});
 					}
-				})
 
-			}
+					else {
+						$(".more").html("没有更多记录");
+					}
+					myscroll_x.refresh();
 
-//			function machine_ajax_list(_start) {
-//				$(".more").html("未找到查询到缴费记录");
-//			}
-			$(".back_list").on("click", function() {
-				//				window.location.href = "user_sheZhi.html"
-				history.go(-1)
-			})
-			$(".paylist").on("click", function() {
-				window.location.href = "Initiate.php"
-			})
-			$("body").on("click",".scroll_box ul",function() {
-				let yundan=$(this).find('.yundanhao').text()
-				let _state=$(this).find('.state').attr('state')
-				window.location.href = "waybilldetail.html?danhao="+yundan+"&state="+_state
+				},
+				error: function () {
+					alert("网络错误，请重新进入页面");
+
+					$(".wait").addClass("hidden");
+					myscroll_x.refresh();
+				}
 			})
 
-		</script>
-	</body>
+		}
+
+		//			function machine_ajax_list(_start) {
+		//				$(".more").html("未找到查询到缴费记录");
+		//			}
+		$(".back_list").on("click", function () {
+			//				window.location.href = "user_sheZhi.html"
+			history.go(-1)
+		})
+		$(".paylist").on("click", function () {
+			window.location.href = "Initiate.php"
+		})
+		$("body").on("click", ".scroll_box ul", function () {
+			let yundan = $(this).find('.yundanhao').text()
+			let _state = $(this).find('.state').attr('state')
+			window.location.href = "waybilldetail.html?danhao=" + yundan + "&state=" + _state
+		})
+
+	</script>
+</body>
 
 </html>

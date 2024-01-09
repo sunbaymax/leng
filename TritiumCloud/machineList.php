@@ -228,7 +228,7 @@
 				if(_userType == 'b') {
 					$('.is_c').hide()
 					$.ajax({
-						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/device_list",
+						url: "http://erpapi.ccsc58.com/xiandun/public/index.php/index/device/device_list",
 //						url: "http://www.ccsc58.com/json/00_00_tb_shebeidongtai.php",
 						type: "post",
 						data: {
@@ -317,7 +317,7 @@
 					let userType=userinfo.userType;
 //					console.log(copenid,33)
 					$.ajax({
-						url: "http://www.zjcoldcloud.com/xiandun_back/public/index.php/index/device/xiandu_device_list",
+						url: "http://erpapi.ccsc58.com/xiandun_back/public/index.php/index/device/xiandu_device_list",
 						type: "post",
 						data: {
 							openid: copenid,
@@ -544,9 +544,9 @@
 			    if (mymessage == true) {
        				var _jiebangurl = '';
 					if(_is_master == 0) {
-						_jiebangurl = "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/remove_scend_device";
+						_jiebangurl = "http://erpapi.ccsc58.com/xiandun/public/index.php/index/device/remove_scend_device";
 					} else {
-						_jiebangurl = "http://www.zjcoldcloud.com/xiandun/public/index.php/index/Device/remove_bind";
+						_jiebangurl = "http://erpapi.ccsc58.com/xiandun/public/index.php/index/Device/remove_bind";
 					}
 				
 					$.ajax({
@@ -611,7 +611,7 @@
 			var copenid = userinfo.copenid == undefined ? '' : userinfo.copenid;
 			$.ajax({
 				type: "post",
-				url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/xiandun_update_device",
+				url: "http://erpapi.ccsc58.com/xiandun/public/index.php/index/device/xiandun_update_device",
 				data: {
 					devid: _num,
 					beizhu: bieming,

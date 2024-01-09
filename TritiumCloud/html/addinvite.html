@@ -208,7 +208,7 @@
 			var ischoose= [];
 			$.ajax({
 				type:"post",
-				url:"https://www.zjcoldcloud.com/xiandun/public/index.php/index/device/device_list_for_share",
+				url:"https://erpapi.ccsc58.com/xiandun/public/index.php/index/device/device_list_for_share",
 				async:true,
 				data:{
 					phone: "",
@@ -248,7 +248,7 @@
                 let device=unique(ischoose).toString()
 				$.ajax({
 					type: "post",
-					url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/share/add_member",
+					url: "http://erpapi.ccsc58.com/xiandun/public/index.php/index/share/add_member",
 					async: true,
 					data: {
 						mainname: _user,
@@ -277,7 +277,7 @@
 				let _searchinput = $(".searchinput").val();
 				$.ajax({
 				type:"post",
-				url:"https://www.zjcoldcloud.com/xiandun/public/index.php/index/device/device_list_for_share",
+				url:"https://erpapi.ccsc58.com/xiandun/public/index.php/index/device/device_list_for_share",
 				async:true,
 				data:{
 					phone: "",

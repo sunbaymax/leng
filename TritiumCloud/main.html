@@ -236,7 +236,7 @@
 					}
 					$.ajax({
 						type: "post",
-						url: "https://www.zjcoldcloud.com/xiandun_back/public/index.php/index/device/device_list_v1",
+						url: "https://erpapi.ccsc58.com/xiandun_back/public/index.php/index/device/device_list_v1",
 						async: true,
 						data: {
 							userName: _userName,
@@ -488,7 +488,7 @@
 				}
 				$.ajax({
 					type: "post",
-					url: "http://www.zjcoldcloud.com/xiandun_back/public/index.php/index/department/my_department",
+					url: "http://erpapi.ccsc58.com/xiandun_back/public/index.php/index/department/my_department",
 					async: true,
 					data: {
 						user: _userName,
@@ -520,7 +520,7 @@
 				});
 				$.ajax({
 					type: "post",
-					url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/Tb_Wei_User/index",
+					url: "http://erpapi.ccsc58.com/xiandun/public/index.php/index/Tb_Wei_User/index",
 					async: true,
 					data: {
 						openid: openid
@@ -557,7 +557,7 @@
 					var copenid = userinfo.copenid == undefined ? '' : userinfo.copenid;
 					$.ajax({
 						type: "post",
-						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/xiandun_update_device",
+						url: "http://erpapi.ccsc58.com/xiandun/public/index.php/index/device/xiandun_update_device",
 						data: {
 							devid: _num,
 							beizhu: bieming,
@@ -651,7 +651,7 @@
 				//确定退出
 				$(".JieChuBang_left").on("click", function() {
 					$.ajax({
-						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/login/xiandun_cancellation",
+						url: "http://erpapi.ccsc58.com/xiandun/public/index.php/index/login/xiandun_cancellation",
 						type: "post",
 						data: {
 							uid,

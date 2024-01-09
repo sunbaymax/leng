@@ -83,7 +83,7 @@ class JSSDK {
 //    $access_token = $data->access_token;
 //  }
 //  return $access_token;
-     $url = "http://www.zjcoldcloud.com/weixin/get_token_zlkj.php";
+     $url = "http://erpapi.ccsc58.com/weixin/get_token_zlkj.php";
     $access_token=file_get_contents($url);
     return $access_token;
   }

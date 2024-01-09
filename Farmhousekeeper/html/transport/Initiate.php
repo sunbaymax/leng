@@ -557,7 +557,7 @@
 //		    	}
 		    	$.ajax({
 		    		type:"post",
-		    		url:"http://www.zjcoldcloud.com/xiandun/public/index.php/index/transport/save",
+		    		url:"http://erpapi.ccsc58.com/xiandun/public/index.php/index/transport/save",
 		    		async:true,
 		    		data:{
 		    			controller:"register",
